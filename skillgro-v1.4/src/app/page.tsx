@@ -26,7 +26,8 @@ export default function Home() {
     }
   };
 
-  if (isAuthenticated) {
+  // if (isAuthenticated) {
+  if (true) {
     return (
       <Wrapper>
         <HomeOne />

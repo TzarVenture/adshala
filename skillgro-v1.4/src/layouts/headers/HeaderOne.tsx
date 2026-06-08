@@ -13,6 +13,9 @@ const TotalWishlist = dynamic(() => import("@/components/common/TotalWishlist"),
 const CustomSelect = dynamic(() => import("@/ui/CustomSelect"), { ssr: false });
 
 import logo from "@/assets/img/logo/logo.svg"
+import Adshalaa_logo21 from "@/assets/img/logo/Adshalaa_Logo21.svg"
+// import Adshalaa_logo2 from "@/assets/img/logo/Adshalaa_Logo2.png"
+import Adshalaa_logo from "@/assets/img/logo/Adshalaa_Logo.png"
 import icon_1 from "@/assets/img/icons/user.svg"
 import icon_2 from "@/assets/img/icons/cart.svg"
 import icon_3 from "@/assets/img/icons/heart.svg"
@@ -40,7 +43,10 @@ const HeaderOne = () => {
                         <div className="tgmenu__wrap">
                            <nav className="tgmenu__nav">
                               <div className="logo">
-                                 <Link href="/"><Image src={logo} alt="Logo" /></Link>
+                                 {/* <Link href="/"><Image src={logo} alt="Logo" /></Link> */}
+                                 <Link href="/"><Image src={Adshalaa_logo} alt="Logo" width={153} height={40}/></Link>
+                                 {/* <Link href="/"><Image src={Adshalaa_logo21} alt="Logo" width={153} height={40}/></Link> */}
+                                 {/* <Link href="/"><Image src={Adshalaa_logo2} alt="Logo" /></Link> */}
                               </div>
                               <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                  <NavMenu />
