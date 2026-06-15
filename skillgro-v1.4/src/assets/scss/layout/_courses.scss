@@ -1809,7 +1809,7 @@
                     &.active {
                         color: var(--tg-common-color-white);
                         background: var(--tg-theme-primary);
-                        @include box-shadow(4px 6px 0px 0px #050071);
+                        @include box-shadow(4px 6px 0px 0px #0f521f);
                     }
                 }
             }
@@ -2255,7 +2255,7 @@
         padding: 33px 20px;
         gap: 3px;
         &-value {
-            color: #082A5E;
+            color: #0f521f;
             font-weight: 600;
             font-size: 64px;
             line-height: .8;

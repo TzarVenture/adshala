@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 
+import Adshalaa_logo from "@/assets/img/logo/Adshalaa_Logo.png"
 import logo from "@/assets/img/logo/secondary_logo.svg"
 
 const FooterCommon = () => {
@@ -9,7 +10,7 @@ const FooterCommon = () => {
          <div className="col-xl-3 col-lg-4 col-md-6">
             <div className="footer__widget">
                <div className="logo mb-35">
-                  <Link href="/"><Image src={logo} alt="img" /></Link>
+                  <Link href="/"><Image src={Adshalaa_logo} alt="img" width={153} height={40} /></Link>
                </div>
                <div className="footer__content">
                   <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>

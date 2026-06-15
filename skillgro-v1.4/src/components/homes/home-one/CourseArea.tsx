@@ -8,7 +8,7 @@ import course_data from "@/data/home-data/CourseData";
 
 import bg_img from '@//assets/img/bg/courses_bg.jpg';
 
-const tab_title: string[] = ["All Courses", "Design", "Business", "Development"];
+const tab_title: string[] = ["All Courses", "Design", "Digital Marketing", "Development"];
 
 // slider setting
 const setting = {
@@ -66,9 +66,9 @@ const CourseArea = ({ style }: StyleType) => {
           <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="section__title text-center mb-40">
-                <span className="sub-title">Top Class Courses</span>
-                <h2 className="title">Explore Our World&apos;s Best Courses</h2>
-                <p className="desc">When known printer took a galley of type scrambl edmake</p>
+                <span className="sub-title">Top Certification Courses</span>
+                <h2 className="title">Explore Our Best Certification Courses</h2>
+                <p className="desc">Practical training, real internships and certifications that get you hired</p>
               </div>
               <div className="courses__nav">
                 <ul className="nav nav-tabs" id="courseTab" role="tablist">

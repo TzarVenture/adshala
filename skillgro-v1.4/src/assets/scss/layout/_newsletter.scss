@@ -170,8 +170,8 @@
             }
             & input {
                 width: 100%;
-                border: 1px solid #433EC2;
-                background: #4A44D1;
+                border: 1px solid #1f7a33;
+                background: #1f7a33;
                 @include border-radius(50px);
                 color: var(--tg-common-color-white);
                 font-size: 16px;
@@ -180,7 +180,7 @@
                 height: 60px;
                 flex-grow: 1;
                 &::placeholder {
-                    color: #9E9BF1;
+                    color: #9bf1a9;
                     font-size: 16px;
                     text-transform: capitalize;
                 }

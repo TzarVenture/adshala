@@ -39,7 +39,7 @@ export default function Home() {
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 px-4">
     <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl text-center">
       <div className="mb-6">
-        <h1 className="text-5xl font-bold text-blue-600">Adshala</h1>
+        <h1 className="text-5xl font-bold text-blue-600">Adshalaa</h1>
         <p className="text-gray-500 mt-2">Learning Without Limits</p>
       </div>
 

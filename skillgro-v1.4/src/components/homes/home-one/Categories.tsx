@@ -97,9 +97,9 @@ const Categories = () => {
             <div className="row justify-content-center">
                <div className="col-xl-5 col-lg-7">
                   <div className="section__title text-center mb-40">
-                     <span className="sub-title">Trending Categories</span>
-                     <h2 className="title">Top Category We Have</h2>
-                     <p className="desc">when known printer took a galley of type scrambl edmake</p>
+                     <span className="sub-title">Trending Courses</span>
+                     <h2 className="title">Where Learning Leads to a Job.</h2>
+                     <p className="desc">Master in-demand skills, gain real internship experience with Adshala's certified career programs in Digital Marketing.</p>
                   </div>
                </div>
             </div>
