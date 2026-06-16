@@ -64,7 +64,7 @@ const CourseArea = ({ style }: StyleType) => {
       <div className="container">
         <div className="section__title-wrap">
           <div className="row justify-content-center">
-            <div className="col-lg-6">
+            <div className="col-lg-7">
               <div className="section__title text-center mb-40">
                 <span className="sub-title">Top Certification Courses</span>
                 <h2 className="title">Explore Our Best Certification Courses</h2>

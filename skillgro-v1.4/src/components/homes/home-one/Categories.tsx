@@ -14,43 +14,43 @@ const category_data: DatatYpe[] = [
    {
       id: 1,
       icon: "flaticon-graphic-design",
-      title: "Graphic Design",
+      title: "Digital Marketing Certification",
       total: "(22)"
    },
    {
       id: 2,
       icon: "flaticon-investment",
-      title: "Finance",
+      title: "Graphic Design Certification",
       total: "(41)"
    },
    {
       id: 3,
       icon: "flaticon-coding",
-      title: "Development",
+      title: "Web Development Certification",
       total: "(29)"
    },
    {
       id: 4,
       icon: "flaticon-email",
-      title: "Marketing",
+      title: "Mastery in Social Media Management",
       total: "(31)"
    },
    {
       id: 5,
       icon: "flaticon-fashion",
-      title: "Life Style",
+      title: "Marketplace Certification",
       total: "(23)"
    },
    {
       id: 6,
       icon: "flaticon-interaction",
-      title: "Management",
+      title: "SEO Certification",
       total: "(19)"
    },
    {
       id: 7,
       icon: "flaticon-web-design",
-      title: "App Design",
+      title: "Mastery in Instagram",
       total: "(18)"
    },
 ];
@@ -95,7 +95,7 @@ const Categories = () => {
       <section className="categories-area section-py-120">
          <div className="container">
             <div className="row justify-content-center">
-               <div className="col-xl-5 col-lg-7">
+               <div className="col-xl-6 col-lg-7">
                   <div className="section__title text-center mb-40">
                      <span className="sub-title">Trending Courses</span>
                      <h2 className="title">Where Learning Leads to a Job.</h2>
