@@ -23,12 +23,33 @@ interface DataType {
    instructors: string;
    price: number;
    skill_level: string;
+   overview?: string;
    price_type: string;
    language: string;
+   meta1?: string;
+   meta2?: string;
+   meta3?: string;
    popular?: string;
 }[];
 
 const inner_course_data: DataType[] = [
+   {
+      id: 111,
+      thumb: course_thumb11,
+      category: "Marketing",
+      rating: 5,
+      title: "Certification in Advanced Digital Marketing & AI",
+      instructors: "David Millar",
+      price: 15,
+      skill_level: "Beginner",
+      overview: "certification-in-advanced-digital-marketing-&-ai",
+      price_type: "Free",
+      language: "Arabic",
+      meta1: "20+ AI Tools",
+      meta2: "Resume Building",
+      meta3: "Mentor Support",
+      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+   },
    {
       id: 1,
       thumb: course_thumb1,

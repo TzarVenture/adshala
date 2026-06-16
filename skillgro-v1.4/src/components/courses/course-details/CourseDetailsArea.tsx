@@ -7,11 +7,13 @@ import Sidebar from "./Sidebar";
 import Curriculum from "./Curriculum"
 import Reviews from "./Reviews"
 import Instructors from "./Instructors"
-
+import AdvanceDMOverview from "./Overview/AdvanceDMOverview";
+import AdvanceDMCurriculum from "./Curriculum/AdvanceDMCurriculum";
+import AdvanceDMSidebar from "./Sidebar/AdvanceDMSidebar";
 import course_details_img1 from "@/assets/img/courses/courses_details.jpg"
 import course_details_img2 from "@/assets/img/courses/course_author001.png"
 
-const tab_title: string[] = ["Overview", "Curriculum", "Instructors", "reviews"];
+const tab_title: string[] = ["Overview", "Curriculum"];
 
 const CourseDetailsArea = ({ single_course }: any) => {
 
@@ -21,6 +23,33 @@ const CourseDetailsArea = ({ single_course }: any) => {
     setActiveTab(index);
   };
 
+  const currentOverView = () =>{
+    if(single_course?.overview === "certification-in-advanced-digital-marketing-&-ai"){
+      return <AdvanceDMOverview />
+    }
+      else{
+        return <Overview />
+      }
+  }
+
+  const currentCurriculum = () =>{
+    if(single_course?.overview === "certification-in-advanced-digital-marketing-&-ai"){
+      return <AdvanceDMCurriculum />
+    }
+      else{
+        return <Curriculum />
+      }
+  }
+
+  const currentSidebar = () =>{
+    if(single_course?.overview === "certification-in-advanced-digital-marketing-&-ai"){
+      return <AdvanceDMSidebar />
+    }
+      else{
+        return <Sidebar />
+      }
+  }
+ 
   return (
     <section className="courses__details-area section-py-120">
       <div className="container">
@@ -39,12 +68,9 @@ const CourseDetailsArea = ({ single_course }: any) => {
               <h2 className="title">{single_course?.title ? single_course.title : "Resolving Conflicts Between Designers And Engineers"}</h2>
               <div className="courses__details-meta">
                 <ul className="list-wrap">
-                  <li className="author-two">
-                    <Image src={course_details_img2} alt="img" />
-                    By <Link href="#">{single_course?.instructors ? single_course.instructors : "David Millar"}</Link>
-                  </li>
-                  <li className="date"><i className="flaticon-calendar"></i>24/07/2024</li>
-                  <li><i className="flaticon-mortarboard"></i>2,250 Students</li>
+                  <li>{single_course.meta1}</li>
+                  <li>{single_course.meta2}</li>
+                  <li>{single_course.meta3}</li>
                 </ul>
               </div>
               <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -56,10 +82,11 @@ const CourseDetailsArea = ({ single_course }: any) => {
               </ul>
               <div className="tab-content" id="myTabContent">
                 <div className={`tab-pane fade ${activeTab === 0 ? 'show active' : ''}`} id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab">
-                  <Overview />
+                  {/* <Overview /> */}
+                  {currentOverView()}
                 </div>
                 <div className={`tab-pane fade ${activeTab === 1 ? 'show active' : ''}`} id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab">
-                  <Curriculum />
+                  {currentCurriculum()}
                 </div>
                 <div className={`tab-pane fade ${activeTab === 2 ? 'show active' : ''}`} id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab">
                   <Instructors />
@@ -70,7 +97,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
               </div>
             </div>
           </div>
-          <Sidebar />
+          {currentSidebar()}
         </div>
       </div>
     </section>
