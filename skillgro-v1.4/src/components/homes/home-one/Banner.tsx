@@ -22,7 +22,7 @@ const Banner: React.FC = () => {
 
    return (
       <section
-         className="banner-area banner-bg tg-motion-effects" >
+         className="banner-area banner-bg tg-motion-effects" style={{ backgroundImage: `url(${bg_img.src})`}}>
          <div className="container">
             <div className="row justify-content-between align-items-start">
                <div className="col-xl-5 col-lg-6">

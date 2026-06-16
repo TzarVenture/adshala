@@ -34,6 +34,23 @@ interface DataType {
 
 const inner_course_data: DataType[] = [
    {
+      id: 112,
+      thumb: course_thumb11,
+      category: "Design",
+      rating: 5,
+      title: "Certification in Advanced Graphic Design & AI",
+      instructors: "David Millar",
+      price: 15,
+      skill_level: "Beginner",
+      overview: "certification-in-advanced-graphic-design-&-ai",
+      price_type: "Free",
+      language: "Arabic",
+      meta1: "15+ Design Software & AI Tools",
+      meta2: "Portfolio Building",
+      meta3: "Mentor Support",
+      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+   },
+   {
       id: 111,
       thumb: course_thumb11,
       category: "Marketing",

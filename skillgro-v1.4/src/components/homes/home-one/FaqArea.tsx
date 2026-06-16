@@ -8,7 +8,7 @@ import MotionAnimation from "@/hooks/MotionAnimation"
 
 import faq_img1 from "@/assets/img/others/faq_img.png"
 import shape from "@/assets/img/others/faq_shape01.svg"
-
+import Link from "next/link"
 const FaqArea = () => {
 
    MotionAnimation();
@@ -59,6 +59,9 @@ const FaqArea = () => {
                                  </div>
                               </div>
                            ))}
+                           <p style={{textAlign: "center", marginTop: "20px"}}>
+                              <Link href="/faq" >View More</Link>
+                              </p>
                         </div>
                      </div>
                   </div>

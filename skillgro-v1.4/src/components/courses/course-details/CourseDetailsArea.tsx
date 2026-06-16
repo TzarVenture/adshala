@@ -7,9 +7,16 @@ import Sidebar from "./Sidebar";
 import Curriculum from "./Curriculum";
 import Reviews from "./Reviews";
 import Instructors from "./Instructors";
+
 import AdvanceDMOverview from "./Overview/AdvanceDMOverview";
+import AdvanceGDOverview from "./Overview/AdvanceGDOverview"
+
 import AdvanceDMCurriculum from "./Curriculum/AdvanceDMCurriculum";
+import AdvanceGDCurriculum from "./Curriculum/AdvanceGDCurriculum"
+
 import AdvanceDMSidebar from "./Sidebar/AdvanceDMSidebar";
+import AdvanceGDSidebar from "./Sidebar/AdvanceGDSidebar";
+
 import course_details_img1 from "@/assets/img/courses/courses_details.jpg";
 import course_details_img2 from "@/assets/img/courses/course_author001.png";
 
@@ -28,7 +35,12 @@ const CourseDetailsArea = ({ single_course }: any) => {
       "certification-in-advanced-digital-marketing-&-ai"
     ) {
       return <AdvanceDMOverview />;
-    } else {
+    } 
+    else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
+      return <AdvanceGDOverview/>
+    }
+    
+    else {
       return <Overview />;
     }
   };
@@ -39,7 +51,11 @@ const CourseDetailsArea = ({ single_course }: any) => {
       "certification-in-advanced-digital-marketing-&-ai"
     ) {
       return <AdvanceDMCurriculum />;
-    } else {
+    } 
+    else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
+      return <AdvanceGDCurriculum/>
+    }
+    else {
       return <Curriculum />;
     }
   };
@@ -50,7 +66,11 @@ const CourseDetailsArea = ({ single_course }: any) => {
       "certification-in-advanced-digital-marketing-&-ai"
     ) {
       return <AdvanceDMSidebar />;
-    } else {
+    } 
+    else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
+      return <AdvanceGDSidebar/>
+    }
+    else {
       return <Sidebar />;
     }
   };

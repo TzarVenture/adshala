@@ -8,9 +8,9 @@ const Features = () => {
             <div className="row justify-content-center">
                <div className="col-xl-6">
                   <div className="section__title white-title text-center mb-50">
-                     <span className="sub-title">How We Start Journey</span>
+                     <span className="sub-title">Why Choose Adshalaa</span>
                      <h2 className="title">Start your Learning Journey Today!</h2>
-                     <p>Groove’s intuitive shared inbox makesteam members together <br /> organize, prioritize and.In this episode.</p>
+                     <p>At Adshala, we turn ambition into a career. Whether you're a student, a fresher or a working professional, our hands-on certification programs give you the skills, experience and placement support you need to succeed in today's digital world.</p>
                   </div>
                </div>
             </div>

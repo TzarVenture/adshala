@@ -37,7 +37,7 @@ const About = () => {
                   <div className="col-lg-6">
                      <div className="about__content">
                         <div className="section__title">
-                           <span className="sub-title">Know More About Us</span>
+                           <span className="sub-title">Know More About Adshalaa</span>
                            <h2 className="title">
                               Where Classroom Learning Becomes
                               <span className="position-relative title-shape-wrap">
