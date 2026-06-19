@@ -6,6 +6,7 @@ import Newsletter from "./Newsletter"
 import Instructor from "./Instructor"
 import Counter from "./Counter"
 import FaqArea from "./FaqArea"
+import EnquiryForm from "./EnquiryForm"
 import Features from "./Features"
 import InstructorTwo from "./InstructorTwo"
 import Blog from "./Blog"
@@ -24,12 +25,13 @@ const HomeOne = () => {
             <About />
             <CourseArea />
             <Newsletter />
-            <Instructor />
+            {/* <Instructor /> */}
             <Counter />
             <FaqArea />
             <Features />
             <InstructorTwo />
-            <Blog />
+            {/* <EnquiryForm/> */}
+            {/* <Blog /> */}
          </main>
          <FooterOne />
       </>

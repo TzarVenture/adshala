@@ -15,7 +15,7 @@ import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
 
-const AdvanceDMSidebar = () => {
+const Sidebar = () => {
 
    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
@@ -29,7 +29,7 @@ const AdvanceDMSidebar = () => {
                </div>
                <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
-                  <h2 className="title">₹90,000 <del>₹1,00,000</del></h2>
+                  <h2 className="title">₹20,000 <del>₹35,000</del></h2>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
@@ -98,4 +98,4 @@ const AdvanceDMSidebar = () => {
    )
 }
 
-export default AdvanceDMSidebar
+export default Sidebar

@@ -91,7 +91,7 @@ const CourseArea = ({ style }: StyleType) => {
                   <SwiperSlide key={item.id} className="swiper-slide">
                     <div className="courses__item shine__animate-item">
                       <div className="courses__item-thumb">
-                        <Link href="/course-details" className="shine__animate-link">
+                        <Link href="/course-details/111" className="shine__animate-link">
                           <Image src={item.thumb} alt="img" />
                         </Link>
                       </div>
@@ -111,7 +111,7 @@ const CourseArea = ({ style }: StyleType) => {
                               <i className="flaticon-arrow-right"></i>
                             </Link>
                           </div>
-                          <h5 className="price">${item.price}.00</h5>
+                          <h5 className="price">₹{item.price}</h5>
                         </div>
                       </div>
                     </div>

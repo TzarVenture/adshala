@@ -5,7 +5,7 @@ import CurvedCircle from "./CurvedCircle"
 import useSvgAnimation from '@/hooks/useSvgAnimation'
 import InjectableSvg from "@/hooks/InjectableSvg"
 import MotionAnimation from "@/hooks/MotionAnimation"
-
+import BtnArrow from "@/svg/BtnArrow"
 import faq_img1 from "@/assets/img/others/faq_img.png"
 import shape from "@/assets/img/others/faq_shape01.svg"
 import Link from "next/link"
@@ -60,7 +60,9 @@ const FaqArea = () => {
                               </div>
                            ))}
                            <p style={{textAlign: "center", marginTop: "20px"}}>
-                              <Link href="/faq" >View More</Link>
+                              {/* <Link href="/faq" >View More</Link> */}
+                              {/* instructor__area */}
+                              <Link href="/faq" className="btn arrow-btn" style={{padding: "10px 20px"}}>View More <BtnArrow /></Link>
                               </p>
                         </div>
                      </div>

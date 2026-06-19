@@ -16,14 +16,14 @@ const HeaderTopOne = ({ style }: StyleType) => {
             <div className="row">
                <div className="col-lg-6">
                   <ul className="tg-header__top-info list-wrap">
-                     <li><Image src={icon_1} alt="Icon" /> <span>589 5th Ave, NY 10024, USA</span></li>
-                     <li><Image src={icon_2} alt="Icon" /> <Link href="mailto:info@skillgrodemo.com">info@skillgrodemo.com</Link></li>
+                     <li><Image src={icon_1} alt="Icon" /> <span>Saki Naka, Andheri, Mumbai 400072</span></li>
+                     <li><Image src={icon_2} alt="Icon" /> <Link href="mailto:hello@adshalaa.com">hello@adshalaa.com</Link></li>
                   </ul>
                </div>
                <div className="col-lg-6">
                   <div className="tg-header__top-right">
                      <div className="tg-header__phone">
-                        <Image src={icon_3} alt="Icon" />Call us: <Link href="tel:0123456789">+123 599 8989</Link>
+                        <Image src={icon_3} alt="Icon" />Call us: <Link href="tel:8652199991">+91 8652199991</Link>
                      </div>
                      <ul className="tg-header__top-social list-wrap">
                         <li>Follow Us On :</li>

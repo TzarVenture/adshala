@@ -26,6 +26,7 @@ interface DataType {
       review: string;
       title: string;
       author?: string;
+      link?: String;
       price: number;
       lesson?: string;
       minute?: string;
@@ -37,6 +38,16 @@ const course_data: DataType[] = [
       id: 1,
       page: "home_1",
       course_details: [
+         {
+            id: 111,
+            thumb: course_thumb1,
+            tag: "Marketing",
+            review: "(4.8 Reviews)",
+            title: "Certification in Advanced Digital Marketing & AI",
+            author: "David Millar",
+            link: "/course-details/111",
+            price: 60000,
+         },
          {
             id: 1,
             thumb: course_thumb1,

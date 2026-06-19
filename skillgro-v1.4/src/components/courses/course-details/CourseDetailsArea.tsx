@@ -10,16 +10,29 @@ import Instructors from "./Instructors";
 
 import AdvanceDMOverview from "./Overview/AdvanceDMOverview";
 import AdvanceGDOverview from "./Overview/AdvanceGDOverview"
+import MasterSMMOverview from "./Overview/MasterSMMOverview"
+import MCOverview from "./Overview/MCOverview"
+import SCOverview from "./Overview/SCOverview"
+import CWebDevOverview from "./Overview/CWebDevOverview"
 
 import AdvanceDMCurriculum from "./Curriculum/AdvanceDMCurriculum";
 import AdvanceGDCurriculum from "./Curriculum/AdvanceGDCurriculum"
+import MasterSMMCurriculum from "./Curriculum/MasterSMMCurriculum"
+import MCCurriculum from "./Curriculum/MCCurriculum"
+import SCCurriculum from "./Curriculum/SCCurriculum"
+import CWebDevCurriculum from "./Curriculum/CWebDevCurriculum"
 
 import AdvanceDMSidebar from "./Sidebar/AdvanceDMSidebar";
 import AdvanceGDSidebar from "./Sidebar/AdvanceGDSidebar";
+import MasterSMMSidebar from "./Sidebar/MasterSMMSidebar"
+import MCSidebar from "./Sidebar/MCSidebar"
+import SCSidebar from "./Sidebar/SCSidebar"
+import CWebDevSidebar from "./Sidebar/CWebDevSidebar"
 
 import course_details_img1 from "@/assets/img/courses/courses_details.jpg";
+import mybannerimage from "./mybannerimage.jpeg"
 import course_details_img2 from "@/assets/img/courses/course_author001.png";
-
+// import mybannerimage from "@/components/courses/course-details/mybannerimage.jpeg"
 const tab_title: string[] = ["Overview", "Curriculum"];
 
 const CourseDetailsArea = ({ single_course }: any) => {
@@ -39,6 +52,18 @@ const CourseDetailsArea = ({ single_course }: any) => {
     else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
       return <AdvanceGDOverview/>
     }
+    else if(single_course?.overview === "mastery-in-social-media-management"){
+      return <MasterSMMOverview/>
+    }
+    else if(single_course?.overview === "marketplace-certification"){
+      return <MCOverview/>
+    }
+    else if(single_course?.overview === "seo-certification"){
+      return <SCOverview/>
+    }
+    else if(single_course?.overview === "certification-in-web-development"){
+      return <CWebDevOverview/>
+    }
     
     else {
       return <Overview />;
@@ -55,6 +80,18 @@ const CourseDetailsArea = ({ single_course }: any) => {
     else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
       return <AdvanceGDCurriculum/>
     }
+    else if(single_course?.overview === "mastery-in-social-media-management"){
+      return <MasterSMMCurriculum/>
+    }
+    else if(single_course?.overview === "marketplace-certification"){
+      return <MCCurriculum/>
+    }
+    else if(single_course?.overview === "seo-certification"){
+      return <SCCurriculum/>
+    }
+    else if(single_course?.overview === "certification-in-web-development"){
+      return <CWebDevCurriculum/>
+    }
     else {
       return <Curriculum />;
     }
@@ -70,6 +107,18 @@ const CourseDetailsArea = ({ single_course }: any) => {
     else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
       return <AdvanceGDSidebar/>
     }
+    else if(single_course?.overview === "mastery-in-social-media-management"){
+      return <MasterSMMSidebar/>
+    }
+    else if(single_course?.overview === "marketplace-certification"){
+      return <MCSidebar/>
+    }
+    else if(single_course?.overview === "seo-certification"){
+      return <SCSidebar/>
+    }
+    else if(single_course?.overview === "certification-in-web-development"){
+      return <CWebDevSidebar/>
+    }
     else {
       return <Sidebar />;
     }
@@ -82,6 +131,9 @@ const CourseDetailsArea = ({ single_course }: any) => {
           <div className="col-xl-9 col-lg-8">
             <div className="courses__details-thumb">
               <Image src={course_details_img1} alt="img" />
+              {/* <Image src={mybannerimage} alt="img" /> */}
+              {/* <Image   src="/mybannerimage.jpeg"  width={1200}
+  height={600} alt="img" /> */}
             </div>
             <div className="courses__details-content">
               <ul className="courses__item-meta list-wrap">
