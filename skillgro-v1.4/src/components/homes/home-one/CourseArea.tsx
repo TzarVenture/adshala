@@ -87,7 +87,7 @@ const CourseArea = ({ style }: StyleType) => {
 <div className="tab-content" id="courseTabContent">
   {(() => {
     const courseItem = course_data.find((item) => item.page === "home_1");
-    const filtered = courseItem.course_details.filter(
+    const filtered = courseItem?.course_details.filter(
       (item) => tabCategories[activeTab] === null || item.tag === tabCategories[activeTab]
     );
     return (
