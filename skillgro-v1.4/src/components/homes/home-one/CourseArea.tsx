@@ -93,7 +93,7 @@ const CourseArea = ({ style }: StyleType) => {
     return (
       <div className="tab-pane fade show active">
         <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper courses-swiper-active">
-          {filtered.map((item) => (
+          {filtered?.map((item) => (
             <SwiperSlide key={item.id} className="swiper-slide">
               <div className="courses__item shine__animate-item">
                 <div className="courses__item-thumb">
