@@ -14,25 +14,25 @@ const category_data: DatatYpe[] = [
    {
       id: 1,
       icon: "flaticon-graphic-design",
-      title: "Digital Marketing Certification",
+      title: "Digital Marketing",
       total: "(22)"
    },
    {
       id: 2,
       icon: "flaticon-investment",
-      title: "Graphic Design Certification",
+      title: "Graphic Designing",
       total: "(41)"
    },
    {
       id: 3,
       icon: "flaticon-coding",
-      title: "Web Development Certification",
+      title: "Web Development",
       total: "(29)"
    },
    {
       id: 4,
       icon: "flaticon-email",
-      title: "Mastery in Social Media Management",
+      title: "Social Media Management",
       total: "(31)"
    },
    {
@@ -47,12 +47,12 @@ const category_data: DatatYpe[] = [
       title: "SEO Certification",
       total: "(19)"
    },
-   {
-      id: 7,
-      icon: "flaticon-web-design",
-      title: "Mastery in Instagram",
-      total: "(18)"
-   },
+   // {
+   //    id: 7,
+   //    icon: "flaticon-web-design",
+   //    title: "Mastery in Instagram",
+   //    total: "(18)"
+   // },
 ];
 
 // slider setting
@@ -99,7 +99,7 @@ const Categories = () => {
                   <div className="section__title text-center mb-40">
                      <span className="sub-title">Trending Courses</span>
                      <h2 className="title">Where Learning Leads to a Job.</h2>
-                     <p className="desc">Master in-demand skills, gain real internship experience with Adshala's certified career programs in Digital Marketing.</p>
+                     <p className="desc">Master in-demand skills, gain real internship experience with Adshalaa's certified career programs in Digital Marketing.</p>
                   </div>
                </div>
             </div>
@@ -116,7 +116,7 @@ const Categories = () => {
                                        <i className={item.icon}></i>
                                     </div>
                                     <span className="name">{item.title}</span>
-                                    <span className="courses">{item.total}</span>
+                                    {/* <span className="courses">{item.total}</span> */}
                                  </Link>
                               </div>
                            </SwiperSlide>

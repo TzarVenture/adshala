@@ -127,7 +127,7 @@ const CourseSidebar = ({ setCourses }: any) => {
             </div>
 
             {/* Language Filter */}
-            <div className="courses-widget">
+            {/* <div className="courses-widget">
                <h4 className="widget-title">Languages</h4>
                <div className="courses-cat-list">
                   <ul className="list-wrap">
@@ -146,10 +146,10 @@ const CourseSidebar = ({ setCourses }: any) => {
                      </a>
                   </div>
                </div>
-            </div>
+            </div> */}
 
             {/* Price Filter */}
-            <div className="courses-widget">
+            {/* <div className="courses-widget">
                <h4 className="widget-title">Price</h4>
                <div className="courses-cat-list">
                   <ul className="list-wrap">
@@ -163,10 +163,10 @@ const CourseSidebar = ({ setCourses }: any) => {
                      ))}
                   </ul>
                </div>
-            </div>
+            </div> */}
 
             {/* Skill Filter */}
-            <div className="courses-widget">
+            {/* <div className="courses-widget">
                <h4 className="widget-title">Skill level</h4>
                <div className="courses-cat-list">
                   <ul className="list-wrap">
@@ -180,10 +180,10 @@ const CourseSidebar = ({ setCourses }: any) => {
                      ))}
                   </ul>
                </div>
-            </div>
+            </div> */}
 
             {/* Instructors Filter */}
-            <div className="courses-widget">
+            {/* <div className="courses-widget">
                <h4 className="widget-title">Instructors</h4>
                <div className="courses-cat-list">
                   <ul className="list-wrap">
@@ -202,10 +202,10 @@ const CourseSidebar = ({ setCourses }: any) => {
                      </a>
                   </div>
                </div>
-            </div>
+            </div> */}
 
             {/* Rating Filter */}
-            <div className="courses-widget">
+            {/* <div className="courses-widget">
                <h4 className="widget-title">Ratings</h4>
                <div className="courses-rating-list">
                   <ul className="list-wrap">
@@ -223,7 +223,7 @@ const CourseSidebar = ({ setCourses }: any) => {
                      ))}
                   </ul>
                </div>
-            </div>
+            </div> */}
          </aside>
       </div>
    );

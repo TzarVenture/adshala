@@ -36,8 +36,8 @@ const InstructorTwo = ({ style }: StyleType) => {
                            </div>
                         </div>
                         <div className="instructor__content-two">
-                           <h3 className="title"><Link href="/contact">Become a Instructor</Link></h3>
-                           <p>To take a trivial example, which of us undertakes physical exercise yes is this happen here.</p>
+                           <h3 className="title"><Link href="/contact">Become an Instructor</Link></h3>
+                           <p>Share your expertise and inspire the next generation of digital professionals.</p>
                            <div className="tg-button-wrap">
                               <Link href="/contact" className="btn arrow-btn">Apply Now <BtnArrow /></Link>
                            </div>
@@ -58,7 +58,7 @@ const InstructorTwo = ({ style }: StyleType) => {
                         </div>
                         <div className="instructor__content-two">
                            <h3 className="title"><Link href="/contact">Become a Student</Link></h3>
-                           <p>Join millions of people from around the world learning together. Online learning</p>
+                           <p>Learn industry-ready skills and build a successful career with Adshalaa.</p>
                            <div className="tg-button-wrap">
                               <Link href="/contact" className="btn arrow-btn">Apply Now <BtnArrow /></Link>
                            </div>

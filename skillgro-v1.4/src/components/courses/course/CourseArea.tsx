@@ -64,10 +64,10 @@ const CourseArea = () => {
                                           <li className="courses__item-tag">
                                              <Link href="/courses">{item.category}</Link>
                                           </li>
-                                          <li className="avg-rating"><i className="fas fa-star"></i> ({item.rating} Reviews)</li>
+                                          {/* <li className="avg-rating"><i className="fas fa-star"></i> ({item.rating} Reviews)</li> */}
                                        </ul>
                                        <h5 className="title"><Link href={`/course-details/${item.id}`}>{item.title}</Link></h5>
-                                       <p className="author">By <Link href="#">{item.instructors}</Link></p>
+                                       {/* <p className="author">By <Link href="#">{item.instructors}</Link></p> */}
                                        <div className="courses__item-bottom">
                                           <div className="button">
                                              <Link href={`/course-details/${item.id}`}>
@@ -75,7 +75,7 @@ const CourseArea = () => {
                                                 <i className="flaticon-arrow-right"></i>
                                              </Link>
                                           </div>
-                                          <h5 className="price">${item.price}.00</h5>
+                                          <h5 className="price">₹{item.price}</h5>
                                        </div>
                                     </div>
                                  </div>

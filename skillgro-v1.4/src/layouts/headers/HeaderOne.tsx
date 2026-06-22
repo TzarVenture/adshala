@@ -19,11 +19,11 @@ import Adshalaa_logo from "@/assets/img/logo/Adshalaa_Logo.png"
 import icon_1 from "@/assets/img/icons/user.svg"
 import icon_2 from "@/assets/img/icons/cart.svg"
 import icon_3 from "@/assets/img/icons/heart.svg"
-
+import BrochurePopup from "@/components/common/BrochurePopup"
 const HeaderOne = () => {
 
    const [selectedOption, setSelectedOption] = React.useState(null);
-
+const [brochureOpen, setBrochureOpen] = useState(false)
    const handleSelectChange = (option: React.SetStateAction<null>) => {
       setSelectedOption(option);
    };
@@ -51,10 +51,17 @@ const HeaderOne = () => {
                               <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                  <NavMenu />
                               </div>
-                              <div className="tgmenu__search d-none d-md-block">
+                              {/* <li className="header-btn"> */}
+                                 <button onClick={() =>{
+                                    setBrochureOpen(true); 
+                                    }} className="btn">
+                                    Get Brochure
+                                 </button>
+                                 {/* </li> */}
+                              {/* <div className="tgmenu__search d-none d-md-block">
                                  <CustomSelect value={selectedOption} onChange={handleSelectChange} />
-                              </div>
-                              <div className="tgmenu__action">
+                              </div> */}
+                              {/* <div className="tgmenu__action">
                                  <ul className="list-wrap">
                                     <li className="wishlist-icon">
                                        <Link href="/wishlist" className="cart-count">
@@ -72,10 +79,10 @@ const HeaderOne = () => {
                                        <Link href="/login">Log in</Link>
                                     </li>
                                  </ul>
-                              </div>
-                              <div className="mobile-login-btn">
+                              </div> */}
+                              {/* <div className="mobile-login-btn">
                                  <Link href="/login"><InjectableSvg src={icon_1.src} alt="" className="injectable" /></Link>
-                              </div>
+                              </div> */}
                               <div onClick={() => setIsActive(true)} className="mobile-nav-toggler"><i className="tg-flaticon-menu-1"></i></div>
                            </nav>
                         </div>
@@ -85,6 +92,7 @@ const HeaderOne = () => {
             </div>
          </header>
          <MobileSidebar isActive={isActive} setIsActive={setIsActive} />
+         <BrochurePopup isOpen={brochureOpen} onClose={() => setBrochureOpen(false)} />
       </>
    )
 }

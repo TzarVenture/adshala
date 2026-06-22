@@ -8,7 +8,8 @@ import course_data from "@/data/home-data/CourseData";
 
 import bg_img from '@//assets/img/bg/courses_bg.jpg';
 
-const tab_title: string[] = ["All Courses", "Design", "Digital Marketing", "Development"];
+const tab_title: string[] = ["All Courses", "Design", "Marketing", "Development"];
+const tabCategories = [null, "Design", "Marketing", "Development"];
 
 // slider setting
 const setting = {
@@ -83,50 +84,54 @@ const CourseArea = ({ style }: StyleType) => {
           </div>
         </div>
 
-        <div className="tab-content" id="courseTabContent">
-          {course_data.filter((items) => items.page === "home_1").map((course_item, index) => (
-            <div key={course_item.id} className={`tab-pane fade ${activeTab === index ? 'show active' : ''}`} id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab">
-              <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper courses-swiper-active">
-                {course_item.course_details.map((item) => (
-                  <SwiperSlide key={item.id} className="swiper-slide">
-                    <div className="courses__item shine__animate-item">
-                      <div className="courses__item-thumb">
-                        <Link href="/course-details/111" className="shine__animate-link">
-                          <Image src={item.thumb} alt="img" />
-                        </Link>
-                      </div>
-                      <div className="courses__item-content">
-                        <ul className="courses__item-meta list-wrap">
-                          <li className="courses__item-tag">
-                            <Link href="/courses">{item.tag}</Link>
-                          </li>
-                          <li className="avg-rating"><i className="fas fa-star"></i> {item.review}</li>
-                        </ul>
-                        <h5 className="title"><Link href="/course-details">{item.title}</Link></h5>
-                        <p className="author">By <Link href="#">{item.author}</Link></p>
-                        <div className="courses__item-bottom">
-                          <div className="button">
-                            <Link href="/course-details">
-                              <span className="text">Enroll Now</span>
-                              <i className="flaticon-arrow-right"></i>
-                            </Link>
-                          </div>
-                          <h5 className="price">₹{item.price}</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              {!style &&
-                <div className="courses__nav">
-                  <div className="courses-button-prev"><i className="flaticon-arrow-right"></i></div>
-                  <div className="courses-button-next"><i className="flaticon-arrow-right"></i></div>
+<div className="tab-content" id="courseTabContent">
+  {(() => {
+    const courseItem = course_data.find((item) => item.page === "home_1");
+    const filtered = courseItem.course_details.filter(
+      (item) => tabCategories[activeTab] === null || item.tag === tabCategories[activeTab]
+    );
+    return (
+      <div className="tab-pane fade show active">
+        <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper courses-swiper-active">
+          {filtered.map((item) => (
+            <SwiperSlide key={item.id} className="swiper-slide">
+              <div className="courses__item shine__animate-item">
+                <div className="courses__item-thumb">
+                  <Link href={`/course-details/${item.id}`} className="shine__animate-link">
+                    <Image src={item.thumb} alt="img" />
+                  </Link>
                 </div>
-              }
-            </div>
+                <div className="courses__item-content">
+                  <ul className="courses__item-meta list-wrap">
+                    <li className="courses__item-tag">
+                      <Link href="/courses">{item.tag}</Link>
+                    </li>
+                  </ul>
+                  <h5 className="title"><Link href="/course-details">{item.title}</Link></h5>
+                  <div className="courses__item-bottom">
+                    <div className="button">
+                      <Link href="/course-details">
+                        <span className="text">Enroll Now</span>
+                        <i className="flaticon-arrow-right"></i>
+                      </Link>
+                    </div>
+                    <h5 className="price">₹{item.price}</h5>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
+        {!style &&
+          <div className="courses__nav">
+            <div className="courses-button-prev"><i className="flaticon-arrow-right"></i></div>
+            <div className="courses-button-next"><i className="flaticon-arrow-right"></i></div>
+          </div>
+        }
+      </div>
+    );
+  })()}
+</div>
       </div>
     </section>
   )

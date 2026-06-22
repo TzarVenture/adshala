@@ -38,10 +38,10 @@ const FaqArea = () => {
                <div className="col-lg-6">
                   <div className="faq__content">
                      <div className="section__title pb-10">
-                        <span className="sub-title">Faq’s</span>
+                        <span className="sub-title">FAQ’s</span>
                         <h2 className="title">Start Learning From <br /> World’s Pro Instructors</h2>
                      </div>
-                     <p>Groove’s intuitive shared inbox makes it easy for team members to organize, prioritize and.In this episode.</p>
+                     <p>Everything you need to know about Adshalaa is right here. Explore answers related to course modules, fees, certifications and career support.</p>
                      <div className="faq__wrap">
                         <div className="accordion" id="accordionExample">
                            {faq_data.filter((items) => items.page === "home_1").map((item) => (

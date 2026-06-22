@@ -10,13 +10,13 @@ const faq_data: DataType[] = [
    {
       id: 1,
       page: "home_1",
-      question: "What mode of learning does Adshala offer?",
+      question: "What mode of learning does Adshalaa offer?",
       answer: "Our programs are offered in offline mode with in-person, mentor-led sessions.",
    },
    {
       id: 2,
       page: "home_1",
-      question: "What courses does Adshala offer?",
+      question: "What courses does Adshalaa offer?",
       class_name:"collapsed",
       answer: "We currently offer certification programs in Digital Marketing, Graphic Designing and Web Development, along with specialized courses in SEO, Social Media Management, Marketplace and Instagram Mastery.",
    },

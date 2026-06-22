@@ -3,7 +3,7 @@ import Link from "next/link"
 import MobileMenu from "./MobileMenu"
 
 import logo from "@/assets/img/logo/logo.svg"
-
+import Adshalaa_logo from "@/assets/img/logo/Adshalaa_Logo.png"
 interface MobileMenuProps {
    isActive: boolean;
    setIsActive: (isActive: boolean) => void;
@@ -17,14 +17,14 @@ const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
             <nav className="tgmobile__menu-box">
                <div onClick={() => setIsActive(false)} className="close-btn"><i className="tg-flaticon-close-1"></i></div>
                <div className="nav-logo">
-                  <Link href="/"><Image src={logo} alt="Logo" /></Link>
+                  {/* <Link href="/"><Image src={Adshalaa_logo} alt="Logo" /></Link> */}
                </div>
-               <div className="tgmobile__search">
+               {/* <div className="tgmobile__search">
                   <form action="#">
                      <input type="text" placeholder="Search here..." />
                      <button><i className="fas fa-search"></i></button>
                   </form>
-               </div>
+               </div> */}
                <div className="tgmobile__menu-outer">
                   <MobileMenu />
                </div>
