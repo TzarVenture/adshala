@@ -31,7 +31,7 @@ const MobileMenu = () => {
                .filter(Boolean) || [];
 
             const allLinks = [...subMenuLinks, ...megaMenuLinks, ...courseSubMenuLinks].filter(Boolean) as string[];
-            const hasChildren = !!(menu.sub_menus?.length || menu.home_sub_menu?.length || menu.course_sub_menu?.length);
+            const hasChildren = !!(menu.sub_menus?.length || menu?.home_sub_menu?.length || menu.course_sub_menu?.length);
 
             return (
                <li
