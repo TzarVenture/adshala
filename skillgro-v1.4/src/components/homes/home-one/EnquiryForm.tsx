@@ -113,7 +113,7 @@ export default function EnquiryForm() {
               value={formData.phone}
               onChange={handleChange}
               required
-              placeholder="1234567890"
+              placeholder="9876543210"
             />
           </div>
 

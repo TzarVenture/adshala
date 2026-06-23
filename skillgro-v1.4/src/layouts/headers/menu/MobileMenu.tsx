@@ -26,8 +26,12 @@ const MobileMenu = () => {
             const megaMenuLinks = menu.sub_menus
                ?.flatMap((sub_m) => sub_m.mega_menus?.map((mega_m) => mega_m.link))
                .filter(Boolean) || [];
-            const allLinks = [...subMenuLinks, ...megaMenuLinks].filter(Boolean) as string[];
-            const hasChildren = !!(menu.sub_menus?.length || menu.home_sub_menu?.length);
+            const courseSubMenuLinks = menu.course_sub_menu
+               ?.flatMap((c_menu) => c_menu.menu_details.map((d) => d.link))
+               .filter(Boolean) || [];
+
+            const allLinks = [...subMenuLinks, ...megaMenuLinks, ...courseSubMenuLinks].filter(Boolean) as string[];
+            const hasChildren = !!(menu.sub_menus?.length || menu.home_sub_menu?.length || menu.course_sub_menu?.length);
 
             return (
                <li
@@ -39,7 +43,29 @@ const MobileMenu = () => {
                >
                   <Link href={menu.link}>{menu.title}</Link>
 
-                  {hasChildren && menu.sub_menus && (
+                  {/* Course mega menu for mobile */}
+                  {menu.course_sub_menu && (
+                     <ul
+                        className="sub-menu"
+                        style={{ display: navTitle === menu.title ? "block" : "none" }}
+                     >
+                        {menu.course_sub_menu.flatMap((c_menu) =>
+                           c_menu.menu_details.map((item, index) => (
+                              <li key={index} className={isActive(item.link) ? "active" : ""}>
+                                 <Link href={item.link}>
+                                    {item.title}{" "}
+                                    {item.badge && (
+                                       <span className={item.badge_class}>{item.badge}</span>
+                                    )}
+                                 </Link>
+                              </li>
+                           ))
+                        )}
+                     </ul>
+                  )}
+
+                  {/* Regular sub menu */}
+                  {!menu.course_sub_menu && hasChildren && menu.sub_menus && (
                      <ul
                         className="sub-menu"
                         style={{ display: navTitle === menu.title ? "block" : "none" }}

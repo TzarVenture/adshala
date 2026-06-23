@@ -16,6 +16,13 @@ import course_thumb12 from "@/assets/img/courses/h8_course_thumb06.jpg"
 import course_thumb13 from "@/assets/img/courses/h8_course_thumb07.jpg"
 import course_thumb14 from "@/assets/img/courses/h8_course_thumb08.jpg"
 
+import thumb1 from "@/assets/img/courses/course_card_images/1.jpg"
+import thumb2 from "@/assets/img/courses/course_card_images/2.jpg"
+import thumb3 from "@/assets/img/courses/course_card_images/3.jpg"
+import thumb4 from "@/assets/img/courses/course_card_images/4.jpg"
+import thumb5 from "@/assets/img/courses/course_card_images/5.jpg"
+import thumb6 from "@/assets/img/courses/course_card_images/6.jpg"
+
 interface DataType {
    id: number;
    page: string;
@@ -40,7 +47,7 @@ const course_data: DataType[] = [
       course_details: [
          {
             id: 111,
-            thumb: course_thumb1,
+            thumb: thumb2,
             tag: "Marketing",
             review: "(4.8 Reviews)",
             title: "Certification in Advanced Digital Marketing & AI",
@@ -50,7 +57,7 @@ const course_data: DataType[] = [
          },
          {
             id: 112,
-            thumb: course_thumb1,
+            thumb: thumb6,
             tag: "Design",
             review: "(4.8 Reviews)",
             title: "Certification in Advanced Graphic Design & AI",
@@ -60,7 +67,7 @@ const course_data: DataType[] = [
          },
          {
             id: 113,
-            thumb: course_thumb1,
+            thumb: thumb1,
             tag: "Marketing",
             review: "(4.8 Reviews)",
             title: "Mastery in Social Media Management",
@@ -70,27 +77,27 @@ const course_data: DataType[] = [
          },
          {
             id: 114,
-            thumb: course_thumb1,
+            thumb: thumb3,
             tag: "Marketing",
             review: "(4.8 Reviews)",
-            title: "Marketplace Certification",
+            title: "Marketplace Specialist Program",
             author: "David Millar",
             link: "/course-details/111",
             price: 20000,
          },
          {
             id: 115,
-            thumb: course_thumb1,
+            thumb: thumb4,
             tag: "Marketing",
             review: "(4.8 Reviews)",
-            title: "SEO Certification",
+            title: "Advanced SEO certification",
             author: "David Millar",
             link: "/course-details/111",
             price: 20000,
          },
          {
             id: 116,
-            thumb: course_thumb1,
+            thumb: thumb5,
             tag: "Development",
             review: "(4.8 Reviews)",
             title: "Certification in Web Development",

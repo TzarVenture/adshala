@@ -1,18 +1,32 @@
 import feature_data from "@/data/home-data/FeatureData";
 import InjectableSvg from "@/hooks/InjectableSvg";
+import Image from "next/image";
+
+import graduateIcon from "@/assets/icons/1.png";
+import certificateIcon from "@/assets/icons/2.png";
+import laptopIcon from "@/assets/icons/3.png";
+
 import {
-  FaLaptopCode,
-  FaCertificate,
-  FaUserGraduate,
+//   FaLaptopCode,
+//   FaCertificate,
+//   FaUserGraduate,
   FaBriefcase,
 } from "react-icons/fa";
 
-const featureIcons: Record<number, React.ReactNode> = {
-  1: <FaUserGraduate size={50} color="#ffff" />,
-  2: <FaCertificate size={50} color="#fff" />,
-  3: <FaLaptopCode size={50} color="#fff" />,
-  4: <FaBriefcase size={50} color="#fff" />,
+// const featureIcons: Record<number, React.ReactNode> = {
+//   1: <FaUserGraduate size={50} color="#ffff" />,
+//   2: <FaCertificate size={50} color="#fff" />,
+//   3: <FaLaptopCode size={50} color="#fff" />,
+//   4: <FaBriefcase size={50} color="#fff" />,
 
+// };
+
+
+const featureIcons: Record<number, React.ReactNode> = {
+  1: <Image src={graduateIcon} alt="Graduate" width={80} height={50} />,
+  2: <Image src={certificateIcon} alt="Certificate" width={80} height={50} />,
+  3: <Image src={laptopIcon} alt="Laptop" width={80} height={50} />,
+  4: <FaBriefcase size={58} color="#1a3f32" />,
 };
 
 const Features = () => {
@@ -24,7 +38,7 @@ const Features = () => {
                   <div className="section__title white-title text-center mb-50">
                      <span className="sub-title">Why Choose Adshalaa</span>
                      <h2 className="title">Start your Learning Journey Today!</h2>
-                     <p>At Adshalaa, we turn ambition into a career. Whether you're a student, a fresher or a working professional, our hands-on certification programs give you the skills, experience and placement support you need to succeed in today's digital world.</p>
+                     <p>At Adshalaa, we transform ambition into careers through hands-on certification programs, real-world training and placement support.</p>
                   </div>
                </div>
             </div>

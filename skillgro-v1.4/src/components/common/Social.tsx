@@ -11,27 +11,27 @@ const Social = () => {
    return (
       <>
          <li>
-             <Link href="https://www.facebook.com/" target="_blank">
+             <Link href="https://www.facebook.com/" target="_blank" style={{color: "#1b4322"}}>
                <InjectableSvg src={icon_1.src} alt="img" className="injectable" />
             </Link>
          </li>
          <li>
-            <Link href="https://www.facebook.com/" target="_blank">
+            <Link href="https://www.facebook.com/" target="_blank" style={{color: "#1b4322"}}>
                <InjectableSvg src={icon_2.src} alt="img" className="injectable" />
             </Link>
          </li>
          <li>
-            <Link href="https://www.facebook.com/" target="_blank">
+            <Link href="https://www.facebook.com/" target="_blank" style={{color: "#1b4322"}}>
                <InjectableSvg src={icon_3.src} alt="img" className="injectable" />
             </Link>
          </li>
          <li>
-            <Link href="https://www.facebook.com/" target="_blank">
+            <Link href="https://www.facebook.com/" target="_blank" style={{color: "#1b4322"}}>
                <InjectableSvg src={icon_4.src} alt="img" className="injectable" />
             </Link>
          </li>
          <li>
-            <Link href="https://www.facebook.com/" target="_blank">
+            <Link href="https://www.facebook.com/" target="_blank" style={{color: "#1b4322"}}>
                <InjectableSvg src={icon_5.src} alt="img" className="injectable" />
             </Link>
          </li>

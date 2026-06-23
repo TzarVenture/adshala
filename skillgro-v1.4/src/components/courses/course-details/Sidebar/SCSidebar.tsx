@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useState } from "react";
 import InjectableSvg from "@/hooks/InjectableSvg";
 import BtnArrow from "@/svg/BtnArrow";
-
+import sidebarimage from"@/assets/img/courses/sidebar_image/ADSHALA BANNER 05.jpg";
 import img_1 from "@/assets/img/courses/course_thumb02.jpg"
 import img_2 from "@/assets/img/others/payment.png"
 import icon_1 from "@/assets/img/icons/course_icon01.svg";
@@ -14,6 +14,7 @@ import icon_3 from "@/assets/img/icons/course_icon03.svg";
 import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
+import { assert } from "console";
 
 const Sidebar = () => {
 
@@ -23,8 +24,8 @@ const Sidebar = () => {
       <>
          <div className="col-xl-3 col-lg-4">
             <div className="courses__details-sidebar">
-               <div className="courses__details-video">
-                  <Image src={img_1} alt="img" />
+         <div className="courses__details-video">
+            <Image src={sidebarimage} alt="img" style={{objectFit: "contain"}} />
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
                <div className="courses__cost-wrap">

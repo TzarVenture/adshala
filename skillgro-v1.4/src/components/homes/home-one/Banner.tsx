@@ -63,13 +63,13 @@ const Banner: React.FC = () => {
                            <div className="image">
                               <Image src={banner_author_1} alt="img" />
                            </div>
-                           <h6 className="name">Robert Fox</h6>
+                           <h6 className="name">Sumit Gupta</h6>
                         </div>
                         <div className="banner__author-item">
                            <div className="image">
                               <Image src={banner_author_2} alt="img" />
                            </div>
-                           <h6 className="name">Michel Jones</h6>
+                           <h6 className="name">Anil Jadhav</h6>
                         </div>
                         <Image src={banner_shape_4} alt="shape" className="arrow-shape tg-motion-effects3" />
                      </div>

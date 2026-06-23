@@ -1,7 +1,7 @@
 .form-container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 2rem auto;
-  min-height: 850px;
+  min-height: 600px;
   padding: 2.5rem;
   background: #ffffff;
   border-radius: 12px;
@@ -74,7 +74,7 @@
 
 .submit-btn {
   padding: 0.85rem;
-  background-color: #0070f3;
+  background-color: #1A3F32;
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -86,7 +86,8 @@
 }
 
 .submit-btn:hover {
-  background-color: #0051cb;
+  background-color: #FFC224;
+  color: #000;
 }
 
 .submit-btn:disabled {

@@ -124,13 +124,29 @@ const CourseDetailsArea = ({ single_course }: any) => {
     }
   };
 
+  console.log("single_course", single_course)
   return (
+  <>
+ <style jsx global>{`
+  @media (max-width: 767px) {
+    .courses__details-thumb {
+      height: auto !important;
+    }
+
+    .courses__details-thumb img {
+      width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+  }
+`}</style>
     <section className="courses__details-area section-py-120">
       <div className="container">
         <div className="row">
           <div className="col-xl-9 col-lg-8">
             <div className="courses__details-thumb">
-              <Image src={course_details_img1} alt="img" />
+              {/* <Image src={course_details_img1} alt="img" /> */}
+              <Image src={single_course?.banner} alt="img" className="course-bannerrrr" />
               {/* <Image src={mybannerimage} alt="img" /> */}
               {/* <Image   src="/mybannerimage.jpeg"  width={1200}
   height={600} alt="img" /> */}
@@ -222,6 +238,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
         </div>
       </div>
     </section>
+      </>
   );
 };
 

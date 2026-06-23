@@ -14,7 +14,7 @@ import icon_3 from "@/assets/img/icons/course_icon03.svg";
 import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
-
+import sidebarimage from"@/assets/img/courses/sidebar_image/ADSHALA BANNER 03.jpg";
 const Sidebar = () => {
 
    const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -24,7 +24,7 @@ const Sidebar = () => {
          <div className="col-xl-3 col-lg-4">
             <div className="courses__details-sidebar">
                <div className="courses__details-video">
-                  <Image src={img_1} alt="img" />
+                  <Image src={sidebarimage} alt="img" style={{objectFit: "contain"}}/>
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
                <div className="courses__cost-wrap">

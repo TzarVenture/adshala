@@ -13,8 +13,22 @@ import course_thumb10 from "@/assets/img/courses/course_thumb10.jpg"
 import course_thumb11 from "@/assets/img/courses/course_thumb11.jpg"
 import course_thumb12 from "@/assets/img/courses/course_thumb12.jpg"
 
+import thumb1 from "@/assets/img/courses/course_card_images/1.jpg"
+import thumb2 from "@/assets/img/courses/course_card_images/2.jpg"
+import thumb3 from "@/assets/img/courses/course_card_images/3.jpg"
+import thumb4 from "@/assets/img/courses/course_card_images/4.jpg"
+import thumb5 from "@/assets/img/courses/course_card_images/5.jpg"
+import thumb6 from "@/assets/img/courses/course_card_images/6.jpg"
+// Course Banner Images
+import course_banner1 from "@/assets/img/courses/coursesBanner/adshalaa_01.jpg"
+import course_banner2 from "@/assets/img/courses/coursesBanner/adshalaa_02.jpg"
+import course_banner3 from "@/assets/img/courses/coursesBanner/adshalaa_03.jpg"
+import course_banner4 from "@/assets/img/courses/coursesBanner/adshalaa_04.jpg"
+import course_banner5 from "@/assets/img/courses/coursesBanner/adshalaa_05.jpg"
+import course_banner6 from "@/assets/img/courses/coursesBanner/adshalaa_06.jpg"
 interface DataType {
    id: number;
+   banner?: StaticImageData;
    thumb: StaticImageData;
    category: string;
    rating: number;
@@ -37,7 +51,8 @@ interface DataType {
 const inner_course_data: DataType[] =[
       {
       id: 116,
-      thumb: course_thumb11,
+      banner: course_banner5,
+      thumb: thumb5,
       category: "Development",
       rating: 5,
       title: "Certification in Web Development ",
@@ -54,10 +69,11 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 115,
-      thumb: course_thumb11,
+      banner: course_banner4,
+      thumb: thumb4,
       category: "Marketing",
       rating: 5,
-      title: "SEO Certification",
+      title: "Advanced SEO certification",
       instructors: "David Millar",
       price: 20000,
       skill_level: "Beginner",
@@ -71,10 +87,11 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 114,
-      thumb: course_thumb11,
+      banner: course_banner3,
+      thumb: thumb3,
       category: "Marketing",
       rating: 5,
-      title: "Marketplace Certification",
+      title: "Marketplace Specialist Program",
       instructors: "David Millar",
       price: 20000,
       skill_level: "Beginner",
@@ -88,7 +105,8 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 113,
-      thumb: course_thumb11,
+      banner: course_banner1,
+      thumb: thumb1,
       category: "Marketing",
       rating: 5,
       title: "Mastery in Social Media Management",
@@ -105,7 +123,8 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 112,
-      thumb: course_thumb11,
+      banner: course_banner6,
+      thumb: thumb6,
       category: "Design",
       rating: 5,
       title: "Certification in Advanced Graphic Design & AI",
@@ -122,7 +141,8 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 111,
-      thumb: course_thumb11,
+      banner: course_banner2,
+      thumb: thumb2,
       category: "Marketing",
       rating: 5,
       title: "Certification in Advanced Digital Marketing & AI",

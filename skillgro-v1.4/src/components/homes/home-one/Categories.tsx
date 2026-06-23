@@ -13,13 +13,14 @@ interface DatatYpe {
 const category_data: DatatYpe[] = [
    {
       id: 1,
-      icon: "flaticon-graphic-design",
-      title: "Digital Marketing",
+      icon: "flaticon-investment",
+      title: "Advanced Digital Marketing",
       total: "(22)"
    },
    {
       id: 2,
-      icon: "flaticon-investment",
+   
+      icon: "flaticon-graphic-design",
       title: "Graphic Designing",
       total: "(41)"
    },
@@ -44,7 +45,7 @@ const category_data: DatatYpe[] = [
    {
       id: 6,
       icon: "flaticon-interaction",
-      title: "SEO Certification",
+      title: "Advanced SEO Certification",
       total: "(19)"
    },
    // {

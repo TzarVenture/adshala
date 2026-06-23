@@ -45,8 +45,9 @@ const feature_data: DataType[] = [
       id: 3,
       page: "home_1",
       icon: icon_3,
-      title: "Industry Recognized Certificate",
-      desc: "Get certification that proves your skills to employers",
+      // title: "Industry Recognized Certificate",
+      title: "Paid Internship",
+      desc: "Paid Internships with Real Experience",
    },
    {
       id: 4,

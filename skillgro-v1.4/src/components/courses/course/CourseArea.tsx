@@ -56,7 +56,7 @@ const CourseArea = () => {
                                  <div className="courses__item shine__animate-item">
                                     <div className="courses__item-thumb">
                                        <Link href={`/course-details/${item.id}`} className="shine__animate-link">
-                                          <Image src={item.thumb} alt="img" />
+                                          <Image src={item.thumb} alt="img" style={{objectFit:"contain"}}/>
                                        </Link>
                                     </div>
                                     <div className="courses__item-content">
@@ -75,7 +75,7 @@ const CourseArea = () => {
                                                 <i className="flaticon-arrow-right"></i>
                                              </Link>
                                           </div>
-                                          <h5 className="price">₹{item.price}</h5>
+                                          <h5 className="price">₹{Number(item.price).toLocaleString("en-IN")}</h5>
                                        </div>
                                     </div>
                                  </div>

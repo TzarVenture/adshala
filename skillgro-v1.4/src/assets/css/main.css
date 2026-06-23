@@ -20243,7 +20243,7 @@ blockquote > p {
 }
 .footer__bottom {
   background: var(--tg-common-color-dark);
-  padding: 35px 0;
+  padding: 20px 0;
 }
 @media (max-width: 991.98px) {
   .footer__bottom {

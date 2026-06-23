@@ -2,8 +2,7 @@ interface MenuItem {
     id: number;
     title: string;
     link: string;
-    menu_class?: string;
-    home_sub_menu?: {
+    course_sub_menu?: {
         menu_details: {
             link: string;
             title: string;
@@ -20,7 +19,7 @@ interface MenuItem {
             title: string;
         }[];
     }[];
-}[];
+}
 
 const menu_data: MenuItem[] = [
     {
@@ -32,6 +31,24 @@ const menu_data: MenuItem[] = [
         id: 2,
         title: "Courses",
         link: "/courses",
+        course_sub_menu: [
+            {
+                menu_details: [
+                    { link: "/courses/web-development", title: "Web Development", badge_class: "tg-badge", badge: "Hot" },
+                    { link: "/courses/react", title: "SEO Certification", badge_class: "tg-badge-two", badge: "New" },
+                    { link: "/courses/nodejs", title: "Digital Marketing" },
+                    { link: "/courses/mongodb", title: "Graphic Designing" },
+                    { link: "/courses/nextjs", title: "Social Media Management" },
+                ]
+            },
+            {
+                menu_details: [
+                    { link: "/courses/ui-ux", title: "Marketplace Certification" },
+                    // { link: "/courses/python", title: "Python", badge_class: "tg-badge", badge: "Hot" },
+                    // { link: "/courses/devops", title: "DevOps" },
+                ]
+            },
+        ],
     },
     {
         id: 3,
@@ -39,7 +56,6 @@ const menu_data: MenuItem[] = [
         link: "#",
         sub_menus: [
             { link: "/about-us", title: "About Us" },
-            // { link: "/instructors", title: "Our Instructors" },
             { link: "/faq", title: "FAQ" },
             { link: "/contact", title: "Contact" },
         ],
