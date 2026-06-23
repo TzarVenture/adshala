@@ -22,7 +22,7 @@ const NavMenu = () => {
                .filter(Boolean) as string[] || [];
 
             const allLinks: string[] = [...subMenuLinks, ...megaMenuLinks, ...courseSubMenuLinks];
-            const hasChildren = !!(menu.sub_menus?.length || menu.course_sub_menu?.length);
+            const hasChildren = !!(menu?.sub_menus?.length || menu?.course_sub_menu?.length);
 
             return (
                <li
