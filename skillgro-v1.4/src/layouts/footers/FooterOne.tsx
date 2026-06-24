@@ -22,9 +22,9 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                   <FooterCommon />
                   <div className="col-xl-3 col-lg-4 col-md-6">
                      <div className="footer__widget">
-                        <h4 className="footer__widget-title" style={{color: "#1b4322"}}>Get In Touch</h4>
+                        <h4 className="footer__widget-title" style={{color: "#FFC224"}}>Get In Touch</h4>
                         <div className="footer__contact-content">
-                           <p style={{color: "#1b4322"}}>when an unknown printer took <br /> galley type and scrambled</p>
+                           <p style={{color: "#dbd7d7"}}>Have questions about our courses or admissions? <br/> Reach out. We're happy to help you find the right program.</p>
                            <ul className="list-wrap footer__social">
                               <Social />
                            </ul>

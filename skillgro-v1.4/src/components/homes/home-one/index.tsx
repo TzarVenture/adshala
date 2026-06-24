@@ -30,7 +30,7 @@ const HomeOne = () => {
             <FaqArea />
             <Features />
             <InstructorTwo />
-            {/* <EnquiryForm/> */}
+            <EnquiryForm/>
             {/* <Blog /> */}
          </main>
          <FooterOne />

@@ -52,6 +52,18 @@ const [brochureOpen, setBrochureOpen] = useState(false)
                                  <NavMenu />
                               </div>
                               {/* <li className="header-btn"> */}
+
+                                 <button  onClick={() => {
+                                       document
+                                          .getElementById("enquiry-form01")
+                                          ?.scrollIntoView({
+                                          behavior: "smooth",
+                                          block: "start",
+                                          });
+                                           }} className="btn d-none d-md-inline-block"
+                                            style={{marginRight: "10px"}}>
+                                    Enquire Now
+                                 </button>
                                  <button onClick={() =>{
                                     setBrochureOpen(true); 
                                     }} className="btn">

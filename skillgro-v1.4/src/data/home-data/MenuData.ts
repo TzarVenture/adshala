@@ -50,15 +50,27 @@ const menu_data: MenuItem[] = [
             },
         ],
     },
+    // {
+    //     id: 3,
+    //     title: "Pages",
+    //     link: "#",
+    //     sub_menus: [
+    //         { link: "/about-us", title: "About Us" },
+    //         { link: "/faq", title: "FAQ" },
+    //         { link: "/contact", title: "Contact" },
+    //     ],
+    // },
     {
-        id: 3,
-        title: "Pages",
-        link: "#",
-        sub_menus: [
-            { link: "/about-us", title: "About Us" },
-            { link: "/faq", title: "FAQ" },
-            { link: "/contact", title: "Contact" },
-        ],
+        id: 4,
+        title: "About Us",
+        link: "/about-us",
+       
+    },
+    {
+        id: 5,
+        title: "Contact",
+        link: "/contact",
+        
     },
 ];
 

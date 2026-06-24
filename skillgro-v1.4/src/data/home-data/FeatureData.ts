@@ -64,7 +64,7 @@ const feature_data: DataType[] = [
       page: "home_2",
       icon: icon2_1,
       title: "Expert Tutors",
-      desc: "when an unknown printer took a galley offe type and scrambled makes.",
+      desc: "Learn from professionals in digital marketing, design and development.",
    },
 
    {
@@ -72,7 +72,7 @@ const feature_data: DataType[] = [
       page: "home_2",
       icon: icon2_2,
       title: "Effective Courses",
-      desc: "when an unknown printer took a galley offe type and scrambled makes.",
+      desc: "Our curriculum is built around what hiring managers look for.",
    },
 
    {
@@ -80,7 +80,7 @@ const feature_data: DataType[] = [
       page: "home_2",
       icon: icon2_3,
       title: "Earn Certificate",
-      desc: "when an unknown printer took a galley offe type and scrambled makes.",
+      desc: "Get certification that validates your skills to employers.",
    },
 
    // home_3

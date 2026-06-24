@@ -9,10 +9,7 @@ export default function ContactForm() {
 
    return (
       <form action={formAction} id="contact-form">
-         <div className="form-grp">
-            <textarea name="message" placeholder="Comment" required></textarea>
-         </div>
-         <div className="row">
+           <div className="row">
             <div className="col-md-4">
                <div className="form-grp">
                   <input name="user_name" type="text" placeholder="Name *" required />
@@ -29,6 +26,10 @@ export default function ContactForm() {
                </div>
             </div>
          </div>
+         <div className="form-grp">
+            <textarea name="message" placeholder="Comment" required></textarea>
+         </div>
+       
          <button type="submit" className="btn btn-two arrow-btn">Submit Now <BtnArrow /></button>
          {state.success && <p className="text-success mt-2">✅ Message sent successfully!</p>}
          {state.error && <p className="text-danger mt-2">❌ Error: {state.error}</p>}

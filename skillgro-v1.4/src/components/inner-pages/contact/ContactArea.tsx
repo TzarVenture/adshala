@@ -20,7 +20,7 @@ const ContactArea = () => {
                            </div>
                            <div className="content">
                               <h4 className="title">Address</h4>
-                              <p>Awamileaug Drive, Kensington <br /> London, UK</p>
+                              <p> Saki Naka, Andheri <br /> Mumbai 400072</p>
                            </div>
                         </li>
                         <li>
@@ -29,8 +29,8 @@ const ContactArea = () => {
                            </div>
                            <div className="content">
                               <h4 className="title">Phone</h4>
-                              <Link href="tel:0123456789">+1 (800) 123 456 789</Link>
-                              <Link href="tel:0123456789">+1 (800) 123 456 789</Link>
+                              <Link href="tel:0123456789">+91 8652199991</Link>
+                              <Link href="tel:0123456789">+91 7760775875</Link>
                            </div>
                         </li>
                         <li>
@@ -39,8 +39,8 @@ const ContactArea = () => {
                            </div>
                            <div className="content">
                               <h4 className="title">E-mail Address</h4>
-                              <Link href="mailto:info@gmail.com">info@gmail.com</Link>
-                              <Link href="mailto:info@gmail.com">info@gmail.com</Link>
+                              <Link href="mailto:info@gmail.com">hello@adshalaa.com</Link>
+                              {/* <Link href="mailto:info@gmail.com">info@gmail.com</Link> */}
                            </div>
                         </li>
                      </ul>
@@ -56,9 +56,9 @@ const ContactArea = () => {
                   </div>
                </div>
             </div>
-            <div className="contact-map">
+            {/* <div className="contact-map">
                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48409.69813174607!2d-74.05163325136718!3d40.68264649999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bae694479a3%3A0xb9949385da52e69e!2sBarclays%20Center!5e0!3m2!1sen!2sbd!4v1684309529719!5m2!1sen!2sbd" style={{ border: '0' }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+            </div> */}
          </div>
       </section>
    )

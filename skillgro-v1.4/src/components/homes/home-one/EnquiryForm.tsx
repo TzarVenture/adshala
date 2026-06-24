@@ -16,10 +16,12 @@ interface FormData {
 // Available program list options
 const PROGRAMS = [
   'Web Development',
-  'UI/UX Designing',
-  'Data Science',
-  'Digital Marketing',
-  'Cyber Security'
+  'Certification in Advanced Digital Marketing & AI',
+  'Certification in Advanced Graphic Design & AI',
+  'Mastery in Social Media Management',
+  'Marketplace Certification',
+  'SEO Certification',
+  'Certification in Web Development '
 ];
 
 export default function EnquiryForm() {
@@ -31,7 +33,7 @@ export default function EnquiryForm() {
     program: '',
     message: '',
   });
-
+const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<{
     loading: boolean;
     success: boolean | null;
@@ -50,7 +52,8 @@ export default function EnquiryForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ loading: true, success: null, message: '' });
-
+    console.log(formData)
+    
     try {
       const response = await fetch('/api/enquire', {
         method: 'POST',
@@ -86,7 +89,9 @@ export default function EnquiryForm() {
   };
 
   return (
-    <div className="form-container">
+    <div className='form-parent'>
+
+    <div className="form-container" id='enquiry-form01'>
       <h2 className="form-title">Enquiry Form</h2>
       <form onSubmit={handleSubmit} className="enquiry-form">
         
@@ -99,7 +104,7 @@ export default function EnquiryForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder="John Doe"
+            placeholder="Enter Your Name"
           />
         </div>
 
@@ -113,7 +118,7 @@ export default function EnquiryForm() {
               value={formData.phone}
               onChange={handleChange}
               required
-              placeholder="9876543210"
+              placeholder="Enter Your Phone No."
             />
           </div>
 
@@ -126,8 +131,8 @@ export default function EnquiryForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="john@example.com"
-            />
+              placeholder="Enter Your Email"
+              />
           </div>
         </div>
 
@@ -141,8 +146,8 @@ export default function EnquiryForm() {
               value={formData.city}
               onChange={handleChange}
               required
-              placeholder="Mumbai"
-            />
+              placeholder="Enter City"
+              />
           </div>
 
           <div className="form-group">
@@ -153,7 +158,7 @@ export default function EnquiryForm() {
               value={formData.program}
               onChange={handleChange}
               required
-            >
+              >
               <option value="" disabled>Select a program</option>
               {PROGRAMS.map((prog) => (
                 <option key={prog} value={prog}>{prog}</option>
@@ -170,12 +175,24 @@ export default function EnquiryForm() {
             value={formData.message}
             onChange={handleChange}
             required
-            rows={4}
+            rows={2}
             placeholder="Tell us more about your requirements..."
-          />
+            />
         </div>
-
-        <button type="submit" disabled={status.loading} className="submit-btn">
+<div className="consent-group">
+  <label className="consent-label">
+    <input
+      type="checkbox"
+      checked={agreed}
+      onChange={(e) => setAgreed(e.target.checked)}
+      required
+    />
+    <span>
+      By Proceeding, I agree to <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">T&C</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Yes, I would like to receive updates via SMS & WhatsApp.
+    </span>
+  </label>
+</div>
+        <button type="submit" disabled={status.loading || !agreed} className="submit-btn">
           {status.loading ? 'Submitting...' : 'Submit Enquiry'}
         </button>
 
@@ -185,6 +202,7 @@ export default function EnquiryForm() {
           </div>
         )}
       </form>
+    </div>
     </div>
   );
 }

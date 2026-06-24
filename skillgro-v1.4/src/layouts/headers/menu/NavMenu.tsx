@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import menu_data from "@/data/home-data/MenuData";
 import Image from "next/image";
-import icon_1 from "@/assets/img/others/mega_menu_img.jpg";
+import icon_1 from "@/assets/img/others/mega_menu_img.jpeg";
 
 const NavMenu = () => {
    const pathname = usePathname();
