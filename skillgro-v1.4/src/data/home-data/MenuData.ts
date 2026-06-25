@@ -34,16 +34,16 @@ const menu_data: MenuItem[] = [
         course_sub_menu: [
             {
                 menu_details: [
-                    { link: "/courses/web-development", title: "Web Development", badge_class: "tg-badge", badge: "Hot" },
-                    { link: "/courses/react", title: "SEO Certification", badge_class: "tg-badge-two", badge: "New" },
-                    { link: "/courses/nodejs", title: "Digital Marketing" },
-                    { link: "/courses/mongodb", title: "Graphic Designing" },
-                    { link: "/courses/nextjs", title: "Social Media Management" },
+                    { link: "/course-details/111", title: "Digital Marketing", badge_class: "tg-badge", badge: "Hot"  },
+                    { link: "/course-details/115", title: "SEO Certification", badge_class: "tg-badge-two", badge: "New" },
+                    { link: "/course-details/116", title: "Web Development"},
+                    { link: "/course-details/112", title: "Graphic Designing" },
+                    { link: "/course-details/113", title: "Social Media Management" },
                 ]
             },
             {
                 menu_details: [
-                    { link: "/courses/ui-ux", title: "Marketplace Certification" },
+                    { link: "/course-details/114", title: "Marketplace Certification" },
                     // { link: "/courses/python", title: "Python", badge_class: "tg-badge", badge: "Hot" },
                     // { link: "/courses/devops", title: "DevOps" },
                 ]
