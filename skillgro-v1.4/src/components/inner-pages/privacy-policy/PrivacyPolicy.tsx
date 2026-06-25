@@ -269,14 +269,14 @@ export default function PrivacyPolicy() {
                 <div className="col-md-6 mb-30">
                   <div className="contact-item">
                     <h4 style={{ marginBottom: "10px", fontWeight: "600" }}>Email</h4>
-                    <a href="mailto:hello@adshalaa.com">abc@adshalaa.com</a>
+                    <a href="mailto:hello@adshalaa.com">hello@adshalaa.com</a>
                   </div>
                 </div>
                 <div className="col-md-6 mb-30">
                   <div className="contact-item">
                     <h4 style={{ marginBottom: "10px", fontWeight: "600" }}>Phone</h4>
-                    <a href="tel:+918652199991">+91 8652199991</a>
-                    <br />
+                    <a href="tel:+918652199991">+91 8652199991</a>{", "}
+                    {/* <br /> */}
                     <a href="tel:+917760775875">+91 7760775875</a>
                   </div>
                 </div>

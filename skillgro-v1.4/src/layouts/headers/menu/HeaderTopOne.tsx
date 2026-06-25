@@ -5,6 +5,7 @@ import icon_1 from "@/assets/img/icons/map_marker.svg"
 import icon_2 from "@/assets/img/icons/envelope.svg"
 import icon_3 from "@/assets/img/icons/phone.svg"
 
+import { FaPhone } from "react-icons/fa6";
 interface StyleType{
    style?:boolean;
 }
@@ -23,7 +24,7 @@ const HeaderTopOne = ({ style }: StyleType) => {
                <div className="col-lg-6">
                   <div className="tg-header__top-right">
                      <div className="tg-header__phone">
-                        <Image src={icon_3} alt="Icon" />Call us: <Link href="tel:8652199991">+91 8652199991</Link>
+                        <FaPhone />Call us: <Link href="tel:8652199991">+91 8652199991</Link>
                      </div>
                      <ul className="tg-header__top-social list-wrap">
                         <li>Follow Us On :</li>

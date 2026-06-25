@@ -107,7 +107,7 @@ const CourseArea = ({ style }: StyleType) => {
                       <Link href="/courses">{item.tag}</Link>
                     </li>
                   </ul>
-                  <h5 className="title"><Link href="/course-details">{item.title}</Link></h5>
+                  <h5 className="title"><Link href={`/course-details/${item.id}`}>{item.title}</Link></h5>
                   <div className="courses__item-bottom">
                     <div className="button">
                       <Link href="/course-details">
