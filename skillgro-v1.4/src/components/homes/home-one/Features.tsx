@@ -26,7 +26,7 @@ const featureIcons: Record<number, React.ReactNode> = {
   1: <Image src={graduateIcon} alt="Graduate" width={80} height={50} />,
   2: <Image src={certificateIcon} alt="Certificate" width={80} height={50} />,
   3: <Image src={laptopIcon} alt="Laptop" width={80} height={50} />,
-  4: <FaBriefcase size={58} color="#1a3f32" />,
+  4: <FaBriefcase size={58} color="#FFC224" />,
 };
 
 const Features = () => {

@@ -8,6 +8,7 @@ import MobileSidebar from "./menu/MobileSidebar"
 import InjectableSvg from "@/hooks/InjectableSvg"
 import useSticky from "@/hooks/useSticky"
 import dynamic from "next/dynamic"
+import { useRouter } from "next/navigation";
 const TotalCart = dynamic(() => import("@/components/common/TotalCart"), { ssr: false });
 const TotalWishlist = dynamic(() => import("@/components/common/TotalWishlist"), { ssr: false });
 const CustomSelect = dynamic(() => import("@/ui/CustomSelect"), { ssr: false });
@@ -21,7 +22,7 @@ import icon_2 from "@/assets/img/icons/cart.svg"
 import icon_3 from "@/assets/img/icons/heart.svg"
 import BrochurePopup from "@/components/common/BrochurePopup"
 const HeaderOne = () => {
-
+const router = useRouter();
    const [selectedOption, setSelectedOption] = React.useState(null);
 const [brochureOpen, setBrochureOpen] = useState(false)
    const handleSelectChange = (option: React.SetStateAction<null>) => {
@@ -52,15 +53,17 @@ const [brochureOpen, setBrochureOpen] = useState(false)
                                  <NavMenu />
                               </div>
                               {/* <li className="header-btn"> */}
-
-                                 <button  onClick={() => {
-                                       document
-                                          .getElementById("enquiry-form01")
-                                          ?.scrollIntoView({
-                                          behavior: "smooth",
-                                          block: "start",
-                                          });
-                                           }} className="btn d-none d-md-inline-block"
+   <div className="tgmenu__search d-none d-md-block">
+                                 <CustomSelect value={selectedOption} onChange={handleSelectChange} />
+                              </div>
+                                 <button   onClick={() => {
+    const form = document.getElementById("enquiry-form01");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push("/#enquiry-form01");
+    }
+  }} className="btn d-none d-md-inline-block"
                                             style={{marginRight: "10px"}}>
                                     Enquire Now
                                  </button>
@@ -70,9 +73,7 @@ const [brochureOpen, setBrochureOpen] = useState(false)
                                     Get Brochure
                                  </button>
                                  {/* </li> */}
-                              {/* <div className="tgmenu__search d-none d-md-block">
-                                 <CustomSelect value={selectedOption} onChange={handleSelectChange} />
-                              </div> */}
+                           
                               {/* <div className="tgmenu__action">
                                  <ul className="list-wrap">
                                     <li className="wishlist-icon">

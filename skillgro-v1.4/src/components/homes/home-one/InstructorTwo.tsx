@@ -60,7 +60,14 @@ const InstructorTwo = ({ style }: StyleType) => {
                            <h3 className="title"><Link href="/contact">Become a Student</Link></h3>
                            <p>Learn industry-ready skills and build a successful career with Adshalaa.</p>
                            <div className="tg-button-wrap">
-                              <Link href="/contact" className="btn arrow-btn">Apply Now <BtnArrow /></Link>
+                              <button className="btn arrow-btn" onClick={() => {
+    document
+      .getElementById("enquiry-form01")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }}>Apply Now <BtnArrow /></button>
                            </div>
                         </div>
                      </div>

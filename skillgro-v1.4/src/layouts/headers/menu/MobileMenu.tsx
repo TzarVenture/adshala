@@ -121,6 +121,23 @@ const MobileMenu = () => {
                </li>
             );
          })}
+                 {/* Enquire Now — static mobile menu item */}
+         <li className={pathname === "/courses" ? "active" : ""}>
+            <a
+               href="#enquiry-form01"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const form = document.getElementById("enquiry-form01");
+                  if (form) {
+                     form.scrollIntoView({ behavior: "smooth", block: "start" });
+                  } else {
+                     window.location.href = "/#enquiry-form01"; 
+                  }
+               }}
+            >
+               Enquire Now
+            </a>
+         </li>
       </ul>
    );
 };

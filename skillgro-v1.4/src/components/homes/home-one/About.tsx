@@ -72,7 +72,7 @@ const About = () => {
                            </li>
                         </ul>
                         <div className="tg-button-wrap">
-                           <Link href="/about-us" className="btn arrow-btn">Enquire Now <BtnArrow /></Link>
+                           <button className="btn arrow-btn" onClick={() => { document .getElementById("enquiry-form01") ?.scrollIntoView({ behavior: "smooth", block: "start", }); }}>Enquire Now <BtnArrow /></button>
                         </div>
                      </div>
                   </div>

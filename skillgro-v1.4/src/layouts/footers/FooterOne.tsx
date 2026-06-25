@@ -49,7 +49,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
             {style_2 && <div className="footer__shape" style={{ backgroundImage: `url(${bg_img.src})` }}></div>}
          </div>
 
-         <div className={`footer__bottom ${style_2 ? "footer__bottom-four" : ""}`} style={{background: "#1b4322"}}>
+         <div className={`footer__bottom ${style_2 ? "footer__bottom-four" : ""}`} style={{background: "#153027"}}>
             <div className="container">
                <div className="row align-items-center">
                   <div className="col-md-7">
@@ -70,7 +70,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                      <div className="footer__bottom-menu">
                         <ul className="list-wrap">
                            <li><Link href="/contact">Term of Use</Link></li>
-                           <li><Link href="/contact">Privacy Policy</Link></li>
+                           <li><Link href="/privacy-policy">Privacy Policy</Link></li>
                         </ul>
                      </div>
                   </div>

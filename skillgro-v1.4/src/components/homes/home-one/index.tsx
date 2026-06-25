@@ -13,8 +13,15 @@ import Blog from "./Blog"
 import FooterOne from "@/layouts/footers/FooterOne"
 import HeaderOne from "@/layouts/headers/HeaderOne"
 import Categories from "./Categories"
-
+import { useEffect } from "react"
 const HomeOne = () => {
+   useEffect(() => {
+  if (window.location.hash === "#enquiry-form01") {
+    setTimeout(() => {
+      document.getElementById("enquiry-form01")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300); // small delay lets the page render first
+  }
+}, []);
    return (
       <>
          <HeaderOne />

@@ -6,11 +6,12 @@ import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated();
 
 const options = [
-   { value: 'business', label: 'Business' },
-   { value: 'data-science', label: 'Data Science' },
-   { value: 'art-design', label: 'Art & Design' },
-   { value: 'marketing', label: 'Marketing' },
-   { value: 'finance', label: 'Finance' },
+   { value: 'web-development', label: 'Web Development' },
+   { value: 'digital-marketing', label: 'Digital Marketing' },
+   { value: 'graphic-design', label: 'Graphic Design' },
+   { value: 'social-media-management', label: 'Social Media Management' },
+   { value: 'marketplace-certificate', label: 'Marketplace Certification' },
+   { value: 'seo-certification', label: 'SEO Certification' },
 ];
 
 const CustomSelect = ({ value, onChange }: any) => {

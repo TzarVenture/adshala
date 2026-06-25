@@ -19,12 +19,12 @@ const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
                <div className="nav-logo">
                   {/* <Link href="/"><Image src={Adshalaa_logo} alt="Logo" /></Link> */}
                </div>
-               {/* <div className="tgmobile__search">
+               <div className="tgmobile__search">
                   <form action="#">
                      <input type="text" placeholder="Search here..." />
                      <button><i className="fas fa-search"></i></button>
                   </form>
-               </div> */}
+               </div>
                <div className="tgmobile__menu-outer">
                   <MobileMenu />
                </div>

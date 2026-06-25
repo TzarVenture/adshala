@@ -19,7 +19,7 @@ const AboutUs = () => {
             <Feature style={true} />
             <Newsletter />
             <Features />
-            <Testimonial />
+            {/* <Testimonial /> */}
          </main>
          <FooterOne />
       </>

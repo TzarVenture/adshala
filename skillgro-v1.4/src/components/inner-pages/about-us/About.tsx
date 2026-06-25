@@ -5,11 +5,12 @@ import Link from "next/link"
 import VideoPopup from "@/modals/VideoPopup"
 import { useState } from "react"
 import useSvgAnimation from "@/hooks/useSvgAnimation"
-
+import { useRouter } from "next/navigation";
 import about_img from "@/assets/img/others/inner_about_img.png"
 
 const About = () => {
 
+const router = useRouter();
    const [isVideoOpen, setIsVideoOpen] = useState(false);
    const svgIconRef = useSvgAnimation('/svg-animation-img/inner_about_shape.svg');
 
@@ -61,7 +62,20 @@ const About = () => {
                            </li>
                         </ul>
                         <div className="tg-button-wrap">
-                           <Link href="/contact" className="btn arrow-btn">Enquire Now <BtnArrow /></Link>
+                          <button
+  onClick={() => {
+    const form = document.getElementById("enquiry-form01");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push("/#enquiry-form01");
+    }
+  }}
+  className="btn d-none d-md-inline-block"
+  style={{ marginRight: "10px" }}
+>
+  Enquire Now
+</button>
                         </div>
                      </div>
                   </div>

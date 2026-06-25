@@ -6,6 +6,7 @@ import { useState } from "react";
 import InjectableSvg from "@/hooks/InjectableSvg";
 import BtnArrow from "@/svg/BtnArrow";
 import sidebarimage from"@/assets/img/courses/sidebar_image/ADSHALA BANNER 05.jpg";
+import { useRouter } from "next/navigation";
 import img_1 from "@/assets/img/courses/course_thumb02.jpg"
 import img_2 from "@/assets/img/others/payment.png"
 import icon_1 from "@/assets/img/icons/course_icon01.svg";
@@ -17,7 +18,7 @@ import icon_6 from "@/assets/img/icons/course_icon06.svg";
 import { assert } from "console";
 
 const Sidebar = () => {
-
+const router = useRouter();
    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
    return (
@@ -83,9 +84,16 @@ const Sidebar = () => {
                </div>
                <div className="courses__details-enroll">
                   <div className="tg-button-wrap">
-                     <Link href="/courses" className="btn btn-two arrow-btn">
-                        See All Instructors<BtnArrow />
-                     </Link>
+                  <button className="btn btn-two arrow-btn"  onClick={() => {
+    const form = document.getElementById("enquiry-form01");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push("/#enquiry-form01");
+    }
+  }}>
+                        Enquire Now<BtnArrow />
+                     </button>
                   </div>
                </div>
             </div>

@@ -43,9 +43,20 @@ const Banner: React.FC = () => {
                         Industry-recognized certification programs with real time projects with paid internship.
                      </p>
                      <div className="banner__btn-wrap">
-                        <Link href="/contact" className="btn arrow-btn">
-                          Talk to a Career Advisor <BtnArrow />
-                        </Link>
+             <button
+  type="button"
+  className="btn arrow-btn"
+  onClick={() => {
+    document
+      .getElementById("enquiry-form01")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }}
+>
+  Enquire Now <BtnArrow />
+</button>
                      </div>
                   </div>
                </div>
