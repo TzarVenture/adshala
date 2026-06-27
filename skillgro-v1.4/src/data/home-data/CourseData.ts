@@ -28,6 +28,7 @@ interface DataType {
    page: string;
    course_details: {
       id: number;
+      sku?: String;
       thumb: StaticImageData;
       tag: string;
       review: string;
@@ -47,6 +48,7 @@ const course_data: DataType[] = [
       course_details: [
          {
             id: 111,
+            sku: "certification-in-advanced-digital-marketing-&-ai-mumbai",
             thumb: thumb2,
             tag: "Marketing",
             review: "(4.8 Reviews)",
@@ -57,6 +59,7 @@ const course_data: DataType[] = [
          },
          {
             id: 112,
+            sku: "certification-in-advanced-graphic-design-&-ai-mumbai",
             thumb: thumb6,
             tag: "Design",
             review: "(4.8 Reviews)",
@@ -67,6 +70,7 @@ const course_data: DataType[] = [
          },
          {
             id: 113,
+            sku: "mastery-in-social-media-management-in-mumbai",
             thumb: thumb1,
             tag: "Marketing",
             review: "(4.8 Reviews)",
@@ -77,6 +81,7 @@ const course_data: DataType[] = [
          },
          {
             id: 114,
+            sku: "marketplace-specialist-program-in-mumbai",
             thumb: thumb3,
             tag: "Marketing",
             review: "(4.8 Reviews)",
@@ -87,6 +92,7 @@ const course_data: DataType[] = [
          },
          {
             id: 115,
+            sku: "advanced-seo-certification-in-mumbai",
             thumb: thumb4,
             tag: "Marketing",
             review: "(4.8 Reviews)",
@@ -97,6 +103,7 @@ const course_data: DataType[] = [
          },
          {
             id: 116,
+            sku: "certification-in-advanced-digital-marketing-&-ai-mumbai",
             thumb: thumb5,
             tag: "Development",
             review: "(4.8 Reviews)",

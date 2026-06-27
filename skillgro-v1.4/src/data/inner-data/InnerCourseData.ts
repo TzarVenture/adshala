@@ -28,6 +28,7 @@ import course_banner5 from "@/assets/img/courses/coursesBanner/adshalaa_05.jpg"
 import course_banner6 from "@/assets/img/courses/coursesBanner/adshalaa_06.jpg"
 interface DataType {
    id: number;
+   sku?: String;
    banner?: StaticImageData;
    thumb: StaticImageData;
    category: string;
@@ -51,6 +52,7 @@ interface DataType {
 const inner_course_data: DataType[] =[
       {
       id: 116,
+      sku: "certification-in-web-development-in-mumbai",
       banner: course_banner5,
       thumb: thumb5,
       category: "Development",
@@ -69,6 +71,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 115,
+      sku: "advanced-seo-certification-in-mumbai",
       banner: course_banner4,
       thumb: thumb4,
       category: "Marketing",
@@ -87,6 +90,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 114,
+      sku: "marketplace-specialist-program-in-mumbai",
       banner: course_banner3,
       thumb: thumb3,
       category: "Marketing",
@@ -105,6 +109,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 113,
+      sku: "mastery-in-social-media-management-in-mumbai",
       banner: course_banner1,
       thumb: thumb1,
       category: "Marketing",
@@ -123,6 +128,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 112,
+      sku: "certification-in-advanced-graphic-design-&-ai-mumbai",
       banner: course_banner6,
       thumb: thumb6,
       category: "Design",
@@ -141,6 +147,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 111,
+      sku: "certification-in-advanced-digital-marketing-&-ai-mumbai",
       banner: course_banner2,
       thumb: thumb2,
       category: "Marketing",

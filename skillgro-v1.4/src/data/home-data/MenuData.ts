@@ -34,16 +34,16 @@ const menu_data: MenuItem[] = [
         course_sub_menu: [
             {
                 menu_details: [
-                    { link: "/course-details/111", title: "Digital Marketing", badge_class: "tg-badge", badge: "Hot"  },
-                    { link: "/course-details/115", title: "SEO Certification", badge_class: "tg-badge-two", badge: "New" },
-                    { link: "/course-details/116", title: "Web Development"},
-                    { link: "/course-details/112", title: "Graphic Designing" },
-                    { link: "/course-details/113", title: "Social Media Management" },
+                    { link: "/course-details/certification-in-advanced-digital-marketing-&-ai-mumbai", title: "Digital Marketing", badge_class: "tg-badge", badge: "Hot"  },
+                    { link: "/course-details/advanced-seo-certification-in-mumbai", title: "SEO Certification", badge_class: "tg-badge-two", badge: "New" },
+                    { link: "/course-details/certification-in-web-development-in-mumbai", title: "Web Development"},
+                    { link: "/course-details/certification-in-advanced-graphic-design-&-ai-mumbai", title: "Graphic Designing" },
+                    { link: "/course-details/mastery-in-social-media-management-in-mumbai", title: "Social Media Management" },
                 ]
             },
             {
                 menu_details: [
-                    { link: "/course-details/114", title: "Marketplace Certification" },
+                    { link: "/course-details/marketplace-specialist-program-in-mumbai", title: "Marketplace Certification" },
                     // { link: "/courses/python", title: "Python", badge_class: "tg-badge", badge: "Hot" },
                     // { link: "/courses/devops", title: "DevOps" },
                 ]

@@ -19,10 +19,11 @@ type Props = {
 export default async function Page({ params }: Props) {
 
    const { id } = await params;
+   console.log("id", id)
    const courseId = id[0];
 
    const courses = courses_data;
-   const single_course = courses.find((item) => String(item.id) === courseId);
+   const single_course = courses.find((item) => String(item.sku) === courseId);
 
    if (!single_course) {
       notFound();

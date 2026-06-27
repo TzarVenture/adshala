@@ -55,7 +55,7 @@ const CourseArea = () => {
                               <div key={item.id} className="col">
                                  <div className="courses__item shine__animate-item">
                                     <div className="courses__item-thumb">
-                                       <Link href={`/course-details/${item.id}`} className="shine__animate-link">
+                                       <Link href={`/course-details/${item?.sku}`} className="shine__animate-link">
                                           <Image src={item.thumb} alt="img" style={{objectFit:"contain"}}/>
                                        </Link>
                                     </div>

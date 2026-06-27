@@ -97,7 +97,7 @@ const CourseArea = ({ style }: StyleType) => {
             <SwiperSlide key={item.id} className="swiper-slide">
               <div className="courses__item shine__animate-item">
                 <div className="courses__item-thumb">
-                  <Link href={`/course-details/${item.id}`} className="shine__animate-link">
+                  <Link href={`/course-details/${item.sku}`} className="shine__animate-link">
                     <Image src={item.thumb} alt="img" style={{objectFit: "contain"}}/>
                   </Link>
                 </div>
@@ -107,7 +107,7 @@ const CourseArea = ({ style }: StyleType) => {
                       <Link href="/courses">{item.tag}</Link>
                     </li>
                   </ul>
-                  <h5 className="title"><Link href={`/course-details/${item.id}`}>{item.title}</Link></h5>
+                  <h5 className="title"><Link href={`/course-details/${item.sku}`}>{item.title}</Link></h5>
                   <div className="courses__item-bottom">
                     <div className="button">
                       <Link href="/course-details">
