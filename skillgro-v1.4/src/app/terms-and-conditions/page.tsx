@@ -1,13 +1,14 @@
-import AboutUs from "@/components/inner-pages/about-us";
+import TermsAndConditions from "@/components/inner-pages/terms-and-conditions";
+
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata = {
-   title: "About Us Adshalaa",
+   title: "Terms & Conditions Adshalaa",
 };
 const page = () => {
    return (
       <Wrapper>
-         <AboutUs />
+         <TermsAndConditions />
       </Wrapper>
    )
 }

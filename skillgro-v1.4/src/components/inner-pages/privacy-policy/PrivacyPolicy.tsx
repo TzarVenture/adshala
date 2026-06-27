@@ -220,28 +220,41 @@ const sections = [
       </p>
     ),
   },
+    {
+    id: "12",
+    title: "Contact Us",
+    content: (
+      <div>
+        <p style={{ marginBottom: "15px" }}>
+          For any questions or concerns regarding these Privacy Policy, please contact:
+        </p>
+        <ul style={{ marginLeft: "20px" }}>
+          <li>
+            <strong>Address:</strong> Saki Vihar, Andheri East, Mumbai – 400072
+          </li>
+          <li>
+            <strong>Email:</strong>{" "}
+            <a href="mailto:hello@adshalaa.com">hello@adshalaa.com</a>
+          </li>
+          <li>
+            <strong>Phone:</strong>{" "}
+            <a href="tel:+918652199991">+91 8652199991</a> /{" "}
+            <a href="tel:+917760775875">+91 7760775875</a>
+          </li>
+          <li>
+            <strong>Website:</strong>{" "}
+            <a href="https://www.adshalaa.com">www.adshalaa.com</a>
+          </li>
+        </ul>
+      </div>
+    ),
+  },
 ];
 
 export default function PrivacyPolicy() {
   return (
     <section className="privacy-policy-area section-py-120">
       <div className="container">
-        {/* <div className="row">
-          <div className="col-lg-12">
-            <div className="section__title text-center mb-50">
-              <h2 className="title mb-20">Privacy Policy</h2>
-              <p className="desc mb-10">
-                <strong>Effective Date: June 2026</strong>
-              </p>
-              <p className="desc">
-                Your privacy matters to us. This policy explains what data we
-                collect, why we collect it, and how it is used and protected at
-                Adshalaa.
-              </p>
-            </div>
-          </div>
-        </div> */}
-
         <div className="row">
           <div className="col-lg-12">
             <div className="privacy-policy-content">
@@ -256,31 +269,6 @@ export default function PrivacyPolicy() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Section */}
-        <div className="row mt-40">
-          <div className="col-lg-8 col-md-10 mx-auto">
-            <div className="contact-info-box" style={{ backgroundColor: "#f8f9fa", padding: "40px", borderRadius: "8px", border: "1px solid #e8e8e8" }}>
-              <h3 className="title mb-20">Have Questions?</h3>
-              <div className="row">
-                <div className="col-md-6 mb-30">
-                  <div className="contact-item">
-                    <h4 style={{ marginBottom: "10px", fontWeight: "600" }}>Email</h4>
-                    <a href="mailto:hello@adshalaa.com">hello@adshalaa.com</a>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-30">
-                  <div className="contact-item">
-                    <h4 style={{ marginBottom: "10px", fontWeight: "600" }}>Phone</h4>
-                    <a href="tel:+918652199991">+91 8652199991</a>{", "}
-                    {/* <br /> */}
-                    <a href="tel:+917760775875">+91 7760775875</a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
