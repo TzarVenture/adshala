@@ -34,10 +34,10 @@ const menu_data: MenuItem[] = [
         course_sub_menu: [
             {
                 menu_details: [
-                    { link: "/course-details/certification-in-advanced-digital-marketing-&-ai-mumbai", title: "Digital Marketing", badge_class: "tg-badge", badge: "Hot"  },
+                    { link: "/course-details/certification-in-advanced-digital-marketing-and-ai-mumbai", title: "Digital Marketing", badge_class: "tg-badge", badge: "Hot"  },
                     { link: "/course-details/advanced-seo-certification-in-mumbai", title: "SEO Certification", badge_class: "tg-badge-two", badge: "New" },
                     { link: "/course-details/certification-in-web-development-in-mumbai", title: "Web Development"},
-                    { link: "/course-details/certification-in-advanced-graphic-design-&-ai-mumbai", title: "Graphic Designing" },
+                    { link: "/course-details/certification-in-advanced-graphic-design-and-ai-mumbai", title: "Graphic Designing" },
                     { link: "/course-details/mastery-in-social-media-management-in-mumbai", title: "Social Media Management" },
                 ]
             },

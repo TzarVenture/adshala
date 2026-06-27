@@ -128,7 +128,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 112,
-      sku: "certification-in-advanced-graphic-design-&-ai-mumbai",
+      sku: "certification-in-advanced-graphic-design-and-ai-mumbai",
       banner: course_banner6,
       thumb: thumb6,
       category: "Design",
@@ -147,7 +147,7 @@ const inner_course_data: DataType[] =[
    },
    {
       id: 111,
-      sku: "certification-in-advanced-digital-marketing-&-ai-mumbai",
+      sku: "certification-in-advanced-digital-marketing-and-ai-mumbai",
       banner: course_banner2,
       thumb: thumb2,
       category: "Marketing",

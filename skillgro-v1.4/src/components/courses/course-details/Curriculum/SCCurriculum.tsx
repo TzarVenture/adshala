@@ -233,8 +233,7 @@ const faq_data: DataType[] = [
       },
       {
         lock: true,
-        title:
-          "NAP Consistency (Name, Address, Phone)",
+        title: "NAP Consistency (Name, Address, Phone)",
         duration: "10:48",
       },
       {
@@ -409,166 +408,166 @@ const faq_data: DataType[] = [
       },
     ],
   },
-{
-  id: 13,
-  title: "YouTube SEO",
-  collapsed: "collapsed",
-  faq_details: [
-    {
-      lock: true,
-      title: "Optimizing Video Titles, Descriptions & Tags",
-      duration: "03:03",
-    },
-    {
-      lock: true,
-      title: "YouTube Keyword Research",
-      duration: "07:48",
-    },
-    {
-      lock: true,
-      title: "Thumbnails & Engagement Signals",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Ranking on YouTube & Google Search",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Channel Growth Through SEO",
-      duration: "10:48",
-    },
-  ],
-},
   {
-  id: 14,
-  title: "AI Tools for SEO",
-  collapsed: "collapsed",
-  faq_details: [
-    {
-      lock: true,
-      title: "AI for Keyword Research & Content Briefs",
-      duration: "03:03",
-    },
-    {
-      lock: true,
-      title: "AI Content Writing & Optimization Tools",
-      duration: "07:48",
-    },
-    {
-      lock: true,
-      title: "AI-Powered Site Audit Tools",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "ChatGPT for SEO Strategy & Ideation",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Automating SEO Reports with AI",
-      duration: "10:48",
-    },
-  ],
-},
-{
-  id: 15,
-  title: "Link Building Outreach",
-  collapsed: "collapsed",
-  faq_details: [
-    {
-      lock: true,
-      title: "Finding Link Prospects",
-      duration: "03:03",
-    },
-    {
-      lock: true,
-      title: "Writing Outreach Emails That Get Replies",
-      duration: "07:48",
-    },
-    {
-      lock: true,
-      title: "Guest Blogging & Content Collaboration",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Broken Link Building",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Building Digital PR for Links",
-      duration: "10:48",
-    },
-  ],
-},
- {
-  id: 16,
-  title: "SEO Reporting & Analytics",
-  collapsed: "collapsed",
-  faq_details: [
-    {
-      lock: true,
-      title: "Setting Up Monthly SEO Reports",
-      duration: "03:03",
-    },
-    {
-      lock: true,
-      title: "Tracking Keyword Rankings",
-      duration: "07:48",
-    },
-    {
-      lock: true,
-      title: "Measuring Organic Traffic Growth",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Reporting ROI of SEO Efforts",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Presenting SEO Data to Clients",
-      duration: "10:48",
-    },
-  ],
-},
-{
-  id: 17,
-  title: "Freelancing & Client Handling for SEO",
-  collapsed: "collapsed",
-  faq_details: [
-    {
-      lock: true,
-      title: "Working with SEO Client Briefs",
-      duration: "03:03",
-    },
-    {
-      lock: true,
-      title: "SEO Proposal & Pricing",
-      duration: "07:48",
-    },
-    {
-      lock: true,
-      title: "Managing Client Expectations & Communication",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Freelance Platforms for SEO (Fiverr, Upwork, LinkedIn)",
-      duration: "10:48",
-    },
-    {
-      lock: true,
-      title: "Building Your SEO Portfolio",
-      duration: "10:48",
-    },
-  ],
-},
+    id: 13,
+    title: "YouTube SEO",
+    collapsed: "collapsed",
+    faq_details: [
+      {
+        lock: true,
+        title: "Optimizing Video Titles, Descriptions & Tags",
+        duration: "03:03",
+      },
+      {
+        lock: true,
+        title: "YouTube Keyword Research",
+        duration: "07:48",
+      },
+      {
+        lock: true,
+        title: "Thumbnails & Engagement Signals",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Ranking on YouTube & Google Search",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Channel Growth Through SEO",
+        duration: "10:48",
+      },
+    ],
+  },
+  {
+    id: 14,
+    title: "AI Tools for SEO",
+    collapsed: "collapsed",
+    faq_details: [
+      {
+        lock: true,
+        title: "AI for Keyword Research & Content Briefs",
+        duration: "03:03",
+      },
+      {
+        lock: true,
+        title: "AI Content Writing & Optimization Tools",
+        duration: "07:48",
+      },
+      {
+        lock: true,
+        title: "AI-Powered Site Audit Tools",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "ChatGPT for SEO Strategy & Ideation",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Automating SEO Reports with AI",
+        duration: "10:48",
+      },
+    ],
+  },
+  {
+    id: 15,
+    title: "Link Building Outreach",
+    collapsed: "collapsed",
+    faq_details: [
+      {
+        lock: true,
+        title: "Finding Link Prospects",
+        duration: "03:03",
+      },
+      {
+        lock: true,
+        title: "Writing Outreach Emails That Get Replies",
+        duration: "07:48",
+      },
+      {
+        lock: true,
+        title: "Guest Blogging & Content Collaboration",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Broken Link Building",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Building Digital PR for Links",
+        duration: "10:48",
+      },
+    ],
+  },
+  {
+    id: 16,
+    title: "SEO Reporting & Analytics",
+    collapsed: "collapsed",
+    faq_details: [
+      {
+        lock: true,
+        title: "Setting Up Monthly SEO Reports",
+        duration: "03:03",
+      },
+      {
+        lock: true,
+        title: "Tracking Keyword Rankings",
+        duration: "07:48",
+      },
+      {
+        lock: true,
+        title: "Measuring Organic Traffic Growth",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Reporting ROI of SEO Efforts",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Presenting SEO Data to Clients",
+        duration: "10:48",
+      },
+    ],
+  },
+  {
+    id: 17,
+    title: "Freelancing & Client Handling for SEO",
+    collapsed: "collapsed",
+    faq_details: [
+      {
+        lock: true,
+        title: "Working with SEO Client Briefs",
+        duration: "03:03",
+      },
+      {
+        lock: true,
+        title: "SEO Proposal & Pricing",
+        duration: "07:48",
+      },
+      {
+        lock: true,
+        title: "Managing Client Expectations & Communication",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Freelance Platforms for SEO (Fiverr, Upwork, LinkedIn)",
+        duration: "10:48",
+      },
+      {
+        lock: true,
+        title: "Building Your SEO Portfolio",
+        duration: "10:48",
+      },
+    ],
+  },
 ];
 
 const Curriculum = () => {
@@ -579,9 +578,9 @@ const Curriculum = () => {
       <div className="courses__curriculum-wrap">
         <h3 className="title">Course Curriculum</h3>
         <p>
-          Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum
-          suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.
+          Gain expertise in keyword research, on-page and technical SEO, link
+          building, local SEO, content optimization, analytics and ranking
+          strategies to improve website visibility and organic traffic.
         </p>
         <div className="accordion" id="accordionExample">
           {faq_data.map((item) => (

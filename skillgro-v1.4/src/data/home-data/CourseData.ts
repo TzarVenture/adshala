@@ -48,7 +48,7 @@ const course_data: DataType[] = [
       course_details: [
          {
             id: 111,
-            sku: "certification-in-advanced-digital-marketing-&-ai-mumbai",
+            sku: "certification-in-advanced-digital-marketing-and-ai-mumbai",
             thumb: thumb2,
             tag: "Marketing",
             review: "(4.8 Reviews)",
@@ -59,7 +59,7 @@ const course_data: DataType[] = [
          },
          {
             id: 112,
-            sku: "certification-in-advanced-graphic-design-&-ai-mumbai",
+            sku: "certification-in-advanced-graphic-design-and-ai-mumbai",
             thumb: thumb6,
             tag: "Design",
             review: "(4.8 Reviews)",
@@ -103,7 +103,7 @@ const course_data: DataType[] = [
          },
          {
             id: 116,
-            sku: "certification-in-advanced-digital-marketing-&-ai-mumbai",
+            sku: "certification-in-web-development-in-mumbai",
             thumb: thumb5,
             tag: "Development",
             review: "(4.8 Reviews)",
