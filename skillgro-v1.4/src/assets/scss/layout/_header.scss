@@ -444,16 +444,20 @@
                         &:nth-child(2) {
                             border: none;
                         }
-                        &:nth-child(3) {
-                            border: none;
-                            margin-left: auto;
-                        }
                         & > .mega-sub-menu {
                             display: flex;
                             flex-direction: column;
                             min-width: 260px;
                             margin-left: 10px !important;
                         }
+                    }
+                    & > li.mega-menu-img-item {
+                        border: none;
+                        margin-left: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding-left: 20px;
                     }
                 }
             }

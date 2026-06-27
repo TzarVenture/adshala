@@ -30,7 +30,7 @@ const router = useRouter();
                </div>
                <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
-                  <h2 className="title">₹75,000 <del>$1,30,000</del></h2>
+                  <h2 className="title">₹75,000 <del style={{color: "#ffc224"}}>$1,30,000</del></h2>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>

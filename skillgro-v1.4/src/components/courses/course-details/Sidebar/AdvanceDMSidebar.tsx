@@ -30,7 +30,7 @@ const AdvanceDMSidebar = () => {
                </div>
                <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
-                  <h2 className="title">₹60,000 <del>₹1,00,000</del></h2>
+                  <h2 className="title">₹60,000 <del style={{color: "#ffc224"}}>₹1,00,000</del></h2>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>

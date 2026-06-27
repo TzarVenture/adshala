@@ -22,6 +22,21 @@ import MCCurriculum from "./Curriculum/MCCurriculum"
 import SCCurriculum from "./Curriculum/SCCurriculum"
 import CWebDevCurriculum from "./Curriculum/CWebDevCurriculum"
 
+import AdvanceDMStatistics from "./SalaryStatistics/AdvanceDMStatistics";
+import AdvanceGDStatistics from "./SalaryStatistics/AdvanceGDStatistics"
+import MasterSMMStatistics from "./SalaryStatistics/MasterSMMStatistics"
+import MCStatistics from "./SalaryStatistics/MCStatistics"
+import SCStatistics from "./SalaryStatistics/SCStatistics"
+import CWebDevStatistics from "./SalaryStatistics/CWebDevStatistics"
+
+import AdvanceDMCertificate from "./Certificates/AdvanceDMCertificate";
+import AdvanceGDCertificate from "./Certificates/AdvanceGDCertificate"
+import MasterSMMCertificate from "./Certificates/MasterSMMCertificate"
+import MCCertificate from "./Certificates/MCCertificate"
+import SCCertificate from "./Certificates/SCCertificate"
+import CWebDevCertificate from "./Certificates/CWebDevCertificate"
+
+
 import AdvanceDMSidebar from "./Sidebar/AdvanceDMSidebar";
 import AdvanceGDSidebar from "./Sidebar/AdvanceGDSidebar";
 import MasterSMMSidebar from "./Sidebar/MasterSMMSidebar"
@@ -33,7 +48,7 @@ import course_details_img1 from "@/assets/img/courses/courses_details.jpg";
 import mybannerimage from "./mybannerimage.jpeg"
 import course_details_img2 from "@/assets/img/courses/course_author001.png";
 // import mybannerimage from "@/components/courses/course-details/mybannerimage.jpeg"
-const tab_title: string[] = ["Overview", "Curriculum"];
+const tab_title: string[] = ["Overview", "Curriculum", "Certificates", "Salary Statistics"];
 
 const CourseDetailsArea = ({ single_course }: any) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -96,6 +111,58 @@ const CourseDetailsArea = ({ single_course }: any) => {
       return <Curriculum />;
     }
   };
+  const currentCertificate = () => {
+    if (
+      single_course?.overview ===
+      "certification-in-advanced-digital-marketing-&-ai"
+    ) {
+      return <AdvanceDMCertificate />;
+    } 
+    else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
+      return <AdvanceGDCertificate/>
+    }
+    else if(single_course?.overview === "mastery-in-social-media-management"){
+      return <MasterSMMCertificate/>
+    }
+    else if(single_course?.overview === "marketplace-certification"){
+      return <MCCertificate/>
+    }
+    else if(single_course?.overview === "seo-certification"){
+      return <SCCertificate/>
+    }
+    else if(single_course?.overview === "certification-in-web-development"){
+      return <CWebDevCertificate/>
+    }
+    else {
+      return <Instructors />;
+    }
+  };
+  const currentSalaryStatistics = () => {
+    if (
+      single_course?.overview ===
+      "certification-in-advanced-digital-marketing-&-ai"
+    ) {
+      return <AdvanceDMStatistics />;
+    } 
+    else if(single_course?.overview === "certification-in-advanced-graphic-design-&-ai"){
+      return <AdvanceGDStatistics/>
+    }
+    else if(single_course?.overview === "mastery-in-social-media-management"){
+      return <MasterSMMStatistics/>
+    }
+    else if(single_course?.overview === "marketplace-certification"){
+      return <MCStatistics/>
+    }
+    else if(single_course?.overview === "seo-certification"){
+      return <SCStatistics/>
+    }
+    else if(single_course?.overview === "certification-in-web-development"){
+      return <CWebDevStatistics/>
+    }
+    else {
+      return <Reviews />;
+    }
+  };
 
   const currentSidebar = () => {
     if (
@@ -124,7 +191,6 @@ const CourseDetailsArea = ({ single_course }: any) => {
     }
   };
 
-  console.log("single_course", single_course)
   return (
   <>
  <style jsx global>{`
@@ -221,7 +287,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
                   role="tabpanel"
                   aria-labelledby="overview-tab"
                 >
-                  <Instructors />
+                  {currentCertificate()}
                 </div>
                 <div
                   className={`tab-pane fade ${activeTab === 3 ? "show active" : ""}`}
@@ -229,11 +295,11 @@ const CourseDetailsArea = ({ single_course }: any) => {
                   role="tabpanel"
                   aria-labelledby="overview-tab"
                 >
-                  <Reviews />
+                  {currentSalaryStatistics()}
                 </div>
               </div>
             </div>
-          </div>
+          </div> 
           {currentSidebar()}
         </div>
       </div>
