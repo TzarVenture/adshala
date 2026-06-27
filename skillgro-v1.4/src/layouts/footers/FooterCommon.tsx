@@ -32,7 +32,7 @@ const FooterCommon = () => {
          </div>
          <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div className="footer__widget">
-               <h4 className="footer__widget-title" style={{color: "#FFC224"}}>Useful Links</h4>
+               <h4 className="footer__widget-title" style={{color: "#FFC224"}}>Our Company</h4>
                <div className="footer__link">
                   <ul className="list-wrap">
                      <li><Link href="/about-us" style={{color: "#dbd7d7"}}>About Us</Link></li>
@@ -47,7 +47,7 @@ const FooterCommon = () => {
          </div>
          <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div className="footer__widget">
-               <h4 className="footer__widget-title" style={{color: "#FFC224"}}>Our Company</h4>
+               <h4 className="footer__widget-title" style={{color: "#FFC224"}}>Useful Links</h4>
                <div className="footer__link">
                   <ul className="list-wrap" >
                      <li><Link href="/contact" style={{color: "#dbd7d7"}}>Become an Instructor</Link></li>

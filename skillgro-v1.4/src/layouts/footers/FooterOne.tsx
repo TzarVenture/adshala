@@ -69,7 +69,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                   <div className="col-md-5">
                      <div className="footer__bottom-menu">
                         <ul className="list-wrap">
-                           <li><Link href="/terms-and-conditions">Term of Use</Link></li>
+                           <li><Link href="/terms-and-conditions">Terms & Conditions</Link></li>
                            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
                         </ul>
                      </div>

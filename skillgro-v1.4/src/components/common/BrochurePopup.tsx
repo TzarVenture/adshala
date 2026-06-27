@@ -9,15 +9,28 @@ interface BrochurePopupProps {
 }
 
 const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [useremail, setUseremail] = useState("")
+  const [userphone, setUserphone] = useState("")
   const [submitted, setSubmitted] = useState(false)
 
   if (!isOpen) return null
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Brochure Data", name, email)
+    console.log("Brochure Data", username, useremail, userphone)
+    try{
+      const response = await fetch('/api/brochure', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({username, userphone, useremail}),
+      })
+      if(!response.ok){
+        console.log("brochure data saved")
+      }
+    }catch(err){
+      console.log(err)
+    }
     // Trigger PDF download
     const link = document.createElement("a")
     link.href = "/Adshala_Complete_A4_Brochure_2025 (1).pdf" 
@@ -29,7 +42,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
   const handleClose = () => {
     onClose()
     // reset after close animation
-    setTimeout(() => { setName(""); setEmail(""); setSubmitted(false) }, 300)
+    setTimeout(() => { setUsername(""); setUseremail(""); setUserphone(""); setSubmitted(false) }, 300)
   }
 
   return (
@@ -92,18 +105,28 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
                 <input
                   type="text"
                   placeholder="Your Full Name *"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
                   required
                   style={{ width: "100%", padding:"7px", borderRadius: "16px", border:"0.5px solid black" }}
+                />
+              </div>
+              <div className="form-grp" style={{ marginBottom: "16px" }}>
+                <input
+                  type="tel"
+                  placeholder="Your Phone Number *"
+                  value={userphone}
+                  onChange={e => setUserphone(e.target.value)}
+                  required
+                  style={{ width: "100%", padding:"7px", borderRadius: "16px", border:"0.5px solid black"   }}
                 />
               </div>
               <div className="form-grp" style={{ marginBottom: "24px" }}>
                 <input
                   type="email"
                   placeholder="Your Email Address *"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  value={useremail}
+                  onChange={e => setUseremail(e.target.value)}
                   required
                   style={{ width: "100%", padding:"7px", borderRadius: "16px", border:"0.5px solid black"   }}
                 />

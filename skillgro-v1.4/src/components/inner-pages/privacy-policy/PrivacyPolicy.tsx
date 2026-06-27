@@ -180,7 +180,7 @@ const sections = [
         </ul>
         <p>
           To exercise any of these rights, contact us at{" "}
-          <a href="mailto:abc@adshalaa.com">abc@adshalaa.com</a>.
+          <a href="mailto:hello@adshalaa.com">hello@adshalaa.com</a>.
         </p>
       </div>
     ),
@@ -348,7 +348,7 @@ export default function PrivacyPolicy() {
           content: "•";
           position: absolute;
           left: 0;
-          color: #1e6b9c;
+          color: #1a3f32;
           font-weight: bold;
         }
 

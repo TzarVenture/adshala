@@ -437,12 +437,12 @@ export default function TermsAndConditions() {
           content: "•";
           position: absolute;
           left: 0;
-          color: #1e6b9c;
+          color: #1a3f32;
           font-weight: bold;
         }
 
         .contact-item a {
-          color: #1e6b9c;
+          color: #1a3f32;
           text-decoration: none;
           transition: color 0.3s ease;
         }
@@ -453,7 +453,7 @@ export default function TermsAndConditions() {
         }
 
         .section-content a {
-          color: #1e6b9c;
+          color: #1a3f32;
           text-decoration: none;
           transition: color 0.3s ease;
         }
