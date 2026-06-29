@@ -68,20 +68,6 @@ const router = useRouter();
                      </li>
                   </ul>
                </div>
-               <div className="courses__payment">
-                  <h5 className="title">Secure Payment:</h5>
-                  <Image src={img_2} alt="img" />
-               </div>
-               <div className="courses__details-social">
-                  <h5 className="title">Share this course:</h5>
-                  <ul className="list-wrap">
-                     <li><Link href="#"><i className="fab fa-facebook-f"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-twitter"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-whatsapp"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-instagram"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-youtube"></i></Link></li>
-                  </ul>
-               </div>
                <div className="courses__details-enroll">
                   <div className="tg-button-wrap">
                   <button className="btn btn-two arrow-btn"  onClick={() => {
