@@ -33,7 +33,7 @@ export default async function Page({ params }: Props) {
       <Wrapper>
          <HeaderOne />
          <main className="main-area fix">
-            <BreadcrumbOne title="Course Details" sub_title="Course Details" />
+            <BreadcrumbOne title="Course Details" sub_title="Course Details" showCertificationImage />
             <CourseDetailsArea single_course={single_course} />
          </main>
          <FooterOne />

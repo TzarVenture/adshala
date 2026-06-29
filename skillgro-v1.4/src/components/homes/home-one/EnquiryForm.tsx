@@ -25,7 +25,16 @@ const PROGRAMS = [
 ];
 
 export default function EnquiryForm() {
-  const [formData, setFormData] = useState<FormData>({
+
+  return (
+    <div className='form-parent'>
+      <EnquiryFormContainer/>
+    </div>
+  );
+}
+
+export function EnquiryFormContainer(){
+    const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
     email: '',
@@ -88,10 +97,8 @@ const [agreed, setAgreed] = useState(false);
     }
   };
 
-  return (
-    <div className='form-parent'>
-
-    <div className="form-container" id='enquiry-form01'>
+  return(
+<div className="form-container" id='enquiry-form01'>
       <h2 className="form-title">Enquiry Form</h2>
       <form onSubmit={handleSubmit} className="enquiry-form">
         
@@ -203,6 +210,5 @@ const [agreed, setAgreed] = useState(false);
         )}
       </form>
     </div>
-    </div>
-  );
+  )
 }

@@ -1,5 +1,7 @@
 "use client"
 import VideoPopup from "@/modals/VideoPopup"
+import EnquiryPopup from "@/modals/EnquiryPopup"
+
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react";
@@ -19,6 +21,7 @@ import sidebarimage from"@/assets/img/courses/sidebar_image/ADSHALA BANNER 06.jp
 const Sidebar = () => {
 const router = useRouter();
    const [isVideoOpen, setIsVideoOpen] = useState(false);
+   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
 
    return (
       <>
@@ -67,30 +70,9 @@ const router = useRouter();
                      </li>
                   </ul>
                </div>
-               <div className="courses__payment">
-                  <h5 className="title">Secure Payment:</h5>
-                  <Image src={img_2} alt="img" />
-               </div>
-               <div className="courses__details-social">
-                  <h5 className="title">Share this course:</h5>
-                  <ul className="list-wrap">
-                     <li><Link href="#"><i className="fab fa-facebook-f"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-twitter"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-whatsapp"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-instagram"></i></Link></li>
-                     <li><Link href="#"><i className="fab fa-youtube"></i></Link></li>
-                  </ul>
-               </div>
                <div className="courses__details-enroll">
                   <div className="tg-button-wrap">
-                     <button className="btn btn-two arrow-btn"  onClick={() => {
-    const form = document.getElementById("enquiry-form01");
-    if (form) {
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      router.push("/#enquiry-form01");
-    }
-  }}>
+                     <button className="btn btn-two arrow-btn"  onClick={() => setIsEnquiryOpen(true)}>
                         Enquire Now<BtnArrow />
                      </button>
                   </div>
@@ -100,6 +82,11 @@ const router = useRouter();
          <VideoPopup
             isOpen={isVideoOpen}
             onClose={() => setIsVideoOpen(false)}
+            videoId="b2Az7_lLh3g"
+         />
+         <EnquiryPopup
+            isOpen={isEnquiryOpen}
+            onClose={() => setIsEnquiryOpen(false)}
             videoId="b2Az7_lLh3g"
          />
       </>
