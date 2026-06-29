@@ -1,0 +1,131 @@
+.sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 8px; */
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.action-center {
+  background-color: #16a34a !important;
+}
+.whatsapp {
+  color: blue;
+}
+.sticky-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  text-decoration: none;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  font-weight: 600;
+}
+
+.sticky-action .icon {
+  font-size: 18px;
+}
+.sticky-action .label {
+  display: none;
+}
+
+.sticky-action:active {
+  transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sticky-action:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.sticky-action.action-center {
+  margin: 0 auto;
+}
+
+.sticky-action .whatsapp {
+  color: #25d366;
+  font-size: 20px;
+}
+
+/* Mobile: full width and show labels */
+@media (max-width: 991px) {
+  .sticky-bar {
+    /* padding: 10px; */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: rgba(255,255,255,0.98); */
+    /* background: red; */
+    background: transparent !important;
+    justify-content: space-between;
+  }
+  .action-left {
+    border-radius: 0 50px 0 0;
+    flex: 1;
+    background-color: #ffc224;
+    color: white;
+  }
+  .action-right {
+    border-radius: 50px 0 0 0 !important;
+    flex: 1;
+    background-color: #1a3f32;
+    color: white;
+    border: none;
+  }
+  .action-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #16a34a;
+    color: white;
+    bottom: 50%;
+    /* border-radius: 50%; */
+    border-radius: 12px;
+    padding: 14px;
+    z-index: 10;
+  }
+  .action-center .label {
+    display: none;
+  }
+  .sticky-action {
+    justify-content: center;
+  }
+  .sticky-action .label {
+    display: inline-block;
+    font-size: 14px;
+  }
+  /* .sticky-action + .sticky-action { margin-left: 8px; } */
+}
+
+/* Desktop: show only center (whatsapp) */
+@media (min-width: 992px) {
+  .sticky-bar {
+    width: auto;
+    left: auto;
+    right: 40px;
+    bottom: 80px;
+  }
+  .sticky-action.action-left,
+  .sticky-action.action-right {
+    display: none;
+  }
+  .sticky-action.action-center {
+    padding: 12px;
+    border-radius: 50%;
+  }
+  .sticky-action.action-center .label {
+    display: none;
+  }
+}

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import MotionAnimation from "@/hooks/MotionAnimation";
+import StickyBar from "@/components/common/StickyBar";
 
 if (typeof window !== "undefined") {
     require("bootstrap/dist/js/bootstrap");
@@ -18,6 +19,7 @@ const Wrapper = ({ children }: WrapperProps) => {
 
     return <>
         {children}
+        <StickyBar />
         <ScrollToTop />
         <ToastContainer position="top-center" />
     </>;

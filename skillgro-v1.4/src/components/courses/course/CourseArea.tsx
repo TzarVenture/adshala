@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useSearchParams } from 'next/navigation';
 import CourseSidebar from './CourseSidebar';
 import CourseTop from './CourseTop';
 import UseCourses from '@/hooks/UseCourses';
@@ -10,25 +11,45 @@ import UseCourses from '@/hooks/UseCourses';
 const CourseArea = () => {
 
    const { courses, setCourses } = UseCourses();
+   const searchParams = useSearchParams();
+   const queryParam = (searchParams.get('q') || '').trim().toLowerCase();
 
    const itemsPerPage = 12;
    const [itemOffset, setItemOffset] = useState(0);
-   const endOffset = itemOffset + itemsPerPage;
-   const currentItems = courses.slice(itemOffset, endOffset);
-   const pageCount = Math.ceil(courses.length / itemsPerPage);
+   const [activeTab, setActiveTab] = useState(0);
 
-   const startOffset = itemOffset + 1;
-   const totalItems = courses.length;
+   const filteredCourses = courses.filter((course: any) => {
+      if (!queryParam) return true;
+
+      const searchableText = [
+         course?.title,
+         course?.category,
+         course?.desc,
+         course?.instructors,
+      ]
+         .filter(Boolean)
+         .join(' ')
+         .toLowerCase();
+
+      return searchableText.includes(queryParam);
+   });
+
+   const endOffset = itemOffset + itemsPerPage;
+   const currentItems = filteredCourses.slice(itemOffset, endOffset);
+   const pageCount = Math.max(1, Math.ceil(filteredCourses.length / itemsPerPage));
+
+   const startOffset = filteredCourses.length ? itemOffset + 1 : 0;
+   const totalItems = filteredCourses.length;
 
    useEffect(() => {
-   }, [courses]);
+      setItemOffset(0);
+   }, [queryParam]);
 
    const handlePageClick = (event: { selected: number }) => {
-      const newOffset = (event.selected * itemsPerPage) % courses.length;
+      const safeLength = filteredCourses.length || 1;
+      const newOffset = (event.selected * itemsPerPage) % safeLength;
       setItemOffset(newOffset);
    };
-
-   const [activeTab, setActiveTab] = useState(0);
 
    const handleTabClick = (index: number) => {
       setActiveTab(index);
@@ -51,7 +72,7 @@ const CourseArea = () => {
                   <div className="tab-content" id="myTabContent">
                      <div className={`tab-pane fade ${activeTab === 0 ? 'show active' : ''}`} id="grid" role="tabpanel" aria-labelledby="grid-tab">
                         <div className="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
-                           {currentItems.map((item) => (
+                           {currentItems.length > 0 ? currentItems.map((item: any) => (
                               <div key={item.id} className="col">
                                  <div className="courses__item shine__animate-item">
                                     <div className="courses__item-thumb">
@@ -80,7 +101,13 @@ const CourseArea = () => {
                                     </div>
                                  </div>
                               </div>
-                           ))}
+                           )) : (
+                              <div className="col-12">
+                                 <div className="text-center py-5">
+                                    <h5>No courses found for this search.</h5>
+                                 </div>
+                              </div>
+                           )}
                         </div>
                         <nav className="pagination__wrap mt-30">
                            <ReactPaginate
@@ -96,7 +123,7 @@ const CourseArea = () => {
 
                      <div className={`tab-pane fade ${activeTab === 1 ? 'show active' : ''}`} id="list" role="tabpanel" aria-labelledby="list-tab">
                         <div className="row courses__list-wrap row-cols-1">
-                           {currentItems.map((item) => (
+                           {currentItems.length > 0 ? currentItems.map((item: any) => (
                               <div key={item.id} className="col">
                                  <div className="courses__item courses__item-three shine__animate-item">
                                     <div className="courses__item-thumb">
@@ -128,7 +155,13 @@ const CourseArea = () => {
                                     </div>
                                  </div>
                               </div>
-                           ))}
+                           )) : (
+                              <div className="col-12">
+                                 <div className="text-center py-5">
+                                    <h5>No courses found for this search.</h5>
+                                 </div>
+                              </div>
+                           )}
                         </div>
                         <nav className="pagination__wrap mt-30">
                            <ul className="list-wrap">
