@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import EnquiryPopup from "@/modals/EnquiryPopup"
 import { useRouter } from "next/navigation";
 import { GoDownload } from "react-icons/go";
+import { Suspense } from "react";
 const TotalCart = dynamic(() => import("@/components/common/TotalCart"), {
   ssr: false,
 });
@@ -72,10 +73,13 @@ const HeaderOne = () => {
                     </div>
                     {/* <li className="header-btn"> */}
                     <div className="tgmenu__search d-none d-md-block">
-                      <CustomSelect
-                        value={selectedOption}
-                        onChange={handleSelectChange}
-                      />
+                      <Suspense fallback={null}>
+                        <CustomSelect
+                          value={selectedOption}
+                          onChange={handleSelectChange}
+
+                        />
+                      </Suspense>
                     </div>
                     <button
                       onClick={() => setIsEnquiryOpen(true)}
