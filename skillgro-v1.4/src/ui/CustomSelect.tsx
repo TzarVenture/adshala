@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useRouter, useSearchParams } from 'next/navigation';
-
+import { Suspense } from "react";
 const animatedComponents = makeAnimated();
 
 const options = [
@@ -15,7 +15,7 @@ const options = [
    { value: 'seo-certification', label: 'SEO Certification' },
 ];
 
-const CustomSelect = ({ value, onChange }: any) => {
+const CustomSelectInner = ({ value, onChange }: any) => {
    const router = useRouter();
    const searchParams = useSearchParams();
    const [query, setQuery] = useState('');
@@ -64,6 +64,14 @@ const CustomSelect = ({ value, onChange }: any) => {
             <button type="submit"><i className="flaticon-search"></i></button>
          </div>
       </form>
+   );
+};
+
+const CustomSelect = (props: any) => {
+   return (
+      <Suspense fallback={null}>
+         <CustomSelectInner {...props} />
+      </Suspense>
    );
 };
 

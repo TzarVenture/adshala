@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import MobileMenu from "./MobileMenu"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 
 import {
@@ -18,7 +18,7 @@ interface MobileMenuProps {
    setIsActive: (isActive: boolean) => void;
 }
 
-const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
+const MobileSidebarInner = ({ isActive, setIsActive }: MobileMenuProps) => {
    const router = useRouter();
    const searchParams = useSearchParams();
    const [query, setQuery] = useState('');
@@ -69,4 +69,12 @@ const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
    )
 }
 
-export default MobileSidebar
+const MobileSidebar = (props: MobileMenuProps) => {
+   return (
+      <Suspense fallback={null}>
+         <MobileSidebarInner {...props} />
+      </Suspense>
+   );
+};
+
+export default MobileSidebar;
