@@ -1,12 +1,15 @@
 .form-parent {
-  background-image: url("/breadcrumb_bg.51afc4be.jpg");
+  /* background-image: url("/breadcrumb_bg.51afc4be.jpg"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: space-between;
   align-items: center;
+  width: 80%;
   padding: 20px 0;
+  margin: 0 auto;
 }
 
 .form-container {
@@ -15,7 +18,7 @@
   padding: 1.5rem;
   background: #f7f7fa;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -60,7 +63,7 @@
   width: 100%;
   padding: 0.45rem 0.6rem;
   border: 1px solid #dcdcdc;
-  border-radius: 6px;
+  border-radius: 12px;
   font-size: 0.85rem;
   color: #333333;
   background-color: #fff;
@@ -72,9 +75,9 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #0070f3;
+  border-color: #ffc107;
   background-color: #ffffff;
-  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+  /* box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1); */
 }
 
 .form-group textarea {
@@ -146,14 +149,31 @@
   border: 1px solid #fed7d7;
 }
 
+@media (min-width: 1400px) {
+  .form-parent {
+    padding: 20px 150px;
+  }
+}
+
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;
     gap: 0.65rem;
   }
 
+  .form-img {
+    display: none;
+  }
+
   .form-container {
     padding: 1.25rem;
-    margin: 1rem;
+    margin: 20px 0;
+    /* margin: 1rem; */
+    /* width: 100%; */
+  }
+
+  .form-parent {
+    /* padding: 20px 40px; */
+    padding: 0;
   }
 }

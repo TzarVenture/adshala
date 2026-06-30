@@ -77,7 +77,7 @@ const CourseArea = () => {
                                  <div className="courses__item shine__animate-item">
                                     <div className="courses__item-thumb">
                                        <Link href={`/course-details/${item?.sku}`} className="shine__animate-link">
-                                          <Image src={item.thumb} alt="img" style={{objectFit:"contain"}}/>
+                                          <Image src={item.thumb} alt="img" style={{ objectFit: "contain" }} />
                                        </Link>
                                     </div>
                                     <div className="courses__item-content">
@@ -135,14 +135,14 @@ const CourseArea = () => {
                                        <ul className="courses__item-meta list-wrap">
                                           <li className="courses__item-tag">
                                              <a href="course.html">{item.category}</a>
-                                             <div className="avg-rating">
+                                             {/* <div className="avg-rating">
                                                 <i className="fas fa-star"></i>  ({item.rating} Reviews)
-                                             </div>
+                                             </div> */}
                                           </li>
-                                          <li className="price">${item.price}.00</li>
+                                          <li className="price">₹{Number(item.price).toLocaleString("en-IN")}</li>
                                        </ul>
                                        <h5 className="title"><a href="course-details.html">{item.title}</a></h5>
-                                       <p className="author">By <a href="#">{item.instructors}</a></p>
+                                       {/* <p className="author">By <a href="#">{item.instructors}</a></p> */}
                                        <p className="info">{item.desc}</p>
                                        <div className="courses__item-bottom">
                                           <div className="button">

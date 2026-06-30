@@ -8,7 +8,9 @@ import MobileSidebar from "./menu/MobileSidebar";
 import InjectableSvg from "@/hooks/InjectableSvg";
 import useSticky from "@/hooks/useSticky";
 import dynamic from "next/dynamic";
+import EnquiryPopup from "@/modals/EnquiryPopup"
 import { useRouter } from "next/navigation";
+import { GoDownload } from "react-icons/go";
 const TotalCart = dynamic(() => import("@/components/common/TotalCart"), {
   ssr: false,
 });
@@ -30,6 +32,7 @@ const HeaderOne = () => {
   const router = useRouter();
   const [selectedOption, setSelectedOption] = React.useState(null);
   const [brochureOpen, setBrochureOpen] = useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
   const handleSelectChange = (option: React.SetStateAction<null>) => {
     setSelectedOption(option);
   };
@@ -75,17 +78,7 @@ const HeaderOne = () => {
                       />
                     </div>
                     <button
-                      onClick={() => {
-                        const form = document.getElementById("enquiry-form01");
-                        if (form) {
-                          form.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                          });
-                        } else {
-                          router.push("/#enquiry-form01");
-                        }
-                      }}
+                      onClick={() => setIsEnquiryOpen(true)}
                       className="btn d-none d-md-inline-block"
                       style={{ marginRight: "10px" }}
                     >
@@ -97,7 +90,7 @@ const HeaderOne = () => {
                       }}
                       className="btn"
                     >
-                      Get Brochure
+                      Brochure <GoDownload size={20} />
                     </button>
                     {/* </li> */}
 
@@ -140,6 +133,11 @@ const HeaderOne = () => {
       <BrochurePopup
         isOpen={brochureOpen}
         onClose={() => setBrochureOpen(false)}
+      />
+      <EnquiryPopup
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        videoId="b2Az7_lLh3g"
       />
     </>
   );

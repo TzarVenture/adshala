@@ -118,11 +118,11 @@ const CourseSidebar = ({ setCourses }: any) => {
                         </li>
                      ))}
                   </ul>
-                  <div className="show-more">
+                  {/* <div className="show-more">
                      <a className={`show-more-btn ${showMoreCategory ? 'active' : ''}`} style={{ cursor: "pointer" }} onClick={() => setShowMoreCategory(!showMoreCategory)}>
                         {showMoreCategory ? "Show Less -" : "Show More +"}
                      </a>
-                  </div>
+                  </div> */}
                </div>
             </div>
 

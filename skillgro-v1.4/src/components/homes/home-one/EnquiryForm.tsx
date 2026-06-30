@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import "./EnquiryForm.css";
-
+import BtnArrow from "@/svg/BtnArrow"
 // Define the shape of our form state
 interface FormData {
   name: string;
@@ -28,13 +28,20 @@ export default function EnquiryForm() {
 
   return (
     <div className='form-parent'>
-      <EnquiryFormContainer/>
+      <div>
+
+        <EnquiryFormContainer />
+      </div>
+      <div className='form-img'>
+        <img src="https://imgs.search.brave.com/tsEk6c2-kC33QLSqPLEa1ywjAkSY4K_S0VG9rIs0yHY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvdmlzdWFsaXpp/bmctY29uY2VwdC1h/c2tpbmctcXVlc3Rp/b25zLXRocm91Z2gt/aWxsdXN0cmF0aXZl/LWRpYWdyYW1fMTM0/NzQ1MS04MzcwLmpw/Zz9zZW10PWFpc19o/eWJyaWQmdz03NDAm/cT04MA" alt="" width={500} height={150} />
+      </div>
+
     </div>
   );
 }
 
-export function EnquiryFormContainer(){
-    const [formData, setFormData] = useState<FormData>({
+export function EnquiryFormContainer() {
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
     email: '',
@@ -42,7 +49,7 @@ export function EnquiryFormContainer(){
     program: '',
     message: '',
   });
-const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<{
     loading: boolean;
     success: boolean | null;
@@ -62,7 +69,7 @@ const [agreed, setAgreed] = useState(false);
     e.preventDefault();
     setStatus({ loading: true, success: null, message: '' });
     console.log(formData)
-    
+
     try {
       const response = await fetch('/api/enquire', {
         method: 'POST',
@@ -97,11 +104,11 @@ const [agreed, setAgreed] = useState(false);
     }
   };
 
-  return(
-<div className="form-container" id='enquiry-form01'>
+  return (
+    <div className="form-container" id='enquiry-form01'>
       <h2 className="form-title">Enquiry Form</h2>
       <form onSubmit={handleSubmit} className="enquiry-form">
-        
+
         <div className="form-group">
           <label htmlFor="name">Full Name *</label>
           <input
@@ -139,7 +146,7 @@ const [agreed, setAgreed] = useState(false);
               onChange={handleChange}
               required
               placeholder="Enter Your Email"
-              />
+            />
           </div>
         </div>
 
@@ -150,11 +157,12 @@ const [agreed, setAgreed] = useState(false);
               type="text"
               id="city"
               name="city"
+              // className='form-control'
               value={formData.city}
               onChange={handleChange}
               required
               placeholder="Enter City"
-              />
+            />
           </div>
 
           <div className="form-group">
@@ -165,7 +173,8 @@ const [agreed, setAgreed] = useState(false);
               value={formData.program}
               onChange={handleChange}
               required
-              >
+              style={{ padding: "9.1px" }}
+            >
               <option value="" disabled>Select a program</option>
               {PROGRAMS.map((prog) => (
                 <option key={prog} value={prog}>{prog}</option>
@@ -184,25 +193,35 @@ const [agreed, setAgreed] = useState(false);
             required
             rows={2}
             placeholder="Tell us more about your requirements..."
-            />
+          />
         </div>
-<div className="consent-group">
-  <label className="consent-label">
-    <input
-      type="checkbox"
-      checked={agreed}
-      onChange={(e) => setAgreed(e.target.checked)}
-      required
-    />
-    <span>
-      By Proceeding, I agree to <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">T&C</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Yes, I would like to receive updates via SMS & WhatsApp.
-    </span>
-  </label>
-</div>
-        <button type="submit" disabled={status.loading || !agreed} className="submit-btn">
+        <div className="consent-group">
+          <label className="consent-label">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              required
+            />
+            <span>
+              By Proceeding, I agree to <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">T&C</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Yes, I would like to receive updates via SMS & WhatsApp.
+            </span>
+          </label>
+        </div>
+        {/* <button type="submit" disabled={status.loading || !agreed} className="submit-btn">
           {status.loading ? 'Submitting...' : 'Submit Enquiry'}
-        </button>
+        </button> */}
+        <button
+          type="submit"
+          className="btn btn-two arrow-btn "
+          style={{ width: "100%" }}
+          disabled={status.loading || !agreed}
+        >
+          <span style={{ width: "100%" }}>
 
+            {status.loading ? 'Submitting...' : 'Submit Enquiry'}
+          </span>
+        </button>
         {status.message && (
           <div className={`status-banner ${status.success ? 'success' : 'error'}`}>
             {status.message}

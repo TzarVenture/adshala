@@ -1,5 +1,6 @@
 "use client"
 import VideoPopup from "@/modals/VideoPopup"
+import EnquiryPopup from "@/modals/EnquiryPopup"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react";
@@ -14,23 +15,23 @@ import icon_3 from "@/assets/img/icons/course_icon03.svg";
 import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
-import sidebarimage from"@/assets/img/courses/sidebar_image/ADSHALA BANNER 02.jpg";
+import sidebarimage from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 02.jpg";
 
 const AdvanceDMSidebar = () => {
-const router = useRouter();
+   const router = useRouter();
    const [isVideoOpen, setIsVideoOpen] = useState(false);
-
+   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
    return (
       <>
          <div className="col-xl-3 col-lg-4">
             <div className="courses__details-sidebar">
                <div className="courses__details-video">
-                  <Image src={sidebarimage} alt="img" style={{objectFit: "contain"}}/>
+                  <Image src={sidebarimage} alt="img" style={{ objectFit: "contain" }} />
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
                <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
-                  <h2 className="title">₹90,000 <del style={{color: "#ffc224"}}>₹1,00,000</del></h2>
+                  <h2 className="title">₹90,000 <del style={{ color: "#ffc224" }}>₹1,00,000</del></h2>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
@@ -52,7 +53,7 @@ const router = useRouter();
                      </li>
                      <li>
                         <InjectableSvg src={icon_4.src} alt="img" className="injectable" />
-                        Mode 
+                        Mode
                         <span>Offline</span>
                      </li>
                      <li>
@@ -69,14 +70,7 @@ const router = useRouter();
                </div>
                <div className="courses__details-enroll">
                   <div className="tg-button-wrap">
-                    <button className="btn btn-two arrow-btn"  onClick={() => {
-    const form = document.getElementById("enquiry-form01");
-    if (form) {
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      router.push("/#enquiry-form01");
-    }
-  }}>
+                     <button className="btn btn-two arrow-btn" onClick={() => setIsEnquiryOpen(true)}>
                         Enquire Now<BtnArrow />
                      </button>
                   </div>
@@ -86,6 +80,11 @@ const router = useRouter();
          <VideoPopup
             isOpen={isVideoOpen}
             onClose={() => setIsVideoOpen(false)}
+            videoId="b2Az7_lLh3g"
+         />
+         <EnquiryPopup
+            isOpen={isEnquiryOpen}
+            onClose={() => setIsEnquiryOpen(false)}
             videoId="b2Az7_lLh3g"
          />
       </>

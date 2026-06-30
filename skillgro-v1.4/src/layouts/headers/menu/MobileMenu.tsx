@@ -121,8 +121,8 @@ const MobileMenu = () => {
                </li>
             );
          })}
-                 {/* Enquire Now — static mobile menu item */}
-         <li className={pathname === "/courses" ? "active" : ""}>
+         {/* Enquire Now — static mobile menu item */}
+         {/* <li className={pathname === "/courses" ? "active" : ""}>
             <a
                href="#enquiry-form01"
                 onClick={(e) => {
@@ -137,7 +137,7 @@ const MobileMenu = () => {
             >
                Enquire Now
             </a>
-         </li>
+         </li> */}
       </ul>
    );
 };

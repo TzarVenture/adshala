@@ -53,15 +53,27 @@ const BreadcrumbOne = ({ title, sub_title, sub_title_2, style, showCertification
                   </div>
                </div>
                {showCertificationImage && (
-                  <div className="col-12 col-lg-4 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-1">
-                     <Image
+                  <div className="col-12 col-lg-4 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-1 gap-3">
+                     {/* <Image
                         src="/adshalaa_certification.png"
                         alt="Certification"
                         width={500}
                         height={180}
                         className="img-fluid"
                         style={{ maxHeight: "180px", objectFit: "contain" }}
-                     />
+                     /> */}
+                     <div className="img1 d-flex justify-content-center align-items-center bg-white rounded-3 p-3">
+                        <Image src="/certificate1.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                     </div>
+                     <div className="img2 bg-white rounded-3 p-3">
+                        <Image src="/certificate2.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                     </div>
+                     <div className="img3 bg-white rounded-3 p-3">
+                        <Image src="/certificate3-removebg-preview.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                     </div>
+                     <div className="img4 bg-white rounded-3 p-3">
+                        <Image src="/certificate4.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                     </div>
                   </div>
                )}
             </div>

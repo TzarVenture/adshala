@@ -54,7 +54,7 @@ const CustomSelect = ({ value, onChange }: any) => {
                isSearchable={true}
             />
          </div>
-         <div className="input-grp">
+         <div className="input-grp" >
             <input
                type="text"
                value={query}

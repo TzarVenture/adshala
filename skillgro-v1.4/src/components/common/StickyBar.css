@@ -14,9 +14,11 @@
 .action-center {
   background-color: #16a34a !important;
 }
+
 .whatsapp {
   color: blue;
 }
+
 .sticky-action {
   display: inline-flex;
   align-items: center;
@@ -36,6 +38,7 @@
 .sticky-action .icon {
   font-size: 18px;
 }
+
 .sticky-action .label {
   display: none;
 }
@@ -51,7 +54,7 @@
 }
 
 .sticky-action.action-center {
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .sticky-action .whatsapp {
@@ -71,12 +74,14 @@
     background: transparent !important;
     justify-content: space-between;
   }
+
   .action-left {
     border-radius: 0 50px 0 0;
     flex: 1;
     background-color: #ffc224;
-    color: white;
+    color: #1a3f32;
   }
+
   .action-right {
     border-radius: 50px 0 0 0 !important;
     flex: 1;
@@ -84,28 +89,33 @@
     color: white;
     border: none;
   }
+
   .action-center {
     position: absolute;
-    left: 50%;
+    /* left: 50%; */
+    right: 0;
     transform: translateX(-50%);
     background-color: #16a34a;
     color: white;
-    bottom: 50%;
-    /* border-radius: 50%; */
-    border-radius: 12px;
+    bottom: 130%;
+    border-radius: 50px;
     padding: 14px;
     z-index: 10;
   }
+
   .action-center .label {
     display: none;
   }
+
   .sticky-action {
     justify-content: center;
   }
+
   .sticky-action .label {
     display: inline-block;
     font-size: 14px;
   }
+
   /* .sticky-action + .sticky-action { margin-left: 8px; } */
 }
 
@@ -117,14 +127,17 @@
     right: 40px;
     bottom: 80px;
   }
+
   .sticky-action.action-left,
   .sticky-action.action-right {
     display: none;
   }
+
   .sticky-action.action-center {
     padding: 12px;
     border-radius: 50%;
   }
+
   .sticky-action.action-center .label {
     display: none;
   }
