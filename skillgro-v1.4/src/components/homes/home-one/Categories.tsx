@@ -19,7 +19,7 @@ const category_data: DatatYpe[] = [
    },
    {
       id: 2,
-   
+
       icon: "flaticon-graphic-design",
       title: "Graphic Designing",
       total: "(41)"
@@ -123,7 +123,6 @@ const Categories = () => {
                            </SwiperSlide>
                         ))}
                      </Swiper>
-
                      <div className="categories__nav">
                         <button className="categories-button-prev">
                            <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -301,7 +301,7 @@
 
     &__nav {
         @media #{$xs} {
-            display: none;
+            display: block;
         }
 
         & button {
@@ -317,6 +317,9 @@
             border: 1px solid #333;
             box-shadow: -3px 2px 0px 0px #382900;
             @include transition(.3s);
+            @include flexbox();
+            align-items: center;
+            justify-content: center;
 
             @media #{$lg} {
                 left: 30px;
@@ -324,6 +327,22 @@
 
             @media #{$lg} {
                 left: 20px;
+            }
+
+            @media #{$xs} {
+                width: 51px;
+                z-index: 10;
+                // width: 36px;
+                height: 36px;
+                left: -10px;
+                box-shadow: none;
+                background: none;
+                border: none;
+
+                & svg {
+                    width: 17px;
+                    height: 17px;
+                }
             }
 
             &.categories-button-next {
@@ -337,6 +356,13 @@
 
                 @media #{$lg} {
                     right: 20px;
+                }
+
+                @media #{$xs} {
+                    left: auto;
+                    right: -10px;
+                    box-shadow: none;
+                    // box-shadow: 2px 1.5px 0px 0px #382900;
                 }
             }
 
