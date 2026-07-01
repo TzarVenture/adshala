@@ -22,7 +22,7 @@ const BreadcrumbOne = ({ title, sub_title, sub_title_2, style, showCertification
       <section className="breadcrumb__area breadcrumb__bg" style={{ backgroundImage: `url(${bg_img.src})` }}>
          <div className="container">
             <div className="row align-items-center">
-               <div className={showCertificationImage ? "col-12 col-lg-8" : "col-12"}>
+               <div className={showCertificationImage ? "col-12 col-lg-7" : "col-12"}>
                   <div className="breadcrumb__content">
                      <h3 className="title">{title}</h3>
                      <nav className="breadcrumb">
@@ -53,7 +53,7 @@ const BreadcrumbOne = ({ title, sub_title, sub_title_2, style, showCertification
                   </div>
                </div>
                {showCertificationImage && (
-                  <div className="col-12 col-lg-4 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-1 gap-3">
+                  <div className="col-12 col-lg-5 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-1 gap-3">
                      {/* <Image
                         src="/adshalaa_certification.png"
                         alt="Certification"
@@ -69,10 +69,16 @@ const BreadcrumbOne = ({ title, sub_title, sub_title_2, style, showCertification
                         <Image src="/certificate2.png" alt="Certification" width={500} height={100} className="img-fluid" />
                      </div>
                      <div className="img3 bg-white rounded-3 p-3">
-                        <Image src="/certificate3-removebg-preview.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                        <Image src="/certificate3.png" alt="Certification" width={500} height={100} className="img-fluid" />
                      </div>
                      <div className="img4 bg-white rounded-3 p-3">
                         <Image src="/certificate4.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                     </div>
+                     <div className="img4 bg-white rounded-3 p-3">
+                        <Image src="/certificate5.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                     </div>
+                     <div className="img4 bg-white rounded-3 p-3">
+                        <Image src="/certificate6.png" alt="Certification" width={500} height={100} className="img-fluid" />
                      </div>
                   </div>
                )}
