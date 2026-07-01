@@ -26,13 +26,14 @@ const VideoPopup: React.FC<VideoPopupProps> = ({
           width: "fit-content",
           maxWidth: "fit-content",
           display: "inline-block",
-          background: "#f7f7fa",
+          // background: "#f7f7fa",
           borderRadius: "16px"
         },
         closeButton: {
           top: "12px",
           right: "12px",
           padding: "4px",
+          color: "white"
         },
       }}
     >
