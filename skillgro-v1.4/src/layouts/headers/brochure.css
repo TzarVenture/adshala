@@ -1,0 +1,11 @@
+@media (max-width: 600px) {
+    .brochure-btn {
+        padding: 10px 20px;
+    }
+}
+
+.mobile-btn-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

@@ -12,6 +12,7 @@ import EnquiryPopup from "@/modals/EnquiryPopup"
 import { useRouter } from "next/navigation";
 import { GoDownload } from "react-icons/go";
 import { Suspense } from "react";
+import "./brochure.css"
 const TotalCart = dynamic(() => import("@/components/common/TotalCart"), {
   ssr: false,
 });
@@ -81,6 +82,7 @@ const HeaderOne = () => {
                         />
                       </Suspense>
                     </div>
+
                     <button
                       onClick={() => setIsEnquiryOpen(true)}
                       className="btn d-none d-md-inline-block"
@@ -88,17 +90,19 @@ const HeaderOne = () => {
                     >
                       Enquire Now
                     </button>
-                    <button
-                      onClick={() => {
-                        setBrochureOpen(true);
-                      }}
-                      className="btn"
-                    >
-                      Brochure <GoDownload size={20} />
-                    </button>
-                    {/* </li> */}
+                    <div className="mobile-btn-menu">
+                      <button
+                        onClick={() => {
+                          setBrochureOpen(true);
+                        }}
+                        className="btn brochure-btn"
+                      >
+                        Brochure <GoDownload size={20} />
+                      </button>
 
-                    {/* <div className="tgmenu__action">
+                      {/* </li> */}
+
+                      {/* <div className="tgmenu__action">
                                  <ul className="list-wrap">
                                     <li className="wishlist-icon">
                                        <Link href="/wishlist" className="cart-count">
@@ -117,14 +121,15 @@ const HeaderOne = () => {
                                     </li>
                                  </ul>
                               </div> */}
-                    {/* <div className="mobile-login-btn">
+                      {/* <div className="mobile-login-btn">
                                  <Link href="/login"><InjectableSvg src={icon_1.src} alt="" className="injectable" /></Link>
                               </div> */}
-                    <div
-                      onClick={() => setIsActive(true)}
-                      className="mobile-nav-toggler"
-                    >
-                      <i className="tg-flaticon-menu-1"></i>
+                      <div
+                        onClick={() => setIsActive(true)}
+                        className="mobile-nav-toggler"
+                      >
+                        <i className="tg-flaticon-menu-1"></i>
+                      </div>
                     </div>
                   </nav>
                 </div>
