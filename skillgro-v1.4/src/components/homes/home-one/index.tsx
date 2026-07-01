@@ -1,3 +1,4 @@
+'use client'
 import BrandOne from "@/components/common/brands/BrandOne"
 import Banner from "./Banner"
 import About from "./About"
@@ -16,12 +17,12 @@ import Categories from "./Categories"
 import { useEffect } from "react"
 const HomeOne = () => {
    useEffect(() => {
-  if (window.location.hash === "#enquiry-form01") {
-    setTimeout(() => {
-      document.getElementById("enquiry-form01")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 300); // small delay lets the page render first
-  }
-}, []);
+      if (window.location.hash === "#enquiry-form01") {
+         setTimeout(() => {
+            document.getElementById("enquiry-form01")?.scrollIntoView({ behavior: "smooth", block: "start" });
+         }, 300); // small delay lets the page render first
+      }
+   }, []);
    return (
       <>
          <HeaderOne />
@@ -37,7 +38,7 @@ const HomeOne = () => {
             <FaqArea />
             <Features />
             <InstructorTwo />
-            <EnquiryForm/>
+            <EnquiryForm />
             {/* <Blog /> */}
          </main>
          <FooterOne />
