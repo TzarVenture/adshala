@@ -173,6 +173,7 @@
   }
 
   .form-parent {
+    width: 90%;
     /* padding: 20px 40px; */
     padding: 0;
   }

@@ -4,41 +4,50 @@
     09. Categories
 ===============================*/
 .section-py-120 {
-    padding: 120px 0;
+    padding: 50px 0;
+
     @media #{$xs} {
-        padding: 100px 0;
+        padding: 50px 0;
     }
 }
+
 .categories {
     &-area {
         &-four {
             position: relative;
         }
     }
+
     &__bg {
         background-size: cover;
         background-position: center;
         position: relative;
         z-index: 1;
     }
+
     &__wrap {
         background: var(--tg-common-color-gray);
         @include border-radius(500px);
         padding: 52px 145px 45px;
         position: relative;
+
         @media #{$lg} {
             padding: 52px 100px 45px;
         }
+
         @media #{$md} {
             padding: 45px 90px 45px;
         }
+
         @media #{$xs} {
             padding: 30px 20px 30px;
             @include border-radius(30px);
         }
     }
+
     &__item {
         text-align: center;
+
         & .icon {
             width: 150px;
             height: 150px;
@@ -53,12 +62,14 @@
             @include transition(.3s);
             position: relative;
             margin: 0 0 12px;
+
             @media #{$xs} {
                 width: 130px;
                 height: 130px;
                 font-size: 45px;
                 margin: 0 auto 12px;
             }
+
             &::before {
                 content: "";
                 position: absolute;
@@ -72,6 +83,7 @@
                 pointer-events: none;
             }
         }
+
         & .name {
             display: block;
             font-family: var(--tg-heading-font-family);
@@ -81,12 +93,14 @@
             color: var(--tg-heading-color);
             margin: 0 0 7px;
         }
+
         & .courses {
             display: block;
             line-height: 1.3;
             font-family: var(--tg-heading-font-family);
             color: var(--tg-body-color);
         }
+
         &:hover {
             & .icon {
                 background: var(--tg-theme-primary);
@@ -94,8 +108,10 @@
                 color: var(--tg-common-color-white);
             }
         }
+
         &-two {
             margin-bottom: 30px;
+
             & a {
                 background: #f9f9f9;
                 @include border-radius(8px);
@@ -104,21 +120,25 @@
                 padding: 15px 30px 15px 15px;
                 gap: 15px;
                 justify-content: space-between;
+
                 & .content {
                     @include flexbox();
                     align-items: center;
                     gap: 13px;
+
                     & img {
                         width: 50px;
                         height: 50px;
                         flex: 0 0 auto;
                         @include border-radius(50%);
                     }
+
                     & .name {
                         font-family: var(--tg-heading-font-family);
                         font-size: 14px;
                         color: var(--tg-body-color);
                         line-height: 1.4;
+
                         & strong {
                             display: block;
                             color: var(--tg-heading-color);
@@ -129,17 +149,21 @@
                         }
                     }
                 }
+
                 & .icon {
                     font-size: 22px;
                     color: var(--tg-body-color);
                     font-weight: 700;
                     @include transition(.3s);
                 }
+
                 &:hover {
                     transform: translateY(-3px);
+
                     & .icon {
                         color: var(--tg-theme-primary);
                     }
+
                     & .name {
                         & strong {
                             color: var(--tg-theme-primary);
@@ -148,8 +172,10 @@
                 }
             }
         }
+
         &-three {
             margin-bottom: 30px;
+
             & a {
                 background: var(--tg-common-color-white);
                 box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.05);
@@ -157,9 +183,11 @@
                 display: block;
                 text-align: center;
                 padding: 65px 30px 70px;
+
                 @media #{$lg} {
                     padding: 45px 30px 50px;
                 }
+
                 & .icon {
                     width: 120px;
                     height: 120px;
@@ -175,6 +203,7 @@
                     overflow: hidden;
                     z-index: 1;
                     @include transition(.3s);
+
                     &::before {
                         content: "";
                         position: absolute;
@@ -189,6 +218,7 @@
                         @include border-radius(50%);
                     }
                 }
+
                 & .name {
                     display: block;
                     font-weight: 600;
@@ -198,6 +228,7 @@
                     line-height: 1.2;
                     font-family: var(--tg-heading-font-family);
                 }
+
                 & .courses {
                     font-weight: 500;
                     font-size: 14px;
@@ -205,9 +236,11 @@
                     font-family: var(--tg-heading-font-family);
                     line-height: 1.2;
                 }
+
                 &:hover {
                     & .icon {
                         color: var(--tg-heading-color);
+
                         &::before {
                             transform: scale(1);
                         }
@@ -215,19 +248,23 @@
                 }
             }
         }
+
         &-four {
             margin-bottom: 30px;
             text-align: center;
+
             & a {
                 position: relative;
                 @include border-radius(12px);
                 overflow: hidden;
                 display: block;
+
                 & img {
                     width: 100%;
                     height: 230px;
                     object-fit: cover;
                 }
+
                 & .name {
                     position: absolute;
                     left: 50%;
@@ -245,12 +282,14 @@
                     padding: 14px 19px;
                     @include transition(.3s);
                     white-space: nowrap;
+
                     & strong {
                         font-weight: 400;
                         font-size: 14px;
                         color: var(--tg-body-color);
                     }
                 }
+
                 &:hover {
                     & .name {
                         color: var(--tg-theme-primary);
@@ -259,10 +298,12 @@
             }
         }
     }
+
     &__nav {
         @media #{$xs} {
             display: none;
         }
+
         & button {
             position: absolute;
             left: 50px;
@@ -276,113 +317,141 @@
             border: 1px solid #333;
             box-shadow: -3px 2px 0px 0px #382900;
             @include transition(.3s);
+
             @media #{$lg} {
                 left: 30px;
             }
+
             @media #{$lg} {
                 left: 20px;
             }
+
             &.categories-button-next {
                 left: auto;
                 right: 50px;
                 box-shadow: 2px 4px 0px 0px #382900;
+
                 @media #{$lg} {
                     right: 30px;
                 }
+
                 @media #{$lg} {
                     right: 20px;
                 }
             }
+
             &:hover {
                 box-shadow: none;
             }
         }
     }
+
     &__shape-wrap {
         & img {
             position: absolute;
             z-index: -1;
+
             &:nth-child(1) {
                 left: 9%;
                 top: 33%;
                 max-width: 153px;
                 -webkit-animation-duration: 30s;
                 animation-duration: 30s;
+
                 @media #{$xl} {
                     left: 1%;
                 }
+
                 @media #{$xs} {
                     display: none;
                 }
             }
+
             &:nth-child(2) {
                 right: 0;
                 top: 0;
                 max-width: 436px;
+
                 @media #{$lg} {
                     max-width: 300px;
                 }
+
                 @media #{$xs} {
                     max-width: 200px;
                 }
             }
+
             &:nth-child(3) {
                 right: 11%;
                 top: 37%;
                 max-width: 83px;
+
                 @media #{$xl} {
                     right: 2%;
                 }
+
                 @media #{$xs} {
                     display: none;
                 }
             }
+
             &:nth-child(4) {
                 left: 0;
                 bottom: 0;
                 max-width: 456px;
+
                 @media #{$lg} {
                     max-width: 300px;
                 }
+
                 @media #{$xs} {
                     max-width: 200px;
                 }
             }
         }
+
         &-two {
             & img {
                 position: absolute;
                 z-index: -1;
+
                 &:nth-child(1) {
                     left: 4%;
                     top: 14%;
                     max-width: 147px;
+
                     @media #{$xxl} {
                         left: 2%;
                         top: 16%;
                         max-width: 125px;
                     }
+
                     @media #{$md} {
                         top: 11%;
                         max-width: 110px;
                     }
+
                     @media #{$xs} {
                         display: none;
                     }
                 }
+
                 &:nth-child(2) {
                     right: 3%;
                     bottom: 10%;
                     max-width: 107px;
+
                     @media #{$xxl} {
                         right: 2%;
                         bottom: 4%;
                         max-width: 80px;
                     }
+
                     @media #{$md} {
                         bottom: 2%;
                         max-width: 70px;
                     }
+
                     @media #{$xs} {
                         display: none;
                     }
@@ -391,13 +460,16 @@
         }
     }
 }
+
 .view-all-categories {
     text-align: right;
     margin-bottom: 30px;
+
     @media #{$xs} {
         text-align: left;
         margin-bottom: 40px;
     }
+
     & a {
         display: inline-flex;
         align-items: center;
@@ -406,22 +478,27 @@
         font-size: 15px;
         font-family: var(--tg-heading-font-family);
         font-weight: 500;
+
         & span {
             text-decoration: underline;
         }
+
         & svg {
             width: 15px;
         }
+
         &:hover {
             color: var(--tg-theme-primary);
         }
     }
 }
+
 .mb-xs-30 {
     @media #{$xs} {
         margin-bottom: 30px;
     }
 }
+
 .mb-xs-20 {
     @media #{$xs} {
         margin-bottom: 20px;
