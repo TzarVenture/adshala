@@ -33,7 +33,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
     }
     // Trigger PDF download
     const link = document.createElement("a")
-    link.href = "/Adshala_Complete_A4_Brochure_new.pdf"
+    link.href = "/Adshalaa-Brochure.pdf"
     link.download = "Adshalaa-Brochure.pdf"
     link.click()
     setSubmitted(true)
@@ -85,7 +85,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
               Your download has started!
             </h3>
             <p style={{ color: "#666", marginBottom: "24px" }}>
-              Didn't start? <a href="/Adshala_Complete_A4_Brochure_new.pdf" download="Adshala-Brochure.pdf" style={{ color: "#4263eb" }}>Click here</a>
+              Didn't start? <a href="/Adshalaa-Brochure.pdf" download="Adshala-Brochure.pdf" style={{ color: "#4263eb" }}>Click here</a>
             </p>
             <button onClick={handleClose} className="btn btn-two arrow-btn">
               Close <BtnArrow />
