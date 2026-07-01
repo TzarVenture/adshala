@@ -11,7 +11,7 @@ import BrochurePopup from "@/components/common/BrochurePopup"
 import { MdOutlineFileDownload } from "react-icons/md";
 const WHATSAPP_NUMBER = "911234567890"; // replace with real number
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
-const BROCHURE_LINK = "/Adshala_Complete_A4_Brochure_2025 (1).pdf";
+const BROCHURE_LINK = "/Adshala_Complete_A4_Brochure_new.pdf";
 import { useRouter } from "next/navigation";
 
 const StickyBar: React.FC = () => {

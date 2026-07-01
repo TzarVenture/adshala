@@ -19,21 +19,21 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Brochure Data", username, useremail, userphone)
-    try{
+    try {
       const response = await fetch('/api/brochure', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({username, userphone, useremail}),
+        body: JSON.stringify({ username, userphone, useremail }),
       })
-      if(!response.ok){
+      if (!response.ok) {
         console.log("brochure data saved")
       }
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
     // Trigger PDF download
     const link = document.createElement("a")
-    link.href = "/Adshala_Complete_A4_Brochure_2025 (1).pdf" 
+    link.href = "/Adshala_Complete_A4_Brochure_new.pdf"
     link.download = "Adshalaa-Brochure.pdf"
     link.click()
     setSubmitted(true)
@@ -85,7 +85,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
               Your download has started!
             </h3>
             <p style={{ color: "#666", marginBottom: "24px" }}>
-              Didn't start? <a href="/Adshala_Complete_A4_Brochure_2025 (1).pdf" download="Adshala-Brochure.pdf" style={{ color: "#4263eb" }}>Click here</a>
+              Didn't start? <a href="/Adshala_Complete_A4_Brochure_new.pdf" download="Adshala-Brochure.pdf" style={{ color: "#4263eb" }}>Click here</a>
             </p>
             <button onClick={handleClose} className="btn btn-two arrow-btn">
               Close <BtnArrow />
@@ -108,7 +108,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
                   value={username}
                   onChange={e => setUsername(e.target.value)}
                   required
-                  style={{ width: "100%", padding:"7px", borderRadius: "16px", border:"0.5px solid black" }}
+                  style={{ width: "100%", padding: "7px", borderRadius: "16px", border: "0.5px solid black" }}
                 />
               </div>
               <div className="form-grp" style={{ marginBottom: "16px" }}>
@@ -118,7 +118,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
                   value={userphone}
                   onChange={e => setUserphone(e.target.value)}
                   required
-                  style={{ width: "100%", padding:"7px", borderRadius: "16px", border:"0.5px solid black"   }}
+                  style={{ width: "100%", padding: "7px", borderRadius: "16px", border: "0.5px solid black" }}
                 />
               </div>
               <div className="form-grp" style={{ marginBottom: "24px" }}>
@@ -128,7 +128,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
                   value={useremail}
                   onChange={e => setUseremail(e.target.value)}
                   required
-                  style={{ width: "100%", padding:"7px", borderRadius: "16px", border:"0.5px solid black"   }}
+                  style={{ width: "100%", padding: "7px", borderRadius: "16px", border: "0.5px solid black" }}
                 />
               </div>
               <button
