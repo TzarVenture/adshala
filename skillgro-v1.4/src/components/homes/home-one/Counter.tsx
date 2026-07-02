@@ -36,9 +36,9 @@ const count_data: DataType[] = [
 
 const Counter = () => {
    return (
-      <section className="fact__area">
+      <section className="fact__area pt-4 pt-lg-5" style={{ backgroundColor: "#f7f7f9" }}>
          <div className="container">
-            <div className="fact__inner-wrap">
+            <div className="fact__inner-wrap" >
                <div className="row">
                   {count_data.map((item) => (
                      <div key={item.id} className="col-lg-3 col-6">
