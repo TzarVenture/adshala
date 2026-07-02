@@ -3,3 +3,9 @@
         padding: 14px !important;
     }
 }
+
+@media(max-width: 414px) {
+    .mobilebtnsize {
+        padding: 10px !important;
+    }
+}
