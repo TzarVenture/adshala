@@ -59,12 +59,13 @@ export async function POST(req) {
       console.error('[Contact] Google Sheets failed:', sheetResult.reason);
 
     if (mongoResult.status === 'rejected') {
-      return NextResponse.json({ error: 'Failed to save contact' }, { status: 500 });
+      const reasonMessage = mongoResult.reason?.message || String(mongoResult.reason);
+      return NextResponse.json({ error: `Failed to save contact: ${reasonMessage}` }, { status: 500 });
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
     console.error('[Contact] Unexpected error:', err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: `Internal server error: ${err.message || err}` }, { status: 500 });
   }
 }

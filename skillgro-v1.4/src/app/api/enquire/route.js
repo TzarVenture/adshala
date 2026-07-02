@@ -91,12 +91,13 @@ export async function POST(req) {
 
     // Only hard-fail if MongoDB failed (primary store)
     if (mongoResult.status === 'rejected') {
-      return NextResponse.json({ error: 'Failed to save enquiry' }, { status: 500 });
+      const reasonMessage = mongoResult.reason?.message || String(mongoResult.reason);
+      return NextResponse.json({ error: `Failed to save enquiry: ${reasonMessage}` }, { status: 500 });
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
     console.error('[Enquiry] Unexpected error:', err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: `Internal server error: ${err.message || err}` }, { status: 500 });
   }
 }
