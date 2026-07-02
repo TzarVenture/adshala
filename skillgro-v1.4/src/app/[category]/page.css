@@ -1,0 +1,5 @@
+@media(max-width: 380px) {
+    .mobilebtnsize {
+        padding: 14px !important;
+    }
+}

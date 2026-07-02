@@ -9,3 +9,9 @@
     align-items: center;
     gap: 20px;
 }
+
+@media (max-width: 380px) {
+    .mobile-btn-menu {
+        gap: 9px;
+    }
+}

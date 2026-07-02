@@ -11,7 +11,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
+import "./page.css"
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FooterOne from "@/layouts/footers/FooterOne";
 import BreadcrumbOne from "@/components/common/breadcrumb/BreadcrumbOne";
@@ -163,10 +163,10 @@ export default async function CategoryPage({ params }: Props) {
                 <p style={{ color: "#6D6C80", marginBottom: "16px" }}>
                   Want to know more about this program?
                 </p>
-                <Link href="/contact" className="btn arrow-btn me-3">
+                <Link href="/contact" className="btn arrow-btn me-3 mobilebtnsize">
                   Contact Us <i className="flaticon-arrow-right"></i>
                 </Link>
-                <Link href="/courses" className="btn btn-two">
+                <Link href="/courses" className="btn btn-two mobilebtnsize">
                   View All Courses
                 </Link>
               </div>
