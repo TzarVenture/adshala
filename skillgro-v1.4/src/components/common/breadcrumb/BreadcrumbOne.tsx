@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 import Link from "next/link";
 
 import shape_1 from "@/assets/img/others/breadcrumb_shape01.svg";
@@ -7,8 +7,7 @@ import shape_3 from "@/assets/img/others/breadcrumb_shape03.svg";
 import shape_4 from "@/assets/img/others/breadcrumb_shape04.svg";
 import shape_5 from "@/assets/img/others/breadcrumb_shape05.svg";
 import bg_img from "@/assets/img/bg/breadcrumb_bg.jpg";
-
-import bg_image from "./adshalaa_certification.png"
+import "./BreadcrumbOne.css"
 interface StyleType {
    title: string;
    sub_title: string;
@@ -17,73 +16,101 @@ interface StyleType {
    showCertificationImage?: boolean;
 }
 
-const BreadcrumbOne = ({ title, sub_title, sub_title_2, style, showCertificationImage = false }: StyleType) => {
+const BreadcrumbOne = ({
+   title,
+   sub_title,
+   sub_title_2,
+   style,
+   showCertificationImage = false,
+}: StyleType) => {
+   const certificates = [
+      "/certificate1.png",
+      "/certificate2.png",
+      "/certificate3.png",
+      "/certificate4.png",
+      "/certificate5.png",
+      "/certificate6.png",
+   ];
+
    return (
-      <section className="breadcrumb__area breadcrumb__bg" style={{ backgroundImage: `url(${bg_img.src})` }}>
+      <section
+         className="breadcrumb__area breadcrumb__bg"
+         style={{ backgroundImage: `url(${bg_img.src})` }}
+      >
          <div className="container">
-            <div className="row align-items-center">
-               <div className={showCertificationImage ? "col-12 col-lg-7" : "col-12"}>
+            <div
+               className={`d-flex ${showCertificationImage
+                  ? "flex-column flex-lg-row justify-content-between align-items-start"
+                  : "flex-column"
+                  }`}
+            >
+               {/* Left Content */}
+               <div className={showCertificationImage ? "flex-grow-1" : "w-100"}>
                   <div className="breadcrumb__content">
                      <h3 className="title">{title}</h3>
+
                      <nav className="breadcrumb">
-                        {
-                           style ? (
-                              <>
-                                 <span property="itemListElement">
-                                    <Link href="/">Home</Link>
-                                 </span>
-                                 <span className="breadcrumb-separator"><i className="fas fa-angle-right"></i></span>
-                                 <span property="itemListElement">
-                                    <Link href="/events">{sub_title}</Link>
-                                 </span>
-                                 <span className="breadcrumb-separator"><i className="fas fa-angle-right"></i></span>
-                                 <span property="itemListElement">{sub_title_2}</span>
-                              </>
-                           ) : (
-                              <>
-                                 <span property="itemListElement">
-                                    <Link href="/">Home</Link>
-                                 </span>
-                                 <span className="breadcrumb-separator"><i className="fas fa-angle-right"></i></span>
-                                 <span property="itemListElement">{sub_title}</span>
-                              </>
-                           )
-                        }
+                        {style ? (
+                           <>
+                              <span property="itemListElement">
+                                 <Link href="/">Home</Link>
+                              </span>
+
+                              <span className="breadcrumb-separator">
+                                 <i className="fas fa-angle-right"></i>
+                              </span>
+
+                              <span property="itemListElement">
+                                 <Link href="/events">{sub_title}</Link>
+                              </span>
+
+                              <span className="breadcrumb-separator">
+                                 <i className="fas fa-angle-right"></i>
+                              </span>
+
+                              <span property="itemListElement">{sub_title_2}</span>
+                           </>
+                        ) : (
+                           <>
+                              <span property="itemListElement">
+                                 <Link href="/">Home</Link>
+                              </span>
+
+                              <span className="breadcrumb-separator">
+                                 <i className="fas fa-angle-right"></i>
+                              </span>
+
+                              <span property="itemListElement">{sub_title}</span>
+                           </>
+                        )}
                      </nav>
                   </div>
                </div>
+
+               {/* Certificates */}
                {showCertificationImage && (
-                  <div className="col-12 col-lg-5 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-1 gap-3">
-                     {/* <Image
-                        src="/adshalaa_certification.png"
-                        alt="Certification"
-                        width={500}
-                        height={180}
-                        className="img-fluid"
-                        style={{ maxHeight: "180px", objectFit: "contain" }}
-                     /> */}
-                     <div className="img1 d-flex justify-content-center align-items-center bg-white rounded-3 p-3">
-                        <Image src="/certificate1.png" alt="Certification" width={500} height={100} className="img-fluid" />
-                     </div>
-                     <div className="img2 bg-white rounded-3 p-3">
-                        <Image src="/certificate2.png" alt="Certification" width={500} height={100} className="img-fluid" />
-                     </div>
-                     <div className="img3 bg-white rounded-3 p-3">
-                        <Image src="/certificate3.png" alt="Certification" width={500} height={100} className="img-fluid" />
-                     </div>
-                     <div className="img4 bg-white rounded-3 p-3">
-                        <Image src="/certificate4.png" alt="Certification" width={500} height={100} className="img-fluid" />
-                     </div>
-                     <div className="img4 bg-white rounded-3 p-3">
-                        <Image src="/certificate5.png" alt="Certification" width={500} height={100} className="img-fluid" />
-                     </div>
-                     <div className="img4 bg-white rounded-3 p-3">
-                        <Image src="/certificate6.png" alt="Certification" width={500} height={100} className="img-fluid" />
+                  <div className="certificate-wrapper mt-4 mt-lg-0">
+                     <div className="certificate-list">
+                        {certificates.map((src, index) => (
+                           <div
+                              key={index}
+                              className="certificate-item bg-white rounded-3 p-2"
+                           >
+                              <Image
+                                 src={src}
+                                 alt={`Certificate ${index + 1}`}
+                                 width={70}
+                                 height={90}
+                              // className="img-fluid"
+                              />
+                           </div>
+                        ))}
                      </div>
                   </div>
                )}
             </div>
          </div>
+
          <div className="breadcrumb__shape-wrap">
             <Image src={shape_1} alt="img" className="alltuchtopdown" />
             <Image src={shape_2} alt="img" />
@@ -92,7 +119,7 @@ const BreadcrumbOne = ({ title, sub_title, sub_title_2, style, showCertification
             <Image src={shape_5} alt="img" />
          </div>
       </section>
-   )
-}
+   );
+};
 
-export default BreadcrumbOne
+export default BreadcrumbOne;

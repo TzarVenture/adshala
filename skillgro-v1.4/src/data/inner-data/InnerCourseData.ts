@@ -49,8 +49,8 @@ interface DataType {
 
 
 
-const inner_course_data: DataType[] =[
-      {
+const inner_course_data: DataType[] = [
+   {
       id: 116,
       sku: "certification-in-web-development-in-mumbai",
       banner: course_banner5,

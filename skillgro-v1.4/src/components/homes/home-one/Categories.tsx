@@ -2,59 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import Link from "next/link";
-
-interface DatatYpe {
-   id: number;
-   icon: string;
-   title: string;
-   total: string;
-}[]
-
-const category_data: DatatYpe[] = [
-   {
-      id: 1,
-      icon: "flaticon-investment",
-      title: "Advanced Digital Marketing",
-      total: "(22)"
-   },
-   {
-      id: 2,
-
-      icon: "flaticon-graphic-design",
-      title: "Graphic Designing",
-      total: "(41)"
-   },
-   {
-      id: 3,
-      icon: "flaticon-coding",
-      title: "Web Development",
-      total: "(29)"
-   },
-   {
-      id: 4,
-      icon: "flaticon-email",
-      title: "Social Media Management",
-      total: "(31)"
-   },
-   {
-      id: 5,
-      icon: "flaticon-fashion",
-      title: "Marketplace Certification",
-      total: "(23)"
-   },
-   {
-      id: 6,
-      icon: "flaticon-interaction",
-      title: "Advanced SEO Certification",
-      total: "(19)"
-   },
-   // {
-   //    id: 7,
-   //    icon: "flaticon-web-design",
-   //    title: "Mastery in Instagram",
-   //    total: "(18)"
-   // },
-];
+import category_config from "@/data/home-data/CategoryConfig";
 
 // slider setting
 const setting = {
@@ -109,10 +57,10 @@ const Categories = () => {
                <div className="col-12">
                   <div className="categories__wrap">
                      <Swiper {...setting} modules={[Navigation]} className="swiper categories-active">
-                        {category_data.map((item) => (
+                        {category_config.map((item) => (
                            <SwiperSlide key={item.id} className="swiper-slide">
                               <div className="categories__item">
-                                 <Link href="/courses">
+                                 <Link href={`/${item.slug}`}>
                                     <div className="icon">
                                        <i className={item.icon}></i>
                                     </div>
