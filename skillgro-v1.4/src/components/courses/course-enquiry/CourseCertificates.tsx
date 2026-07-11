@@ -23,13 +23,12 @@ export default function CourseCertificates({
     <section className="cc__section">
       <div className="cc__wrapper">
         {/* Header */}
-        <div className="cc__header">
-          <span className="cc__eyebrow">What You Will Earn</span>
-          <h2 className="cc__heading">
-            Your Certificates After Completing <br />
-            <span className="cc__course-name">{courseTitle}</span>
+        <div className="section__title text-center mb-40">
+          <span className="sub-title">What You Will Earn</span>
+          <h2 className="title">
+            Industry-Recognised Certification
           </h2>
-          <p className="cc__subtext">
+          <p className="desc" style={{ marginTop: '10px' }}>
             Earn industry-recognised credentials that employers trust — boosting your career from day one.
           </p>
         </div>

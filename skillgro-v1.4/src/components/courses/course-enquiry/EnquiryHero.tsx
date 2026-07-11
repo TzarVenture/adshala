@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import "./enquiry-hero.css";
+import mobileBannerImg from "@/assets/img/banner/DM_Banner_Enquiry_Page.png";
 import { CourseDataType } from "@/data/inner-data/InnerCourseData";
 import { COURSE_TOOLS, DEFAULT_TOOLS } from "@/data/inner-data/CourseToolsData";
 import { EnquiryFormContainer } from "@/components/homes/home-one/EnquiryForm";
@@ -48,12 +50,22 @@ export default function EnquiryHero({ course }: EnquiryHeroProps) {
                 <span className="enquiry-hero__tag-category">{displayCategory}</span>
               </div>
 
-              <h1 className="enquiry-hero__title">{course.title}</h1>
+              <div className="enquiry-hero__desktop-text">
+                <h1 className="enquiry-hero__title">{course.title}</h1>
+                <p className="enquiry-hero__desc">
+                  {course.desc ||
+                    "Learn professional skills with expert mentorship and recognized certification."}
+                </p>
+              </div>
 
-              <p className="enquiry-hero__desc">
-                {course.desc ||
-                  "Learn professional skills with expert mentorship and recognized certification."}
-              </p>
+              <div className="enquiry-hero__mobile-image">
+                <Image
+                  src={mobileBannerImg}
+                  alt={course.title}
+                  style={{ width: "100%", height: "auto", borderRadius: "12px", marginBottom: "20px" }}
+                  priority
+                />
+              </div>
 
               {/* 3 info stats */}
               <div className="enquiry-hero__stats">
@@ -67,7 +79,7 @@ export default function EnquiryHero({ course }: EnquiryHeroProps) {
                 <div className="enquiry-hero__stat-item">
                   <div className="enquiry-hero__stat-label">Mode</div>
                   <div className="enquiry-hero__stat-value">
-                    {course.mode || "Offline"}
+                    Offline
                   </div>
                 </div>
 
@@ -100,7 +112,7 @@ export default function EnquiryHero({ course }: EnquiryHeroProps) {
             </div>
 
             {/* Right: Enquiry Form */}
-            <div className="enquiry-hero__form-wrapper">
+            <div className="enquiry-hero__form-wrapper" id="enquiry-form-section">
               <EnquiryFormContainer defaultProgram={course.title} />
             </div>
 
@@ -123,6 +135,22 @@ export default function EnquiryHero({ course }: EnquiryHeroProps) {
             courseTitle={course.title}
           />
         )}
+
+        {/* ── Bottom Enquire Now CTA ── */}
+        <div style={{ textAlign: "center", marginTop: "-20px" }}>
+          <button
+            onClick={() => {
+              document.getElementById("enquiry-form-section")?.scrollIntoView({ behavior: "smooth" });
+              setTimeout(() => {
+                const firstInput = document.querySelector("#enquiry-form-section input") as HTMLInputElement;
+                if (firstInput) firstInput.focus();
+              }, 500);
+            }}
+            className="btn btn-two arrow-btn"
+          >
+            Enquire Now <i className="fas fa-arrow-right"></i>
+          </button>
+        </div>
 
       </div>
 

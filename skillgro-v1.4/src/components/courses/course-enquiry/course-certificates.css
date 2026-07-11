@@ -15,44 +15,6 @@
   padding: 0 24px;
 }
 
-/* ── Header ── */
-.cc__header {
-  text-align: center;
-  margin-bottom: 52px;
-}
-
-.cc__eyebrow {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #ffc224;
-  background: rgba(255, 194, 36, 0.12);
-  border-radius: 50px;
-  padding: 5px 16px;
-  margin-bottom: 14px;
-}
-
-.cc__heading {
-  font-size: 32px;
-  font-weight: 800;
-  line-height: 1.3;
-  color: #111827;
-  margin-bottom: 14px;
-}
-
-.cc__course-name {
-  color: #1a3f32;
-}
-
-.cc__subtext {
-  font-size: 15px;
-  color: #6b7280;
-  line-height: 1.65;
-  max-width: 520px;
-  margin: 0 auto;
-}
 
 /* ── Certificate card grid ── */
 /* Uses CSS custom property --count for dynamic column count */
@@ -139,9 +101,6 @@
     gap: 24px;
   }
 
-  .cc__heading {
-    font-size: 24px;
-  }
 
   .cc__card {
     padding: 18px;
@@ -150,9 +109,6 @@
 }
 
 @media (max-width: 480px) {
-  .cc__heading {
-    font-size: 20px;
-  }
 
   .cc__footer-note {
     flex-direction: column;
