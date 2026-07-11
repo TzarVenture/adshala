@@ -19,7 +19,9 @@ export default function ToolsSlider({
 
   return (
     <section className="ts__section">
-      <h3 className="ts__title">{title}</h3>
+      <div className="section__title text-center mb-40">
+        <h2 className="title">{title}</h2>
+      </div>
 
       <div className="ts__container">
         {/* Row 1: scrolls left → */}

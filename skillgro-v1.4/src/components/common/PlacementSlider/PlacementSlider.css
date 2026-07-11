@@ -11,44 +11,6 @@
   background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
 }
 
-/* ── Header block ───────────────────────────────────────────────────────── */
-.ps__header {
-  max-width: 720px;
-  margin: 0 auto 36px;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.ps__title {
-  font-size: 32px;
-  font-weight: 800;
-  color: #1a3f32;
-  margin: 0 0 12px;
-  line-height: 1.25;
-}
-
-.ps__title span {
-  color: #e8a520;
-}
-
-.ps__desc {
-  font-size: 16px;
-  color: #5a7a6b;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* ── Rounded container around the slider ────────────────────────────────── */
-.ps__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 28px 0;
-  background: #ffffff;
-  border-radius: 20px;
-  border: 1px solid #e8ede9;
-  box-shadow: 0 4px 24px rgba(26, 63, 50, 0.06);
-  overflow: hidden;
-}
 
 /* ── Track container (holds the moving strip) ───────────────────────────── */
 .ps__track-wrapper {
@@ -132,20 +94,6 @@
     padding: 48px 0 40px;
   }
 
-  .ps__container {
-    margin: 0 20px;
-    border-radius: 16px;
-    padding: 22px 0;
-  }
-
-  .ps__title {
-    font-size: 26px;
-  }
-
-  .ps__desc {
-    font-size: 15px;
-  }
-
   .ps__card {
     width: 190px;
   }
@@ -164,24 +112,6 @@
 @media (max-width: 640px) {
   .ps__section {
     padding: 36px 0 30px;
-  }
-
-  .ps__container {
-    margin: 0 16px;
-    border-radius: 14px;
-    padding: 18px 0;
-  }
-
-  .ps__header {
-    margin-bottom: 24px;
-  }
-
-  .ps__title {
-    font-size: 22px;
-  }
-
-  .ps__desc {
-    font-size: 14px;
   }
 
   .ps__card {
@@ -211,7 +141,4 @@
     gap: 12px;
   }
 
-  .ps__title {
-    font-size: 20px;
-  }
 }
