@@ -29,41 +29,33 @@ interface PlacementSliderProps {
 
 export default function PlacementSlider({
   title = "Where Dreams Get Placed",
-  description = "From classrooms to careers — meet the Adshala graduates who turned their skills into success stories at top companies.",
+  description = "From classrooms to careers - meet the Adshala graduates who turned their skills into success stories at top companies.",
 }: PlacementSliderProps) {
   // Triple-duplicate for a smooth infinite loop (translateX goes to -33.333%)
   const items = [...PLACEMENT_IMAGES, ...PLACEMENT_IMAGES, ...PLACEMENT_IMAGES];
 
   return (
     <section className="ps__section">
-      <div className="ps__header">
-        <h2 className="ps__title">
-          {title.split(" ").map((word, i, arr) =>
-            i >= arr.length - 1 ? (
-              <span key={i}> {word}</span>
-            ) : (
-              <React.Fragment key={i}>{i > 0 ? " " : ""}{word}</React.Fragment>
-            )
-          )}
+      <div className="section__title text-center mb-40">
+        <h2 className="title">
+          {title}
         </h2>
-        <p className="ps__desc">{description}</p>
+        <p className="desc">{description}</p>
       </div>
 
-      <div className="ps__container">
-        <div className="ps__track-wrapper">
-          <div className="ps__track">
-            {items.map((img, idx) => (
-              <div className="ps__card" key={idx}>
-                <Image
-                  src={img}
-                  alt={`Placement champion ${(idx % PLACEMENT_IMAGES.length) + 1}`}
-                  className="ps__card-img"
-                  placeholder="blur"
-                  quality={85}
-                />
-              </div>
-            ))}
-          </div>
+      <div className="ps__track-wrapper">
+        <div className="ps__track">
+          {items.map((img, idx) => (
+            <div className="ps__card" key={idx}>
+              <Image
+                src={img}
+                alt={`Placement champion ${(idx % PLACEMENT_IMAGES.length) + 1}`}
+                className="ps__card-img"
+                placeholder="blur"
+                quality={85}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

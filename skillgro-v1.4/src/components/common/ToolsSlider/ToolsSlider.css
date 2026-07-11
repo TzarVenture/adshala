@@ -11,15 +11,6 @@
   overflow: hidden;
 }
 
-.ts__title {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a3f32;
-  margin-bottom: 28px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 
 .ts__container {
   display: flex;
@@ -126,10 +117,6 @@
 @media (max-width: 768px) {
   .ts__section {
     margin-top: 40px;
-  }
-
-  .ts__title {
-    font-size: 15px;
   }
 
   .ts__item {
