@@ -246,13 +246,15 @@ export default function WhyChooseUs({ courseOverviewKey }: WhyChooseUsProps) {
 
         {/* ── Left: Why Adshalaa + industry facts ── */}
         <div className="wcu__left">
-          <span className="wcu__eyebrow">Industry Insights</span>
-          <h2 className="wcu__heading">
-            Why Choose <span className="wcu__brand">Adshalaa?</span>
-          </h2>
-          <p className="wcu__subtext">
-            Our courses are built around what employers actually hire for — backed by real market data.
-          </p>
+          <div className="section__title mb-40">
+            <span className="sub-title">Industry Insights</span>
+            <h2 className="title">
+              Why Choose Adshalaa?
+            </h2>
+            <p className="desc" style={{ marginTop: '10px' }}>
+              Our courses are built around what employers actually hire for — backed by real market data.
+            </p>
+          </div>
 
           <ul className="wcu__facts">
             {facts.map((fact, i) => (

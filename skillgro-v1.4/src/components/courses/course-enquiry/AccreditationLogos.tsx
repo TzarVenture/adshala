@@ -22,9 +22,9 @@ export default function AccreditationLogos() {
   return (
     <section className="accred__section">
       <div className="accred__wrapper">
-        <div className="accred__header">
-          <span className="accred__eyebrow">Accredited &amp; Recognised By</span>
-          <h3 className="accred__heading">Our Certifications Are Backed By Industry Leaders</h3>
+        <div className="section__title text-center mb-40">
+          <span className="sub-title">Accredited &amp; Recognised By</span>
+          <h2 className="title">Our Certifications Are Backed By Industry Leaders</h2>
         </div>
 
         <div className="accred__grid">
