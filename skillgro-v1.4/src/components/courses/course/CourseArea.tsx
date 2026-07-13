@@ -59,8 +59,18 @@ const CourseArea = () => {
       <section className="all-courses-area section-py-120">
          <div className="container">
             <div className="row">
-               <CourseSidebar setCourses={setCourses} />
+               <CourseSidebar setCourses={setCourses} queryParam={queryParam} />
                <div className="col-xl-9 col-lg-8">
+                  {queryParam && (
+                     <div className="d-flex align-items-center justify-content-between mb-20 bg-light p-3 rounded" style={{ border: '1px solid #edf2f0' }}>
+                        <span className="fs-6 text-secondary">
+                           Showing results for: <strong className="text-dark">"{searchParams.get('q')}"</strong>
+                        </span>
+                        <Link href="/courses" className="btn btn-sm btn-danger text-white rounded-pill px-3 py-1" style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>
+                           Clear Search <i className="fas fa-times ms-2"></i>
+                        </Link>
+                     </div>
+                  )}
                   <CourseTop
                      startOffset={startOffset}
                      endOffset={Math.min(endOffset, totalItems)}
