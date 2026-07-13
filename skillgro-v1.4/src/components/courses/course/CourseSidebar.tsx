@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Rating } from 'react-simple-star-rating';
 
-const CourseSidebar = ({ setCourses }: any) => {
+const CourseSidebar = ({ setCourses, queryParam }: any) => {
 
    const [showMoreCategory, setShowMoreCategory] = useState(false);
    const [showMoreLanguage, setShowMoreLanguage] = useState(false);
@@ -16,19 +16,29 @@ const CourseSidebar = ({ setCourses }: any) => {
    const [instructorSelected, setInstructorSelected] = useState('');
    const [ratingSelected, setRatingSelected] = useState<number | null>(null);
 
-   const categoryFilter = useSelector(selectCourses).map(course => course.category);
-   const languageFilter = useSelector(selectCourses).map(course => course.language);
-   const priceFilter = useSelector(selectCourses).map(course => course.price_type);
-   const skillFilter = useSelector(selectCourses).map(course => course.skill_level);
-   const instructorFilter = useSelector(selectCourses).map(course => course.instructors);
+   const allCourses = useSelector(selectCourses);
+
+   const availableCourses = queryParam ? allCourses.filter((course: any) => {
+      const searchableText = [
+         course?.title,
+         course?.category,
+         course?.desc,
+         course?.instructors,
+      ].filter(Boolean).join(' ').toLowerCase();
+      return searchableText.includes(queryParam);
+   }) : allCourses;
+
+   const categoryFilter = availableCourses.map((course: any) => course.category);
+   const languageFilter = availableCourses.map((course: any) => course.language);
+   const priceFilter = availableCourses.map((course: any) => course.price_type);
+   const skillFilter = availableCourses.map((course: any) => course.skill_level);
+   const instructorFilter = availableCourses.map((course: any) => course.instructors);
 
    const allCategory = ['All Category', ...new Set(categoryFilter)];
    const allLanguage = ['All Language', ...new Set(languageFilter)];
    const allPrice = ['All Price', ...new Set(priceFilter)];
    const allSkill = ['All Skill', ...new Set(skillFilter)];
    const allInstructor = ['All Instructors', ...new Set(instructorFilter)];
-
-   const allCourses = useSelector(selectCourses);
 
    // Handle category selection
    const handleCategory = (category: string) => {
