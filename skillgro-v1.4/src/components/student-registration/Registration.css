@@ -1,0 +1,378 @@
+/* ================================================================
+   Adshaala Multi-Step Registration Form — Registration.css
+   ================================================================ */
+
+/* ── Brand Info (Left Column) ────────────────────────────────── */
+.registration-brand-info {
+  padding-right: 40px;
+}
+
+.registration-brand-badge {
+  display: inline-block;
+  background: rgba(26, 63, 50, 0.1);
+  color: #1a3f32;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.registration-brand-title {
+  font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
+  font-size: 42px;
+  font-weight: 700;
+  color: #161439;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.registration-brand-desc {
+  font-size: 16px;
+  color: #6D6C80;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.registration-brand-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #161439;
+  font-weight: 500;
+}
+
+.registration-brand-features .icon {
+  width: 24px;
+  height: 24px;
+  background: #ffc224;
+  color: #1a3f32;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ── Form Container (Right Column) ───────────────────────────── */
+.registration-container {
+  width: 100%;
+}
+
+.registration-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e7e7e7;
+}
+
+/* ── Progress Bar ────────────────────────────────────────────── */
+.progress-bar-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.progress-bar-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #f0f0f0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  background: #1a3f32;
+  transform: translateY(-50%);
+  z-index: 2;
+  transition: width 0.3s ease;
+}
+
+.progress-step {
+  position: relative;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  background: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #a0a0a0;
+  transition: all 0.3s ease;
+}
+
+.progress-step.active {
+  background: #1a3f32;
+  color: #ffc224;
+  box-shadow: 0 0 0 4px rgba(26, 63, 50, 0.15);
+}
+
+.progress-step.completed {
+  background: #1a3f32;
+  color: #fff;
+}
+
+/* ── Form Steps ──────────────────────────────────────────────── */
+.step-title {
+  font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: #161439;
+  margin-bottom: 10px;
+}
+
+.step-subtitle {
+  font-size: 15px;
+  color: #6D6C80;
+  margin-bottom: 30px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-grid.full {
+  grid-template-columns: 1fr;
+}
+
+/* ── Form Fields ─────────────────────────────────────────────── */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a3f32;
+}
+
+.form-field input:not([type="radio"]):not([type="checkbox"]),
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: var(--tg-body-font-family, 'Inter', sans-serif);
+  color: #333;
+  background: #f9f9f9;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-field input:not([type="radio"]):not([type="checkbox"]):focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: #1a3f32;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(26, 63, 50, 0.08);
+}
+
+.form-error {
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 4px;
+}
+
+/* ── Checkboxes & Radios ─────────────────────────────────────── */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.custom-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.custom-radio input {
+  width: 18px;
+  height: 18px;
+  accent-color: #1a3f32;
+}
+
+.custom-radio span {
+  font-size: 15px;
+  color: #333;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+}
+
+.checkbox-wrapper input {
+  width: 20px;
+  height: 20px;
+  accent-color: #1a3f32;
+  margin-top: 2px;
+}
+
+.checkbox-wrapper label {
+  font-size: 14px;
+  color: #6D6C80;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #e7e7e7;
+}
+
+.btn-prev,
+.btn-next {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-prev {
+  background: #f0f0f0;
+  color: #6D6C80;
+  border: none;
+}
+
+.btn-prev:hover {
+  background: #e2e2e2;
+  color: #333;
+}
+
+.btn-next {
+  background: #1a3f32;
+  color: #fff;
+  border: none;
+}
+
+.btn-next:hover {
+  background: #112a21;
+}
+
+.btn-submit {
+  background: #ffc224;
+  color: #1a3f32;
+}
+
+.btn-submit:hover {
+  background: #e6ae20;
+}
+
+.btn-next:disabled,
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Success State ───────────────────────────────────────────── */
+.registration-success {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: #e6f4ea;
+  color: #1a3f32;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 24px;
+}
+
+.registration-success h2 {
+  font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a3f32;
+  margin-bottom: 16px;
+}
+
+.registration-success p {
+  font-size: 16px;
+  color: #6D6C80;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+  .registration-brand-info {
+    padding-right: 0;
+    text-align: center;
+  }
+  .registration-brand-features li {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .registration-brand-title {
+    font-size: 32px;
+  }
+  .registration-card {
+    padding: 30px 20px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .radio-group-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .step-title {
+    font-size: 24px;
+  }
+}
