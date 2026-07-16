@@ -8,6 +8,8 @@ import StepPersonal from './StepPersonal';
 import StepProfessional from './StepProfessional';
 import StepCourse from './StepCourse';
 import StepBackground from './StepBackground';
+import StepDocuments from './StepDocuments';
+import StepPayment from './StepPayment';
 import StepDeclaration from './StepDeclaration';
 
 import './Registration.css';
@@ -17,7 +19,9 @@ const steps = [
   { id: 2, component: StepProfessional },
   { id: 3, component: StepCourse },
   { id: 4, component: StepBackground },
-  { id: 5, component: StepDeclaration },
+  { id: 5, component: StepDocuments },
+  { id: 6, component: StepDeclaration }, // Emergency Contact and Terms
+  { id: 7, component: StepPayment },
 ];
 
 const FORM_STORAGE_KEY = 'adshaala_registration_form_data';
@@ -33,48 +37,33 @@ export default function MultiStepForm() {
   const methods = useForm({
     mode: 'onTouched',
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      dob: '',
-      city: '',
-      professionalStatus: '',
-      company: '',
-      designation: '',
-      experience: '',
-      course: '',
-      batch: '',
-      source: '',
-      goals: '',
-      emergencyName: '',
-      emergencyRelation: '',
-      emergencyPhone: '',
-      docAck: false,
-      declaration: false,
+      name: '', email: '', phone: '', dob: '', city: '',
+      professionalStatus: '', company: '', designation: '', experience: '',
+      course: '', coursePrice: 0, batch: '',
+      source: '', goals: '',
+      documentMode: '', aadhaarFile: null, secondaryIdType: '', secondaryFile: null, offlineAck: false,
+      paymentType: '', paymentAmount: 2000,
+      emergencyName: '', emergencyRelation: '', emergencyPhone: '',
+      docAck: false, declaration: false,
     }
   });
 
   const { trigger, handleSubmit, watch, reset } = methods;
 
-  // Load from localStorage on mount
   useEffect(() => {
     const savedData = localStorage.getItem(FORM_STORAGE_KEY);
     const savedStep = localStorage.getItem(STEP_STORAGE_KEY);
-    
-    if (savedData) {
-      reset(JSON.parse(savedData));
-    }
-    if (savedStep) {
-      setCurrentStep(Number(savedStep));
-    }
+    if (savedData) reset(JSON.parse(savedData));
+    if (savedStep) setCurrentStep(Number(savedStep));
     setIsMounted(true);
   }, [reset]);
 
-  // Save to localStorage when values or step changes
   useEffect(() => {
     if (isMounted) {
       const subscription = watch((value) => {
-        localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(value));
+        // Don't stringify FileLists for localstorage, it will break or serialize to {}
+        const safeValue = { ...value, aadhaarFile: null, secondaryFile: null };
+        localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(safeValue));
       });
       localStorage.setItem(STEP_STORAGE_KEY, currentStep.toString());
       return () => subscription.unsubscribe();
@@ -82,46 +71,56 @@ export default function MultiStepForm() {
   }, [watch, currentStep, isMounted]);
 
   const nextStep = async () => {
-    // Determine which fields to validate based on the current step
     let fieldsToValidate: string[] = [];
-    
-    if (currentStep === 0) {
-      fieldsToValidate = ['name', 'email', 'phone', 'dob', 'city'];
-    } else if (currentStep === 1) {
+    if (currentStep === 0) fieldsToValidate = ['name', 'email', 'phone', 'dob', 'city'];
+    else if (currentStep === 1) {
       fieldsToValidate = ['professionalStatus'];
       const status = methods.getValues('professionalStatus');
       if (['Working Professional', 'Business Owner', 'Freelancer'].includes(status)) {
         fieldsToValidate.push('company', 'designation', 'experience');
       }
-    } else if (currentStep === 2) {
-      fieldsToValidate = ['course', 'batch'];
-    } else if (currentStep === 3) {
-      fieldsToValidate = ['source', 'goals'];
+    } 
+    else if (currentStep === 2) fieldsToValidate = ['course', 'batch'];
+    else if (currentStep === 3) fieldsToValidate = ['source', 'goals'];
+    else if (currentStep === 4) {
+      fieldsToValidate = ['documentMode'];
+      const mode = methods.getValues('documentMode');
+      if (mode === 'online') fieldsToValidate.push('aadhaarFile', 'secondaryIdType', 'secondaryFile');
+      if (mode === 'offline') fieldsToValidate.push('offlineAck');
+    }
+    else if (currentStep === 5) {
+      fieldsToValidate = ['emergencyName', 'emergencyRelation', 'emergencyPhone', 'declaration'];
+    }
+    else if (currentStep === 6) {
+      fieldsToValidate = ['paymentType', 'paymentAmount'];
     }
 
     const isStepValid = await trigger(fieldsToValidate as any);
-    
-    if (isStepValid) {
-      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
-    }
+    if (isStepValid) setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
-  const prevStep = () => {
-    setCurrentStep((prev) => Math.max(prev - 1, 0));
-  };
+  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   const onSubmit = async (data: any) => {
+    // Note: In the next phase, we will intercept this to launch Razorpay first.
+    // For now, we package everything into FormData to handle files.
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setServerError('');
 
     try {
+      const formData = new FormData();
+      Object.keys(data).forEach(key => {
+        if (key === 'aadhaarFile' || key === 'secondaryFile') {
+          if (data[key] && data[key].length > 0) formData.append(key, data[key][0]);
+        } else {
+          formData.append(key, data[key]);
+        }
+      });
+
       const response = await fetch('/api/student-register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        body: formData, // Removed Content-Type to let browser set boundary
       });
 
       const result = await response.json();

@@ -48,43 +48,19 @@ export default function StepDeclaration() {
         </div>
       </div>
 
-      <div className="mt-4 pt-4" style={{ borderTop: '1px solid #e7e7e7' }}>
-        <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '16px', color: '#161439' }}>
-          Document Checklist Acknowledgment
-        </h3>
-        <p style={{ fontSize: '14px', color: '#6D6C80', marginBottom: '16px' }}>
-          I acknowledge that I will submit copies of the following documents during physical verification:
-          Aadhaar Card, PAN Card, 2 Passport Photos, 10th/12th/Graduation Marksheets, and Resume.
-        </p>
-        <div className="checkbox-wrapper">
-          <input
-            type="checkbox"
-            id="docAck"
-            {...register('docAck', { required: 'You must acknowledge the document checklist' })}
-          />
-          <label htmlFor="docAck">
-            I confirm that I have the required documents and will submit them.
-          </label>
-        </div>
-        {errors.docAck && <span className="form-error d-block mt-1">{errors.docAck.message as string}</span>}
+      <h3 className="step-title" style={{ fontSize: '20px', marginTop: '30px' }}>Terms & Declaration</h3>
+      <div className="checkbox-wrapper mt-3">
+        <input
+          type="checkbox"
+          id="declaration"
+          {...register('declaration', { required: 'You must agree to the terms and conditions' })}
+        />
+        <label htmlFor="declaration">
+          I hereby declare that all the information provided above is true to the best of my knowledge. 
+          I understand that any false information may lead to the cancellation of my admission.
+        </label>
       </div>
-
-      <div className="mt-4">
-        <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '16px', color: '#161439' }}>
-          Declaration
-        </h3>
-        <div className="checkbox-wrapper">
-          <input
-            type="checkbox"
-            id="declaration"
-            {...register('declaration', { required: 'You must agree to the declaration' })}
-          />
-          <label htmlFor="declaration">
-            I hereby declare that all the information provided in this registration form is true and correct to the best of my knowledge. I agree to abide by the rules, regulations, and policies of <strong>ADSHALAA – Digital Marketing Institute, Mumbai</strong>.
-          </label>
-        </div>
-        {errors.declaration && <span className="form-error d-block mt-1">{errors.declaration.message as string}</span>}
-      </div>
+      {errors.declaration && <span className="form-error d-block mt-1">{errors.declaration.message as string}</span>}
     </div>
   );
 }
