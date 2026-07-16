@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
+import crypto from 'crypto';
 
 // ─── Handler ──────────────────────────────────────────────────────────────────
 export async function POST(request) {
@@ -29,6 +30,40 @@ export async function POST(request) {
     const documentMode = formData.get('documentMode') || '';
     const paymentAmount = formData.get('paymentAmount') || '';
 
+    // Extract Razorpay payment details
+    const razorpayPaymentId = formData.get('razorpay_payment_id') || '';
+    const razorpayOrderId = formData.get('razorpay_order_id') || '';
+    const razorpaySignature = formData.get('razorpay_signature') || '';
+
+    // Verify payment details
+    const secret = process.env.RAZORPAY_KEY_SECRET;
+    if (!secret || secret === 'YOUR_KEY_SECRET') {
+      console.error('Razorpay secret is not configured.');
+      return NextResponse.json(
+        { error: 'Payment gateway configuration error. Please contact administration.' },
+        { status: 500 }
+      );
+    }
+
+    if (!razorpayPaymentId || !razorpayOrderId || !razorpaySignature) {
+      return NextResponse.json(
+        { error: 'Payment verification failed. Missing payment reference.' },
+        { status: 400 }
+      );
+    }
+
+    const generatedSignature = crypto
+      .createHmac('sha256', secret)
+      .update(razorpayOrderId + '|' + razorpayPaymentId)
+      .digest('hex');
+
+    if (generatedSignature !== razorpaySignature) {
+      return NextResponse.json(
+        { error: 'Payment verification failed. Invalid transaction signature.' },
+        { status: 400 }
+      );
+    }
+
     // TODO: Extract Files for Google Drive Upload
     // const aadhaarFile = formData.get('aadhaarFile');
     // const secondaryFile = formData.get('secondaryFile');
@@ -51,7 +86,7 @@ export async function POST(request) {
     // Append to registrationSheet
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'registrationSheet!A:S',
+      range: 'registrationSheet!A:U',
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [
@@ -61,7 +96,8 @@ export async function POST(request) {
             professionalStatus, company, designation, experience,
             course, batch, source, goals,
             emergencyName, emergencyRelation, emergencyPhone,
-            documentMode, paymentAmount
+            documentMode, paymentAmount,
+            razorpayPaymentId, razorpayOrderId
           ],
         ],
       },

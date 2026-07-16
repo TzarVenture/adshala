@@ -1,10 +1,13 @@
 'use client';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 export default function StepProfessional() {
-  const { register, watch, formState: { errors } } = useFormContext();
+  const { register, control, formState: { errors } } = useFormContext();
   
-  const status = watch('professionalStatus');
+  const status = useWatch({
+    control,
+    name: 'professionalStatus',
+  });
   const showConditionalFields = ['Working Professional', 'Business Owner', 'Freelancer'].includes(status);
 
   return (
