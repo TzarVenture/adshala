@@ -79,7 +79,7 @@ export default function MultiStepForm() {
       if (['Working Professional', 'Business Owner', 'Freelancer'].includes(status)) {
         fieldsToValidate.push('company', 'designation', 'experience');
       }
-    } 
+    }
     else if (currentStep === 2) fieldsToValidate = ['course', 'batch'];
     else if (currentStep === 3) fieldsToValidate = ['source', 'goals'];
     else if (currentStep === 4) {
@@ -153,7 +153,7 @@ export default function MultiStepForm() {
               Our admission counselor will review your details and contact you shortly
               to complete the physical verification and fee payment process.
             </p>
-            <button 
+            <button
               className="btn-next mt-4"
               onClick={() => window.location.href = '/'}
             >
@@ -172,13 +172,13 @@ export default function MultiStepForm() {
       <div className="registration-card">
         {/* Progress Bar */}
         <div className="progress-bar-container">
-          <div 
-            className="progress-bar-fill" 
+          <div
+            className="progress-bar-fill"
             style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
           />
           {steps.map((step, index) => (
-            <div 
-              key={step.id} 
+            <div
+              key={step.id}
               className={`progress-step ${index === currentStep ? 'active' : ''} ${index < currentStep ? 'completed' : ''}`}
             >
               {index < currentStep ? '✓' : step.id}

@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 export default function StepDocuments() {
   const { register, setValue, formState: { errors } } = useFormContext();
 
-  const [mode, setMode] = useState<'online' | 'offline' | ''>('');
+  const [mode, setMode] = useState<'online' | 'offline' | ''>('offline');
   const [idType, setIdType] = useState('');
 
   // Sync local state → react-hook-form
@@ -16,13 +16,13 @@ export default function StepDocuments() {
     <div className="form-step">
       <h2 className="step-title">Document Submission</h2>
       <p className="step-subtitle">
-        Choose how you wish to submit your KYC documents. Aadhaar is mandatory.
+        All documents must be physically verified at our center. Please select the offline submission option below.
       </p>
 
       {/* Validation field */}
       <input type="hidden" {...register('documentMode', { required: 'Please select a submission method' })} />
 
-      {/* Cards */}
+      {/* Commented out selector cards for future use:
       <div className="doc-mode-selector mb-2">
         <div
           className={`doc-mode-card ${mode === 'online' ? 'doc-mode-card--active' : ''}`}
@@ -48,11 +48,55 @@ export default function StepDocuments() {
           {mode === 'offline' && <i className="fas fa-check-circle" style={{ color: '#1a3f32', fontSize: '18px' }}></i>}
         </div>
       </div>
+      */}
+
+      {/* Active Submission Method Banner */}
+      <div className="doc-mode-info-card mb-4" style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
+        padding: '18px 20px',
+        background: '#edf4f0',
+        border: '1.5px solid #1a3f32',
+        borderRadius: '12px'
+      }}>
+        <div className="doc-mode-icon" style={{
+          background: '#1a3f32',
+          color: '#ffc224',
+          width: '44px',
+          height: '44px',
+          borderRadius: '10px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '20px',
+          flexShrink: 0
+        }}>
+          <i className="fas fa-building"></i>
+        </div>
+        <div style={{ flex: 1 }}>
+          <span className="doc-mode-title" style={{ fontSize: '15px', fontWeight: 700, color: '#161439', display: 'block' }}>
+            Submit at Center (In-Person Verification)
+          </span>
+          <span className="doc-mode-desc" style={{ fontSize: '13px', color: '#555', display: 'block', marginTop: '4px' }}>
+            Verify your identity and academic records physically before your batch begins.
+          </span>
+        </div>
+      </div>
       {errors.documentMode && <span className="form-error d-block mb-3">{errors.documentMode.message as string}</span>}
 
       {/* ── ONLINE ────────────────────────────────────────────────── */}
       {mode === 'online' && (
         <div key="online-section">
+          <div className="offline-notice-box p-4 text-center" style={{ background: '#f5f7f8', border: '1px dashed #c3c3c3', borderRadius: '8px', marginBottom: '15px' }}>
+            <i className="fas fa-info-circle text-warning mb-3" style={{ fontSize: '32px', color: '#f57f17' }}></i>
+            <h4 style={{ color: '#1a3f32', marginBottom: '8px', fontWeight: 600 }}>In-Person Document Verification Required</h4>
+            <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.5', marginBottom: 0 }}>
+              To ensure the security and privacy of your credentials, online document upload is temporarily disabled. 
+              Please select the <strong>"Submit at Center"</strong> option above to complete your verification offline.
+            </p>
+          </div>
+          {/*
           <div className="doc-upload-card">
             <div className="doc-upload-header">
               <div className="doc-upload-label">
@@ -120,6 +164,7 @@ export default function StepDocuments() {
             <i className="fas fa-info-circle me-1"></i>
             Documents are encrypted and used only for admission verification.
           </p>
+          */}
         </div>
       )}
 

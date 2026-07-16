@@ -53,6 +53,7 @@ const FooterCommon = () => {
                      <li><Link href="/contact" style={{ color: "#dbd7d7" }}>Become an Instructor</Link></li>
                      <li><Link href="#" style={{ color: "#dbd7d7" }}>Placement Cell </Link></li>
                      <li><Link href="/contact" style={{ color: "#dbd7d7" }}>Contact Us</Link></li>
+                     <li><Link href="https://www.adshalaa.com/certification-in-advanced-graphic-design-and-ai-mumbai-enquiry-now" style={{ color: "#dbd7d7" }}>CGDM</Link></li>
                   </ul>
                </div>
             </div>
