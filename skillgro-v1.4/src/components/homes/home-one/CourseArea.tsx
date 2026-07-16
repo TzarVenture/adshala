@@ -110,7 +110,7 @@ const CourseArea = ({ style }: StyleType) => {
                   <h5 className="title"><Link href={`/course-details/${item.sku}`}>{item.title}</Link></h5>
                   <div className="courses__item-bottom">
                     <div className="button">
-                      <Link href="/course-details">
+                      <Link href={`/course-details/${item.sku}`}>
                         <span className="text">Enroll Now</span>
                         <i className="flaticon-arrow-right"></i>
                       </Link>

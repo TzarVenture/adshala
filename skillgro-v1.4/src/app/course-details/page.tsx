@@ -1,15 +1,11 @@
-import CourseDetails from "@/components/courses/course-details";
-import Wrapper from "@/layouts/Wrapper";
+import { redirect } from "next/navigation";
 
 export const metadata = {
    title: "AdShalaa | Best Digital Marketing Courses in Mumbai",
 };
+
 const page = () => {
-   return (
-      <Wrapper>
-         <CourseDetails />
-      </Wrapper>
-   )
+   redirect("/courses");
 }
 
 export default page
