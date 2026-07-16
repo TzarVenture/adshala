@@ -20,6 +20,7 @@
     "next": "16.0.10",
     "nodemailer": "^7.0.11",
     "plyr": "^3.8.3",
+    "razorpay": "^2.9.8",
     "react": "19.2.1",
     "react-countup": "^6.5.3",
     "react-curved-text": "^3.0.1",

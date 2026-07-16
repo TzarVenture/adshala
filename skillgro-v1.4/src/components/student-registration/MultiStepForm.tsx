@@ -27,6 +27,24 @@ const steps = [
 const FORM_STORAGE_KEY = 'adshaala_registration_form_data';
 const STEP_STORAGE_KEY = 'adshaala_registration_current_step';
 
+const loadRazorpayScript = () => {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined') {
+      resolve(false);
+      return;
+    }
+    if ((window as any).Razorpay) {
+      resolve(true);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 export default function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -102,41 +120,110 @@ export default function MultiStepForm() {
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   const onSubmit = async (data: any) => {
-    // Note: In the next phase, we will intercept this to launch Razorpay first.
-    // For now, we package everything into FormData to handle files.
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setServerError('');
 
     try {
-      const formData = new FormData();
-      Object.keys(data).forEach(key => {
-        if (key === 'aadhaarFile' || key === 'secondaryFile') {
-          if (data[key] && data[key].length > 0) formData.append(key, data[key][0]);
-        } else {
-          formData.append(key, data[key]);
-        }
-      });
-
-      const response = await fetch('/api/student-register', {
+      // 1. Create payment order in the backend
+      const orderResponse = await fetch('/api/payment/create-order', {
         method: 'POST',
-        body: formData, // Removed Content-Type to let browser set boundary
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: data.paymentAmount,
+          course: data.course,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+        }),
       });
 
-      const result = await response.json();
+      const orderResult = await orderResponse.json();
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        localStorage.removeItem(FORM_STORAGE_KEY);
-        localStorage.removeItem(STEP_STORAGE_KEY);
-      } else {
-        setSubmitStatus('error');
-        setServerError(result.error || 'Failed to submit registration. Please try again.');
+      if (!orderResponse.ok) {
+        throw new Error(orderResult.error || 'Failed to initialize payment gateway order.');
       }
-    } catch (err) {
+
+      // 2. Load the Razorpay Checkout SDK
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        throw new Error('Failed to load Razorpay SDK. Please check your internet connection.');
+      }
+
+      // 3. Define Razorpay checkout options with customized Adshalaa branding
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
+        amount: orderResult.amount,
+        currency: orderResult.currency,
+        name: 'Adshalaa',
+        description: `Course Registration Fee - ${data.course}`,
+        image: `${window.location.origin}/Adshalaa_Logo.png`,
+        order_id: orderResult.order_id,
+        handler: async function (response: any) {
+          try {
+            setIsSubmitting(true);
+            setServerError('');
+
+            // Package final form data including files and payment details
+            const formData = new FormData();
+            Object.keys(data).forEach(key => {
+              if (key === 'aadhaarFile' || key === 'secondaryFile') {
+                if (data[key] && data[key].length > 0) formData.append(key, data[key][0]);
+              } else {
+                formData.append(key, data[key]);
+              }
+            });
+
+            // Append signature verification parameters
+            formData.append('razorpay_payment_id', response.razorpay_payment_id);
+            formData.append('razorpay_order_id', response.razorpay_order_id);
+            formData.append('razorpay_signature', response.razorpay_signature);
+
+            const regResponse = await fetch('/api/student-register', {
+              method: 'POST',
+              body: formData,
+            });
+
+            const regResult = await regResponse.json();
+
+            if (regResponse.ok) {
+              setSubmitStatus('success');
+              localStorage.removeItem(FORM_STORAGE_KEY);
+              localStorage.removeItem(STEP_STORAGE_KEY);
+            } else {
+              setSubmitStatus('error');
+              setServerError(regResult.error || 'Failed to verify transaction and submit registration.');
+            }
+          } catch (err) {
+            setSubmitStatus('error');
+            setServerError('A network error occurred during transaction verification.');
+          } finally {
+            setIsSubmitting(false);
+          }
+        },
+        prefill: {
+          name: data.name,
+          email: data.email,
+          contact: data.phone,
+        },
+        theme: {
+          color: '#1a3f32', // Adshalaa theme color
+        },
+        modal: {
+          ondismiss: function () {
+            setIsSubmitting(false);
+          },
+        },
+      };
+
+      const razorpayInstance = new (window as any).Razorpay(options);
+      razorpayInstance.open();
+
+    } catch (err: any) {
       setSubmitStatus('error');
-      setServerError('A network error occurred. Please check your connection and try again.');
-    } finally {
+      setServerError(err.message || 'An error occurred during payment initiation.');
       setIsSubmitting(false);
     }
   };
