@@ -48,6 +48,7 @@ const loadRazorpayScript = () => {
 export default function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isValidating, setIsValidating] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [serverError, setServerError] = useState('');
   const [isMounted, setIsMounted] = useState(false);
@@ -66,9 +67,13 @@ export default function MultiStepForm() {
     }
   });
 
-  const { trigger, handleSubmit, watch, reset } = methods;
+  const { trigger, handleSubmit, watch, reset, setError } = methods;
 
   useEffect(() => {
+    if (localStorage.getItem('adshaala_registration_status') === 'completed') {
+      setSubmitStatus('success');
+      return;
+    }
     const savedData = localStorage.getItem(FORM_STORAGE_KEY);
     const savedStep = localStorage.getItem(STEP_STORAGE_KEY);
     if (savedData) reset(JSON.parse(savedData));
@@ -114,6 +119,29 @@ export default function MultiStepForm() {
     }
 
     const isStepValid = await trigger(fieldsToValidate as any);
+
+    if (isStepValid && currentStep === 0) {
+      setIsValidating(true);
+      try {
+        const email = methods.getValues('email');
+        const phone = methods.getValues('phone');
+        const res = await fetch('/api/check-user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, phone })
+        });
+        const data = await res.json();
+        if (data.exists) {
+          setError('email', { type: 'manual', message: 'This email or phone is already registered.' });
+          setIsValidating(false);
+          return;
+        }
+      } catch (err) {
+        console.error('Validation error:', err);
+      }
+      setIsValidating(false);
+    }
+
     if (isStepValid) setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
@@ -192,6 +220,7 @@ export default function MultiStepForm() {
               setSubmitStatus('success');
               localStorage.removeItem(FORM_STORAGE_KEY);
               localStorage.removeItem(STEP_STORAGE_KEY);
+              localStorage.setItem('adshaala_registration_status', 'completed');
             } else {
               setSubmitStatus('error');
               setServerError(regResult.error || 'Failed to verify transaction and submit registration.');
@@ -305,8 +334,9 @@ export default function MultiStepForm() {
                   type="button"
                   className="btn-next"
                   onClick={nextStep}
+                  disabled={isValidating}
                 >
-                  Save & Continue →
+                  {isValidating ? 'Checking...' : 'Save & Continue →'}
                 </button>
               ) : (
                 <button

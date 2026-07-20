@@ -174,8 +174,11 @@ export default function StepDocuments() {
           <div className="offline-ack-header">
             <i className="fas fa-clipboard-list" style={{ fontSize: '26px', color: '#f57f17', flexShrink: 0, marginTop: '2px' }}></i>
             <div>
-              <h3>Documents to Bring</h3>
+              <h3>Documents to Bring or Email</h3>
               <p>Carry originals + 1 photocopy each before your batch starts.</p>
+              <p className="mt-1" style={{ fontSize: '14px', color: '#1a3f32' }}>
+                Alternatively, you can send your documents via email to <strong>hello@adshalaa.com</strong>
+              </p>
             </div>
           </div>
           <ul className="offline-doc-list">
