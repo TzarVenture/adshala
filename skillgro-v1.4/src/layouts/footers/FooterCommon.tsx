@@ -16,16 +16,10 @@ const FooterCommon = () => {
                <div className="footer__content" >
                   <p style={{ color: "#dbd7d7" }}>India's leading skill-development institute offering certified programs in Digital Marketing, Graphic Design, and Web Development, with real internships and 100% placement support.</p>
                   <ul className="list-wrap">
-                     <li>
-                        <Link
-                           href="https://www.google.com/maps/place/ADSHALAA+Advance+Digital+Marketing+Certification+Course+in+Andheri,+Mumbai/@19.1601052,72.863454,12z/data=!3m1!4b1!4m6!3m5!1s0x4b21caa1f3b88d6b:0x21c1ab798094afaa!8m2!3d19.1601052!4d72.863454!16s%2Fg%2F11zg002tph"
-                           target="_blank"
-                           style={{ color: "#dbd7d7", textDecoration: "none" }}
-                        >
-                           Saki Vihar, Andheri East 400072{" "}
-                           <RiExternalLinkLine style={{ verticalAlign: "middle" }} />
-                        </Link>
-                     </li>                     <li style={{ color: "#dbd7d7" }}>+91 8652199991/ +91 7760775875</li>
+                     <li style={{ color: "#dbd7d7", fontSize: "16px", marginTop: "10px" }}>
+                        <i className="fas fa-phone" style={{ marginRight: "8px", color: "#FFC224" }}></i>
+                        +91 8652199991 | +91 7760775875
+                     </li>
                   </ul>
                </div>
             </div>
