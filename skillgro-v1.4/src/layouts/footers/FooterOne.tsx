@@ -27,7 +27,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                         <div className="col-sm-6">
                            <div className="footer__widget mb-4 mb-sm-2">
                               <div className="logo mb-3">
-                                 <Link href="/"><Image src={Adshalaa_logo} alt="img" width={153} height={40} /></Link>
+                                 <Link href="/"><Image src={Adshalaa_logo} alt="img" width={150} height={40} /></Link>
                               </div>
                               <div className="footer__content" >
                                  <p style={{ color: "#dbd7d7" }}>India's leading skill-development institute offering certified programs in Digital Marketing, Graphic Design, and Web Development, with real internships and 100% placement support.</p>
@@ -84,9 +84,10 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                               <div className="footer__link">
                                  <ul className="list-wrap" >
                                     <li><Link href="/contact" style={{ color: "#dbd7d7" }}>Become an Instructor</Link></li>
+                                    <li><Link href="https://www.adshalaa.com/student-registration" style={{ color: "#dbd7d7" }}>Student Registration</Link></li>
                                     <li><Link href="#" style={{ color: "#dbd7d7" }}>Placement Cell </Link></li>
                                     <li><Link href="/contact" style={{ color: "#dbd7d7" }}>Contact Us</Link></li>
-                                    <li><Link href="https://www.adshalaa.com/certification-in-advanced-graphic-design-and-ai-mumbai-enquiry-now" style={{ color: "#dbd7d7" }}>CGDM</Link></li>
+                                    <li><Link href="https://www.adshalaa.com/certification-in-advanced-digital-marketing-and-ai-mumbai-enquiry-now" style={{ color: "#dbd7d7" }}>CADM</Link></li>
                                  </ul>
                               </div>
                            </div>

@@ -62,8 +62,8 @@ const HeaderOne = () => {
                         <Image
                           src={Adshalaa_logo}
                           alt="Logo"
-                          width={153}
-                          height={40}
+                          width={173}
+                          height={50}
                         />
                       </Link>
                       {/* <Link href="/"><Image src={Adshalaa_logo21} alt="Logo" width={153} height={40}/></Link> */}
