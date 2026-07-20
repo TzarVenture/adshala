@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import course_data from '@/data/home-data/CourseData';
 
-// const MIN_FEE = Number(process.env.NEXT_PUBLIC_MIN_FEE) || 2000;
-const MIN_FEE = 1;
+const MIN_FEE = Number(process.env.NEXT_PUBLIC_MIN_FEE) || 2000;
 
 export default function StepPayment() {
   const { register, setValue, formState: { errors } } = useFormContext();
