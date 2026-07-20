@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import course_data from '@/data/home-data/CourseData';
 
-const MIN_FEE = Number(process.env.NEXT_PUBLIC_MIN_FEE) || 2000;
+const Minimum_Fee = Number(process.env.NEXT_PUBLIC_MIN_FEE) || 2000;
 
 export default function StepPayment() {
   const { register, setValue, formState: { errors } } = useFormContext();
@@ -13,16 +13,16 @@ export default function StepPayment() {
   const coursePrice = courseObj?.price ?? 0;
 
   const [selectedType, setSelectedType] = useState<'registration' | 'custom' | ''>('');
-  const [customAmount, setCustomAmount] = useState(MIN_FEE);
+  const [customAmount, setCustomAmount] = useState(Minimum_Fee);
 
   // Sync to react-hook-form
   useEffect(() => { setValue('paymentType', selectedType); }, [selectedType, setValue]);
   useEffect(() => {
-    const amt = selectedType === 'registration' ? MIN_FEE : customAmount;
+    const amt = selectedType === 'registration' ? Minimum_Fee : customAmount;
     setValue('paymentAmount', amt);
   }, [selectedType, customAmount, setValue]);
 
-  const amountPayable = selectedType === 'registration' ? MIN_FEE : (customAmount >= MIN_FEE ? customAmount : 0);
+  const amountPayable = selectedType === 'registration' ? Minimum_Fee : (customAmount >= Minimum_Fee ? customAmount : 0);
   const remainingBalance = coursePrice - amountPayable;
   const isPartial = amountPayable > 0 && amountPayable < coursePrice;
 
@@ -66,7 +66,7 @@ export default function StepPayment() {
               <div className="payment-option-icon"><i className="fas fa-tag"></i></div>
               <div className="payment-option-content">
                 <span className="payment-option-title">Registration Fee</span>
-                <span className="payment-option-amount">₹{MIN_FEE.toLocaleString('en-IN')}</span>
+                <span className="payment-option-amount">₹{Minimum_Fee.toLocaleString('en-IN')}</span>
                 <span className="payment-option-desc">Pay only the booking fee now</span>
               </div>
               {selectedType === 'registration' && (
@@ -81,7 +81,7 @@ export default function StepPayment() {
               <div className="payment-option-icon"><i className="fas fa-keyboard"></i></div>
               <div className="payment-option-content">
                 <span className="payment-option-title">Custom Amount</span>
-                <span className="payment-option-amount">Min ₹{MIN_FEE.toLocaleString('en-IN')}</span>
+                <span className="payment-option-amount">Min ₹{Minimum_Fee.toLocaleString('en-IN')}</span>
                 <span className="payment-option-desc">Pay any amount up to full fee</span>
               </div>
               {selectedType === 'custom' && (
@@ -97,7 +97,7 @@ export default function StepPayment() {
         {selectedType === 'custom' && (
           <div className="form-field mt-3">
             <label style={{ fontSize: '13px', fontWeight: 600, color: '#1a3f32', display: 'block', marginBottom: '6px' }}>
-              Enter Amount — Min ₹{MIN_FEE.toLocaleString('en-IN')}
+              Enter Amount — Min ₹{Minimum_Fee.toLocaleString('en-IN')}
               {coursePrice > 0 && ` / Max ₹${coursePrice.toLocaleString('en-IN')}`} *
             </label>
             <div className="payment-amount-input-wrap">
@@ -110,13 +110,13 @@ export default function StepPayment() {
                   const val = Number(e.target.value) || 0;
                   setCustomAmount(val);
                 }}
-                min={MIN_FEE}
+                min={Minimum_Fee}
                 max={coursePrice > 0 ? coursePrice : undefined}
-                placeholder={String(MIN_FEE)}
+                placeholder={String(Minimum_Fee)}
               />
             </div>
-            {customAmount < MIN_FEE && customAmount > 0 && (
-              <span className="form-error mt-1 d-block">Minimum is ₹{MIN_FEE.toLocaleString('en-IN')}</span>
+            {customAmount < Minimum_Fee && customAmount > 0 && (
+              <span className="form-error mt-1 d-block">Minimum is ₹{Minimum_Fee.toLocaleString('en-IN')}</span>
             )}
             {coursePrice > 0 && customAmount > coursePrice && (
               <span className="form-error mt-1 d-block">Cannot exceed ₹{coursePrice.toLocaleString('en-IN')}</span>
@@ -138,7 +138,7 @@ export default function StepPayment() {
               <div className="payment-partial-note">
                 <i className="fas fa-info-circle"></i>
                 <p>
-                  This ₹{MIN_FEE.toLocaleString('en-IN')} registration fee will be{' '}
+                  This ₹{Minimum_Fee.toLocaleString('en-IN')} registration fee will be{' '}
                   <strong>fully adjusted</strong> against your total course fee of{' '}
                   <strong>₹{coursePrice.toLocaleString('en-IN')}</strong> at full payment.
                 </p>
