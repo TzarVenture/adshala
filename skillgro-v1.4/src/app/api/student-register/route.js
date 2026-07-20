@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import crypto from 'crypto';
+import clientPromise from '@/lib/mongodb';
+import mongoose from 'mongoose';
+
+// ─── MongoDB ──────────────────────────────────────────────────────────────────
+async function saveToMongo(data) {
+  await clientPromise();
+  await mongoose.connection.collection("student_registrations").insertOne({
+    ...data,
+    createdAt: new Date(),
+  });
+}
 
 // ─── Handler ──────────────────────────────────────────────────────────────────
 export async function POST(request) {
@@ -64,6 +75,15 @@ export async function POST(request) {
       );
     }
 
+    const registrationData = {
+      name, email, phone, dob, city,
+      professionalStatus, company, designation, experience,
+      course, coursePrice, batch, source, goals,
+      emergencyName, emergencyRelation, emergencyPhone,
+      documentMode, paymentAmount,
+      razorpayPaymentId, razorpayOrderId
+    };
+
     // TODO: Extract Files for Google Drive Upload
     // const aadhaarFile = formData.get('aadhaarFile');
     // const secondaryFile = formData.get('secondaryFile');
@@ -84,7 +104,7 @@ export async function POST(request) {
     const sheets = google.sheets({ version: 'v4', auth });
     
     // Append to registrationSheet
-    await sheets.spreadsheets.values.append({
+    const sheetPromise = sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: 'registrationSheet!A:U',
       valueInputOption: 'USER_ENTERED',
@@ -102,6 +122,20 @@ export async function POST(request) {
         ],
       },
     });
+
+    const [mongoResult, sheetResult] = await Promise.allSettled([
+      saveToMongo(registrationData),
+      sheetPromise
+    ]);
+
+    if (mongoResult.status === 'rejected') {
+      console.error('[Registration] MongoDB failed:', mongoResult.reason);
+      throw new Error('Failed to save to database');
+    }
+    
+    if (sheetResult.status === 'rejected') {
+      console.error('[Registration] Google Sheets failed:', sheetResult.reason);
+    }
 
     return NextResponse.json({ success: true, message: 'Data saved successfully' }, { status: 200 });
 

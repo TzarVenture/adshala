@@ -95,7 +95,8 @@ const HeaderOne = () => {
                         onClick={() => {
                           setBrochureOpen(true);
                         }}
-                        className="btn brochure-btn"
+                        className="btn brochure-btn d-none d-md-inline-flex"
+                        style={{ alignItems: 'center', gap: '5px' }}
                       >
                         Brochure <GoDownload size={20} />
                       </button>
