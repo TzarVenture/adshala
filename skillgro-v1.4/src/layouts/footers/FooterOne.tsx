@@ -6,6 +6,7 @@ import "./footerone.css"
 import icon_1 from "@/assets/img/others/google-play.svg"
 import icon_2 from "@/assets/img/others/apple-store.svg"
 import bg_img from "@/assets/img/others/h8_footer_shape.svg"
+import Adshalaa_logo from "@/assets/img/brand/Adshalaa_footer_logo.png"
 
 // import adshalaaImage from "./adshalaa_certification.png"
 interface StyleType {
@@ -26,7 +27,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                         <div className="col-sm-6">
                            <div className="footer__widget mb-4 mb-sm-2">
                               <div className="logo mb-3">
-                                 <Link href="/"><Image src="/Adshalaa_Logo.png" alt="img" width={153} height={40} /></Link>
+                                 <Link href="/"><Image src={Adshalaa_logo} alt="img" width={153} height={40} /></Link>
                               </div>
                               <div className="footer__content" >
                                  <p style={{ color: "#dbd7d7" }}>India's leading skill-development institute offering certified programs in Digital Marketing, Graphic Design, and Web Development, with real internships and 100% placement support.</p>

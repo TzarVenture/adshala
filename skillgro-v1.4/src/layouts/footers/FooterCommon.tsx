@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 
-import Adshalaa_logo from "@/assets/img/logo/Adshalaa_Logo.png"
+import Adshalaa_logo from "@/assets/img/brand/Adshalaa_footer_logo.png"
 import logo from "@/assets/img/logo/secondary_logo.svg"
 import { RiExternalLinkLine } from "react-icons/ri";
 

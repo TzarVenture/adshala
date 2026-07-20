@@ -25,7 +25,7 @@ const CustomSelect = dynamic(() => import("@/ui/CustomSelect"), { ssr: false });
 import logo from "@/assets/img/logo/logo.svg";
 import Adshalaa_logo21 from "@/assets/img/logo/Adshalaa_Logo21.svg";
 // import Adshalaa_logo2 from "@/assets/img/logo/Adshalaa_Logo2.png"
-import Adshalaa_logo from "@/assets/img/logo/Adshalaa_Logo.png";
+import Adshalaa_logo from "@/assets/img/brand/Adshalaa_nav_logo.png";
 import icon_1 from "@/assets/img/icons/user.svg";
 import icon_2 from "@/assets/img/icons/cart.svg";
 import icon_3 from "@/assets/img/icons/heart.svg";
