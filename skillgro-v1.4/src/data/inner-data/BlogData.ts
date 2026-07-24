@@ -16,6 +16,7 @@ import blog_thumb12 from "@/assets/img/blog/blog_post12.jpg"
 interface DataType {
    id: number;
    thumb: StaticImageData;
+   slug?: String
    tag: string;
    date: string;
    title: string;
@@ -23,130 +24,28 @@ interface DataType {
 
 const inner_blog_data: DataType[] = [
    {
-      id: 1,
+      id: 101,
+      slug: "benefits-ai-powered-advanced-certification",
       thumb: blog_thumb1,
-      tag: "Marketing",
-      date: "20 July, 2024",
-      title: "How To Become idiculously Self-Aware In 20 Minutes"
+      tag: "Marketing & AI",
+      date: "15 July, 2026",
+      title: "Benefits of AI-powered advanced certification in digital marketing, graphic design, and web development"
    },
    {
-      id: 2,
+      id: 102,
+      slug: "digital-marketing-careers-in-india",
       thumb: blog_thumb2,
-      tag: "Students",
-      date: "20 July, 2024",
-      title: "Get Started With UI Design With Tips To Speed"
+      tag: "Digital Marketing",
+      date: "15 July, 2026",
+      title: "Digital marketing careers in India: high value, exceptional growth, and potential."
    },
    {
-      id: 3,
+      id: 103,
+      slug: "why-digital-marketing-provides-high-paying-career-opportunities",
       thumb: blog_thumb3,
-      tag: "Science",
-      date: "20 July, 2024",
-      title: "Make Your Own Expanding Contracting Content"
-   },
-   {
-      id: 4,
-      thumb: blog_thumb4,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 5,
-      thumb: blog_thumb5,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 6,
-      thumb: blog_thumb6,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 7,
-      thumb: blog_thumb7,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 8,
-      thumb: blog_thumb8,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 9,
-      thumb: blog_thumb9,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 10,
-      thumb: blog_thumb10,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 11,
-      thumb: blog_thumb11,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 12,
-      thumb: blog_thumb12,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 13,
-      thumb: blog_thumb9,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 14,
-      thumb: blog_thumb10,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 15,
-      thumb: blog_thumb11,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 16,
-      thumb: blog_thumb12,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 17,
-      thumb: blog_thumb7,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
-   },
-   {
-      id: 18,
-      thumb: blog_thumb8,
-      tag: "Agency",
-      date: "20 July, 2024",
-      title: "What we are capable to usually discovered"
+      tag: "Salaries & Careers",
+      date: "15 July, 2026",
+      title: "Why digital marketing provides high-paying career opportunities."
    },
 ];
 

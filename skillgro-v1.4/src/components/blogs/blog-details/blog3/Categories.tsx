@@ -1,0 +1,29 @@
+import Link from "next/link";
+
+const categories_data: string[] = [
+   "High Paying Careers",
+   "Digital Marketing Salaries",
+   "Performance Marketing",
+   "AI Marketing & Automation",
+   "SEO & E-commerce Growth",
+   "Career Advice & Placements"
+];
+
+const Categories = () => {
+   return (
+      <div className="blog-widget">
+         <h4 className="widget-title">Categories</h4>
+         <div className="shop-cat-list">
+            <ul className="list-wrap">
+               {categories_data.map((cat, i) => (
+                  <li key={i}>
+                     <Link href="/courses"><i className="flaticon-angle-right"></i>{cat}</Link>
+                  </li>
+               ))}
+            </ul>
+         </div>
+      </div>
+   )
+}
+
+export default Categories;
