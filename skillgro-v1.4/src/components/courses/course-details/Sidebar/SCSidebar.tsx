@@ -18,7 +18,7 @@ const SCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
    const router = useRouter();
    const [isVideoOpen, setIsVideoOpen] = useState(false);
    const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
-   
+
    if (!single_course) return null;
 
    return (
@@ -31,7 +31,7 @@ const SCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
                   )}
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
-               <div className="courses__cost-wrap">
+               {/* <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
                   <h2 className="title">
                      ₹{single_course.price?.toLocaleString()} 
@@ -39,7 +39,7 @@ const SCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
                         <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString()}</del>
                      )}
                   </h2>
-               </div>
+               </div> */}
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
                   <ul className="list-wrap">

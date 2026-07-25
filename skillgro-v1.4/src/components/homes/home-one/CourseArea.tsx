@@ -48,8 +48,8 @@ const setting = {
   },
 };
 
-interface StyleType{
-   style?:boolean;
+interface StyleType {
+  style?: boolean;
 }
 
 const CourseArea = ({ style }: StyleType) => {
@@ -84,54 +84,54 @@ const CourseArea = ({ style }: StyleType) => {
           </div>
         </div>
 
-<div className="tab-content" id="courseTabContent">
-  {(() => {
-    const courseItem = course_data.find((item) => item.page === "home_1");
-    const filtered = courseItem?.course_details.filter(
-      (item) => tabCategories[activeTab] === null || item.tag === tabCategories[activeTab]
-    );
-    return (
-      <div className="tab-pane fade show active">
-        <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper courses-swiper-active">
-          {filtered?.map((item) => (
-            <SwiperSlide key={item.id} className="swiper-slide">
-              <div className="courses__item shine__animate-item">
-                <div className="courses__item-thumb">
-                  <Link href={`/course-details/${item.sku}`} className="shine__animate-link">
-                    <Image src={item.thumb} alt="img" style={{objectFit: "contain"}}/>
-                  </Link>
-                </div>
-                <div className="courses__item-content">
-                  <ul className="courses__item-meta list-wrap">
-                    <li className="courses__item-tag">
-                      <Link href="/courses">{item.tag}</Link>
-                    </li>
-                  </ul>
-                  <h5 className="title"><Link href={`/course-details/${item.sku}`}>{item.title}</Link></h5>
-                  <div className="courses__item-bottom">
-                    <div className="button">
-                      <Link href={`/course-details/${item.sku}`}>
-                        <span className="text">Enroll Now</span>
-                        <i className="flaticon-arrow-right"></i>
-                      </Link>
-                    </div>
-                    <h5 className="price">₹{Number(item.price).toLocaleString("en-IN")}</h5>
+        <div className="tab-content" id="courseTabContent">
+          {(() => {
+            const courseItem = course_data.find((item) => item.page === "home_1");
+            const filtered = courseItem?.course_details.filter(
+              (item) => tabCategories[activeTab] === null || item.tag === tabCategories[activeTab]
+            );
+            return (
+              <div className="tab-pane fade show active">
+                <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper courses-swiper-active">
+                  {filtered?.map((item) => (
+                    <SwiperSlide key={item.id} className="swiper-slide">
+                      <div className="courses__item shine__animate-item">
+                        <div className="courses__item-thumb">
+                          <Link href={`/course-details/${item.sku}`} className="shine__animate-link">
+                            <Image src={item.thumb} alt="img" style={{ objectFit: "contain" }} />
+                          </Link>
+                        </div>
+                        <div className="courses__item-content">
+                          <ul className="courses__item-meta list-wrap">
+                            <li className="courses__item-tag">
+                              <Link href="/courses">{item.tag}</Link>
+                            </li>
+                          </ul>
+                          <h5 className="title"><Link href={`/course-details/${item.sku}`}>{item.title}</Link></h5>
+                          <div className="courses__item-bottom">
+                            <div className="button">
+                              <Link href={`/course-details/${item.sku}`}>
+                                <span className="text">Enroll Now</span>
+                                <i className="flaticon-arrow-right"></i>
+                              </Link>
+                            </div>
+                            {/* <h5 className="price">₹{Number(item.price).toLocaleString("en-IN")}</h5> */}
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                {!style &&
+                  <div className="courses__nav">
+                    <div className="courses-button-prev"><i className="flaticon-arrow-right"></i></div>
+                    <div className="courses-button-next"><i className="flaticon-arrow-right"></i></div>
                   </div>
-                </div>
+                }
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {!style &&
-          <div className="courses__nav">
-            <div className="courses-button-prev"><i className="flaticon-arrow-right"></i></div>
-            <div className="courses-button-next"><i className="flaticon-arrow-right"></i></div>
-          </div>
-        }
-      </div>
-    );
-  })()}
-</div>
+            );
+          })()}
+        </div>
       </div>
     </section>
   )

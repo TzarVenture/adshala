@@ -106,7 +106,7 @@ const CourseArea = () => {
                                                 <i className="flaticon-arrow-right"></i>
                                              </Link>
                                           </div>
-                                          <h5 className="price">₹{Number(item.price).toLocaleString("en-IN")}</h5>
+                                          {/* <h5 className="price">₹{Number(item.price).toLocaleString("en-IN")}</h5> */}
                                        </div>
                                     </div>
                                  </div>
@@ -149,7 +149,7 @@ const CourseArea = () => {
                                                 <i className="fas fa-star"></i>  ({item.rating} Reviews)
                                              </div> */}
                                           </li>
-                                          <li className="price">₹{Number(item.price).toLocaleString("en-IN")}</li>
+                                          {/* <li className="price">₹{Number(item.price).toLocaleString("en-IN")}</li> */}
                                        </ul>
                                        <h5 className="title"><a href="course-details.html">{item.title}</a></h5>
                                        {/* <p className="author">By <a href="#">{item.instructors}</a></p> */}
