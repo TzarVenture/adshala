@@ -67,6 +67,8 @@ export interface CourseDataType {
   instructors: string;
   price: number;
   originalPrice?: number;      // struck-through price shown in sidebar
+  offlinePrice?: number;       // offline course fee shown in DM sidebar
+  onlinePrice?: number;        // online course fee shown in DM sidebar
   skill_level: string;
   overview?: string;           // key used to switch tabs in CourseDetailsArea
   price_type: string;
@@ -330,7 +332,9 @@ const inner_course_data: CourseDataType[] = [
       rating: 5,
       title: "Certification in Advanced Digital Marketing & AI",
       instructors: "David Millar",
-      price: 60000,
+      price: 39000,
+      offlinePrice: 39000,
+      onlinePrice: 30000,
       originalPrice: 100000,
       skill_level: "Beginner",
       overview: "certification-in-advanced-digital-marketing-&-ai",

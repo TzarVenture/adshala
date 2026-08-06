@@ -31,15 +31,15 @@ const SCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
                   )}
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
-               {/* <div className="courses__cost-wrap">
+               <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
                   <h2 className="title">
-                     ₹{single_course.price?.toLocaleString()} 
+                     ₹{single_course.price?.toLocaleString("en-IN")} 
                      {single_course.originalPrice && (
-                        <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString()}</del>
+                        <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString("en-IN")}</del>
                      )}
                   </h2>
-               </div> */}
+               </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
                   <ul className="list-wrap">
