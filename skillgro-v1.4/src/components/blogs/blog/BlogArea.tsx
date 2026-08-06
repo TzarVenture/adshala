@@ -6,8 +6,8 @@ import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import BlogSidebar from "../blog-common/BlogSidebar";
 
-interface DataType{
-   style_1:boolean;
+interface DataType {
+   style_1: boolean;
 }
 
 const BlogArea = ({ style_1 }: DataType) => {
@@ -35,17 +35,17 @@ const BlogArea = ({ style_1 }: DataType) => {
                         <div key={item.id} className="col-xl-4 col-md-6">
                            <div className="blog__post-item shine__animate-item">
                               <div className="blog__post-thumb">
-                                 <Link href="/blog-details" className="shine__animate-link"><Image src={item.thumb} alt="img" /></Link>
+                                 <Link href={`/blog-details/${item.slug || item.id}`} className="shine__animate-link"><Image src={item.thumb} alt="img" /></Link>
                                  <Link href="/blog" className="post-tag">{item.tag}</Link>
                               </div>
                               <div className="blog__post-content">
                                  <div className="blog__post-meta">
                                     <ul className="list-wrap">
                                        <li><i className="flaticon-calendar"></i>{item.date}</li>
-                                       <li><i className="flaticon-user-1"></i>by <Link href="/blog-details">Admin</Link></li>
+                                       {/* <li><i className="flaticon-user-1"></i>by <Link href="/blog-details">Admin</Link></li> */}
                                     </ul>
                                  </div>
-                                 <h4 className="title"><Link href="/blog-details">{item.title}</Link></h4>
+                                 <h4 className="title"><Link href={`/blog-details/${item.slug || item.id}`}>{item.title}</Link></h4>
                               </div>
                            </div>
                         </div>
