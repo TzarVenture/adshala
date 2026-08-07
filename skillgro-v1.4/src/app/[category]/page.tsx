@@ -150,8 +150,8 @@ export default async function CategoryPage({ params }: Props) {
             {/* Course cards grid */}
             <div className="row gy-3 ">
               {courses.map((course) => (
-                <div key={course.id} className="col-xl-3 col-lg-4 col-md-6">
-                  <div className="courses__item shine__animate-item">
+                <div key={course.id} className="col-xl-3 col-lg-4 col-md-6 d-flex">
+                  <div className="courses__item shine__animate-item" style={{ width: "100%", display: "flex", flexDirection: "column" }}>
 
                     {/* Thumbnail */}
                     <div className="courses__item-thumb">
@@ -168,29 +168,34 @@ export default async function CategoryPage({ params }: Props) {
                     </div>
 
                     {/* Content (Matched exactly to CourseArea.tsx UI) */}
-                    <div className="courses__item-content">
-                      <ul className="courses__item-meta list-wrap">
-                        <li className="courses__item-tag">
-                          <Link href="/courses">{course.category}</Link>
-                        </li>
-                      </ul>
+                    <div className="courses__item-content" style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                      <div>
+                        <ul className="courses__item-meta list-wrap">
+                          <li className="courses__item-tag">
+                            <Link href="/courses">{course.category}</Link>
+                          </li>
+                        </ul>
 
-                      <h5 className="title">
-                        <Link href={`/course-details/${course.sku}`}>
-                          {course.title}
-                        </Link>
-                      </h5>
+                        <h5 className="title" style={{ minHeight: "44px", marginBottom: "8px", display: "flex", alignItems: "flex-start" }}>
+                          <Link href={`/course-details/${course.sku}`}>
+                            {course.title}
+                          </Link>
+                        </h5>
+                      </div>
 
-                      <div className="courses__item-bottom">
+                      <div className="courses__item-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "auto", paddingTop: "6px" }}>
                         <div className="button">
                           <Link href={`/course-details/${course.sku}`}>
                             <span className="text">Enroll Now</span>
                             <i className="flaticon-arrow-right"></i>
                           </Link>
                         </div>
-                        <h5 className="price">
-                          ₹{Number(course.price).toLocaleString("en-IN")}
-                        </h5>
+                        <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                          <h5 className="price" style={{ margin: 0, lineHeight: "1.1" }}>
+                            ₹{Number(course.price).toLocaleString("en-IN")}
+                          </h5>
+                          <span style={{ fontSize: "10px", color: "#6D6C80", fontWeight: "500", marginTop: "2px", lineHeight: "1" }}>*GST Tax Included</span>
+                        </div>
                       </div>
                     </div>
                   </div>

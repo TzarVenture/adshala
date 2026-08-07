@@ -39,6 +39,7 @@ const AdvanceGDSidebar = ({ single_course }: { single_course?: CourseDataType })
                         <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString("en-IN")}</del>
                      )}
                   </h2>
+                  <span style={{ fontSize: "12px", color: "var(--tg-common-color-white)", opacity: 0.9, marginTop: "6px", display: "block" }}>*GST Tax Included</span>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>

@@ -46,6 +46,7 @@ const AdvanceDMSidebar = ({ single_course }: { single_course?: CourseDataType })
                            ₹{single_course.onlinePrice ? single_course.onlinePrice.toLocaleString("en-IN") : "30,000"}
                         </h2>
                      </div>
+                     <span style={{ fontSize: "12px", color: "var(--tg-common-color-white)", opacity: 0.9, marginTop: "8px", display: "block" }}>*GST Tax Included</span>
                   </div>
                </div>
                <div className="courses__information-wrap">

@@ -55,7 +55,7 @@ const course_data: DataType[] = [
             title: "Certification in Advanced Digital Marketing & AI",
             author: "David Millar",
             link: "/course-details/111",
-            price: 60000,
+            price: 39000,
          },
          {
             id: 112,
@@ -66,7 +66,7 @@ const course_data: DataType[] = [
             title: "Certification in Advanced Graphic Design & AI",
             author: "David Millar",
             link: "/course-details/111",
-            price: 90000,
+            price: 70800,
          },
          {
             id: 113,
@@ -110,7 +110,7 @@ const course_data: DataType[] = [
             title: "Certification in Web Development",
             author: "David Millar",
             link: "/course-details/111",
-            price: 75000,
+            price: 59000,
          },
       ],
    }

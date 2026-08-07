@@ -79,7 +79,7 @@ export default function EnquiryHero({ course }: EnquiryHeroProps) {
                 <div className="enquiry-hero__stat-item">
                   <div className="enquiry-hero__stat-label">Mode</div>
                   <div className="enquiry-hero__stat-value">
-                    Offline
+                    {course.mode || "Offline"}
                   </div>
                 </div>
 
