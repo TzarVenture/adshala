@@ -128,7 +128,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                   <div className="col-md-7">
                      <div className="copy-right-text">
                         <p>
-                           © 2026 adshalaa.com. All rights reserved.{" "}Designed By{" "}
+                           © {new Date().getFullYear()} Tzar Digital Agency. All rights reserved.{" "}Designed By{" "}
                            <a
                               href="https://tzar.co"
                               target="_blank"
