@@ -61,7 +61,7 @@ async function saveToMongo(data) {
 async function sendWhatsApp(data) {
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
   const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
-  const templateName = process.env.WHATSAPP_TEMPLATE_NAME || 'webinar_registration_confirmation';
+  const templateName = process.env.WHATSAPP_TEMPLATE_NAME || 'webinar_confirmation';
 
   if (!phoneNumberId || !accessToken) {
     console.warn('[Webinar] WhatsApp env vars not set — skipping WhatsApp send');
