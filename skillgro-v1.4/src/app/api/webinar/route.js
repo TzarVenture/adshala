@@ -77,11 +77,12 @@ async function sendWhatsApp(data) {
 
   const isNoParamTemplate = templateName === 'hello_world' || templateName === 'sp_direct_integration_test_template';
 
-  const imageUrl = process.env.WEBINAR_IMAGE_URL || 'https://www.adshalaa.com/webinarPost.jpeg';
-
   const components = [];
 
-  if (imageUrl) {
+  const isImageTemplate = templateName.includes('image') || templateName.includes('media') || process.env.WHATSAPP_HAS_IMAGE === 'true';
+
+  if (isImageTemplate) {
+    const imageUrl = process.env.WEBINAR_IMAGE_URL || 'https://www.adshalaa.com/webinarPost.jpeg';
     components.push({
       type: 'header',
       parameters: [
