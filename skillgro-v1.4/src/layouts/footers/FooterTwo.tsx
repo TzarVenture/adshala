@@ -93,6 +93,7 @@ const FooterTwo = ({ style }: StyleType) => {
                   <div className="col-md-5">
                      <div className="footer__bottom-menu">
                         <ul className="list-wrap">
+                           <li><Link href="/digital-marketing-webinar">Webinar</Link></li>
                            <li><Link href="/contact">Term of Use</Link></li>
                            <li><Link href="/contact">Privacy Policy</Link></li>
                         </ul>
