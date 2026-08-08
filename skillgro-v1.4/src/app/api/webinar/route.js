@@ -77,6 +77,33 @@ async function sendWhatsApp(data) {
 
   const isNoParamTemplate = templateName === 'hello_world' || templateName === 'sp_direct_integration_test_template';
 
+  const imageUrl = process.env.WEBINAR_IMAGE_URL || 'https://www.adshalaa.com/webinarPost.jpeg';
+
+  const components = [];
+
+  if (imageUrl) {
+    components.push({
+      type: 'header',
+      parameters: [
+        {
+          type: 'image',
+          image: { link: imageUrl },
+        },
+      ],
+    });
+  }
+
+  components.push({
+    type: 'body',
+    parameters: [
+      { type: 'text', text: data.name },
+      { type: 'text', text: WEBINAR_INFO.date },
+      { type: 'text', text: WEBINAR_INFO.time },
+      { type: 'text', text: WEBINAR_INFO.venue },
+      { type: 'text', text: WEBINAR_INFO.meetLink },
+    ],
+  });
+
   const body = {
     messaging_product: 'whatsapp',
     to: phone,
@@ -84,22 +111,7 @@ async function sendWhatsApp(data) {
     template: {
       name: templateName,
       language: { code: isNoParamTemplate ? 'en_US' : 'en' },
-      ...(isNoParamTemplate
-        ? {}
-        : {
-            components: [
-              {
-                type: 'body',
-                parameters: [
-                  { type: 'text', text: data.name },
-                  { type: 'text', text: WEBINAR_INFO.date },
-                  { type: 'text', text: WEBINAR_INFO.time },
-                  { type: 'text', text: WEBINAR_INFO.venue },
-                  { type: 'text', text: WEBINAR_INFO.meetLink },
-                ],
-              },
-            ],
-          }),
+      ...(isNoParamTemplate ? {} : { components }),
     },
   };
 
