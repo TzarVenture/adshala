@@ -59,8 +59,8 @@ async function saveToMongo(data) {
 // Template: must be pre-approved on Meta Business Manager
 // Template name: "webinar_registration_confirmation" (create this in Meta)
 async function sendWhatsApp(data) {
-  const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-  const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
+  const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID || '1285212938002596';
+  const accessToken = process.env.WHATSAPP_ACCESS_TOKEN || 'EAATfTEmIXrMBSGL8O3Si5q5G2KGLGR6Usa3fwt49qgXU9LVLEauxwoZAOHRfEaW0bnXpWMH7pUagzkNi1hVLcyxoprZAGay7CpNMd2IYHbIrTWKTQBGF7TZCv0b8yhvkZC0Mo9H3UqNsLRy8qweQWq02XaZBt0MxbZCYjQDfThjJNxlHkwH6k1wxXZCKhFJ82UrEgZDZD';
   const templateName = process.env.WHATSAPP_TEMPLATE_NAME || 'webinar_confirmation';
 
   if (!phoneNumberId || !accessToken) {
