@@ -61,7 +61,7 @@ async function saveToMongo(data) {
 async function sendWhatsApp(data) {
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID || '1285212938002596';
   const accessToken = process.env.WHATSAPP_ACCESS_TOKEN || 'EAATfTEmIXrMBSGL8O3Si5q5G2KGLGR6Usa3fwt49qgXU9LVLEauxwoZAOHRfEaW0bnXpWMH7pUagzkNi1hVLcyxoprZAGay7CpNMd2IYHbIrTWKTQBGF7TZCv0b8yhvkZC0Mo9H3UqNsLRy8qweQWq02XaZBt0MxbZCYjQDfThjJNxlHkwH6k1wxXZCKhFJ82UrEgZDZD';
-  const templateName = process.env.WHATSAPP_TEMPLATE_NAME || 'webinar_confirmation';
+  const templateName = process.env.WHATSAPP_TEMPLATE_NAME || 'webinar_confirmation_image';
 
   if (!phoneNumberId || !accessToken) {
     console.warn('[Webinar] WhatsApp env vars not set — skipping WhatsApp send');
