@@ -68,10 +68,15 @@ async function sendWhatsApp(data) {
     return;
   }
 
-  // Sanitize phone: ensure it starts with country code, no + sign, no spaces
-  let phone = data.phone.replace(/\s+/g, '').replace(/[^0-9]/g, '');
-  if (phone.startsWith('0')) phone = '91' + phone.slice(1);
-  if (!phone.startsWith('91')) phone = '91' + phone;
+  // Sanitize phone number to standard 12-digit Indian format (91XXXXXXXXXX)
+  let phone = data.phone.replace(/[^0-9]/g, '');
+  if (phone.length === 10) {
+    phone = '91' + phone;
+  } else if (phone.length === 11 && phone.startsWith('0')) {
+    phone = '91' + phone.slice(1);
+  } else if (phone.length > 10 && !phone.startsWith('91')) {
+    phone = '91' + phone.slice(-10);
+  }
 
   const url = `https://graph.facebook.com/v20.0/${phoneNumberId}/messages`;
 
