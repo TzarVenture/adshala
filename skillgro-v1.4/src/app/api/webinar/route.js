@@ -160,7 +160,7 @@ export async function POST(req) {
         ...data,
         program: WEBINAR_INFO.title,
         formType: 'WEBINAR',
-        source: 'WEBINAR_REGISTRATION',
+        source: 'WEBSITE_WEBINAR',
       }),
     ]);
 

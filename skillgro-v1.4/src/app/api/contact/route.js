@@ -59,7 +59,7 @@ export async function POST(req) {
         phone: data.phone,
         message: data.message,
         formType: 'CONTACT',
-        source: 'CONTACT_FORM',
+        source: 'WEBSITE_CONTACT',
       }),
     ]);
 
