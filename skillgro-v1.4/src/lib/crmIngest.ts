@@ -35,9 +35,19 @@ export async function forwardToCRM(payload: CRMIngestPayload) {
     const interestedServices = programName ? [programName] : [];
     const requirementsMessage = payload.message || payload.goals || "";
 
+    // Map source and formType to valid CRM Zod enums
+    let source = payload.source || "WEBSITE_ENQUIRY";
+    if (source === "BROCHURE_DOWNLOAD") source = "WEBSITE_BROCHURE";
+    if (source === "WEBINAR_REGISTRATION") source = "WEBSITE_WEBINAR";
+    if (source === "CONTACT_FORM") source = "WEBSITE_CONTACT";
+    if (source === "STUDENT_REGISTRATION") source = "WEBSITE_REGISTRATION";
+
+    let formType = payload.formType || "ENQUIRY";
+    if (formType === "STUDENT_REGISTRATION") formType = "REGISTRATION";
+
     const body = {
       business: "adshalaa",
-      source: payload.source || "WEBSITE_ENQUIRY",
+      source,
       fullName,
       email,
       phone,
@@ -45,7 +55,7 @@ export async function forwardToCRM(payload: CRMIngestPayload) {
       interestedServices,
       requirementsMessage,
       adshalaaData: {
-        formType: payload.formType || "ENQUIRY",
+        formType,
         programName,
         professionalStatus: payload.professionalStatus || "",
         batch: payload.batch || "",

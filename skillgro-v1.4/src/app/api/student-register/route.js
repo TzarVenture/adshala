@@ -129,8 +129,8 @@ export async function POST(request) {
       sheetPromise,
       forwardToCRM({
         ...registrationData,
-        formType: 'STUDENT_REGISTRATION',
-        source: registrationData.source || 'STUDENT_REGISTRATION',
+        formType: 'REGISTRATION',
+        source: 'WEBSITE_REGISTRATION',
       }),
     ]);
 

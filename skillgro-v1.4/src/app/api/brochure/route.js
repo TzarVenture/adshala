@@ -57,7 +57,7 @@ export async function POST(req) {
         email: useremail,
         phone: userphone,
         formType: 'BROCHURE',
-        source: 'BROCHURE_DOWNLOAD',
+        source: 'WEBSITE_BROCHURE',
       }),
     ]);
 
