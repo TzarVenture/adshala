@@ -24,7 +24,10 @@ export interface CRMIngestPayload {
 
 export async function forwardToCRM(payload: CRMIngestPayload) {
   try {
-    const crmUrl = process.env.TZAR_CRM_URL || "http://localhost:3000/api/v1/ingest";
+    const crmUrl =
+      process.env.CENTRAL_CRM_INGEST_URL ||
+      process.env.TZAR_CRM_URL ||
+      "https://tzar-crm.vercel.app/api/v1/ingest";
     const apiKey = process.env.TZAR_INGEST_API_KEY || "tzar_live_ingest_key_demo";
 
     const fullName = payload.name || payload.fullName || payload.username || payload.user_name || "";
