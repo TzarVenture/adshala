@@ -39,6 +39,8 @@ async function saveToMongo(data) {
   });
 }
 
+import { forwardToCRM } from '@/lib/crmIngest';
+
 export async function POST(req) {
   try {
     const data = await req.json();
@@ -48,15 +50,25 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const [mongoResult, sheetResult] = await Promise.allSettled([
+    const [mongoResult, sheetResult, crmResult] = await Promise.allSettled([
       saveToMongo(data),
       appendToSheet(data),
+      forwardToCRM({
+        name: user_name,
+        email: user_email,
+        phone: data.phone,
+        message: data.message,
+        formType: 'CONTACT',
+        source: 'CONTACT_FORM',
+      }),
     ]);
 
     if (mongoResult.status === 'rejected')
       console.error('[Contact] MongoDB failed:', mongoResult.reason);
     if (sheetResult.status === 'rejected')
       console.error('[Contact] Google Sheets failed:', sheetResult.reason);
+    if (crmResult.status === 'rejected')
+      console.error('[Contact] CRM Ingestion failed:', crmResult.reason);
 
     if (mongoResult.status === 'rejected') {
       const reasonMessage = mongoResult.reason?.message || String(mongoResult.reason);

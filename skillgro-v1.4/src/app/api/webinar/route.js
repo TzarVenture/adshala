@@ -140,6 +140,8 @@ async function sendWhatsApp(data) {
   return result;
 }
 
+import { forwardToCRM } from '@/lib/crmIngest';
+
 // ─── Handler ───────────────────────────────────────────────────────────────────
 export async function POST(req) {
   try {
@@ -150,10 +152,16 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const [mongoResult, sheetResult, whatsappResult] = await Promise.allSettled([
+    const [mongoResult, sheetResult, whatsappResult, crmResult] = await Promise.allSettled([
       saveToMongo(data),
       appendToSheet(data),
       sendWhatsApp(data),
+      forwardToCRM({
+        ...data,
+        program: WEBINAR_INFO.title,
+        formType: 'WEBINAR',
+        source: 'WEBINAR_REGISTRATION',
+      }),
     ]);
 
     // Log failures without blocking the success response
@@ -163,6 +171,8 @@ export async function POST(req) {
       console.error('[Webinar] Google Sheets failed:', sheetResult.reason);
     if (whatsappResult.status === 'rejected')
       console.error('[Webinar] WhatsApp failed:', whatsappResult.reason);
+    if (crmResult.status === 'rejected')
+      console.error('[Webinar] CRM Ingestion failed:', crmResult.reason);
 
     // Only hard-fail if MongoDB failed (primary store)
     if (mongoResult.status === 'rejected') {

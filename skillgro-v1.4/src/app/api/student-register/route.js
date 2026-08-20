@@ -3,6 +3,7 @@ import { google } from 'googleapis';
 import crypto from 'crypto';
 import clientPromise from '@/lib/mongodb';
 import mongoose from 'mongoose';
+import { forwardToCRM } from '@/lib/crmIngest';
 
 // ─── MongoDB ──────────────────────────────────────────────────────────────────
 async function saveToMongo(data) {
@@ -123,9 +124,14 @@ export async function POST(request) {
       },
     });
 
-    const [mongoResult, sheetResult] = await Promise.allSettled([
+    const [mongoResult, sheetResult, crmResult] = await Promise.allSettled([
       saveToMongo(registrationData),
-      sheetPromise
+      sheetPromise,
+      forwardToCRM({
+        ...registrationData,
+        formType: 'STUDENT_REGISTRATION',
+        source: registrationData.source || 'STUDENT_REGISTRATION',
+      }),
     ]);
 
     if (mongoResult.status === 'rejected') {
@@ -135,6 +141,10 @@ export async function POST(request) {
     
     if (sheetResult.status === 'rejected') {
       console.error('[Registration] Google Sheets failed:', sheetResult.reason);
+    }
+
+    if (crmResult.status === 'rejected') {
+      console.error('[Registration] CRM Ingestion failed:', crmResult.reason);
     }
 
     return NextResponse.json({ success: true, message: 'Data saved successfully' }, { status: 200 });
