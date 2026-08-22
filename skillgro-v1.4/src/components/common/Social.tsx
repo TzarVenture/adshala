@@ -31,7 +31,7 @@ const Social = () => {
                <FaInstagram size={22} />            </Link>
          </li>
          <li>
-            <Link href="https://wa.me/918652199991" target="_blank" style={{ color: "#ffc224" }}>
+            <Link href="https://wa.me/917304280472" target="_blank" style={{ color: "#ffc224" }}>
                <FaWhatsapp size={22} />            </Link>
          </li>
          <li>

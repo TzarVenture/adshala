@@ -27,7 +27,7 @@ const StickyBar: React.FC = () => {
         <span className="label">Get Brochure</span>
       </span>
 
-      <a className="sticky-action action-center" href="https://wa.me/918652199991" target="_blank" rel="noreferrer">
+      <a className="sticky-action action-center" href="https://wa.me/917304280472" target="_blank" rel="noreferrer">
         <FaWhatsapp className="icon whatsapp" color="white" size={30} />
         {/* <span className="label">WhatsApp</span> */}
       </a>

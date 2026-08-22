@@ -57,7 +57,7 @@ const MobileSidebarInner = ({ isActive, setIsActive }: MobileMenuProps) => {
                   <ul className="list-wrap">
                      <li><Link href="https://www.facebook.com/share/1AQin71UzP/"><i className="fab fa-facebook-f"></i></Link></li>
                      <li><Link href="https://www.instagram.com/adshalaa?igsh=MXBwcTh1ajlmYTJpaA=="><i className="fab fa-instagram"></i></Link></li>
-                     <li><Link href="https://wa.me/918652199991"><i className="fab fa-whatsapp"></i></Link></li>
+                     <li><Link href="https://wa.me/917304280472"><i className="fab fa-whatsapp"></i></Link></li>
                      <li><Link href="#"><i className="fab fa-linkedin-in"></i></Link></li>
                      <li><Link href="https://youtube.com/@adshalaa?si=VOWVukgFbThL1GJw"><i className="fab fa-youtube"></i></Link></li>
                   </ul>
