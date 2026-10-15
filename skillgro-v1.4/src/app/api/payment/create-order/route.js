@@ -35,7 +35,7 @@ export async function POST(request) {
       currency: 'INR',
       receipt: `adshalaa_rec_${Date.now()}`,
       notes: {
-        website: 'Adshalaa',
+        website: 'Adshalaa (by Tzar Digital)',
         course: course || '',
         student_name: name || '',
         student_email: email || '',

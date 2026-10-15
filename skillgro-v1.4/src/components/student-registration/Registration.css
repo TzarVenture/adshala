@@ -1100,3 +1100,157 @@
     font-size: 24px;
   }
 }
+
+/* ── Modern Rounded Receipt Buttons & Layout ─────────────────── */
+.receipt-pill-btn-print {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1.5px solid #1a3f32;
+  background: #ffffff;
+  color: #1a3f32;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  text-decoration: none;
+}
+
+.receipt-pill-btn-print:hover {
+  background: #1a3f32;
+  color: #ffffff;
+  border-color: #1a3f32;
+}
+
+.receipt-pill-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 30px;
+  border: none;
+  background: #1a3f32;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.receipt-pill-btn-primary:hover {
+  background: #112a21;
+  color: #ffffff;
+}
+
+.receipt-pill-btn-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid #d5e2dc;
+  background: #f4f8f6;
+  color: #2e4a3e;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.receipt-pill-btn-light:hover {
+  background: #e5ede8;
+  color: #1a3f32;
+}
+
+/* ── Mobile Responsiveness for Confirmation Page ─────────────── */
+.receipt-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767.98px) {
+  .receipt-card-print {
+    padding: 18px 16px !important;
+    border-radius: 14px !important;
+  }
+  .receipt-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .receipt-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+  .receipt-grid-responsive {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  .receipt-header-responsive {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+}
+
+/* ── Screen: Ensure Print-Only Document Is Completely Hidden On Screen ─ */
+.print-only {
+  display: none !important;
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
+/* ── Print: Exact 2-Page Official Printout Without Empty Spills ── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 14mm;
+  }
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  header, footer, nav, .tg-header__area, #sticky-header, #header-fixed-height,
+  .no-print, .receipt-sidebar, .breadcrumb, .embedded-notice, .receipt-card-print,
+  .registration-brand-info, .step-actions, .progress-bar-container,
+  .embedded-receipt-wrapper > .embedded-notice {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-page-1 {
+    display: block !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    box-sizing: border-box !important;
+  }
+  .print-page-2 {
+    display: block !important;
+    page-break-before: always !important;
+    break-before: page !important;
+    box-sizing: border-box !important;
+  }
+}
+
+

@@ -147,7 +147,11 @@ export async function POST(request) {
       console.error('[Registration] CRM Ingestion failed:', crmResult.reason);
     }
 
-    return NextResponse.json({ success: true, message: 'Data saved successfully' }, { status: 200 });
+    return NextResponse.json({
+      success: true,
+      message: 'Data saved successfully',
+      paymentId: razorpayPaymentId,
+    }, { status: 200 });
 
   } catch (error) {
     console.error('Registration API Error:', error);

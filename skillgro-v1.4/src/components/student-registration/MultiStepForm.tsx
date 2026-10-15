@@ -58,10 +58,10 @@ export default function MultiStepForm() {
     defaultValues: {
       name: '', email: '', phone: '', dob: '', city: '',
       professionalStatus: '', company: '', designation: '', experience: '',
-      course: '', coursePrice: 0, batch: '',
+      course: '', coursePrice: 0, batch: '', batchSchedule: '', batchMode: '',
       source: '', goals: '',
       documentMode: '', aadhaarFile: null, secondaryIdType: '', secondaryFile: null, offlineAck: false,
-      paymentType: '', paymentAmount: 2000,
+      paymentType: '', paymentAmount: Number(process.env.NEXT_PUBLIC_MIN_FEE) || 1,
       emergencyName: '', emergencyRelation: '', emergencyPhone: '',
       docAck: false, declaration: false,
     }
@@ -70,10 +70,6 @@ export default function MultiStepForm() {
   const { trigger, handleSubmit, watch, reset, setError } = methods;
 
   useEffect(() => {
-    if (localStorage.getItem('adshaala_registration_status') === 'completed') {
-      setSubmitStatus('success');
-      return;
-    }
     const savedData = localStorage.getItem(FORM_STORAGE_KEY);
     const savedStep = localStorage.getItem(STEP_STORAGE_KEY);
     if (savedData) reset(JSON.parse(savedData));
@@ -103,7 +99,7 @@ export default function MultiStepForm() {
         fieldsToValidate.push('company', 'designation', 'experience');
       }
     }
-    else if (currentStep === 2) fieldsToValidate = ['course', 'batch'];
+    else if (currentStep === 2) fieldsToValidate = ['course', 'batch', 'batchSchedule', 'batchMode'];
     else if (currentStep === 3) fieldsToValidate = ['source', 'goals'];
     else if (currentStep === 4) {
       fieldsToValidate = ['documentMode'];
@@ -185,9 +181,11 @@ export default function MultiStepForm() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
         amount: orderResult.amount,
         currency: orderResult.currency,
-        name: 'Adshalaa',
+        name: 'Adshalaa (by Tzar Digital)',
         description: `Course Registration Fee - ${data.course}`,
-        image: `${window.location.origin}/Adshalaa_Logo.png`,
+        image: typeof window !== 'undefined' && window.location.protocol === 'https:'
+          ? `${window.location.origin}/Adshalaa_Logo.png`
+          : 'https://www.adshalaa.com/Adshalaa_Logo.png',
         order_id: orderResult.order_id,
         handler: async function (response: any) {
           try {
@@ -218,9 +216,13 @@ export default function MultiStepForm() {
 
             if (regResponse.ok) {
               setSubmitStatus('success');
+              localStorage.setItem('adshaala_last_payment_id', response.razorpay_payment_id);
               localStorage.removeItem(FORM_STORAGE_KEY);
               localStorage.removeItem(STEP_STORAGE_KEY);
-              localStorage.setItem('adshaala_registration_status', 'completed');
+              localStorage.removeItem('adshaala_registration_status');
+              localStorage.removeItem('adshaala_registration_summary');
+              window.location.href = `/student-registration/success?paymentId=${encodeURIComponent(response.razorpay_payment_id)}`;
+              return;
             } else {
               setSubmitStatus('error');
               setServerError(regResult.error || 'Failed to verify transaction and submit registration.');
@@ -259,23 +261,30 @@ export default function MultiStepForm() {
 
   if (submitStatus === 'success') {
     return (
-      <div className="registration-container">
-        <div className="registration-card">
-          <div className="registration-success">
-            <div className="success-icon">✓</div>
-            <h2>Registration Successful!</h2>
-            <p>
-              Welcome to Adshaala! Your application has been successfully submitted.
-              Our admission counselor will review your details and contact you shortly
-              to complete the physical verification and fee payment process.
-            </p>
-            <button
-              className="btn-next mt-4"
-              onClick={() => window.location.href = '/'}
-            >
-              Back to Home
-            </button>
+      <div className="registration-container" style={{ padding: '60px 0', textAlign: 'center' }}>
+        <div className="registration-card" style={{ maxWidth: '480px', margin: '0 auto', padding: '36px 20px', textAlign: 'center' }}>
+          <div
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '50%',
+              background: '#e8f5e9',
+              color: '#2e7d32',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '20px',
+              marginBottom: '14px'
+            }}
+          >
+            <i className="fas fa-check"></i>
           </div>
+          <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#161439', margin: '0 0 6px 0' }}>
+            Payment Successful
+          </h3>
+          <p style={{ fontSize: '13px', color: '#666', margin: 0 }}>
+            Redirecting to your verified registration receipt...
+          </p>
         </div>
       </div>
     );

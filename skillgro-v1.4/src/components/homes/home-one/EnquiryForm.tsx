@@ -197,7 +197,7 @@ export function EnquiryFormContainer({ defaultProgram }: { defaultProgram?: stri
               style={{ padding: "9.1px" }}
               {...register('program', { required: 'Please select a program' })}
             >
-              <option value="" disabled selected>Select a program</option>
+              <option value="" disabled>Select a program</option>
               {PROGRAMS.map((prog) => (
                 <option key={prog} value={prog}>{prog}</option>
               ))}

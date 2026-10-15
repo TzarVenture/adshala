@@ -50,8 +50,8 @@ const MobileMenu = () => {
                         style={{ display: navTitle === menu.title ? "block" : "none" }}
                      >
                         {menu.course_sub_menu.flatMap((c_menu) =>
-                           c_menu.menu_details.map((item, index) => (
-                              <li key={index} className={isActive(item.link) ? "active" : ""}>
+                           c_menu.menu_details.map((item) => (
+                              <li key={item.link} className={isActive(item.link) ? "active" : ""}>
                                  <Link href={item.link}>
                                     {item.title}{" "}
                                     {item.badge && (
