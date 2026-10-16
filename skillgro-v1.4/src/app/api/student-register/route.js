@@ -42,38 +42,50 @@ export async function POST(request) {
     const documentMode = formData.get('documentMode') || '';
     const paymentAmount = formData.get('paymentAmount') || '';
 
-    // Extract Razorpay payment details
-    const razorpayPaymentId = formData.get('razorpay_payment_id') || '';
-    const razorpayOrderId = formData.get('razorpay_order_id') || '';
+    // Payment method handling (UPI QR manual payment active while Razorpay domain verification is in progress)
+    const paymentMethod = formData.get('payment_method') || (formData.get('razorpay_signature') ? 'razorpay' : 'upi_qr');
+    const upiRef = formData.get('upi_ref') || formData.get('upi_transaction_id') || '';
+
+    let razorpayPaymentId = formData.get('razorpay_payment_id') || '';
+    let razorpayOrderId = formData.get('razorpay_order_id') || '';
     const razorpaySignature = formData.get('razorpay_signature') || '';
 
-    // Verify payment details
-    const secret = process.env.RAZORPAY_KEY_SECRET;
-    if (!secret || secret === 'YOUR_KEY_SECRET') {
-      console.error('Razorpay secret is not configured.');
-      return NextResponse.json(
-        { error: 'Payment gateway configuration error. Please contact administration.' },
-        { status: 500 }
-      );
+    /* ── RAZORPAY VERIFICATION (Active when Razorpay gateway is enabled) ──
+    if (paymentMethod === 'razorpay') {
+      const secret = process.env.RAZORPAY_KEY_SECRET;
+      if (!secret || secret === 'YOUR_KEY_SECRET') {
+        console.error('Razorpay secret is not configured.');
+        return NextResponse.json(
+          { error: 'Payment gateway configuration error. Please contact administration.' },
+          { status: 500 }
+        );
+      }
+
+      if (!razorpayPaymentId || !razorpayOrderId || !razorpaySignature) {
+        return NextResponse.json(
+          { error: 'Payment verification failed. Missing payment reference.' },
+          { status: 400 }
+        );
+      }
+
+      const generatedSignature = crypto
+        .createHmac('sha256', secret)
+        .update(razorpayOrderId + '|' + razorpayPaymentId)
+        .digest('hex');
+
+      if (generatedSignature !== razorpaySignature) {
+        return NextResponse.json(
+          { error: 'Payment verification failed. Invalid transaction signature.' },
+          { status: 400 }
+        );
+      }
     }
+    ── END RAZORPAY VERIFICATION ── */
 
-    if (!razorpayPaymentId || !razorpayOrderId || !razorpaySignature) {
-      return NextResponse.json(
-        { error: 'Payment verification failed. Missing payment reference.' },
-        { status: 400 }
-      );
-    }
-
-    const generatedSignature = crypto
-      .createHmac('sha256', secret)
-      .update(razorpayOrderId + '|' + razorpayPaymentId)
-      .digest('hex');
-
-    if (generatedSignature !== razorpaySignature) {
-      return NextResponse.json(
-        { error: 'Payment verification failed. Invalid transaction signature.' },
-        { status: 400 }
-      );
+    // For UPI QR flow, assign tracking reference
+    if (!razorpayPaymentId) {
+      razorpayPaymentId = upiRef ? `UPI_${upiRef.trim()}` : `TZAR_UPI_${Date.now()}`;
+      razorpayOrderId = 'MANUAL_UPI_QR';
     }
 
     const registrationData = {
@@ -82,6 +94,7 @@ export async function POST(request) {
       course, coursePrice, batch, source, goals,
       emergencyName, emergencyRelation, emergencyPhone,
       documentMode, paymentAmount,
+      paymentMethod,
       razorpayPaymentId, razorpayOrderId
     };
 

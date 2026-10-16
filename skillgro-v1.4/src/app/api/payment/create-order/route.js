@@ -34,6 +34,7 @@ export async function POST(request) {
       amount: Math.round(Number(amount) * 100), // Amount in paise (1 INR = 100 paise)
       currency: 'INR',
       receipt: `adshalaa_rec_${Date.now()}`,
+      payment_capture: 1, // Automatically capture payment immediately
       notes: {
         website: 'Adshalaa (by Tzar Digital)',
         course: course || '',

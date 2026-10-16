@@ -149,112 +149,89 @@ export default function MultiStepForm() {
     setServerError('');
 
     try {
-      // 1. Create payment order in the backend
-      const orderResponse = await fetch('/api/payment/create-order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: data.paymentAmount,
-          course: data.course,
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-        }),
+      /* =========================================================================
+         ── RAZORPAY PAYMENT INTEGRATION (Preserved for re-enabling) ──
+         Uncomment this block when Razorpay domain verification is approved:
+
+         // 1. Create payment order in the backend
+         const orderResponse = await fetch('/api/payment/create-order', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({
+             amount: data.paymentAmount,
+             course: data.course,
+             name: data.name,
+             email: data.email,
+             phone: data.phone,
+           }),
+         });
+         const orderResult = await orderResponse.json();
+         if (!orderResponse.ok) throw new Error(orderResult.error || 'Failed to initialize payment gateway order.');
+
+         const scriptLoaded = await loadRazorpayScript();
+         if (!scriptLoaded) throw new Error('Failed to load Razorpay SDK.');
+
+         const options = {
+           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
+           amount: orderResult.amount,
+           currency: orderResult.currency,
+           name: 'Adshalaa (by Tzar Digital)',
+           description: `Course Registration Fee - ${data.course}`,
+           image: typeof window !== 'undefined' && window.location.protocol === 'https:'
+             ? `${window.location.origin}/Adshalaa_Logo.png`
+             : 'https://www.adshalaa.com/Adshalaa_Logo.png',
+           order_id: orderResult.order_id,
+           handler: async function (response: any) {
+             // ... submit with razorpay_payment_id, razorpay_order_id, razorpay_signature ...
+           },
+           prefill: { name: data.name, email: data.email, contact: data.phone },
+           theme: { color: '#1a3f32' },
+           modal: { ondismiss: () => setIsSubmitting(false) },
+         };
+         const razorpayInstance = new (window as any).Razorpay(options);
+         razorpayInstance.on('payment.failed', (res: any) => { ... });
+         razorpayInstance.open();
+         ========================================================================= */
+
+      // ── ACTIVE UPI QR SUBMISSION FLOW ──
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        if (key === 'aadhaarFile' || key === 'secondaryFile') {
+          if (data[key] && data[key].length > 0) formData.append(key, data[key][0]);
+        } else if (data[key] !== null && data[key] !== undefined) {
+          formData.append(key, data[key]);
+        }
       });
 
-      const orderResult = await orderResponse.json();
+      formData.append('payment_method', 'upi_qr');
+      formData.append('upi_ref', data.upiRef || '');
+      formData.append('paymentAmount', String(data.paymentAmount || 2000));
 
-      if (!orderResponse.ok) {
-        throw new Error(orderResult.error || 'Failed to initialize payment gateway order.');
+      const regResponse = await fetch('/api/student-register', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const regResult = await regResponse.json();
+
+      if (regResponse.ok) {
+        setSubmitStatus('success');
+        const paymentId = regResult.paymentId || `UPI_${Date.now()}`;
+        localStorage.setItem('adshaala_last_payment_id', paymentId);
+        localStorage.removeItem(FORM_STORAGE_KEY);
+        localStorage.removeItem(STEP_STORAGE_KEY);
+        localStorage.removeItem('adshaala_registration_status');
+        localStorage.removeItem('adshaala_registration_summary');
+        window.location.href = `/student-registration/success?paymentId=${encodeURIComponent(paymentId)}`;
+        return;
+      } else {
+        setSubmitStatus('error');
+        setServerError(regResult.error || 'Failed to submit registration. Please verify your details.');
       }
-
-      // 2. Load the Razorpay Checkout SDK
-      const scriptLoaded = await loadRazorpayScript();
-      if (!scriptLoaded) {
-        throw new Error('Failed to load Razorpay SDK. Please check your internet connection.');
-      }
-
-      // 3. Define Razorpay checkout options with customized Adshalaa branding
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
-        amount: orderResult.amount,
-        currency: orderResult.currency,
-        name: 'Adshalaa (by Tzar Digital)',
-        description: `Course Registration Fee - ${data.course}`,
-        image: typeof window !== 'undefined' && window.location.protocol === 'https:'
-          ? `${window.location.origin}/Adshalaa_Logo.png`
-          : 'https://www.adshalaa.com/Adshalaa_Logo.png',
-        order_id: orderResult.order_id,
-        handler: async function (response: any) {
-          try {
-            setIsSubmitting(true);
-            setServerError('');
-
-            // Package final form data including files and payment details
-            const formData = new FormData();
-            Object.keys(data).forEach(key => {
-              if (key === 'aadhaarFile' || key === 'secondaryFile') {
-                if (data[key] && data[key].length > 0) formData.append(key, data[key][0]);
-              } else {
-                formData.append(key, data[key]);
-              }
-            });
-
-            // Append signature verification parameters
-            formData.append('razorpay_payment_id', response.razorpay_payment_id);
-            formData.append('razorpay_order_id', response.razorpay_order_id);
-            formData.append('razorpay_signature', response.razorpay_signature);
-
-            const regResponse = await fetch('/api/student-register', {
-              method: 'POST',
-              body: formData,
-            });
-
-            const regResult = await regResponse.json();
-
-            if (regResponse.ok) {
-              setSubmitStatus('success');
-              localStorage.setItem('adshaala_last_payment_id', response.razorpay_payment_id);
-              localStorage.removeItem(FORM_STORAGE_KEY);
-              localStorage.removeItem(STEP_STORAGE_KEY);
-              localStorage.removeItem('adshaala_registration_status');
-              localStorage.removeItem('adshaala_registration_summary');
-              window.location.href = `/student-registration/success?paymentId=${encodeURIComponent(response.razorpay_payment_id)}`;
-              return;
-            } else {
-              setSubmitStatus('error');
-              setServerError(regResult.error || 'Failed to verify transaction and submit registration.');
-            }
-          } catch (err) {
-            setSubmitStatus('error');
-            setServerError('A network error occurred during transaction verification.');
-          } finally {
-            setIsSubmitting(false);
-          }
-        },
-        prefill: {
-          name: data.name,
-          email: data.email,
-          contact: data.phone,
-        },
-        theme: {
-          color: '#1a3f32', // Adshalaa theme color
-        },
-        modal: {
-          ondismiss: function () {
-            setIsSubmitting(false);
-          },
-        },
-      };
-
-      const razorpayInstance = new (window as any).Razorpay(options);
-      razorpayInstance.open();
-
     } catch (err: any) {
       setSubmitStatus('error');
-      setServerError(err.message || 'An error occurred during payment initiation.');
+      setServerError(err.message || 'A network error occurred while submitting registration.');
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -354,7 +331,7 @@ export default function MultiStepForm() {
                   disabled={isSubmitting}
                   onClick={handleSubmit(onSubmit)}
                 >
-                  {isSubmitting ? 'Submitting...' : 'Submit Registration ✓'}
+                  {isSubmitting ? 'Submitting...' : 'I Have Paid & Complete Registration ✓'}
                 </button>
               )}
             </div>

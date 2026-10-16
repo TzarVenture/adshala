@@ -646,6 +646,182 @@ export default function RegistrationSuccess({
     </div>
   );
 
+  // =========================================================================
+  // ── SIMPLE SUCCESS CARD (Active while Razorpay domain verification is in progress) ──
+  // =========================================================================
+  const simpleSuccessCard = (
+    <div
+      style={{
+        background: '#ffffff',
+        border: '1px solid #e0ebe6',
+        borderRadius: '16px',
+        padding: '32px 24px',
+        maxWidth: isEmbedded ? '100%' : '620px',
+        margin: '0 auto',
+        boxShadow: '0 4px 18px rgba(0, 0, 0, 0.03)',
+      }}
+    >
+      {/* Icon & Title */}
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+        <div
+          style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            background: '#e8f5e9',
+            color: '#1a3f32',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+            marginBottom: '12px',
+          }}
+        >
+          <i className="fas fa-check"></i>
+        </div>
+        <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#161439', margin: '0 0 6px 0' }}>
+          Registration Successful
+        </h2>
+        <p style={{ fontSize: '13.5px', color: '#666', margin: 0 }}>
+          Your course registration details have been received and recorded.
+        </p>
+      </div>
+
+      {/* Selected Course & Student Details */}
+      <div
+        style={{
+          background: '#f8faf9',
+          border: '1px solid #e2e8f0',
+          borderRadius: '12px',
+          padding: '16px 20px',
+          marginBottom: '20px',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: '1px dashed #e2e8f0', fontSize: '13.5px' }}>
+          <span style={{ color: '#666' }}>Student Name</span>
+          <span style={{ fontWeight: 600, color: '#161439', textAlign: 'right' }}>{registration.name}</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: '1px dashed #e2e8f0', fontSize: '13.5px' }}>
+          <span style={{ color: '#666' }}>Registered Email</span>
+          <span style={{ fontWeight: 500, color: '#161439', textAlign: 'right' }}>{registration.email}</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: '1px dashed #e2e8f0', fontSize: '13.5px' }}>
+          <span style={{ color: '#666' }}>Phone Number</span>
+          <span style={{ fontWeight: 500, color: '#161439', textAlign: 'right' }}>{registration.phone}</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: '1px dashed #e2e8f0', fontSize: '13.5px' }}>
+          <span style={{ color: '#666' }}>Selected Course</span>
+          <span style={{ fontWeight: 600, color: '#1a3f32', textAlign: 'right' }}>{registration.course}</span>
+        </div>
+        {registration.batch && (
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: '1px dashed #e2e8f0', fontSize: '13.5px' }}>
+            <span style={{ color: '#666' }}>Batch & Schedule</span>
+            <span style={{ fontWeight: 500, color: '#161439', textAlign: 'right' }}>
+              {registration.batchSchedule || registration.batch}
+              {registration.batchMode ? ` (${registration.batchMode})` : ''}
+            </span>
+          </div>
+        )}
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: '1px dashed #e2e8f0', fontSize: '13.5px' }}>
+          <span style={{ color: '#666' }}>Registration Fee</span>
+          <span style={{ fontWeight: 700, color: '#1a3f32', textAlign: 'right' }}>
+            ₹{Number(registration.paymentAmount || 2000).toLocaleString('en-IN')}
+          </span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0 2px', fontSize: '13px' }}>
+          <span style={{ color: '#666' }}>Payment Reference</span>
+          <span style={{ fontFamily: 'monospace', fontWeight: 600, color: '#555', textAlign: 'right' }}>
+            {registration.paymentId}
+          </span>
+        </div>
+      </div>
+
+      {/* Manual Verification Helpdesk Notice */}
+      <div
+        style={{
+          background: '#f4f8f6',
+          border: '1px solid #d2e4db',
+          borderRadius: '10px',
+          padding: '14px 16px',
+          marginBottom: '22px',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '12px',
+        }}
+      >
+        <div style={{ color: '#1a3f32', fontSize: '16px', marginTop: '2px' }}>
+          <i className="fas fa-headset"></i>
+        </div>
+        <div style={{ fontSize: '12.5px', color: '#333', lineHeight: 1.5 }}>
+          <strong style={{ color: '#161439', display: 'block', marginBottom: '2px' }}>
+            Admissions Desk Verification
+          </strong>
+          Our admissions team is manually verifying UPI payments. To confirm your seat immediately or for batch queries:
+          <div style={{ marginTop: '4px', fontWeight: 600 }}>
+            <a href="tel:+918652199991" style={{ color: '#1a3f32', textDecoration: 'none' }}>+91 8652199991</a>
+            {' '}/ <a href="tel:+917760775875" style={{ color: '#1a3f32', textDecoration: 'none' }}>+91 7760775875</a>
+            {' '}| Email: <a href="mailto:corporate@tzar.co" style={{ color: '#1a3f32', textDecoration: 'none' }}>corporate@tzar.co</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          onClick={handleRegisterAnotherClick}
+          className="btn-next"
+          style={{
+            background: '#1a3f32',
+            color: '#ffffff',
+            padding: '10px 20px',
+            borderRadius: '8px',
+            fontSize: '14px',
+            fontWeight: 600,
+            border: 'none',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <i className="fas fa-user-plus"></i>
+          <span>Register Another Student</span>
+        </button>
+        <Link
+          href="/"
+          style={{
+            background: '#f1f5f3',
+            color: '#1a3f32',
+            padding: '10px 18px',
+            borderRadius: '8px',
+            fontSize: '14px',
+            fontWeight: 600,
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            border: '1px solid #d2e4db',
+          }}
+        >
+          <i className="fas fa-home"></i>
+          <span>Home</span>
+        </Link>
+      </div>
+    </div>
+  );
+
+  // Set to true when Razorpay domain verification is approved to restore full printable tax receipt
+  const SHOW_FULL_RAZORPAY_RECEIPT = false;
+
+  if (!SHOW_FULL_RAZORPAY_RECEIPT) {
+    return (
+      <div className="container" style={{ padding: isEmbedded ? '10px 0' : '36px 15px 70px' }}>
+        {simpleSuccessCard}
+      </div>
+    );
+  }
+
   // If embedded inside /student-registration (Option A)
   if (isEmbedded) {
     return (
