@@ -535,41 +535,6 @@
   font-size: 15px;
 }
 
-.payment-amount-input-wrap {
-  position: relative;
-}
-
-.payment-rupee-sign {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a3f32;
-  pointer-events: none;
-}
-
-.payment-amount-input {
-  width: 100%;
-  height: 42px;
-  padding-left: 32px;
-  padding-right: 14px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a3f32;
-  border: 1.5px solid #dce5df;
-  border-radius: 8px;
-  background: #fff;
-  transition: border-color 0.2s;
-  outline: none;
-}
-
-.payment-amount-input:focus {
-  border-color: #1a3f32;
-  box-shadow: 0 0 0 2px rgba(26, 63, 50, 0.08);
-}
-
 /* Total payable box */
 .payment-payable-box {
   background: #fff;
@@ -671,33 +636,39 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .payment-rupee-sign {
   position: absolute;
-  left: 14px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
   color: #1a3f32;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
 
 .payment-amount-input {
   width: 100%;
   height: 52px;
-  padding: 0 16px 0 38px;
-  font-size: 20px;
+  padding: 0 16px 0 48px !important;
+  font-size: 19px;
   font-weight: 700;
   color: #1a3f32;
   border: 2px solid #e2e2e2;
   border-radius: 10px;
   background: #fff;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
+  box-sizing: border-box;
   /* Prevent number input spinners from overlapping */
   -moz-appearance: textfield;
   appearance: textfield;
@@ -1311,6 +1282,17 @@
     flex: 1;
     padding: 10px 10px;
     font-size: 13px;
+  }
+
+  .payment-amount-input {
+    height: 48px;
+    font-size: 17px;
+    padding: 0 14px 0 44px !important;
+  }
+
+  .payment-rupee-sign {
+    left: 14px;
+    font-size: 18px;
   }
 }
 

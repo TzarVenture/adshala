@@ -242,6 +242,7 @@ export default function StepPayment() {
               <input
                 type="number"
                 className="payment-amount-input"
+                style={{ paddingLeft: "46px" }}
                 value={customAmount}
                 onChange={(e) => {
                   const val = e.target.value;
