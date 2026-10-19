@@ -14,7 +14,7 @@ export async function POST(request) {
     }
 
     // Initialize Razorpay
-    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!keyId || !keySecret || keyId === 'rzp_test_YOUR_KEY_ID' || keySecret === 'YOUR_KEY_SECRET') {

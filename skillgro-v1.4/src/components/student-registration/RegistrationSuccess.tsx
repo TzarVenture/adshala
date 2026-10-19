@@ -252,7 +252,7 @@ export default function RegistrationSuccess({
               </span>
             </div>
             <p style={{ fontSize: '13.5px', color: '#555', margin: '4px 0 0 0' }}>
-              Official admission slip issued by Adshaala (by Tzar Digital).
+              Official admission slip issued by Adshalaa EduTech (by Tzar Digital).
             </p>
           </div>
         </div>
@@ -640,7 +640,7 @@ export default function RegistrationSuccess({
         </div>
 
         <div style={{ marginTop: '40px', textAlign: 'center', fontSize: '10.5px', color: '#888', borderTop: '1px solid #eee', paddingTop: '6px' }}>
-          Page 2 of 2 — Adshaala Institute | ISO 9001:2015 Certified
+          Page 2 of 2 — Adshalaa EduTech | ISO 9001:2015 Certified
         </div>
       </div>
     </div>
@@ -812,7 +812,7 @@ export default function RegistrationSuccess({
   );
 
   // Set to true when Razorpay domain verification is approved to restore full printable tax receipt
-  const SHOW_FULL_RAZORPAY_RECEIPT = false;
+  const SHOW_FULL_RAZORPAY_RECEIPT = true;
 
   if (!SHOW_FULL_RAZORPAY_RECEIPT) {
     return (

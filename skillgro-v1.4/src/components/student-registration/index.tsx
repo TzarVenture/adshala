@@ -40,7 +40,7 @@ function RegistrationFormArea() {
           {/* Left Column: Brand Identity */}
           <div className="col-lg-5 mb-5 mb-lg-0 pt-lg-4 position-sticky" style={{ top: '90px' }}>
             <div className="registration-brand-info">
-              <span className="registration-brand-badge">Adshaala Institute</span>
+              <span className="registration-brand-badge">Adshalaa EduTech</span>
               <h1 className="registration-brand-title">
                 Launch Your Professional Career
               </h1>
