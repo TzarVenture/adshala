@@ -267,7 +267,7 @@ const faq_data: DataType[] = [
       {
         lock: true,
         title:
-          "You can reach us at +91 8652199991, hello@adshalaa.com, or visit us at B, Ground Floor, Andheri E, Saki Vihar Rd, behind Finch Restaurant, Ganesh Nagar, Marol, Andheri East, Mumbai, Maharashtra 400072. You can also fill out the contact form on our website.",
+          "You can reach us at +91 8652199991, info@adshalaa.com, or visit us at B, Ground Floor, Andheri E, Saki Vihar Rd, behind Finch Restaurant, Ganesh Nagar, Marol, Andheri East, Mumbai, Maharashtra 400072. You can also fill out the contact form on our website.",
         duration: "03:03",
       },
     ],

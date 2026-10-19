@@ -33,12 +33,35 @@ function RegistrationFormArea() {
   };
 
   return (
-    <section className="registration-area pb-120">
+    <section className="registration-area registration-area-compact">
       <div className="container">
+        {/* Mobile-only compact top brand strip */}
+        <div className="d-lg-none text-center mb-3">
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: '#ffffff',
+              border: '1px solid #d2e4db',
+              padding: '6px 14px',
+              borderRadius: '20px',
+              color: '#1a3f32',
+              fontSize: '12px',
+              fontWeight: 600,
+              boxShadow: '0 1px 4px rgba(26,63,50,0.04)'
+            }}
+          >
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#1a3f32' }}></span>
+            <span>Adshalaa EduTech · Official Student Registration</span>
+            <i className="fas fa-shield-alt" style={{ color: '#1a3f32', fontSize: '11px' }}></i>
+          </div>
+        </div>
+
         <div className="row align-items-start">
 
-          {/* Left Column: Brand Identity */}
-          <div className="col-lg-5 mb-5 mb-lg-0 pt-lg-4 position-sticky" style={{ top: '90px' }}>
+          {/* Left Column: Brand Identity (Shown on Desktop) */}
+          <div className="col-lg-5 mb-4 mb-lg-0 pt-lg-2 position-sticky d-none d-lg-block" style={{ top: '90px' }}>
             <div className="registration-brand-info">
               <span className="registration-brand-badge">Adshalaa EduTech</span>
               <h1 className="registration-brand-title">
@@ -88,8 +111,8 @@ function RegistrationFormArea() {
             </div>
           </div>
 
-          {/* Right Column: Multi-Step Form OR Verified Receipt (Option A) */}
-          <div className="col-lg-7">
+          {/* Right Column: Multi-Step Form OR Verified Receipt */}
+          <div className="col-lg-7 col-12">
             {isMounted && lastPaymentId ? (
               <RegistrationSuccess
                 embeddedPaymentId={lastPaymentId}

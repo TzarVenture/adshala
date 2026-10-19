@@ -180,7 +180,7 @@ const sections = [
         </ul>
         <p>
           To exercise any of these rights, contact us at{" "}
-          <a href="mailto:hello@adshalaa.com">hello@adshalaa.com</a>.
+          <a href="mailto:info@adshalaa.com">info@adshalaa.com</a>.
         </p>
       </div>
     ),
@@ -234,7 +234,7 @@ const sections = [
           </li>
           <li>
             <strong>Email:</strong>{" "}
-            <a href="mailto:hello@adshalaa.com">hello@adshalaa.com</a>
+            <a href="mailto:info@adshalaa.com">info@adshalaa.com</a>
           </li>
           <li>
             <strong>Phone:</strong>{" "}

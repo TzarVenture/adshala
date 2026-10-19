@@ -325,7 +325,7 @@ const sections = [
           </li>
           <li>
             <strong>Email:</strong>{" "}
-            <a href="mailto:abc@adshalaa.com">hello@adshalaa.com</a>
+            <a href="mailto:info@adshalaa.com">info@adshalaa.com</a>
           </li>
           <li>
             <strong>Phone:</strong>{" "}

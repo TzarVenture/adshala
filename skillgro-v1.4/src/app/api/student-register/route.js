@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import clientPromise from '@/lib/mongodb';
 import mongoose from 'mongoose';
 import { forwardToCRM } from '@/lib/crmIngest';
-import { sendPaymentReceiptEmail } from '@/lib/brevoMailer';
+import { sendPaymentReceiptEmail, sendAdminRegistrationNotification } from '@/lib/brevoMailer';
 
 // ─── MongoDB ──────────────────────────────────────────────────────────────────
 async function saveToMongo(data) {
@@ -42,6 +42,12 @@ export async function POST(request) {
     // Extract new Document Mode and Payment Fields
     const documentMode = formData.get('documentMode') || '';
     const paymentAmount = formData.get('paymentAmount') || '';
+
+    // Extract EMI breakdown fields
+    const remainingBalance = formData.get('remainingBalance') || 0;
+    const emiPlanType = formData.get('emiPlanType') || 'FULL_PAYMENT';
+    const emiAmount = formData.get('emiAmount') || 0;
+    const emiCount = formData.get('emiCount') || 0;
 
     // Extract Razorpay payment details
     const razorpayPaymentId = formData.get('razorpay_payment_id') || '';
@@ -83,6 +89,7 @@ export async function POST(request) {
       course, coursePrice, batch, source, goals,
       emergencyName, emergencyRelation, emergencyPhone,
       documentMode, paymentAmount,
+      remainingBalance, emiPlanType, emiAmount, emiCount,
       paymentMethod: 'razorpay',
       razorpayPaymentId, razorpayOrderId
     };
@@ -149,7 +156,7 @@ export async function POST(request) {
       console.error('[Registration] CRM Ingestion failed:', crmResult.reason);
     }
 
-    // Trigger transactional payment receipt email asynchronously
+    // Trigger transactional payment receipt email to student
     sendPaymentReceiptEmail({
       studentName: name,
       email,
@@ -159,8 +166,32 @@ export async function POST(request) {
       paymentAmount,
       paymentId: razorpayPaymentId,
       orderId: razorpayOrderId,
+      remainingBalance,
+      emiPlanType,
+      emiAmount,
+      emiCount,
     }).catch((emailErr) => {
       console.error('[Registration] Failed to send receipt email via Brevo:', emailErr);
+    });
+
+    // Trigger instant admin notification to corporate@tzar.co
+    sendAdminRegistrationNotification({
+      studentName: name,
+      email,
+      phone,
+      city,
+      course,
+      batch,
+      paymentAmount,
+      paymentId: razorpayPaymentId,
+      orderId: razorpayOrderId,
+      remainingBalance,
+      emiPlanType,
+      emiAmount,
+      source,
+      goals,
+    }).catch((adminErr) => {
+      console.error('[Registration] Failed to send admin notification email:', adminErr);
     });
 
     return NextResponse.json({

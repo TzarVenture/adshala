@@ -391,44 +391,46 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
-  background: #edf4f0;
-  color: #1a3f32;
-  border: 1px solid #c5d6ce;
+  padding: 5px 12px;
+  background: #1a3f32;
+  color: #ffffff;
+  border: 1px solid #112a21;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
+  box-shadow: 0 2px 6px rgba(26, 63, 50, 0.15);
 }
 
 .payment-summary-card {
   background: #f4f8f6;
   border: 1px solid #e0ebe6;
-  border-radius: 15px;
-  padding: 24px;
+  border-radius: 10px;
+  padding: 14px 16px;
   margin-bottom: 4px;
 }
 
 .payment-summary-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: #6D6C80;
-  margin-bottom: 16px;
+  color: #5d776b;
+  margin-bottom: 10px;
 }
 
 .payment-summary-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #6D6C80;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #555;
 }
 
 .payment-summary-row--total {
-  padding-bottom: 14px;
-  border-bottom: 1px dashed #c5d6ce;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  border-top: 1px dashed #c5d6ce;
   margin-bottom: 0;
 }
 
@@ -436,38 +438,39 @@
   font-weight: 600;
   color: #1a3f32;
   text-align: right;
-  max-width: 60%;
+  max-width: 65%;
+  font-size: 13.5px;
 }
 
 .payment-total-fee {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #161439;
 }
 
 .payment-option-label {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #1a3f32;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .payment-option-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 8px;
 }
 
 .payment-option-card {
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 14px;
+  gap: 10px;
+  padding: 10px 12px;
   background: #fff;
-  border: 2px solid #e2e2e2;
-  border-radius: 12px;
+  border: 1.5px solid #dce5df;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -477,20 +480,20 @@
 }
 
 .payment-option-card--active {
-  border-color: #1a3f32;
-  background: #f0f7f4;
+  border-color: #1a3f32 !important;
+  background: #edf7f2 !important;
 }
 
 .payment-option-icon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: rgba(26, 63, 50, 0.08);
   color: #1a3f32;
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 14px;
   flex-shrink: 0;
 }
 
@@ -505,17 +508,17 @@
 
 .payment-option-title {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #161439;
 }
 
 .payment-option-amount {
   display: block;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: #1a3f32;
-  margin: 2px 0;
+  margin: 1px 0;
 }
 
 .payment-option-desc {
@@ -526,10 +529,10 @@
 
 .payment-option-check {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   color: #1a3f32;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .payment-amount-input-wrap {
@@ -538,10 +541,10 @@
 
 .payment-rupee-sign {
   position: absolute;
-  left: 16px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: #1a3f32;
   pointer-events: none;
@@ -549,14 +552,14 @@
 
 .payment-amount-input {
   width: 100%;
-  height: 56px;
-  padding-left: 40px;
-  padding-right: 16px;
-  font-size: 20px;
+  height: 42px;
+  padding-left: 32px;
+  padding-right: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #1a3f32;
-  border: 2px solid #e2e2e2;
-  border-radius: 10px;
+  border: 1.5px solid #dce5df;
+  border-radius: 8px;
   background: #fff;
   transition: border-color 0.2s;
   outline: none;
@@ -564,15 +567,15 @@
 
 .payment-amount-input:focus {
   border-color: #1a3f32;
-  box-shadow: 0 0 0 3px rgba(26, 63, 50, 0.08);
+  box-shadow: 0 0 0 2px rgba(26, 63, 50, 0.08);
 }
 
 /* Total payable box */
 .payment-payable-box {
   background: #fff;
   border: 1.5px solid #1a3f32;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 8px;
+  padding: 12px 14px;
 }
 
 .payment-payable-row {
@@ -582,36 +585,36 @@
 }
 
 .payment-payable-row span:first-child {
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #6D6C80;
 }
 
 .payment-payable-amount {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
   color: #1a3f32;
 }
 
 .payment-partial-note {
   display: flex;
-  gap: 10px;
-  margin-top: 12px;
-  padding-top: 12px;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 1px dashed #c5d6ce;
 }
 
 .payment-partial-note i {
   color: #f59e0b;
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 2px;
   flex-shrink: 0;
 }
 
 .payment-partial-note p {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #6D6C80;
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -620,10 +623,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 28px;
-  padding: 16px 0 4px;
+  gap: 16px;
+  padding: 10px 0 0;
   border-top: 1px solid #e7e7e7;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .payment-trust-item {
@@ -697,6 +700,7 @@
   outline: none;
   /* Prevent number input spinners from overlapping */
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .payment-amount-input::-webkit-outer-spin-button,
@@ -779,25 +783,37 @@
   font-weight: bold;
 }
 
-/* ── Form Container (Right Column) ───────────────────────────── */
+/* ── Form Container & Area ───────────────────────────────────── */
+.registration-area-compact {
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+@media (max-width: 767.98px) {
+  .registration-area-compact {
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+}
+
 .registration-container {
   width: 100%;
 }
 
 .registration-card {
   background: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e7e7e7;
+  border-radius: 16px;
+  padding: 24px 26px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dce5df;
 }
 
-/* ── Progress Bar ────────────────────────────────────────────── */
+/* ── Desktop Stepper Progress Bar ────────────────────────────── */
 .progress-bar-container {
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
 }
 
 .progress-bar-container::before {
@@ -806,8 +822,8 @@
   top: 50%;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: #f0f0f0;
+  height: 3px;
+  background: #edf2ef;
   transform: translateY(-50%);
   z-index: 1;
 }
@@ -816,7 +832,7 @@
   position: absolute;
   top: 50%;
   left: 0;
-  height: 4px;
+  height: 3px;
   background: #1a3f32;
   transform: translateY(-50%);
   z-index: 2;
@@ -826,22 +842,23 @@
 .progress-step {
   position: relative;
   z-index: 3;
-  width: 36px;
-  height: 36px;
-  background: #f0f0f0;
+  width: 30px;
+  height: 30px;
+  background: #edf2ef;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  color: #a0a0a0;
+  font-weight: 700;
+  font-size: 13px;
+  color: #7b8e85;
   transition: all 0.3s ease;
 }
 
 .progress-step.active {
   background: #1a3f32;
   color: #ffc224;
-  box-shadow: 0 0 0 4px rgba(26, 63, 50, 0.15);
+  box-shadow: 0 0 0 3px rgba(26, 63, 50, 0.15);
 }
 
 .progress-step.completed {
@@ -849,25 +866,69 @@
   color: #fff;
 }
 
-/* ── Form Steps ──────────────────────────────────────────────── */
+/* ── Mobile Stepper Header (Clean, sleek, zero scroll clutter) ── */
+.mobile-stepper {
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf4f0;
+}
+
+.mobile-stepper-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.mobile-stepper-counter {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #1a3f32;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mobile-stepper-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #4b6357;
+}
+
+.mobile-stepper-track {
+  width: 100%;
+  height: 4px;
+  background: #e5ede8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mobile-stepper-bar {
+  height: 100%;
+  background: #1a3f32;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* ── Form Steps Typography ───────────────────────────────────── */
 .step-title {
   font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
-  font-size: 28px;
+  font-size: 19px;
   font-weight: 700;
   color: #161439;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
 .step-subtitle {
-  font-size: 15px;
+  font-size: 13px;
   color: #6D6C80;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
+  line-height: 1.4;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 12px;
 }
 
 .form-grid.full {
@@ -878,33 +939,44 @@
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .form-field label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #1a3f32;
+  margin-bottom: 2px;
 }
 
 .form-field input:not([type="radio"]):not([type="checkbox"]),
-.form-field select,
-.form-field textarea {
+.form-field select {
   width: 100%;
-  padding: 12px 28px;
-  border: 1.5px solid #e2e2e2;
-  border-radius: 10px;
-  font-size: 18px;
+  height: 40px;
+  padding: 8px 12px;
+  border: 1.5px solid #dce5df;
+  border-radius: 8px;
+  font-size: 14px;
   font-family: var(--tg-body-font-family, 'Inter', sans-serif);
-  color: #333;
-  background: #f9f9f9;
+  color: #222;
+  background: #fafbfa;
   transition: all 0.2s ease;
   outline: none;
 }
 
 .form-field textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 8px 12px;
+  border: 1.5px solid #dce5df;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--tg-body-font-family, 'Inter', sans-serif);
+  color: #222;
+  background: #fafbfa;
+  transition: all 0.2s ease;
+  outline: none;
   resize: vertical;
-  min-height: 100px;
 }
 
 .form-field input:not([type="radio"]):not([type="checkbox"]):focus,
@@ -912,68 +984,182 @@
 .form-field textarea:focus {
   border-color: #1a3f32;
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(26, 63, 50, 0.08);
+  box-shadow: 0 0 0 2px rgba(26, 63, 50, 0.08);
 }
 
 .form-error {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #dc2626;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 /* ── Checkboxes & Radios ─────────────────────────────────────── */
 .radio-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .radio-group-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 8px;
 }
 
 .custom-radio {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
+  padding: 6px 10px;
+  background: #fafbfa;
+  border: 1px solid #dce5df;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.custom-radio:hover {
+  border-color: #1a3f32;
+  background: #f4f8f6;
 }
 
 .custom-radio input {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   accent-color: #1a3f32;
+  flex-shrink: 0;
 }
 
 .custom-radio span {
-  font-size: 15px;
+  font-size: 13.5px;
   color: #333;
 }
 
 .checkbox-wrapper {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  background: #f9f9f9;
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid #e2e2e2;
+  gap: 10px;
+  background: #fafbfa;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dce5df;
 }
 
 .checkbox-wrapper input {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   accent-color: #1a3f32;
   margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .checkbox-wrapper label {
-  font-size: 14px;
-  color: #6D6C80;
-  line-height: 1.6;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.45;
   cursor: pointer;
+}
+
+/* ── Step 3: Compact Course Selection ────────────────────────── */
+.course-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.course-option-compact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #dce5df;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+}
+
+.course-option-compact:hover {
+  border-color: #1a3f32;
+  background: #f7faf8;
+}
+
+.course-option-compact--active {
+  border: 1.5px solid #1a3f32 !important;
+  background: #edf7f2 !important;
+  box-shadow: 0 1px 4px rgba(26, 63, 50, 0.06);
+}
+
+.batch-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.batch-option-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #d4e3da;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+}
+
+.batch-option-pill:hover {
+  border-color: #1a3f32;
+}
+
+.batch-option-pill--active {
+  border: 1.5px solid #1a3f32 !important;
+  background: #ffffff !important;
+  color: #1a3f32 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 4px rgba(26, 63, 50, 0.06);
+}
+
+/* ── Step 4: Source Options ──────────────────────────────────── */
+.source-option-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: #ffffff;
+  border: 1px solid #dce5df;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  color: #333;
+}
+
+.source-option-pill:hover {
+  border-color: #1a3f32;
+}
+
+/* ── Step 5: Document Checklist ──────────────────────────────── */
+.doc-checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 8px;
+}
+
+.doc-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #ffffff;
+  border: 1px solid #dce5df;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: #222;
 }
 
 /* ── Buttons ─────────────────────────────────────────────────── */
@@ -981,20 +1167,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px;
-  padding-top: 24px;
-  border-top: 1px solid #e7e7e7;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #edf2ef;
 }
 
 .btn-prev,
 .btn-next {
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
   cursor: pointer;
   transition: all 0.2s ease;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-prev {
@@ -1036,38 +1226,38 @@
 /* ── Success State ───────────────────────────────────────────── */
 .registration-success {
   text-align: center;
-  padding: 40px 20px;
+  padding: 30px 16px;
 }
 
 .success-icon {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   background: #e6f4ea;
   color: #1a3f32;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
-  margin: 0 auto 24px;
+  font-size: 30px;
+  margin: 0 auto 18px;
 }
 
 .registration-success h2 {
   font-family: var(--tg-heading-font-family, 'Poppins', sans-serif);
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 700;
   color: #1a3f32;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .registration-success p {
-  font-size: 16px;
+  font-size: 14px;
   color: #6D6C80;
-  margin-bottom: 30px;
-  line-height: 1.6;
+  margin-bottom: 24px;
+  line-height: 1.5;
 }
 
-/* ── Responsive ──────────────────────────────────────────────── */
+/* ── Responsive Rules ────────────────────────────────────────── */
 @media (max-width: 991.98px) {
   .registration-brand-info {
     padding-right: 0;
@@ -1081,15 +1271,17 @@
 
 @media (max-width: 767.98px) {
   .registration-brand-title {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .registration-card {
-    padding: 30px 20px;
+    padding: 16px 14px;
+    border-radius: 12px;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .radio-group-grid {
@@ -1097,7 +1289,28 @@
   }
 
   .step-title {
-    font-size: 24px;
+    font-size: 18px;
+  }
+
+  .course-selection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-option-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .step-actions {
+    gap: 8px;
+  }
+
+  .btn-prev,
+  .btn-next {
+    flex: 1;
+    padding: 10px 10px;
+    font-size: 13px;
   }
 }
 
@@ -1181,16 +1394,19 @@
 }
 
 @media (max-width: 767.98px) {
+  .verified-receipt-card,
   .receipt-card-print {
-    padding: 18px 16px !important;
-    border-radius: 14px !important;
+    padding: 18px 14px !important;
+    border-radius: 12px !important;
   }
   .receipt-actions {
     flex-direction: column !important;
     align-items: stretch !important;
-    gap: 12px !important;
+    gap: 10px !important;
   }
-  .receipt-actions .btn {
+  .receipt-actions .btn,
+  .receipt-actions button,
+  .receipt-actions a {
     width: 100% !important;
     justify-content: center !important;
     margin-left: 0 !important;
@@ -1198,12 +1414,23 @@
   }
   .receipt-grid-responsive {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 12px !important;
   }
   .receipt-header-responsive {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 12px !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+  .receipt-header-responsive > div {
+    width: 100% !important;
+  }
+  .course-selection-list label {
+    padding: 12px 14px !important;
+  }
+  .batch-schedule-grid,
+  .batch-mode-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -1233,8 +1460,13 @@
   header, footer, nav, .tg-header__area, #sticky-header, #header-fixed-height,
   .no-print, .receipt-sidebar, .breadcrumb, .embedded-notice, .receipt-card-print,
   .registration-brand-info, .step-actions, .progress-bar-container,
-  .embedded-receipt-wrapper > .embedded-notice {
+  .embedded-receipt-wrapper > .embedded-notice,
+  .sticky-bar, .sticky-action, .action-center, .whatsapp,
+  .scroll__top, .scroll-to-target, .Toastify,
+  div[role="navigation"].sticky-bar {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
   .print-only {
     display: block !important;

@@ -39,7 +39,7 @@ const ContactArea = () => {
                            </div>
                            <div className="content">
                               <h4 className="title">E-mail Address</h4>
-                              <Link href="mailto:info@gmail.com">hello@adshalaa.com</Link>
+                              <Link href="mailto:info@adshalaa.com">info@adshalaa.com</Link>
                               {/* <Link href="mailto:info@gmail.com">info@gmail.com</Link> */}
                            </div>
                         </li>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -15,13 +15,13 @@ import StepDeclaration from "./StepDeclaration";
 import "./Registration.css";
 
 const steps = [
-  { id: 1, component: StepPersonal },
-  { id: 2, component: StepProfessional },
-  { id: 3, component: StepCourse },
-  { id: 4, component: StepBackground },
-  { id: 5, component: StepDocuments },
-  { id: 6, component: StepDeclaration }, // Emergency Contact and Terms
-  { id: 7, component: StepPayment },
+  { id: 1, name: "Personal", title: "Personal Details", component: StepPersonal },
+  { id: 2, name: "Professional", title: "Professional Details", component: StepProfessional },
+  { id: 3, name: "Course", title: "Course Details", component: StepCourse },
+  { id: 4, name: "Background", title: "Background & Goals", component: StepBackground },
+  { id: 5, name: "Documents", title: "Document Submission", component: StepDocuments },
+  { id: 6, name: "Declaration", title: "Terms & Declaration", component: StepDeclaration },
+  { id: 7, name: "Payment", title: "Fee Payment", component: StepPayment },
 ];
 
 const FORM_STORAGE_KEY = "adshaala_registration_form_data";
@@ -99,6 +99,20 @@ export default function MultiStepForm() {
     if (savedStep) setCurrentStep(Number(savedStep));
     setIsMounted(true);
   }, [reset]);
+
+  const formTopRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMounted && formTopRef.current) {
+      const rect = formTopRef.current.getBoundingClientRect();
+      if (rect.top < 70) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - 80,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [currentStep, isMounted]);
 
   useEffect(() => {
     if (isMounted) {
@@ -235,12 +249,12 @@ export default function MultiStepForm() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "",
         amount: orderResult.amount,
         currency: orderResult.currency,
-        name: "Adshalaa (by Tzar Digital)",
+        name: "Adshalaa EduTech",
         description: `Course Registration Fee - ${data.course}`,
         image:
           typeof window !== "undefined" && window.location.protocol === "https:"
-            ? `${window.location.origin}/Adshalaa_Logo.png`
-            : "https://www.adshalaa.com/Adshalaa_Logo.png",
+            ? `${window.location.origin}/adshalaaWBLogo.png`
+            : "https://www.adshalaa.com/adshalaaWBLogo.png",
         order_id: orderResult.order_id,
         handler: async function (response: any) {
           try {
@@ -390,10 +404,10 @@ export default function MultiStepForm() {
   const CurrentComponent = steps[currentStep].component;
 
   return (
-    <div className="registration-container">
+    <div className="registration-container" ref={formTopRef}>
       <div className="registration-card">
-        {/* Progress Bar */}
-        <div className="progress-bar-container">
+        {/* Desktop / Tablet Stepper (Hidden on small mobile) */}
+        <div className="progress-bar-container d-none d-sm-flex">
           <div
             className="progress-bar-fill"
             style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
@@ -402,10 +416,29 @@ export default function MultiStepForm() {
             <div
               key={step.id}
               className={`progress-step ${index === currentStep ? "active" : ""} ${index < currentStep ? "completed" : ""}`}
+              title={step.title}
             >
               {index < currentStep ? "✓" : step.id}
             </div>
           ))}
+        </div>
+
+        {/* Mobile Stepper Header (Clean, sleek, zero clutter) */}
+        <div className="mobile-stepper d-sm-none">
+          <div className="mobile-stepper-meta">
+            <span className="mobile-stepper-counter">
+              Step {currentStep + 1} of {steps.length}
+            </span>
+            <span className="mobile-stepper-title">
+              {steps[currentStep].name}
+            </span>
+          </div>
+          <div className="mobile-stepper-track">
+            <div
+              className="mobile-stepper-bar"
+              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+            />
+          </div>
         </div>
 
         {/* Form Content */}

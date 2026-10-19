@@ -53,10 +53,6 @@
   }
 }
 
-.sticky-action.action-center {
-  /* margin: 0 auto; */
-}
-
 .sticky-action .whatsapp {
   color: #25d366;
   font-size: 20px;
@@ -140,5 +136,16 @@
 
   .sticky-action.action-center .label {
     display: none;
+  }
+}
+
+@media print {
+  .sticky-bar,
+  .sticky-action,
+  .sticky-action.action-center,
+  .whatsapp {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
 }

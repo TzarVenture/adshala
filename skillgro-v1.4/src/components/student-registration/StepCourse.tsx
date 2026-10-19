@@ -60,69 +60,178 @@ export default function StepCourse() {
   return (
     <div className="form-step">
       <h2 className="step-title">Course Details</h2>
-      <p className="step-subtitle">Select the course you wish to enroll in and your preferred batch.</p>
+      <p className="step-subtitle">Select the course you wish to enroll in and your preferred batch schedule.</p>
 
-      <div className="form-field mb-4">
-        <label>Course Selected *</label>
-        <div className="radio-group-grid mt-2">
-          {COURSES.map((course) => (
-            <label key={course.title} className="custom-radio">
-              <input
-                type="radio"
-                value={course.title}
-                {...register('course', { required: 'Please select a course' })}
-              />
-              <span className="d-flex flex-column">
-                <span>{course.title}</span>
-              </span>
-            </label>
-          ))}
-          <label className="custom-radio">
-            <input
-              type="radio"
-              value="Other"
-              {...register('course', { required: 'Please select a course' })}
-            />
-            <span>Other</span>
-          </label>
+      {/* ── Section 1: Course Selection (Subtle Brand Tint 1) ── */}
+      <div
+        className="form-section-card mb-3"
+        style={{
+          background: '#f8faf9',
+          border: '1px solid #dbe6e0',
+          borderRadius: '10px',
+          padding: '14px 14px',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '14px',
+            fontWeight: 700,
+            color: '#161439',
+            marginBottom: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <i className="fas fa-graduation-cap" style={{ color: '#1a3f32', fontSize: '15px' }}></i>
+          <span>Course Selected *</span>
         </div>
-        {errors.course && <span className="form-error">{errors.course.message as string}</span>}
+
+        <div className="course-selection-grid">
+          {COURSES.map((course) => {
+            const isSelected = selectedCourse === course.title;
+            return (
+              <label
+                key={course.title}
+                className={`course-option-compact ${isSelected ? 'course-option-compact--active' : ''}`}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: 0 }}>
+                  <input
+                    type="radio"
+                    value={course.title}
+                    {...register('course', { required: 'Please select a course' })}
+                    style={{
+                      width: '16px',
+                      height: '16px',
+                      accentColor: '#1a3f32',
+                      flexShrink: 0,
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontSize: '13px',
+                      fontWeight: isSelected ? 600 : 500,
+                      color: isSelected ? '#1a3f32' : '#222222',
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    {course.title}
+                  </span>
+                </div>
+              </label>
+            );
+          })}
+        </div>
+        {errors.course && <span className="form-error mt-2 d-block">{errors.course.message as string}</span>}
       </div>
 
-      {/* 1. Schedule Selection */}
-      <div className="form-field mt-4">
-        <label>Preferred Batch *</label>
-        <div className="radio-group-grid mt-2">
-          {BATCH_SCHEDULES.map((sched) => (
-            <label key={sched} className="custom-radio">
-              <input
-                type="radio"
-                value={sched}
-                {...register('batchSchedule', { required: 'Please select a batch schedule' })}
-              />
-              <span>{sched}</span>
-            </label>
-          ))}
+      {/* ── Section 2: Preferred Batch Schedule (Subtle Brand Tint 2) ── */}
+      <div
+        className="form-section-card mb-3"
+        style={{
+          background: '#f2f7f4',
+          border: '1px solid #d5e5db',
+          borderRadius: '10px',
+          padding: '12px 14px',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '13.5px',
+            fontWeight: 700,
+            color: '#161439',
+            marginBottom: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <i className="fas fa-calendar-alt" style={{ color: '#1a3f32', fontSize: '14px' }}></i>
+          <span>Preferred Batch Schedule *</span>
         </div>
-        {errors.batchSchedule && <span className="form-error">{errors.batchSchedule.message as string}</span>}
+
+        <div className="batch-options-grid">
+          {BATCH_SCHEDULES.map((sched) => {
+            const isSelected = selectedSchedule === sched;
+            return (
+              <label
+                key={sched}
+                className={`batch-option-pill ${isSelected ? 'batch-option-pill--active' : ''}`}
+              >
+                <input
+                  type="radio"
+                  value={sched}
+                  {...register('batchSchedule', { required: 'Please select a batch schedule' })}
+                  style={{
+                    width: '15px',
+                    height: '15px',
+                    accentColor: '#1a3f32',
+                    flexShrink: 0,
+                    cursor: 'pointer',
+                  }}
+                />
+                <span>{sched}</span>
+              </label>
+            );
+          })}
+        </div>
+        {errors.batchSchedule && (
+          <span className="form-error mt-1 d-block">{errors.batchSchedule.message as string}</span>
+        )}
       </div>
 
-      {/* 2. Mode Selection */}
-      <div className="form-field mt-4">
-        <label>Learning Mode *</label>
-        <div className="radio-group-grid mt-2">
-          {BATCH_MODES.map((mode) => (
-            <label key={mode} className="custom-radio">
-              <input
-                type="radio"
-                value={mode}
-                {...register('batchMode', { required: 'Please select a learning mode' })}
-              />
-              <span>{mode}</span>
-            </label>
-          ))}
+      {/* ── Section 3: Learning Mode (Subtle Brand Tint 3) ── */}
+      <div
+        className="form-section-card mb-3"
+        style={{
+          background: '#f8faf9',
+          border: '1px solid #dbe6e0',
+          borderRadius: '10px',
+          padding: '12px 14px',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '13.5px',
+            fontWeight: 700,
+            color: '#161439',
+            marginBottom: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <i className="fas fa-chalkboard-teacher" style={{ color: '#1a3f32', fontSize: '14px' }}></i>
+          <span>Learning Mode *</span>
         </div>
-        {errors.batchMode && <span className="form-error">{errors.batchMode.message as string}</span>}
+
+        <div className="batch-options-grid">
+          {BATCH_MODES.map((mode) => {
+            const isSelected = selectedMode === mode;
+            return (
+              <label
+                key={mode}
+                className={`batch-option-pill ${isSelected ? 'batch-option-pill--active' : ''}`}
+              >
+                <input
+                  type="radio"
+                  value={mode}
+                  {...register('batchMode', { required: 'Please select a learning mode' })}
+                  style={{
+                    width: '15px',
+                    height: '15px',
+                    accentColor: '#1a3f32',
+                    flexShrink: 0,
+                    cursor: 'pointer',
+                  }}
+                />
+                <span>{mode}</span>
+              </label>
+            );
+          })}
+        </div>
+        {errors.batchMode && <span className="form-error mt-1 d-block">{errors.batchMode.message as string}</span>}
       </div>
 
       {/* Hidden batch input for final form value */}
@@ -131,33 +240,35 @@ export default function StepCourse() {
         {...register('batch', { required: 'Please select both your preferred schedule and learning mode' })}
       />
       {errors.batch && !errors.batchSchedule && !errors.batchMode && (
-        <span className="form-error mt-2 d-block">{errors.batch.message as string}</span>
+        <span className="form-error mt-1 d-block">{errors.batch.message as string}</span>
       )}
 
-      {/* Dynamic selection summary */}
+      {/* Dynamic selection summary - Compact Strip */}
       {(selectedCourse || selectedSchedule || selectedMode) && (
         <div
           style={{
-            marginTop: '20px',
-            padding: '12px 14px',
-            background: '#f8faf9',
-            border: '1px solid #d9e5df',
+            padding: '8px 12px',
+            background: '#ffffff',
+            border: '1px solid #1a3f32',
             borderRadius: '8px',
-            fontSize: '13px',
-            color: '#333',
-            lineHeight: '1.5'
+            fontSize: '12.5px',
+            color: '#161439',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '6px',
           }}
         >
-          <div style={{ marginBottom: '4px' }}>
-            <span style={{ color: '#666', marginRight: '6px' }}>Course:</span>
-            <span style={{ color: '#1a3f32', fontWeight: 600 }}>{selectedCourse || '—'}</span>
+          <div>
+            <span style={{ color: '#666', marginRight: '6px' }}>Enrolling:</span>
+            <strong style={{ color: '#1a3f32' }}>{selectedCourse || '—'}</strong>
           </div>
           <div>
-            <span style={{ color: '#666', marginRight: '6px' }}>Batch:</span>
-            <span style={{ color: '#1a3f32', fontWeight: 500 }}>{selectedSchedule || '—'}</span>
-            <span style={{ color: '#999', margin: '0 8px' }}>•</span>
-            <span style={{ color: '#666', marginRight: '6px' }}>Mode:</span>
-            <span style={{ color: '#1a3f32', fontWeight: 500 }}>{selectedMode || '—'}</span>
+            <span style={{ color: '#666', marginRight: '6px' }}>Schedule:</span>
+            <span style={{ color: '#1a3f32', fontWeight: 600 }}>{selectedSchedule || '—'}</span>
+            <span style={{ color: '#999', margin: '0 6px' }}>•</span>
+            <span style={{ color: '#1a3f32', fontWeight: 600 }}>{selectedMode || '—'}</span>
           </div>
         </div>
       )}

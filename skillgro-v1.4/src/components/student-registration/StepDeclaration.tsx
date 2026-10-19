@@ -9,7 +9,7 @@ export default function StepDeclaration() {
       <h2 className="step-title">Emergency Contact & Declaration</h2>
       <p className="step-subtitle">Please provide an emergency contact and accept the terms.</p>
 
-      <div className="form-grid mb-4">
+      <div className="form-grid mb-3">
         <div className="form-field">
           <label>Emergency Contact Name *</label>
           <input
@@ -48,16 +48,18 @@ export default function StepDeclaration() {
         </div>
       </div>
 
-      <h3 className="step-title" style={{ fontSize: '20px', marginTop: '30px' }}>Terms & Declaration</h3>
-      <div className="checkbox-wrapper mt-3">
+      <div style={{ fontSize: '14.5px', fontWeight: 700, color: '#161439', marginTop: '14px', marginBottom: '6px' }}>
+        Terms & Declaration *
+      </div>
+      <div className="checkbox-wrapper" style={{ padding: '10px 12px' }}>
         <input
           type="checkbox"
           id="declaration"
           {...register('declaration', { required: 'You must agree to the terms and conditions' })}
+          style={{ width: '16px', height: '16px', marginTop: '2px' }}
         />
-        <label htmlFor="declaration">
-          I hereby declare that all the information provided above is true to the best of my knowledge. 
-          I understand that any false information may lead to the cancellation of my admission.
+        <label htmlFor="declaration" style={{ fontSize: '12.5px', color: '#444', lineHeight: 1.4 }}>
+          I hereby declare that all information provided above is true to the best of my knowledge. I understand that any false information may lead to cancellation of admission.
         </label>
       </div>
       {errors.declaration && <span className="form-error d-block mt-1">{errors.declaration.message as string}</span>}

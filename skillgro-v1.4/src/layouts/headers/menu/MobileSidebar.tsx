@@ -53,6 +53,30 @@ const MobileSidebarInner = ({ isActive, setIsActive }: MobileMenuProps) => {
                <div className="tgmobile__menu-outer">
                   <MobileMenu />
                </div>
+               <div style={{ padding: '16px 20px 8px', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                  <Link
+                     href="/student-registration"
+                     onClick={() => setIsActive(false)}
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        width: '100%',
+                        padding: '11px 16px',
+                        fontSize: '13.5px',
+                        fontWeight: 700,
+                        backgroundColor: '#ffc224',
+                        color: '#13382c',
+                        borderRadius: '25px',
+                        textDecoration: 'none',
+                        boxShadow: '0 2px 8px rgba(255, 194, 36, 0.3)'
+                     }}
+                  >
+                     <i className="fas fa-user-graduate"></i>
+                     <span>Student Registration</span>
+                  </Link>
+               </div>
                <div className="social-links">
                   <ul className="list-wrap">
                      <li><Link href="https://www.facebook.com/share/1AQin71UzP/"><i className="fab fa-facebook-f"></i></Link></li>

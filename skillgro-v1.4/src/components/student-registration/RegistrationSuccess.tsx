@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import adshalaaFooterLogo from '@/assets/img/brand/Adshalaa_footer_logo.png';
 import './Registration.css';
 
 interface RegistrationData {
@@ -110,8 +111,13 @@ export default function RegistrationSuccess({
         header, footer, nav, .tg-header__area, #sticky-header, #header-fixed-height,
         .no-print, .receipt-sidebar, .breadcrumb, .embedded-notice, .receipt-card-print,
         .registration-brand-info, .step-actions, .progress-bar-container,
-        .embedded-receipt-wrapper > .embedded-notice {
+        .embedded-receipt-wrapper > .embedded-notice,
+        .sticky-bar, .sticky-action, .action-center, .whatsapp,
+        .scroll__top, .scroll-to-target, .Toastify,
+        div[role="navigation"].sticky-bar {
           display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
         }
         .print-only {
           display: block !important;
@@ -216,22 +222,47 @@ export default function RegistrationSuccess({
   // The official admission receipt card (Screen view)
   const receiptCardContent = (
     <div
-      className="receipt-card-print"
+      className="receipt-card-print verified-receipt-card"
       style={{
+        position: 'relative',
         background: '#ffffff',
         border: '1px solid #dce5e0',
         borderRadius: '16px',
         padding: '28px 30px',
         boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+        overflow: 'hidden',
       }}
     >
+      {/* Background Watermark for Receipt */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '440px',
+          maxWidth: '85%',
+          opacity: 0.045,
+          pointerEvents: 'none',
+          zIndex: 0,
+          textAlign: 'center',
+        }}
+      >
+        <img
+          src={adshalaaFooterLogo.src}
+          alt=""
+          style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+        />
+      </div>
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
       {/* Top Institute Header with Brand Logo */}
       <div className="receipt-header-responsive" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', marginBottom: '24px', paddingBottom: '20px', borderBottom: '1px solid #e7efe9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <img
-            src="/Adshalaa_Logo.png"
-            alt="Adshalaa Logo"
-            style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+            src={adshalaaFooterLogo.src}
+            alt="Adshalaa EduTech"
+            style={{ height: '44px', width: 'auto', objectFit: 'contain' }}
           />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
@@ -252,7 +283,7 @@ export default function RegistrationSuccess({
               </span>
             </div>
             <p style={{ fontSize: '13.5px', color: '#555', margin: '4px 0 0 0' }}>
-              Official admission slip issued by Adshalaa EduTech (by Tzar Digital).
+              Official admission slip issued by Adshalaa EduTech.
             </p>
           </div>
         </div>
@@ -400,22 +431,6 @@ export default function RegistrationSuccess({
           <span>Print Receipt</span>
         </button>
 
-        <button
-          type="button"
-          onClick={handleRegisterAnotherClick}
-          className="btn"
-          style={{
-            padding: '12px 24px',
-            fontSize: '14px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <i className="fas fa-user-plus"></i>
-          <span>Register Another Student</span>
-        </button>
-
         <Link
           href="/"
           className="btn btn-border"
@@ -432,6 +447,7 @@ export default function RegistrationSuccess({
           <span>Home</span>
         </Link>
       </div>
+      </div>
     </div>
   );
 
@@ -439,17 +455,40 @@ export default function RegistrationSuccess({
   const printDocumentPages = (
     <div className="print-only" style={{ display: 'none' }}>
       {/* ── PRINT PAGE 1: Official Admission Slip ── */}
-      <div className="print-page-1" style={{ padding: '0 0 10px 0' }}>
+      <div className="print-page-1" style={{ position: 'relative', padding: '0 0 10px 0', overflow: 'hidden' }}>
+        {/* Background Watermark */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '420px',
+            maxWidth: '80%',
+            opacity: 0.05,
+            pointerEvents: 'none',
+            zIndex: 0,
+            textAlign: 'center',
+          }}
+        >
+          <img
+            src={adshalaaFooterLogo.src}
+            alt=""
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+          />
+        </div>
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Print Header with Brand Logo */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #1a3f32', paddingBottom: '12px', marginBottom: '14px' }}>
           <div>
-            <img src="/Adshalaa_Logo.png" alt="Adshaala" style={{ height: '42px', objectFit: 'contain' }} />
+            <img src={adshalaaFooterLogo.src} alt="Adshalaa EduTech" style={{ height: '42px', objectFit: 'contain' }} />
             <div style={{ fontSize: '10.5px', color: '#666', marginTop: '3px' }}>
               ISO 9001:2015 Certified · Government & Industry Accredited
             </div>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '14px', fontWeight: 700, color: '#1a3f32' }}>ADSHAALA (BY TZAR DIGITAL)</div>
+            <div style={{ fontSize: '14px', fontWeight: 700, color: '#1a3f32' }}>ADSHALAA EDUTECH</div>
             <div style={{ fontSize: '11.5px', color: '#555' }}>Official Student Admission & Payment Slip</div>
             <div style={{ fontSize: '10.5px', color: '#777', marginTop: '2px' }}>Ref: {registration.paymentId}</div>
           </div>
@@ -551,16 +590,40 @@ export default function RegistrationSuccess({
         </div>
 
         <div style={{ marginTop: '30px', textAlign: 'center', fontSize: '10.5px', color: '#888', borderTop: '1px solid #eee', paddingTop: '6px' }}>
-          Page 1 of 2 — Official Student Admission Receipt · www.adshalaa.com · corporate@tzar.co
+          Page 1 of 2 — Official Student Admission Receipt · www.adshalaa.com · info@adshalaa.com
+        </div>
         </div>
       </div>
 
       {/* ── PRINT PAGE 2: Guidelines, Support & Accreditations ── */}
-      <div className="print-page-2" style={{ padding: '10px 0 0 0' }}>
+      <div className="print-page-2" style={{ position: 'relative', padding: '10px 0 0 0', overflow: 'hidden' }}>
+        {/* Background Watermark */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '420px',
+            maxWidth: '80%',
+            opacity: 0.05,
+            pointerEvents: 'none',
+            zIndex: 0,
+            textAlign: 'center',
+          }}
+        >
+          <img
+            src={adshalaaFooterLogo.src}
+            alt=""
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+          />
+        </div>
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Page 2 Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #1a3f32', paddingBottom: '12px', marginBottom: '14px' }}>
           <div>
-            <img src="/Adshalaa_Logo.png" alt="Adshaala" style={{ height: '38px', objectFit: 'contain' }} />
+            <img src={adshalaaFooterLogo.src} alt="Adshalaa EduTech" style={{ height: '38px', objectFit: 'contain' }} />
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#1a3f32' }}>STUDENT ONBOARDING & HELPDESK DIRECTORY</div>
@@ -583,10 +646,10 @@ export default function RegistrationSuccess({
               </tr>
               <tr>
                 <td style={{ padding: '6px 10px', color: '#666', borderBottom: '1px solid #eee' }}>Official Email:</td>
-                <td style={{ padding: '6px 10px', fontWeight: 600, borderBottom: '1px solid #eee' }}>corporate@tzar.co</td>
+                <td style={{ padding: '6px 10px', fontWeight: 600, borderBottom: '1px solid #eee' }}>info@adshalaa.com</td>
               </tr>
               <tr>
-                <td style={{ padding: '6px 10px', color: '#666', borderBottom: '1px solid #eee' }}>Institute Campus:</td>
+                <td style={{ padding: '6px 10px', color: '#666', borderBottom: '1px solid #eee' }}>Campus Center:</td>
                 <td style={{ padding: '6px 10px', fontWeight: 600, borderBottom: '1px solid #eee' }}>Mumbai Campus, Maharashtra, India</td>
               </tr>
               <tr>
@@ -640,7 +703,8 @@ export default function RegistrationSuccess({
         </div>
 
         <div style={{ marginTop: '40px', textAlign: 'center', fontSize: '10.5px', color: '#888', borderTop: '1px solid #eee', paddingTop: '6px' }}>
-          Page 2 of 2 — Adshalaa EduTech | ISO 9001:2015 Certified
+          Page 2 of 2 — Adshalaa EduTech | www.adshalaa.com | Admissions Desk: info@adshalaa.com
+        </div>
         </div>
       </div>
     </div>
@@ -760,34 +824,13 @@ export default function RegistrationSuccess({
           <div style={{ marginTop: '4px', fontWeight: 600 }}>
             <a href="tel:+918652199991" style={{ color: '#1a3f32', textDecoration: 'none' }}>+91 8652199991</a>
             {' '}/ <a href="tel:+917760775875" style={{ color: '#1a3f32', textDecoration: 'none' }}>+91 7760775875</a>
-            {' '}| Email: <a href="mailto:corporate@tzar.co" style={{ color: '#1a3f32', textDecoration: 'none' }}>corporate@tzar.co</a>
+            {' '}| Email: <a href="mailto:info@adshalaa.com" style={{ color: '#1a3f32', textDecoration: 'none' }}>info@adshalaa.com</a>
           </div>
         </div>
       </div>
 
       {/* Actions */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
-        <button
-          type="button"
-          onClick={handleRegisterAnotherClick}
-          className="btn-next"
-          style={{
-            background: '#1a3f32',
-            color: '#ffffff',
-            padding: '10px 20px',
-            borderRadius: '8px',
-            fontSize: '14px',
-            fontWeight: 600,
-            border: 'none',
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <i className="fas fa-user-plus"></i>
-          <span>Register Another Student</span>
-        </button>
         <Link
           href="/"
           style={{
@@ -846,7 +889,7 @@ export default function RegistrationSuccess({
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <i className="fas fa-info-circle" style={{ color: '#1a3f32', fontSize: '18px' }}></i>
             <span style={{ fontSize: '14px', color: '#1a3f32', fontWeight: 500 }}>
-              Recent registration detected. Review your receipt below or register another student.
+              Recent registration detected. Review your official admission receipt below.
             </span>
           </div>
           <Link
@@ -958,11 +1001,11 @@ export default function RegistrationSuccess({
                   Official Email
                 </div>
                 <a
-                  href="mailto:corporate@tzar.co"
+                  href="mailto:info@adshalaa.com"
                   style={{ fontSize: '15px', fontWeight: 600, color: '#1a3f32', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
                   <i className="fas fa-envelope" style={{ fontSize: '13px', color: '#ffc224' }}></i>
-                  corporate@tzar.co
+                  info@adshalaa.com
                 </a>
               </div>
 

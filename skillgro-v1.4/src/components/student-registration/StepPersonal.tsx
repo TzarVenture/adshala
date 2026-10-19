@@ -133,7 +133,7 @@ export default function StepPersonal() {
             )}
           </div>
 
-          <div style={{ position: 'relative', display: 'flex', gap: '8px' }}>
+          <div style={{ position: 'relative', display: 'flex', gap: '8px', alignItems: 'center' }}>
             <input
               type="email"
               placeholder="john@example.com"
@@ -151,6 +151,7 @@ export default function StepPersonal() {
               })}
               style={{
                 flex: 1,
+                minWidth: 0,
                 backgroundColor: isEmailVerified ? '#f8faf9' : '#fff',
                 borderColor: isEmailVerified ? '#bbf7d0' : undefined
               }}
@@ -161,20 +162,22 @@ export default function StepPersonal() {
                 onClick={handleSendOtp}
                 disabled={isSendingOtp || countdown > 0}
                 style={{
-                  padding: '0 16px',
+                  height: '40px',
+                  padding: '0 14px',
                   background: '#1a3f32',
                   color: '#fff',
                   border: 'none',
-                  borderRadius: '6px',
+                  borderRadius: '8px',
                   fontSize: '12.5px',
                   fontWeight: 600,
                   whiteSpace: 'nowrap',
                   cursor: isSendingOtp || countdown > 0 ? 'not-allowed' : 'pointer',
                   opacity: isSendingOtp || countdown > 0 ? 0.7 : 1,
-                  fontFamily: 'inherit'
+                  fontFamily: 'inherit',
+                  flexShrink: 0
                 }}
               >
-                {isSendingOtp ? 'Sending...' : countdown > 0 ? `Resend (${countdown}s)` : otpSent ? 'Resend OTP' : 'Verify Email'}
+                {isSendingOtp ? 'Sending...' : countdown > 0 ? `${countdown}s` : otpSent ? 'Resend' : 'Verify Email'}
               </button>
             )}
           </div>
@@ -184,30 +187,31 @@ export default function StepPersonal() {
           {otpSent && !isEmailVerified && (
             <div
               style={{
-                marginTop: '10px',
-                padding: '12px 14px',
+                marginTop: '6px',
+                padding: '8px 10px',
                 background: '#f8faf9',
                 border: '1px solid #d2e4db',
-                borderRadius: '8px',
+                borderRadius: '6px',
               }}
             >
-              <div style={{ fontSize: '12px', color: '#555', marginBottom: '8px' }}>
-                We sent a 6-digit verification code to <strong>{emailValue}</strong>:
+              <div style={{ fontSize: '11.5px', color: '#555', marginBottom: '6px' }}>
+                Enter the 6-digit code sent to <strong>{emailValue}</strong>:
               </div>
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                 <input
                   type="text"
                   maxLength={6}
-                  placeholder="6-digit OTP"
+                  placeholder="000000"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                   style={{
                     flex: 1,
-                    maxWidth: '160px',
-                    padding: '8px 12px',
-                    fontSize: '15px',
+                    maxWidth: '130px',
+                    height: '36px',
+                    padding: '4px 8px',
+                    fontSize: '14px',
                     fontFamily: 'monospace',
-                    letterSpacing: '3px',
+                    letterSpacing: '2px',
                     textAlign: 'center',
                     border: '1px solid #cbd5e1',
                     borderRadius: '6px',
@@ -219,18 +223,20 @@ export default function StepPersonal() {
                   onClick={handleVerifyOtp}
                   disabled={isVerifyingOtp || otp.length !== 6}
                   style={{
-                    padding: '8px 16px',
+                    height: '36px',
+                    padding: '0 14px',
                     background: '#1a3f32',
                     color: '#fff',
                     border: 'none',
                     borderRadius: '6px',
-                    fontSize: '13px',
+                    fontSize: '12.5px',
                     fontWeight: 600,
                     cursor: isVerifyingOtp || otp.length !== 6 ? 'not-allowed' : 'pointer',
-                    opacity: isVerifyingOtp || otp.length !== 6 ? 0.6 : 1
+                    opacity: isVerifyingOtp || otp.length !== 6 ? 0.6 : 1,
+                    flexShrink: 0
                   }}
                 >
-                  {isVerifyingOtp ? 'Verifying...' : 'Confirm ✓'}
+                  {isVerifyingOtp ? '...' : 'Confirm ✓'}
                 </button>
               </div>
 
