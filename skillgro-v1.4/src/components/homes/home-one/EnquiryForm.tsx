@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import "./EnquiryForm.css";
 import BtnArrow from "@/svg/BtnArrow"
@@ -28,14 +29,19 @@ export default function EnquiryForm() {
 
   return (
     <div className='form-parent'>
-      <div>
-
+      <div className='form-left-col'>
         <EnquiryFormContainer />
       </div>
       <div className='form-img'>
-        <img src="https://imgs.search.brave.com/tsEk6c2-kC33QLSqPLEa1ywjAkSY4K_S0VG9rIs0yHY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvdmlzdWFsaXpp/bmctY29uY2VwdC1h/c2tpbmctcXVlc3Rp/b25zLXRocm91Z2gt/aWxsdXN0cmF0aXZl/LWRpYWdyYW1fMTM0/NzQ1MS04MzcwLmpw/Zz9zZW10PWFpc19o/eWJyaWQmdz03NDAm/cT04MA" alt="" width={500} height={150} />
+        <Image
+          src="/enquiry-section-art.png"
+          alt="Adshalaa Career Guidance & Enquiry"
+          width={650}
+          height={433}
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 650px"
+        />
       </div>
-
     </div>
   );
 }
