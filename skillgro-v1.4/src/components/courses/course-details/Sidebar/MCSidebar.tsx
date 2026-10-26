@@ -33,13 +33,21 @@ const MCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
                </div>
                <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
-                  <h2 className="title">
-                     ₹{single_course.price?.toLocaleString("en-IN")} 
-                     {single_course.originalPrice && (
-                        <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString("en-IN")}</del>
-                     )}
-                  </h2>
-                  <span style={{ fontSize: "12px", color: "var(--tg-common-color-white)", opacity: 0.9, marginTop: "6px", display: "block" }}>*GST Tax Included</span>
+                  <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <span style={{ fontSize: "15px", fontWeight: 500, color: "var(--tg-common-color-white)", margin: 0 }}>Offline:</span>
+                        <h2 className="title" style={{ fontSize: "22px", margin: 0 }}>
+                           ₹{single_course.offlinePrice ? single_course.offlinePrice.toLocaleString("en-IN") : "20,000"}
+                        </h2>
+                     </div>
+                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <span style={{ fontSize: "15px", fontWeight: 500, color: "var(--tg-common-color-white)", margin: 0 }}>Online:</span>
+                        <h2 className="title" style={{ fontSize: "22px", margin: 0 }}>
+                           ₹{single_course.onlinePrice ? single_course.onlinePrice.toLocaleString("en-IN") : "15,000"}
+                        </h2>
+                     </div>
+                     <span style={{ fontSize: "12px", color: "var(--tg-common-color-white)", opacity: 0.9, marginTop: "8px", display: "block" }}>*GST Tax Included</span>
+                  </div>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>

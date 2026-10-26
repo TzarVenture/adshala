@@ -6,8 +6,23 @@ import course_data from '@/data/home-data/CourseData';
 // Fetch the main courses from the first home variant
 const COURSES = course_data[0].course_details.map(c => ({
   title: c.title,
-  price: c.price
+  price: c.price,
+  offlinePrice: c.offlinePrice,
+  onlinePrice: c.onlinePrice,
 }));
+
+export const calculateCourseFee = (courseTitle: string, mode?: string) => {
+  const found = COURSES.find(c => c.title === courseTitle);
+  if (!found) return 0;
+  
+  if (mode === 'Online' && found.onlinePrice) {
+    return found.onlinePrice;
+  }
+  if ((mode === 'Offline' || mode === 'Hybrid') && found.offlinePrice) {
+    return found.offlinePrice;
+  }
+  return found.price;
+};
 
 const BATCH_SCHEDULES = [
   'Weekday Morning',
@@ -28,13 +43,13 @@ export default function StepCourse() {
   const selectedSchedule = useWatch({ control, name: 'batchSchedule' });
   const selectedMode = useWatch({ control, name: 'batchMode' });
 
-  // Update coursePrice whenever selectedCourse changes
+  // Update coursePrice whenever selectedCourse or selectedMode changes
   useEffect(() => {
     if (selectedCourse) {
-      const price = COURSES.find(c => c.title === selectedCourse)?.price || 0;
-      setValue('coursePrice', price);
+      const price = calculateCourseFee(selectedCourse, selectedMode);
+      setValue('coursePrice', price, { shouldValidate: true });
     }
-  }, [selectedCourse, setValue]);
+  }, [selectedCourse, selectedMode, setValue]);
 
   // Automatically construct and sync the composite batch value (e.g. "Weekend (Online)")
   useEffect(() => {
@@ -264,11 +279,19 @@ export default function StepCourse() {
             <span style={{ color: '#666', marginRight: '6px' }}>Enrolling:</span>
             <strong style={{ color: '#1a3f32' }}>{selectedCourse || '—'}</strong>
           </div>
-          <div>
-            <span style={{ color: '#666', marginRight: '6px' }}>Schedule:</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ color: '#666' }}>Schedule:</span>
             <span style={{ color: '#1a3f32', fontWeight: 600 }}>{selectedSchedule || '—'}</span>
-            <span style={{ color: '#999', margin: '0 6px' }}>•</span>
+            <span style={{ color: '#999' }}>•</span>
             <span style={{ color: '#1a3f32', fontWeight: 600 }}>{selectedMode || '—'}</span>
+            {selectedCourse && (
+              <>
+                <span style={{ color: '#999' }}>•</span>
+                <span style={{ color: '#1a3f32', fontWeight: 700, background: '#eaf4ef', padding: '2px 8px', borderRadius: '4px' }}>
+                  Fee: ₹{calculateCourseFee(selectedCourse, selectedMode).toLocaleString('en-IN')}
+                </span>
+              </>
+            )}
           </div>
         </div>
       )}
