@@ -14,10 +14,20 @@ export default function StepPayment() {
 
   const course = useFormContext().watch("course");
   const batch = useFormContext().watch("batch");
+  const batchMode = useFormContext().watch("batchMode");
   const courseObj = course_data[0].course_details.find(
     (c) => c.title === course,
   );
-  const coursePrice = courseObj?.price ?? 0;
+
+  const isOnline = batchMode === "Online" || (typeof batch === "string" && batch.toLowerCase().includes("online"));
+  let coursePrice = courseObj?.price ?? 0;
+  if (courseObj) {
+    if (isOnline && courseObj.onlinePrice) {
+      coursePrice = courseObj.onlinePrice;
+    } else if (!isOnline && courseObj.offlinePrice) {
+      coursePrice = courseObj.offlinePrice;
+    }
+  }
 
   const [selectedType, setSelectedType] = useState<
     "registration" | "custom" | ""

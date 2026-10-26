@@ -36,6 +36,8 @@ interface DataType {
       author?: string;
       link?: String;
       price: number;
+      offlinePrice?: number;
+      onlinePrice?: number;
       lesson?: string;
       minute?: string;
    }[]
@@ -56,6 +58,8 @@ const course_data: DataType[] = [
             author: "David Millar",
             link: "/course-details/111",
             price: 39000,
+            offlinePrice: 39000,
+            onlinePrice: 30000,
          },
          {
             id: 112,
@@ -89,6 +93,8 @@ const course_data: DataType[] = [
             author: "David Millar",
             link: "/course-details/111",
             price: 20000,
+            offlinePrice: 20000,
+            onlinePrice: 15000,
          },
          {
             id: 115,
