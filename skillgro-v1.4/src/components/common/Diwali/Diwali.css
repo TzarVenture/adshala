@@ -1,0 +1,501 @@
+/* ============================================================
+   REALISTIC ANIMATED DIWALI DECOR, LANTERNS & LIGHT STRIP
+   ============================================================ */
+
+/* ─── 1. AMBIENT WRAPPER (NON-INTRUSIVE) ────────────────────── */
+.diwali-ambient-decor-wrapper {
+  position: relative;
+  z-index: 80;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Ensure Back-to-Top Button is Always Prominent & Uncovered */
+.scroll__top {
+  z-index: 9999 !important;
+}
+
+/* ─── 2. WARM GOLDEN LIGHT STRIP AT NAVBAR BOTTOM EDGE ──────── */
+.diwali-navbar-light-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 99;
+  overflow: visible;
+}
+
+/* Metallic Golden Wire Line along Navbar */
+.diwali-strip-wire {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 194, 36, 0.15) 0%,
+    rgba(255, 215, 0, 0.8) 12%,
+    #FFF9C4 50%,
+    rgba(255, 215, 0, 0.8) 88%,
+    rgba(255, 194, 36, 0.15) 100%
+  );
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+/* Subtle Downward Diffuse Ambient Light Wash (Real subtle glow, no circle edges) */
+.diwali-strip-light-wash {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 215, 0, 0.2) 0%,
+    rgba(255, 194, 36, 0.05) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Micro-Lights Nodes Container */
+.diwali-strip-nodes-container {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Individual Micro Golden Light Node */
+.diwali-strip-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: microLightShimmer 2.4s infinite ease-in-out alternate;
+}
+
+.diwali-strip-node-core {
+  display: block;
+  width: 3.5px;
+  height: 4.5px;
+  background: #FFFFFF;
+  border-radius: 50% 50% 45% 45%;
+  border: 0.5px solid #FFC107;
+  box-shadow: 
+    0 1px 3px rgba(255, 215, 0, 0.85),
+    0 2px 8px rgba(255, 174, 0, 0.5);
+}
+
+@keyframes microLightShimmer {
+  0% {
+    opacity: 0.65;
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9));
+  }
+  100% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+  }
+}
+
+/* ─── 3. HANGING NAVBAR LAMP LANTERNS (AKASH KANDIL) ────────── */
+.diwali-navbar-lantern {
+  position: absolute;
+  top: 100%;
+  pointer-events: none;
+  z-index: 100;
+  user-select: none;
+  /* Organic soft drop-shadow glow without any sharp circular disks */
+  filter: drop-shadow(0 0 10px rgba(255, 194, 36, 0.45)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+.diwali-lantern-svg {
+  transform-origin: 35px 0px;
+}
+
+.diwali-navbar-lantern-left {
+  left: 18px;
+}
+
+.diwali-navbar-lantern-right {
+  right: 18px;
+}
+
+/* Natural Wind Sway for Left & Right Lanterns */
+.diwali-navbar-lantern-left .diwali-lantern-svg {
+  animation: lanternSwayLeft 4.2s infinite ease-in-out alternate;
+}
+
+.diwali-navbar-lantern-right .diwali-lantern-svg {
+  animation: lanternSwayRight 4.6s 0.8s infinite ease-in-out alternate;
+}
+
+@keyframes lanternSwayLeft {
+  0% {
+    transform: rotate(-3.5deg);
+  }
+  50% {
+    transform: rotate(0.5deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes lanternSwayRight {
+  0% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-0.8deg);
+  }
+  100% {
+    transform: rotate(-3.5deg);
+  }
+}
+
+/* Glowing Lantern Body & Filigree Pulse */
+.diwali-lantern-glow-body {
+  animation: lanternCoreGlow 2.4s infinite ease-in-out alternate;
+}
+
+@keyframes lanternCoreGlow {
+  0% {
+    filter: drop-shadow(0 0 4px #FFD54F);
+    opacity: 0.92;
+  }
+  100% {
+    filter: drop-shadow(0 0 14px rgba(255, 140, 0, 0.9));
+    opacity: 1;
+  }
+}
+
+/* Silk Tassels Phase-Lag Swaying */
+.diwali-tassel-center {
+  transform-origin: 35px 98px;
+  animation: tasselLag 3.2s 0.2s infinite ease-in-out alternate;
+}
+
+.diwali-tassel-left {
+  transform-origin: 24px 98px;
+  animation: tasselLag 2.8s 0.4s infinite ease-in-out alternate;
+}
+
+.diwali-tassel-right {
+  transform-origin: 46px 98px;
+  animation: tasselLag 3s 0.6s infinite ease-in-out alternate;
+}
+
+@keyframes tasselLag {
+  0% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(4deg);
+  }
+}
+
+/* ─── 4. REALISTIC DIYA COMPONENT STYLING ───────────────────── */
+.diwali-diya-wrapper {
+  position: relative;
+  overflow: visible;
+  display: inline-block;
+  user-select: none;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25));
+}
+
+/* Ambient Radiant Floor Glow (Warm light pool under Diya) */
+.diwali-real-floor-glow {
+  transform-origin: 120px 165px;
+  animation: floorGlowBreathe 2.4s infinite ease-in-out alternate;
+}
+
+@keyframes floorGlowBreathe {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+}
+
+/* ─── 5. REALISTIC MULTI-TIER FLAME ANIMATIONS ──────────────── */
+.diwali-realistic-flame-wrapper {
+  transform-origin: 120px 84px;
+  animation: flameGlobalOrganicDrift 3.2s infinite ease-in-out alternate;
+}
+
+@keyframes flameGlobalOrganicDrift {
+  0% {
+    transform: rotate(0deg);
+  }
+  35% {
+    transform: rotate(1.2deg) skewX(0.8deg);
+  }
+  70% {
+    transform: rotate(-1.5deg) skewX(-1deg);
+  }
+  100% {
+    transform: rotate(0.8deg) skewX(0.5deg);
+  }
+}
+
+/* Blue Flame Base (Stays anchored at the cotton wick) */
+.diwali-flame-blue-base {
+  opacity: 0.85;
+  transform-origin: 120px 85px;
+  animation: blueBaseFlicker 0.22s infinite alternate ease-in-out;
+}
+
+@keyframes blueBaseFlicker {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+/* Outer Mantle (Saffron & Amber edge - Organic wavering) */
+.diwali-flame-layer-outer {
+  transform-origin: 120px 84px;
+  animation: outerFlameFlicker 0.14s infinite alternate ease-in-out;
+}
+
+@keyframes outerFlameFlicker {
+  0% {
+    transform: scaleY(1) scaleX(1) skewX(0deg);
+  }
+  20% {
+    transform: scaleY(1.05) scaleX(0.97) skewX(-1.5deg);
+  }
+  40% {
+    transform: scaleY(0.96) scaleX(1.03) skewX(1.2deg);
+  }
+  70% {
+    transform: scaleY(1.07) scaleX(0.95) skewX(-0.8deg);
+  }
+  100% {
+    transform: scaleY(0.98) scaleX(1.02) skewX(1.4deg);
+  }
+}
+
+/* Mid Luminous Flame (Bright Golden-Yellow Core) */
+.diwali-flame-layer-mid {
+  transform-origin: 120px 81px;
+  animation: midFlameFlicker 0.18s infinite alternate ease-in-out;
+}
+
+@keyframes midFlameFlicker {
+  0% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 0.92;
+  }
+  30% {
+    transform: scaleY(1.06) scaleX(0.95) skewX(1.2deg);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleY(0.97) scaleX(1.03) skewX(-1deg);
+    opacity: 0.88;
+  }
+  100% {
+    transform: scaleY(1.03) scaleX(0.98) skewX(0.8deg);
+    opacity: 0.96;
+  }
+}
+
+/* Incandescent White-Hot Flame Core */
+.diwali-flame-layer-core {
+  transform-origin: 120px 78px;
+  animation: coreFlameShimmer 0.24s infinite alternate ease-in-out;
+}
+
+@keyframes coreFlameShimmer {
+  0% {
+    opacity: 0.88;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+}
+
+/* Micro Sparks / Embers rising naturally from flame tip */
+.diwali-spark-rising {
+  animation: naturalSparkFloat 1.8s infinite ease-out;
+}
+
+.spark-a {
+  animation-delay: 0.15s;
+}
+
+.spark-b {
+  animation-delay: 0.75s;
+}
+
+.spark-c {
+  animation-delay: 1.35s;
+}
+
+@keyframes naturalSparkFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.95;
+  }
+  40% {
+    transform: translate(-3px, -14px) scale(0.9);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translate(2px, -26px) scale(0.6);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-1px, -36px) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* ─── 6. CORNER DIYA DOCKING (NO OVERLAP WITH BACK TO TOP) ── */
+.diwali-corner-diya {
+  position: fixed;
+  bottom: 16px;
+  z-index: 80;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: diyaGentleBob 3.8s infinite ease-in-out alternate;
+}
+
+.diwali-corner-diya-left {
+  left: 24px;
+}
+
+.diwali-corner-diya-right {
+  right: 125px;
+}
+
+@keyframes diyaGentleBob {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ─── 7. BACKGROUND SPARKLES & SUBTLE FIREWORKS ────────────── */
+.diwali-sparkles-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.diwali-floating-sparkle {
+  position: absolute;
+  pointer-events: none;
+  animation: sparkleTwinkle ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 6px #FFD700);
+}
+
+@keyframes sparkleTwinkle {
+  0% {
+    opacity: 0.12;
+    transform: scale(0.65) rotate(0deg);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.15) rotate(45deg);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7) rotate(90deg);
+  }
+}
+
+/* Realistic Canvas Aerial Fireworks Layer */
+.diwali-fireworks-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* ─── 8. RESPONSIVE DESIGN ─────────────────────────────────── */
+@media (max-width: 1200px) {
+  .diwali-navbar-lantern-left {
+    left: 8px;
+  }
+  .diwali-navbar-lantern-right {
+    right: 8px;
+  }
+  .diwali-corner-diya-right {
+    right: 95px;
+  }
+}
+
+@media (max-width: 992px) {
+  .diwali-corner-diya {
+    bottom: 14px;
+  }
+  .diwali-corner-diya-left {
+    left: 12px;
+  }
+  .diwali-corner-diya-right {
+    right: 85px;
+  }
+  .diwali-navbar-lantern {
+    width: 34px;
+    height: 78px;
+  }
+}
+
+@media (max-width: 768px) {
+  .diwali-corner-diya {
+    display: none !important;
+  }
+  .diwali-navbar-lantern {
+    width: 28px;
+    height: 64px;
+  }
+  .diwali-navbar-lantern-left {
+    left: 4px;
+  }
+  .diwali-navbar-lantern-right {
+    right: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .diwali-navbar-lantern {
+    display: none !important;
+  }
+}

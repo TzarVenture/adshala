@@ -30,6 +30,9 @@ import icon_1 from "@/assets/img/icons/user.svg";
 import icon_2 from "@/assets/img/icons/cart.svg";
 import icon_3 from "@/assets/img/icons/heart.svg";
 import BrochurePopup from "@/components/common/BrochurePopup";
+import DiwaliNavbarLantern from "@/components/common/Diwali/DiwaliNavbarLantern";
+import DiwaliNavbarLightStrip from "@/components/common/Diwali/DiwaliNavbarLightStrip";
+import { isDiwaliSeason } from "@/components/common/Diwali/DiwaliCelebration";
 const HeaderOne = () => {
   const router = useRouter();
   const [selectedOption, setSelectedOption] = React.useState(null);
@@ -50,7 +53,16 @@ const HeaderOne = () => {
         <div
           id="sticky-header"
           className={`tg-header__area ${sticky ? "sticky-menu" : ""}`}
+          style={{ position: "relative" }}
         >
+          {/* Diwali Festive Hanging Lamp Lanterns & Golden Light Strip on Navbar */}
+          {isDiwaliSeason() && (
+            <>
+              <DiwaliNavbarLightStrip />
+              <DiwaliNavbarLantern side="left" />
+              <DiwaliNavbarLantern side="right" />
+            </>
+          )}
           <div className="container custom-container">
             <div className="row">
               <div className="col-12">

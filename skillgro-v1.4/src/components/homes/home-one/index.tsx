@@ -16,6 +16,7 @@ import Blog from "./Blog"
 import FooterOne from "@/layouts/footers/FooterOne"
 import HeaderOne from "@/layouts/headers/HeaderOne"
 import Categories from "./Categories"
+import DiwaliCelebration from "@/components/common/Diwali/DiwaliCelebration"
 import { useEffect } from "react"
 const HomeOne = () => {
    useEffect(() => {
@@ -27,6 +28,7 @@ const HomeOne = () => {
    }, []);
    return (
       <>
+         <DiwaliCelebration />
          <HeaderOne />
          <main className="main-area fix">
             <Banner />
