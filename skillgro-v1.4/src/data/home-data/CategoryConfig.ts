@@ -32,6 +32,60 @@ export interface CategoryConfigItem {
 
 const category_config: CategoryConfigItem[] = [
   {
+    id: 5,
+    slug: "marketplace-specialist-program-in-mumbai",
+    icon: "flaticon-fashion",
+    title: "Marketplace Certification",
+    total: "(23)",
+    heading: "Marketplace Specialist Program",
+    description:
+      "Become a certified marketplace specialist. Learn to sell on Amazon, Flipkart and Meesho — from product listings and catalogue management to sponsored ads and scaling strategies.",
+    targetCategory: "Marketing",
+    seo: {
+      title: "Marketplace Certification Course in Andheri Mumbai | Adshalaa",
+      description:
+        "Get certified in marketplace selling (Amazon, Flipkart, Meesho) at Adshalaa Mumbai. Learn product listing, ads and scaling. 100% placement support.",
+      keywords:
+        "marketplace certification Mumbai, Amazon seller course, Flipkart seller training Andheri, e-commerce marketplace course, Amazon course Mumbai",
+    },
+  },
+  {
+    id: 6,
+    slug: "advanced-seo-certification-in-mumbai",
+    icon: "flaticon-interaction",
+    title: "Advanced SEO Certification",
+    total: "(19)",
+    heading: "Advanced SEO Certification",
+    description:
+      "Master technical SEO, on-page and off-page optimisation, keyword research, link building and AI-powered SEO tools. Learn to rank websites and drive consistent organic traffic professionally.",
+    targetCategory: "Marketing",
+    seo: {
+      title: "Advanced SEO Certification Course in Andheri Mumbai | Adshalaa",
+      description:
+        "Learn advanced SEO at Adshalaa, Andheri Mumbai. Technical SEO, keyword research, link building and AI tools. Get certified and placed. Enroll now.",
+      keywords:
+        "SEO course Mumbai, advanced SEO certification, search engine optimisation training Andheri, SEO with AI course, SEO institute Mumbai",
+    },
+  },
+  {
+    id: 4,
+    slug: "mastery-in-social-media-management-in-mumbai",
+    icon: "flaticon-email",
+    title: "Social Media Management",
+    total: "(31)",
+    heading: "Mastery in Social Media Management",
+    description:
+      "Learn to plan, create and grow brand presence across Instagram, Facebook, LinkedIn and YouTube. Master content calendars, analytics, paid ads and influencer strategy with expert mentors.",
+    targetCategory: "Marketing",
+    seo: {
+      title: "Social Media Management Certification Course in Andheri Mumbai | Adshalaa",
+      description:
+        "Master social media marketing at Adshalaa, Mumbai. Learn content strategy, paid ads and brand management. Get certified and placed with 100% placement assistance.",
+      keywords:
+        "social media management course Mumbai, Instagram marketing course, Facebook ads training Andheri, social media certification, social media course Mumbai",
+    },
+  },
+  {
     id: 1,
     slug: "certification-in-advanced-digital-marketing-and-ai-in-mumbai",
     icon: "flaticon-investment",
@@ -83,60 +137,6 @@ const category_config: CategoryConfigItem[] = [
         "Learn web development at Adshalaa, Andheri Mumbai. Build real websites, earn certification and get placed. 3-month program + 1-month paid internship.",
       keywords:
         "web development course Mumbai, web design certification Andheri, WordPress course Mumbai, front end development course, web development institute Mumbai",
-    },
-  },
-  {
-    id: 4,
-    slug: "mastery-in-social-media-management-in-mumbai",
-    icon: "flaticon-email",
-    title: "Social Media Management",
-    total: "(31)",
-    heading: "Mastery in Social Media Management",
-    description:
-      "Learn to plan, create and grow brand presence across Instagram, Facebook, LinkedIn and YouTube. Master content calendars, analytics, paid ads and influencer strategy with expert mentors.",
-    targetCategory: "Marketing",
-    seo: {
-      title: "Social Media Management Certification Course in Andheri Mumbai | Adshalaa",
-      description:
-        "Master social media marketing at Adshalaa, Mumbai. Learn content strategy, paid ads and brand management. Get certified and placed with 100% placement assistance.",
-      keywords:
-        "social media management course Mumbai, Instagram marketing course, Facebook ads training Andheri, social media certification, social media course Mumbai",
-    },
-  },
-  {
-    id: 5,
-    slug: "marketplace-specialist-program-in-mumbai",
-    icon: "flaticon-fashion",
-    title: "Marketplace Certification",
-    total: "(23)",
-    heading: "Marketplace Specialist Program",
-    description:
-      "Become a certified marketplace specialist. Learn to sell on Amazon, Flipkart and Meesho — from product listings and catalogue management to sponsored ads and scaling strategies.",
-    targetCategory: "Marketing",
-    seo: {
-      title: "Marketplace Certification Course in Andheri Mumbai | Adshalaa",
-      description:
-        "Get certified in marketplace selling (Amazon, Flipkart, Meesho) at Adshalaa Mumbai. Learn product listing, ads and scaling. 100% placement support.",
-      keywords:
-        "marketplace certification Mumbai, Amazon seller course, Flipkart seller training Andheri, e-commerce marketplace course, Amazon course Mumbai",
-    },
-  },
-  {
-    id: 6,
-    slug: "advanced-seo-certification-in-mumbai",
-    icon: "flaticon-interaction",
-    title: "Advanced SEO Certification",
-    total: "(19)",
-    heading: "Advanced SEO Certification",
-    description:
-      "Master technical SEO, on-page and off-page optimisation, keyword research, link building and AI-powered SEO tools. Learn to rank websites and drive consistent organic traffic professionally.",
-    targetCategory: "Marketing",
-    seo: {
-      title: "Advanced SEO Certification Course in Andheri Mumbai | Adshalaa",
-      description:
-        "Learn advanced SEO at Adshalaa, Andheri Mumbai. Technical SEO, keyword research, link building and AI tools. Get certified and placed. Enroll now.",
-      keywords:
-        "SEO course Mumbai, advanced SEO certification, search engine optimisation training Andheri, SEO with AI course, SEO institute Mumbai",
     },
   },
 ];

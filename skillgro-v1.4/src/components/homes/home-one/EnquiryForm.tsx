@@ -17,11 +17,11 @@ interface FormData {
 
 // Available program list options
 const PROGRAMS = [
-  'Certification in Advanced Digital Marketing & AI',
-  'Certification in Advanced Graphic Design & AI',
-  'Mastery in Social Media Management',
   'Marketplace Certification',
   'SEO Certification',
+  'Mastery in Social Media Management',
+  'Certification in Advanced Digital Marketing & AI',
+  'Certification in Advanced Graphic Design & AI',
   'Certification in Web Development '
 ];
 
