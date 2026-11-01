@@ -16,8 +16,10 @@ import Blog from "./Blog"
 import FooterOne from "@/layouts/footers/FooterOne"
 import HeaderOne from "@/layouts/headers/HeaderOne"
 import Categories from "./Categories"
+import DiwaliFireworks from "@/components/common/Diwali/DiwaliFireworks"
 import DiwaliCelebration from "@/components/common/Diwali/DiwaliCelebration"
 import { useEffect } from "react"
+
 const HomeOne = () => {
    useEffect(() => {
       if (window.location.hash === "#enquiry-form01") {
@@ -26,8 +28,10 @@ const HomeOne = () => {
          }, 300); // small delay lets the page render first
       }
    }, []);
+
    return (
       <>
+         <DiwaliFireworks />
          <DiwaliCelebration />
          <HeaderOne />
          <main className="main-area fix">
@@ -52,4 +56,3 @@ const HomeOne = () => {
 }
 
 export default HomeOne
-
