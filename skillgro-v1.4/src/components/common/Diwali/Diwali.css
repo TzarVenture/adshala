@@ -2,6 +2,9 @@
    REALISTIC ANIMATED DIWALI DECOR
    ============================================================ */
 
+@import url("https://fonts.googleapis.com/css2?family=Rozha+One&family=Yatra+One&display=swap");
+@import url("https://fonts.cdnfonts.com/css/samarkan");
+
 /* ─── 1. AMBIENT WRAPPER (NON-INTRUSIVE) ────────────────────── */
 .diwali-ambient-decor-wrapper {
   position: relative;
@@ -234,7 +237,7 @@
   position: absolute;
   pointer-events: none;
   animation: sparkleTwinkle ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 6px #FFD700);
+  filter: drop-shadow(0 0 6px #ffd700);
 }
 
 @keyframes sparkleTwinkle {
@@ -274,5 +277,71 @@
 @media (max-width: 768px) {
   .diwali-corner-diya {
     display: none !important;
+  }
+}
+
+/* ─── 7. HERO "HAPPY DIWALI" TITLE (HINDI DECORATIVE FONT) ─── */
+.hero-diwali-banner-title {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+  text-align: center;
+  overflow: visible;
+}
+
+.hero-diwali-text {
+  font-family: "Samarkan", "Rozha One", "Yatra One", cursive, serif;
+  font-size: clamp(28px, 3.8vw, 44px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  /* Deep, rich festive vermilion & royal saffron gradient for outstanding readability on light background */
+  background: linear-gradient(
+    135deg,
+    #a82005 0%,
+    #c43806 25%,
+    #d95308 55%,
+    #b32e05 85%,
+    #8b1e03 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Clean, subtle depth shadow - reduced glow without blurry halo */
+  filter: drop-shadow(0 1.5px 3px rgba(139, 30, 3, 0.22));
+  /* Ample padding & line-height to completely prevent bottom descender and right-edge clipping */
+  line-height: 1.45;
+  padding: 4px 22px 14px 10px;
+  box-sizing: border-box;
+  overflow: visible;
+  user-select: none;
+  display: inline-block;
+  text-transform: none;
+}
+
+@media (max-width: 992px) {
+  .hero-diwali-banner-title {
+    top: 8px;
+  }
+  .hero-diwali-text {
+    font-size: clamp(24px, 5.5vw, 34px);
+    letter-spacing: 1.6px;
+    padding: 3px 18px 12px 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-diwali-banner-title {
+    top: 6px;
+  }
+  .hero-diwali-text {
+    font-size: clamp(20px, 6.5vw, 28px);
+    letter-spacing: 1.2px;
+    padding: 2px 14px 10px 6px;
   }
 }
