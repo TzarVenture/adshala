@@ -18,6 +18,7 @@ import HeaderOne from "@/layouts/headers/HeaderOne"
 import Categories from "./Categories"
 import DiwaliFireworks from "@/components/common/Diwali/DiwaliFireworks"
 import DiwaliCelebration from "@/components/common/Diwali/DiwaliCelebration"
+import DeepawaliLoader from "@/components/common/Diwali/DeepawaliLoader"
 import { useEffect } from "react"
 
 const HomeOne = () => {
@@ -31,6 +32,7 @@ const HomeOne = () => {
 
    return (
       <>
+         <DeepawaliLoader />
          <DiwaliFireworks />
          <DiwaliCelebration />
          <HeaderOne />
