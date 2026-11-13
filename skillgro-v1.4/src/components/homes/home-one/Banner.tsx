@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import useSvgAnimation from '@/hooks/useSvgAnimation';
 import BtnArrow from '@/svg/BtnArrow';
-import '@/components/common/Diwali/Diwali.css';
 
 import banner_img_1 from '@/assets/img/banner/banner_img.png';
 import banner_shape_1 from '@/assets/img/banner/banner_shape01.png';
@@ -21,12 +20,7 @@ const Banner: React.FC = () => {
 
    return (
       <section
-         className="banner-area banner-bg tg-motion-effects" style={{ backgroundImage: `url(${bg_img.src})`, position: 'relative' }}>
-         {/* Top Centered Festive "Happy Diwali" in Hindi Decorative Font */}
-         <div className="hero-diwali-banner-title" aria-label="Happy Diwali">
-            <span className="hero-diwali-text">Happy Diwali</span>
-         </div>
-
+         className="banner-area banner-bg tg-motion-effects" style={{ backgroundImage: `url(${bg_img.src})` }}>
          <div className="container">
             <div className="row justify-content-between align-items-start">
                <div className="col-xl-5 col-lg-6">
