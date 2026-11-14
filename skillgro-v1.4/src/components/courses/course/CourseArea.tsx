@@ -7,6 +7,8 @@ import { useSearchParams } from 'next/navigation';
 import CourseSidebar from './CourseSidebar';
 import CourseTop from './CourseTop';
 import UseCourses from '@/hooks/UseCourses';
+import CourseCard from '../CourseCard';
+import { getPriceLines, formatINR } from '@/utils/coursePricing';
 
 const CourseArea = () => {
 
@@ -83,33 +85,16 @@ const CourseArea = () => {
                      <div className={`tab-pane fade ${activeTab === 0 ? 'show active' : ''}`} id="grid" role="tabpanel" aria-labelledby="grid-tab">
                         <div className="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
                            {currentItems.length > 0 ? currentItems.map((item: any) => (
-                              <div key={item.id} className="col">
-                                 <div className="courses__item shine__animate-item">
-                                    <div className="courses__item-thumb">
-                                       <Link href={`/course-details/${item?.sku}`} className="shine__animate-link">
-                                          <Image src={item.thumb} alt="img" style={{ objectFit: "contain" }} />
-                                       </Link>
-                                    </div>
-                                    <div className="courses__item-content">
-                                       <ul className="courses__item-meta list-wrap">
-                                          <li className="courses__item-tag">
-                                             <Link href="/courses">{item.category}</Link>
-                                          </li>
-                                          {/* <li className="avg-rating"><i className="fas fa-star"></i> ({item.rating} Reviews)</li> */}
-                                       </ul>
-                                       <h5 className="title"><Link href={`/course-details/${item?.sku}`}>{item.title}</Link></h5>
-                                       {/* <p className="author">By <Link href="#">{item.instructors}</Link></p> */}
-                                       <div className="courses__item-bottom">
-                                          <div className="button">
-                                             <Link href={`/course-details/${item?.sku}`}>
-                                                <span className="text">Enroll Now</span>
-                                                <i className="flaticon-arrow-right"></i>
-                                             </Link>
-                                          </div>
-                                          {/* <h5 className="price">₹{Number(item.price).toLocaleString("en-IN")}</h5> */}
-                                       </div>
-                                    </div>
-                                 </div>
+                              <div key={item.id} className="col d-flex">
+                                 <CourseCard
+                                    sku={item.sku}
+                                    title={item.title}
+                                    category={item.category}
+                                    thumb={item.thumb}
+                                    price={item.price}
+                                    offlinePrice={item.offlinePrice}
+                                    onlinePrice={item.onlinePrice}
+                                 />
                               </div>
                            )) : (
                               <div className="col-12">
@@ -137,30 +122,34 @@ const CourseArea = () => {
                               <div key={item.id} className="col">
                                  <div className="courses__item courses__item-three shine__animate-item">
                                     <div className="courses__item-thumb">
-                                       <a href="course-details.html" className="shine__animate-link">
-                                          <Image src={item.thumb} alt="img" />
-                                       </a>
+                                       <Link href={`/course-details/${item?.sku}`} className="shine__animate-link">
+                                          <Image src={item.thumb} alt={item.title} />
+                                       </Link>
                                     </div>
                                     <div className="courses__item-content">
                                        <ul className="courses__item-meta list-wrap">
                                           <li className="courses__item-tag">
-                                             <a href="course.html">{item.category}</a>
-                                             {/* <div className="avg-rating">
-                                                <i className="fas fa-star"></i>  ({item.rating} Reviews)
-                                             </div> */}
+                                             <Link href="/courses">{item.category}</Link>
                                           </li>
-                                          {/* <li className="price">₹{Number(item.price).toLocaleString("en-IN")}</li> */}
                                        </ul>
-                                       <h5 className="title"><a href="course-details.html">{item.title}</a></h5>
-                                       {/* <p className="author">By <a href="#">{item.instructors}</a></p> */}
+                                       <h5 className="title"><Link href={`/course-details/${item?.sku}`}>{item.title}</Link></h5>
                                        <p className="info">{item.desc}</p>
+                                       <div className="course-card__prices" style={{ marginBottom: "12px", maxWidth: "340px" }}>
+                                          {getPriceLines(item).map((line) => (
+                                             <div key={line.key} className="course-card__price">
+                                                <span className="course-card__price-label">{line.label}</span>
+                                                <span className="course-card__price-amount">{formatINR(line.amount)}</span>
+                                             </div>
+                                          ))}
+                                       </div>
                                        <div className="courses__item-bottom">
                                           <div className="button">
-                                             <a href="course-details.html">
+                                             <Link href={`/course-details/${item?.sku}`}>
                                                 <span className="text">Enroll Now</span>
                                                 <i className="flaticon-arrow-right"></i>
-                                             </a>
+                                             </Link>
                                           </div>
+                                          <span className="course-card__gst">*GST Tax Included</span>
                                        </div>
                                     </div>
                                  </div>

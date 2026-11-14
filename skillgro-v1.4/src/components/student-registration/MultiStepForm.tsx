@@ -48,6 +48,8 @@ const loadRazorpayScript = () => {
 export default function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Which stage the submit is in, so the loader can tell the student what is happening
+  const [submitStage, setSubmitStage] = useState<"order" | "verify">("order");
   const [isValidating, setIsValidating] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
@@ -208,6 +210,7 @@ export default function MultiStepForm() {
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   const onSubmit = async (data: any) => {
+    setSubmitStage("order");
     setIsSubmitting(true);
     setSubmitStatus("idle");
     setServerError("");
@@ -258,6 +261,7 @@ export default function MultiStepForm() {
         order_id: orderResult.order_id,
         handler: async function (response: any) {
           try {
+            setSubmitStage("verify");
             setIsSubmitting(true);
             setServerError("");
 
@@ -405,7 +409,26 @@ export default function MultiStepForm() {
 
   return (
     <div className="registration-container" ref={formTopRef}>
-      <div className="registration-card">
+      <div className="registration-card" style={{ position: "relative" }}>
+        {/* Loading overlay while the order is created / the payment is confirmed */}
+        {isSubmitting && (
+          <div className="submit-overlay" role="status" aria-live="polite">
+            <div className="submit-overlay-box">
+              <div className="submit-spinner" aria-hidden="true" />
+              <h4>
+                {submitStage === "verify"
+                  ? "Confirming your payment…"
+                  : "Preparing secure payment…"}
+              </h4>
+              <p>
+                {submitStage === "verify"
+                  ? "Please wait while we complete your registration. Do not close or refresh this page."
+                  : "Opening the payment window. Please wait a moment."}
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Desktop / Tablet Stepper (Hidden on small mobile) */}
         <div className="progress-bar-container d-none d-sm-flex">
           <div
@@ -475,7 +498,14 @@ export default function MultiStepForm() {
                   onClick={nextStep}
                   disabled={isValidating}
                 >
-                  {isValidating ? "Checking..." : "Save & Continue →"}
+                  {isValidating ? (
+                    <>
+                      <span className="btn-spinner" aria-hidden="true" />
+                      Checking...
+                    </>
+                  ) : (
+                    "Save & Continue →"
+                  )}
                 </button>
               ) : (
                 <button
@@ -484,7 +514,14 @@ export default function MultiStepForm() {
                   disabled={isSubmitting}
                   onClick={handleSubmit(onSubmit)}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Registration ✓"}
+                  {isSubmitting ? (
+                    <>
+                      <span className="btn-spinner" aria-hidden="true" />
+                      {submitStage === "verify" ? "Confirming payment..." : "Processing..."}
+                    </>
+                  ) : (
+                    "Submit Registration ✓"
+                  )}
                 </button>
               )}
             </div>

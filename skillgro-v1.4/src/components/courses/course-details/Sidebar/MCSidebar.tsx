@@ -13,6 +13,7 @@ import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
 import { CourseDataType } from "@/data/inner-data/InnerCourseData";
+import CourseFeeBlock from "./CourseFeeBlock";
 
 const MCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
    const router = useRouter();
@@ -31,24 +32,7 @@ const MCSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
                   )}
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
-               <div className="courses__cost-wrap">
-                  <span>This Course Fee:</span>
-                  <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "6px" }}>
-                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <span style={{ fontSize: "15px", fontWeight: 500, color: "var(--tg-common-color-white)", margin: 0 }}>Offline:</span>
-                        <h2 className="title" style={{ fontSize: "22px", margin: 0 }}>
-                           ₹{single_course.offlinePrice ? single_course.offlinePrice.toLocaleString("en-IN") : "20,000"}
-                        </h2>
-                     </div>
-                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <span style={{ fontSize: "15px", fontWeight: 500, color: "var(--tg-common-color-white)", margin: 0 }}>Online:</span>
-                        <h2 className="title" style={{ fontSize: "22px", margin: 0 }}>
-                           ₹{single_course.onlinePrice ? single_course.onlinePrice.toLocaleString("en-IN") : "15,000"}
-                        </h2>
-                     </div>
-                     <span style={{ fontSize: "12px", color: "var(--tg-common-color-white)", opacity: 0.9, marginTop: "8px", display: "block" }}>*GST Tax Included</span>
-                  </div>
-               </div>
+               <CourseFeeBlock course={single_course} />
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
                   <ul className="list-wrap">

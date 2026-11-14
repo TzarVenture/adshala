@@ -2885,3 +2885,57 @@
         }
     }
 }
+
+/* Home course slider arrows: always stay on screen, left and right of the cards.
+   >=1500px: fully outside the cards, in the page margin.
+   768-1499px (laptops/tablets): smaller arrows straddling the card edge.
+   <768px: centred under the slider (original mobile behaviour). */
+@media (min-width: 768px) {
+    .courses-area .tab-content {
+        position: relative;
+
+        .courses__nav {
+            display: block;
+
+            .courses-button-prev,
+            .courses-button-next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                z-index: 5;
+                cursor: pointer;
+            }
+
+            /* straddle the card edge, but never closer than ~12px to the screen edge */
+            .courses-button-prev {
+                left: max(-24px, calc(20px - (100vw - 100%) / 2));
+            }
+
+            .courses-button-next {
+                right: max(-24px, calc(20px - (100vw - 100%) / 2));
+            }
+        }
+    }
+}
+
+@media (min-width: 1500px) {
+    .courses-area .tab-content .courses__nav {
+        .courses-button-prev,
+        .courses-button-next {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+        }
+
+        .courses-button-prev {
+            left: max(-75px, calc(20px - (100vw - 100%) / 2));
+        }
+
+        .courses-button-next {
+            right: max(-75px, calc(20px - (100vw - 100%) / 2));
+        }
+    }
+}

@@ -13,6 +13,7 @@ import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
 import { CourseDataType } from "@/data/inner-data/InnerCourseData";
+import CourseFeeBlock from "./CourseFeeBlock";
 
 const CWebDevSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
    const router = useRouter();
@@ -31,16 +32,7 @@ const CWebDevSidebar = ({ single_course }: { single_course?: CourseDataType }) =
                   )}
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
-               <div className="courses__cost-wrap">
-                  <span>This Course Fee:</span>
-                  <h2 className="title">
-                     ₹{single_course.price?.toLocaleString("en-IN")} 
-                     {single_course.originalPrice && (
-                        <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString("en-IN")}</del>
-                     )}
-                  </h2>
-                  <span style={{ fontSize: "12px", color: "var(--tg-common-color-white)", opacity: 0.9, marginTop: "6px", display: "block" }}>*GST Tax Included</span>
-               </div>
+               <CourseFeeBlock course={single_course} />
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
                   <ul className="list-wrap">

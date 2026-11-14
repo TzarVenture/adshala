@@ -6,6 +6,7 @@ import Link from "next/link";
 import "./enquiry-hero.css";
 import mobileBannerImg from "@/assets/img/banner/DM_Banner_Enquiry_Page.png";
 import { CourseDataType } from "@/data/inner-data/InnerCourseData";
+import { getPriceLines, formatINR } from "@/utils/coursePricing";
 import { COURSE_TOOLS, DEFAULT_TOOLS } from "@/data/inner-data/CourseToolsData";
 import { EnquiryFormContainer } from "@/components/homes/home-one/EnquiryForm";
 import BrochurePopup from "@/components/common/BrochurePopup";
@@ -86,7 +87,11 @@ export default function EnquiryHero({ course }: EnquiryHeroProps) {
                 <div className="enquiry-hero__stat-item">
                   <div className="enquiry-hero__stat-label">Pricing</div>
                   <div className="enquiry-hero__stat-value">
-                    ₹{Number(course.price || 0).toLocaleString("en-IN")}
+                    {getPriceLines(course).map((line) => (
+                      <span key={line.key} style={{ display: "block" }}>
+                        {line.key === "fee" ? formatINR(line.amount) : `${line.label}: ${formatINR(line.amount)}`}
+                      </span>
+                    ))}
                     <span className="emi-tag">EMI Options Available</span>
                   </div>
                 </div>

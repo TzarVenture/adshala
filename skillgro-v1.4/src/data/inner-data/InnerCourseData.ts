@@ -65,10 +65,10 @@ export interface CourseDataType {
   title: string;
   desc: string;
   instructors: string;
-  price: number;
+  price: number;               // default / single fee (used when no mode-specific fee exists)
   originalPrice?: number;      // struck-through price shown in sidebar
-  offlinePrice?: number;       // offline course fee shown in DM sidebar
-  onlinePrice?: number;        // online course fee shown in DM sidebar
+  offlinePrice?: number;       // offline course fee (optional – only when fees differ by mode)
+  onlinePrice?: number;        // online course fee  (optional – only when fees differ by mode)
   skill_level: string;
   overview?: string;           // key used to switch tabs in CourseDetailsArea
   price_type: string;
@@ -98,97 +98,7 @@ export interface CourseDataType {
 // ─── Active Course Data (single source of truth) ──────────────────────────────
 
 const inner_course_data: CourseDataType[] = [
-   // ── 1. Web Development ────────────────────────────────────────────────────
-   {
-      id: 116,
-      sku: "certification-in-web-development-in-mumbai",
-      banner: course_banner5,
-      thumb: thumb5,
-      category: "Development",
-      rating: 5,
-      title: "Certification in Web Development",
-      instructors: "David Millar",
-      price: 59000,
-      originalPrice: 130000,
-      skill_level: "Beginner",
-      overview: "certification-in-web-development",
-      price_type: "Free",
-      language: "Arabic",
-      meta1: "WordPress & Shopify",
-      meta2: "Build & Launch Websites",
-      meta3: "Mentor Support",
-      desc: "Build modern, responsive websites using HTML, CSS, JavaScript, WordPress and Shopify. Graduate with live project experience, an industry certification and full placement support.",
-      duration: "3 Months",
-      mode: "Offline (Mumbai)",
-      phone: "+91 86521 99991",
-      sidebarImage: sidebar_img_web,
-      level: "Expert",
-      classHours: "72+ Hours",
-      certifications: "Yes",
-      caseStudies: "25+",
-      courseOverview: {
-         description: "The Web Development Certification is a comprehensive, hands-on program designed to take you from complete beginner to building fully functional, professional websites and online stores — no coding required. Focused entirely on WordPress and Shopify, you'll learn to design, customize, launch and manage websites and e-commerce stores through live projects and real client-style builds. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a web development career.",
-         learningsIntro: "This program covers WordPress and Shopify end-to-end combining website design, e-commerce setup, SEO, marketing tools and store management so you can build and run any professional website or online store independently.",
-         learnings: [
-            "Build and customize professional websites on WordPress from scratch",
-            "Design pages using Elementor and popular WordPress themes",
-            "Set up and manage complete e-commerce stores on WooCommerce and Shopify",
-            "Configure payments, shipping and checkout for online stores",
-            "Optimize websites for speed, SEO and performance",
-            "Use AI tools to speed up website building, content creation and design",
-         ],
-         closing: "By the end of the course, you'll be able to independently design, launch and manage WordPress websites and Shopify stores, handle real client projects and use AI tools to work more efficiently — skills directly applicable to WordPress Developer, Shopify Developer and freelance web development roles.",
-      },
-      certificateImages: [],
-      statisticsImage: undefined,
-   },
-
-   // ── 2. Advanced SEO ───────────────────────────────────────────────────────
-   {
-      id: 115,
-      sku: "advanced-seo-certification-in-mumbai",
-      banner: course_banner4,
-      thumb: thumb4,
-      category: "Marketing",
-      rating: 5,
-      title: "Advanced SEO Certification",
-      instructors: "David Millar",
-      price: 20000,
-      originalPrice: 35000,
-      skill_level: "Beginner",
-      overview: "seo-certification",
-      price_type: "Free",
-      language: "Arabic",
-      meta1: "Technical SEO & AI Tools",
-      meta2: "Keyword Research & Link Building",
-      meta3: "Mentor Support",
-      desc: "Master technical SEO, on-page and off-page optimisation, keyword research, link building and AI-powered SEO tools. Learn to rank websites and drive consistent organic traffic professionally.",
-      duration: "2 Months",
-      mode: "Offline (Mumbai)",
-      phone: "+91 86521 99991",
-      sidebarImage: sidebar_img_seo,
-      level: "Expert",
-      classHours: "72+ Hours",
-      certifications: "Yes",
-      caseStudies: "25+",
-      courseOverview: {
-         description: "The SEO Certification is a comprehensive, hands-on program designed to take you from SEO basics to advanced search engine strategy across both on-page and off-page disciplines. From keyword research and technical SEO to link building, local SEO and AI-powered tools, you'll gain practical experience through live website audits, real ranking projects and hands-on tool training. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into an SEO or digital marketing career.",
-         learningsIntro: "This program covers the complete SEO toolkit, combining search strategy, technical knowledge, content optimization and analytics so you can improve rankings, drive organic traffic and deliver measurable results for any website or business.",
-         learnings: [
-            "Perform in-depth keyword research and competitor analysis",
-            "Optimize web pages for search engines using on-page SEO techniques",
-            "Fix technical SEO issues including site speed, crawlability and structured data",
-            "Build high-quality backlinks through proven off-page SEO strategies",
-            "Set up and manage Google Search Console, Google Analytics & SEO tools",
-            "Use AI tools to scale content creation, audits and SEO reporting",
-         ],
-         closing: "By the end of the course, you'll be able to independently plan and execute SEO strategies, conduct full website audits, track and report organic performance and apply AI tools to boost efficiency — skills directly applicable to SEO executive, content strategist and digital marketing roles.",
-      },
-      certificateImages: [],
-      statisticsImage: undefined,
-   },
-
-   // ── 3. Marketplace Specialist ─────────────────────────────────────────────
+   // ── 1. Marketplace Specialist ─────────────────────────────────────────────
    {
       id: 114,
       sku: "marketplace-specialist-program-in-mumbai",
@@ -235,7 +145,54 @@ const inner_course_data: CourseDataType[] = [
       statisticsImage: undefined,
    },
 
-   // ── 4. Social Media Management ────────────────────────────────────────────
+   // ── 2. Advanced SEO ───────────────────────────────────────────────────────
+   {
+      id: 115,
+      sku: "advanced-seo-certification-in-mumbai",
+      banner: course_banner4,
+      thumb: thumb4,
+      category: "Marketing",
+      rating: 5,
+      title: "Advanced SEO Certification",
+      instructors: "David Millar",
+      price: 20000,
+      offlinePrice: 20000,
+      onlinePrice: 15000,
+      originalPrice: 35000,
+      skill_level: "Beginner",
+      overview: "seo-certification",
+      price_type: "Free",
+      language: "Arabic",
+      meta1: "Technical SEO & AI Tools",
+      meta2: "Keyword Research & Link Building",
+      meta3: "Mentor Support",
+      desc: "Master technical SEO, on-page and off-page optimisation, keyword research, link building and AI-powered SEO tools. Learn to rank websites and drive consistent organic traffic professionally.",
+      duration: "2 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_seo,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The SEO Certification is a comprehensive, hands-on program designed to take you from SEO basics to advanced search engine strategy across both on-page and off-page disciplines. From keyword research and technical SEO to link building, local SEO and AI-powered tools, you'll gain practical experience through live website audits, real ranking projects and hands-on tool training. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into an SEO or digital marketing career.",
+         learningsIntro: "This program covers the complete SEO toolkit, combining search strategy, technical knowledge, content optimization and analytics so you can improve rankings, drive organic traffic and deliver measurable results for any website or business.",
+         learnings: [
+            "Perform in-depth keyword research and competitor analysis",
+            "Optimize web pages for search engines using on-page SEO techniques",
+            "Fix technical SEO issues including site speed, crawlability and structured data",
+            "Build high-quality backlinks through proven off-page SEO strategies",
+            "Set up and manage Google Search Console, Google Analytics & SEO tools",
+            "Use AI tools to scale content creation, audits and SEO reporting",
+         ],
+         closing: "By the end of the course, you'll be able to independently plan and execute SEO strategies, conduct full website audits, track and report organic performance and apply AI tools to boost efficiency — skills directly applicable to SEO executive, content strategist and digital marketing roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
+   },
+
+   // ── 3. Social Media Management ────────────────────────────────────────────
    {
       id: 113,
       sku: "mastery-in-social-media-management-in-mumbai",
@@ -246,6 +203,8 @@ const inner_course_data: CourseDataType[] = [
       title: "Mastery in Social Media Management",
       instructors: "David Millar",
       price: 20000,
+      offlinePrice: 20000,
+      onlinePrice: 15000,
       originalPrice: 35000,
       skill_level: "Beginner",
       overview: "mastery-in-social-media-management",
@@ -280,51 +239,7 @@ const inner_course_data: CourseDataType[] = [
       statisticsImage: undefined,
    },
 
-   // ── 5. Graphic Design & AI ────────────────────────────────────────────────
-   {
-      id: 112,
-      sku: "certification-in-advanced-graphic-design-and-ai-mumbai",
-      banner: course_banner6,
-      thumb: thumb6,
-      category: "Design",
-      rating: 5,
-      title: "Certification in Advanced Graphic Design & AI",
-      instructors: "David Millar",
-      price: 70800,
-      originalPrice: 100000,
-      skill_level: "Beginner",
-      overview: "certification-in-advanced-graphic-design-&-ai",
-      price_type: "Free",
-      language: "Arabic",
-      meta1: "15+ Design Software & AI Tools",
-      meta2: "Portfolio Building",
-      meta3: "Mentor Support",
-      desc: "Learn professional graphic design using Adobe Photoshop, Illustrator, InDesign and AI-powered design workflows. Build a job-ready portfolio, earn a recognised certification and launch your creative career.",
-      duration: "3 Months",
-      mode: "Offline (Mumbai)",
-      phone: "+91 86521 99991",
-      sidebarImage: sidebar_img_gd,
-      level: "Expert",
-      classHours: "72+ Hours",
-      certifications: "Yes",
-      caseStudies: "25+",
-      courseOverview: {
-         description: "The Graphic Design Certification is a comprehensive, hands-on program designed to take you from design fundamentals to advanced, industry-ready creative skills. From Adobe Photoshop and Illustrator to Canva, UI/UX basics, branding and AI design tools, you'll gain practical experience through live client-style projects and a professional portfolio. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a graphic design career.",
-         learningsIntro: "This program covers the complete graphic design toolkit — combining design theory, software skills, and real-world application so you can create professional, client-ready work across print, digital, and social media. Master design fundamentals: color theory, typography, layout & composition.",
-         learnings: [
-            "Design in Adobe Photoshop, Illustrator and Canva",
-            "Create logos, brand identities, and complete brand style guides",
-            "Build UI/UX basics for web and mobile using Figma",
-            "Design social media creatives, ads, and motion graphics",
-            "Use AI tools for image generation, editing, and design automation",
-         ],
-         closing: "By the end of the course, you'll be able to design professional branding, marketing and digital assets, build a strong portfolio, and apply AI-driven tools to boost creativity and efficiency — skills directly applicable to real agency, in-house and freelance design roles.",
-      },
-      certificateImages: [],
-      statisticsImage: undefined,
-   },
-
-   // ── 6. Digital Marketing & AI ─────────────────────────────────────────────
+   // ── 4. Digital Marketing & AI ─────────────────────────────────────────────
    {
       id: 111,
       sku: "certification-in-advanced-digital-marketing-and-ai-mumbai",
@@ -372,6 +287,95 @@ const inner_course_data: CourseDataType[] = [
          { title: "Internship Certificate",    image: cert_dm2 },
       ],
       statisticsImage: cert_dm_stats,
+   },
+
+   // ── 5. Graphic Design & AI ────────────────────────────────────────────────
+   {
+      id: 112,
+      sku: "certification-in-advanced-graphic-design-and-ai-mumbai",
+      banner: course_banner6,
+      thumb: thumb6,
+      category: "Design",
+      rating: 5,
+      title: "Certification in Advanced Graphic Design & AI",
+      instructors: "David Millar",
+      price: 70800,
+      originalPrice: 100000,
+      skill_level: "Beginner",
+      overview: "certification-in-advanced-graphic-design-&-ai",
+      price_type: "Free",
+      language: "Arabic",
+      meta1: "15+ Design Software & AI Tools",
+      meta2: "Portfolio Building",
+      meta3: "Mentor Support",
+      desc: "Learn professional graphic design using Adobe Photoshop, Illustrator, InDesign and AI-powered design workflows. Build a job-ready portfolio, earn a recognised certification and launch your creative career.",
+      duration: "3 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_gd,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Graphic Design Certification is a comprehensive, hands-on program designed to take you from design fundamentals to advanced, industry-ready creative skills. From Adobe Photoshop and Illustrator to Canva, UI/UX basics, branding and AI design tools, you'll gain practical experience through live client-style projects and a professional portfolio. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a graphic design career.",
+         learningsIntro: "This program covers the complete graphic design toolkit — combining design theory, software skills, and real-world application so you can create professional, client-ready work across print, digital, and social media. Master design fundamentals: color theory, typography, layout & composition.",
+         learnings: [
+            "Design in Adobe Photoshop, Illustrator and Canva",
+            "Create logos, brand identities, and complete brand style guides",
+            "Build UI/UX basics for web and mobile using Figma",
+            "Design social media creatives, ads, and motion graphics",
+            "Use AI tools for image generation, editing, and design automation",
+         ],
+         closing: "By the end of the course, you'll be able to design professional branding, marketing and digital assets, build a strong portfolio, and apply AI-driven tools to boost creativity and efficiency — skills directly applicable to real agency, in-house and freelance design roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
+   },
+
+   // ── 6. Web Development ────────────────────────────────────────────────────
+   {
+      id: 116,
+      sku: "certification-in-web-development-in-mumbai",
+      banner: course_banner5,
+      thumb: thumb5,
+      category: "Development",
+      rating: 5,
+      title: "Certification in Web Development",
+      instructors: "David Millar",
+      price: 59000,
+      originalPrice: 130000,
+      skill_level: "Beginner",
+      overview: "certification-in-web-development",
+      price_type: "Free",
+      language: "Arabic",
+      meta1: "WordPress & Shopify",
+      meta2: "Build & Launch Websites",
+      meta3: "Mentor Support",
+      desc: "Build modern, responsive websites using HTML, CSS, JavaScript, WordPress and Shopify. Graduate with live project experience, an industry certification and full placement support.",
+      duration: "3 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_web,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Web Development Certification is a comprehensive, hands-on program designed to take you from complete beginner to building fully functional, professional websites and online stores — no coding required. Focused entirely on WordPress and Shopify, you'll learn to design, customize, launch and manage websites and e-commerce stores through live projects and real client-style builds. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a web development career.",
+         learningsIntro: "This program covers WordPress and Shopify end-to-end combining website design, e-commerce setup, SEO, marketing tools and store management so you can build and run any professional website or online store independently.",
+         learnings: [
+            "Build and customize professional websites on WordPress from scratch",
+            "Design pages using Elementor and popular WordPress themes",
+            "Set up and manage complete e-commerce stores on WooCommerce and Shopify",
+            "Configure payments, shipping and checkout for online stores",
+            "Optimize websites for speed, SEO and performance",
+            "Use AI tools to speed up website building, content creation and design",
+         ],
+         closing: "By the end of the course, you'll be able to independently design, launch and manage WordPress websites and Shopify stores, handle real client projects and use AI tools to work more efficiently — skills directly applicable to WordPress Developer, Shopify Developer and freelance web development roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
    },
 ]
 

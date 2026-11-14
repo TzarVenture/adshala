@@ -7,12 +7,12 @@ import { Suspense } from "react";
 const animatedComponents = makeAnimated();
 
 const options = [
-   { value: 'web-development', label: 'Web Development' },
-   { value: 'digital-marketing', label: 'Digital Marketing' },
-   { value: 'graphic-design', label: 'Graphic Design' },
-   { value: 'social-media-management', label: 'Social Media Management' },
    { value: 'marketplace-certificate', label: 'Marketplace Certification' },
    { value: 'seo-certification', label: 'SEO Certification' },
+   { value: 'social-media-management', label: 'Social Media Management' },
+   { value: 'digital-marketing', label: 'Digital Marketing' },
+   { value: 'graphic-design', label: 'Graphic Design' },
+   { value: 'web-development', label: 'Web Development' },
 ];
 
 const CustomSelectInner = ({ value, onChange }: any) => {

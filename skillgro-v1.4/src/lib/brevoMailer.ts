@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import adshalaaFooterLogo from '@/assets/img/brand/Adshalaa_footer_logo.png';
+import { INSTITUTE } from '@/config/institute';
 
 const BASE_DOMAIN = process.env.NEXT_PUBLIC_APP_URL || 'https://www.adshalaa.com';
 const LOGO_URL = adshalaaFooterLogo?.src?.startsWith('http')
@@ -94,66 +95,195 @@ async function sendEmail({
   });
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared email design – every email uses the same layout, logo and brand colours
+// ─────────────────────────────────────────────────────────────────────────────
+
+const BRAND = {
+  green: '#1a3f32',
+  gold: '#ffc224',
+  navy: '#161439',
+  page: '#f1f5f3',
+  border: '#dce8e2',
+  muted: '#667085',
+  text: '#344054',
+};
+
+const FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
+/** Escape user-supplied values before putting them in HTML. */
+const esc = (value: unknown): string =>
+  String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const inr = (value: unknown): string => `₹${Number(value || 0).toLocaleString('en-IN')}`;
+
+type DetailRow = {
+  label: string;
+  /** Already-escaped HTML */
+  value: string;
+  strong?: boolean;
+  mono?: boolean;
+};
+
+/** Two-column label / value table used inside the email body. */
+const detailTable = (rows: DetailRow[]): string => `
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-size:14px;">
+    ${rows
+      .map(
+        (row, i) => `
+    <tr>
+      <td style="padding:11px 0; ${i > 0 ? `border-top:1px solid #eaf0ec;` : ''} color:${BRAND.muted}; width:38%; vertical-align:top;">${row.label}</td>
+      <td style="padding:11px 0; ${i > 0 ? `border-top:1px solid #eaf0ec;` : ''} color:${BRAND.navy}; text-align:right; vertical-align:top; font-weight:${row.strong ? 700 : 600}; ${row.mono ? `font-family:'Courier New',monospace; font-size:13px;` : ''}">${row.value}</td>
+    </tr>`,
+      )
+      .join('')}
+  </table>`;
+
+const sectionTitle = (title: string): string => `
+  <div style="margin:26px 0 4px; font-size:11.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${BRAND.green}; border-bottom:2px solid ${BRAND.gold}; padding-bottom:6px;">${title}</div>`;
+
+const ctaButton = (url: string, label: string): string => `
+  <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:26px auto 6px;">
+    <tr>
+      <td style="background:${BRAND.green}; border-radius:8px;">
+        <a href="${url}" target="_blank" style="display:inline-block; padding:13px 30px; color:#ffffff; font-size:14.5px; font-weight:700; text-decoration:none; font-family:${FONT};">${label}</a>
+      </td>
+    </tr>
+  </table>`;
+
+const noteBox = (html: string, tone: 'info' | 'success' | 'warn' = 'info'): string => {
+  const tones = {
+    info: { bg: '#f4f8f6', border: '#cfe0d7', color: BRAND.text },
+    success: { bg: '#ecf8ee', border: '#a9d9b0', color: '#1b5e20' },
+    warn: { bg: '#fff8e1', border: '#ffe082', color: '#7a4b00' },
+  }[tone];
+  return `
+  <div style="margin:20px 0 0; padding:14px 16px; background:${tones.bg}; border:1px solid ${tones.border}; border-radius:10px; font-size:13px; line-height:1.55; color:${tones.color};">${html}</div>`;
+};
+
+type FooterKind = 'admissions' | 'accounts' | 'admin';
+
+const emailFooter = (kind: FooterKind): string => {
+  if (kind === 'admin') {
+    return `
+      <strong style="color:${BRAND.green};">Adshalaa EduTech • Admin Notification</strong><br />
+      Automated alert sent to ${esc(ADMIN_EMAIL)} · ${esc(INSTITUTE.website)}`;
+  }
+  const desk = kind === 'accounts' ? 'Accounts Desk' : 'Admissions Desk';
+  return `
+      <strong style="color:${BRAND.green};">Adshalaa EduTech • ${desk}</strong><br />
+      Helpline: ${esc(INSTITUTE.phones.join(' / '))}<br />
+      <a href="mailto:${INSTITUTE.email}" style="color:${BRAND.green}; text-decoration:none;">${esc(INSTITUTE.email)}</a> · <a href="https://${INSTITUTE.website}" style="color:${BRAND.green}; text-decoration:none;">${esc(INSTITUTE.website)}</a><br />
+      <span style="color:#8a94a0;">${esc(INSTITUTE.address)}</span><br />
+      <a href="${INSTITUTE.mapUrl}" style="color:${BRAND.green}; font-weight:600; text-decoration:none;">View on Google Maps</a>`;
+};
+
+/** Page shell shared by every email: logo, brand bar, hero heading, body, footer. */
+function emailLayout(opts: {
+  title: string;
+  preheader: string;
+  heading: string;
+  subheading?: string;
+  bodyHtml: string;
+  footer: FooterKind;
+  maxWidth?: number;
+}): string {
+  const width = opts.maxWidth || 580;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${esc(opts.title)}</title>
+</head>
+<body style="margin:0; padding:0; background:${BRAND.page}; font-family:${FONT}; color:${BRAND.text};">
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0; font-size:1px; line-height:1px; color:${BRAND.page};">${esc(opts.preheader)}</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BRAND.page};">
+    <tr>
+      <td align="center" style="padding:26px 12px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:${width}px; background:#ffffff; border:1px solid ${BRAND.border}; border-radius:14px; overflow:hidden;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:24px 24px 18px; background:#ffffff;">
+              <img src="${LOGO_URL}" alt="Adshalaa EduTech" height="54" style="height:54px; max-width:240px; width:auto; display:block; border:0;" />
+            </td>
+          </tr>
+          <tr><td style="height:4px; line-height:4px; font-size:0; background:${BRAND.gold};">&nbsp;</td></tr>
+          <!-- Hero -->
+          <tr>
+            <td align="center" style="background:${BRAND.green}; padding:22px 24px;">
+              <div style="font-size:21px; font-weight:700; color:#ffffff; line-height:1.3;">${opts.heading}</div>
+              ${opts.subheading ? `<div style="margin-top:5px; font-size:13px; color:#c9dcd2;">${opts.subheading}</div>` : ''}
+            </td>
+          </tr>
+          <!-- Body -->
+          <tr>
+            <td style="padding:28px 26px 26px; font-size:14.5px; line-height:1.6;">
+              ${opts.bodyHtml}
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background:#f8faf9; border-top:1px solid #e6eeea; padding:18px 24px; font-size:12px; line-height:1.7; color:${BRAND.muted};">
+              ${emailFooter(opts.footer)}
+            </td>
+          </tr>
+        </table>
+        <div style="max-width:${width}px; margin:12px auto 0; font-size:11px; color:#98a2b3; text-align:center;">© Adshalaa EduTech. All rights reserved.</div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
 /**
  * Sends a 6-digit verification OTP email to verify the student's email on Step 1.
  */
 export async function sendOtpEmail(toEmail: string, otp: string) {
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Email Verification - Adshalaa EduTech</title>
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f3; margin: 0; padding: 24px 12px; color: #222; }
-        .card { max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #dce8e2; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        .header { background: #1a3f32; color: #ffffff; padding: 28px 24px 22px; text-align: center; }
-        .header img { height: 46px; max-width: 100%; object-fit: contain; margin-bottom: 6px; }
-        .header h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
-        .content { padding: 32px 26px; }
-        .otp-box { text-align: center; margin: 26px 0; padding: 22px 18px; background: #f0f7f3; border: 1.5px dashed #1a3f32; border-radius: 10px; }
-        .otp-code { font-family: 'Courier New', monospace; font-size: 34px; font-weight: 800; color: #1a3f32; letter-spacing: 8px; user-select: all; -webkit-user-select: all; }
-        .copy-pill { display: inline-block; margin-top: 10px; background: #1a3f32; color: #ffffff !important; padding: 7px 16px; border-radius: 6px; font-size: 12.5px; font-weight: 600; text-decoration: none; }
-        .footer { background: #fafcfb; padding: 18px 24px; border-top: 1px solid #eef2f0; font-size: 12px; color: #666; text-align: center; line-height: 1.6; }
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <div class="header">
-          <img src="${LOGO_URL}" alt="Adshalaa EduTech" style="height: 48px; max-width: 220px; object-fit: contain; margin-bottom: 8px;" />
-          <h1>Adshalaa EduTech</h1>
-        </div>
-        <div class="content">
-          <h2 style="font-size: 19px; color: #161439; margin-top: 0; margin-bottom: 12px;">Email Verification Code</h2>
-          <p style="font-size: 14.5px; color: #444; line-height: 1.55; margin: 0 0 16px;">
-            Thank you for starting your registration with <strong>Adshalaa EduTech</strong>. Please use the verification code below to verify your email address:
-          </p>
-          <div class="otp-box">
-            <div class="otp-code">${otp}</div>
-            <div>
-              <span class="copy-pill">Copy Code: ${otp}</span>
-            </div>
-            <div style="font-size: 11px; color: #666; margin-top: 8px;">(Tap code or hold to copy)</div>
-          </div>
-          <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.5;">
-            This verification code is valid for <strong>10 minutes</strong>. If you did not request this verification, please disregard this email.
-          </p>
-        </div>
-        <div class="footer">
-          <strong>Adshalaa EduTech • Admissions Support</strong><br />
-          Helpline: +91 8652199991 / +91 7760775875 | Email: info@adshalaa.com<br />
-          Website: www.adshalaa.com
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
+  const bodyHtml = `
+    <p style="margin:0 0 6px; font-size:16px; font-weight:600; color:${BRAND.navy};">Hello,</p>
+    <p style="margin:0 0 20px;">
+      Thank you for starting your registration with <strong>Adshalaa EduTech</strong>.
+      Enter the code below on the registration page to verify your email address.
+    </p>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" style="background:#f4f8f6; border:2px dashed ${BRAND.green}; border-radius:12px; padding:24px 12px;">
+          <div style="font-size:11.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${BRAND.muted}; margin-bottom:8px;">Your verification code</div>
+          <div style="font-family:'Courier New',monospace; font-size:38px; font-weight:800; letter-spacing:10px; color:${BRAND.green}; padding-left:10px; user-select:all; -webkit-user-select:all;">${esc(otp)}</div>
+        </td>
+      </tr>
+    </table>
+
+    ${noteBox(
+      `⏱ This code is valid for <strong>10 minutes</strong>.<br />🔒 For your security, never share this code with anyone. Adshalaa will never ask for it by phone or chat.`,
+      'warn',
+    )}
+
+    <p style="margin:20px 0 0; font-size:12.5px; color:${BRAND.muted};">
+      Didn't request this? You can safely ignore this email – no registration will be created without this code.
+    </p>`;
 
   return sendEmail({
     toEmail,
     subject: `Your Verification Code: ${otp} - Adshalaa EduTech`,
-    text: `Your Adshalaa EduTech verification code is: ${otp}. It is valid for 10 minutes.`,
-    html: htmlContent,
+    text: `Your Adshalaa EduTech verification code is: ${otp}. It is valid for 10 minutes. Do not share this code with anyone.`,
+    html: emailLayout({
+      title: 'Email Verification - Adshalaa EduTech',
+      preheader: `Your Adshalaa verification code is ${otp}. Valid for 10 minutes.`,
+      heading: 'Verify Your Email',
+      subheading: 'One quick step to continue your registration',
+      bodyHtml,
+      footer: 'admissions',
+      maxWidth: 520,
+    }),
   });
 }
 
@@ -188,118 +318,64 @@ export async function sendPaymentReceiptEmail(data: ReceiptEmailData) {
   const emiCountNum = Number(data.emiCount || 0);
   const emiAmountNum = Number(data.emiAmount || 0);
 
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Payment Receipt - Adshalaa EduTech</title>
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f3; margin: 0; padding: 24px 12px; color: #222; }
-        .card { max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #dce8e2; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        .header { background: #1a3f32; color: #ffffff; padding: 28px 24px 22px; text-align: center; }
-        .header img { height: 46px; max-width: 100%; object-fit: contain; margin-bottom: 6px; }
-        .header h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
-        .header p { margin: 0; font-size: 13px; color: #c4d8ce; }
-        .content { padding: 30px 24px; }
-        .receipt-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
-        .receipt-table td { padding: 10px 12px; border-bottom: 1px solid #e9f0ec; }
-        .receipt-table td.label { color: #666; width: 40%; }
-        .receipt-table td.val { color: #161439; font-weight: 600; text-align: right; }
-        .total-row td { border-top: 2px solid #1a3f32; border-bottom: 2px solid #1a3f32; font-size: 15px; color: #1a3f32; }
-        .emi-box { background: #f8faf9; border: 1.5px solid #1a3f32; border-radius: 10px; padding: 16px; margin: 22px 0 16px; }
-        .btn-wrap { text-align: center; margin: 26px 0 16px; }
-        .btn-receipt { display: inline-block; background: #1a3f32; color: #ffffff !important; padding: 12px 26px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; }
-        .support-box { background: #fdfdfd; border: 1px solid #e0ebe6; border-radius: 8px; padding: 14px 18px; margin-top: 20px; font-size: 12.5px; color: #444; line-height: 1.5; }
-        .footer { background: #fafcfb; padding: 18px 24px; border-top: 1px solid #eef2f0; font-size: 12px; color: #666; text-align: center; line-height: 1.6; }
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <div class="header">
-          <img src="${LOGO_URL}" alt="Adshalaa EduTech" style="height: 48px; max-width: 220px; object-fit: contain; margin-bottom: 8px;" />
-          <h1>Adshalaa EduTech</h1>
-          <p>Registration Confirmation & Payment Receipt</p>
-        </div>
-        <div class="content">
-          <p style="font-size: 15.5px; color: #161439; margin-top: 0;">
-            Dear <strong>${data.studentName}</strong>,
-          </p>
-          <p style="font-size: 14px; color: #555; line-height: 1.55; margin-bottom: 18px;">
-            Thank you for enrolling with <strong>Adshalaa EduTech</strong>. Your payment has been received and your course seat is successfully reserved.
-          </p>
+  const rows: DetailRow[] = [
+    { label: 'Course', value: esc(data.course) },
+    ...(data.batch ? [{ label: 'Batch & Mode', value: esc(data.batch) }] : []),
+    { label: 'Payment ID', value: esc(data.paymentId), mono: true },
+    { label: 'Date', value: esc(formattedDate) },
+  ];
 
-          <table class="receipt-table">
-            <tr>
-              <td class="label">Course Name</td>
-              <td class="val">${data.course}</td>
-            </tr>
-            ${data.batch ? `
-            <tr>
-              <td class="label">Batch & Schedule</td>
-              <td class="val">${data.batch}</td>
-            </tr>
-            ` : ''}
-            <tr>
-              <td class="label">Payment ID</td>
-              <td class="val" style="font-family: monospace; font-size: 12.5px;">${data.paymentId}</td>
-            </tr>
-            <tr>
-              <td class="label">Date</td>
-              <td class="val">${formattedDate}</td>
-            </tr>
-            <tr class="total-row">
-              <td class="label" style="font-weight: 700; color: #1a3f32;">Amount Paid Today</td>
-              <td class="val" style="font-weight: 700; color: #1a3f32;">₹${formattedAmount}</td>
-            </tr>
-          </table>
+  const feeStatus =
+    remainingNum > 0
+      ? noteBox(
+          `<strong style="color:${BRAND.green}; font-size:14px;">Remaining balance &amp; EMI schedule</strong><br />
+           Remaining balance: <strong>${inr(remainingNum)}</strong>, payable in <strong>${emiCountNum} installments</strong> of about <strong>${inr(emiAmountNum)}/month</strong>.<br />
+           • Installments fall due every 30 days during your course.<br />
+           • We will email you a payment link before each due date.`,
+          'info',
+        )
+      : noteBox(`✓ <strong>Full course fee paid</strong> – no remaining balance or EMI installments.`, 'success');
 
-          ${remainingNum > 0 ? `
-          <div class="emi-box">
-            <strong style="color: #1a3f32; font-size: 14px; display: block; margin-bottom: 6px;">
-              Remaining Balance & EMI Installment Schedule
-            </strong>
-            <p style="font-size: 12.5px; color: #555; margin: 0 0 10px;">
-              Remaining Balance: <strong>₹${remainingNum.toLocaleString('en-IN')}</strong> payable in <strong>${emiCountNum} installments</strong> of approximately <strong>₹${emiAmountNum.toLocaleString('en-IN')}/month</strong>.
-            </p>
-            <div style="font-size: 12px; color: #666; line-height: 1.5;">
-              • Installments are due every 30 days during your course duration.<br />
-              • Automated reminder emails with direct payment links will be sent before each due date.
-            </div>
-          </div>
-          ` : `
-          <div style="background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 10px 14px; margin: 16px 0; color: #1b5e20; font-size: 12.5px;">
-            ✓ <strong>Full Course Fee Paid Upfront</strong> — No remaining balance or EMI installments required.
-          </div>
-          `}
+  const bodyHtml = `
+    <p style="margin:0 0 6px; font-size:16px; font-weight:600; color:${BRAND.navy};">Dear ${esc(data.studentName)},</p>
+    <p style="margin:0 0 4px;">
+      Thank you for enrolling with <strong>Adshalaa EduTech</strong>. We have received your payment and your seat is reserved.
+    </p>
 
-          <div class="btn-wrap">
-            <a href="${receiptUrl}" class="btn-receipt" target="_blank">
-              View & Print Official Receipt →
-            </a>
-          </div>
+    ${sectionTitle('Registration &amp; payment details')}
+    ${detailTable(rows)}
 
-          <div class="support-box">
-            <strong>What's Next?</strong><br />
-            Our academic coordinator will reach out to you with your batch schedule, learning materials, and orientation details. If you have any questions, feel free to contact our admissions desk.
-          </div>
-        </div>
-        <div class="footer">
-          <strong>Adshalaa EduTech • Admissions Desk</strong><br />
-          Helpline: +91 8652199991 / +91 7760775875 | Email: info@adshalaa.com<br />
-          Mumbai Campus, Maharashtra, India · www.adshalaa.com
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:14px; background:#f4f8f6; border:1px solid #cfe0d7; border-radius:10px;">
+      <tr>
+        <td style="padding:14px 16px; font-size:14px; font-weight:700; color:${BRAND.green};">Amount paid today</td>
+        <td align="right" style="padding:14px 16px; font-size:20px; font-weight:800; color:${BRAND.green};">₹${formattedAmount}</td>
+      </tr>
+    </table>
+
+    ${feeStatus}
+
+    ${ctaButton(receiptUrl, 'View &amp; Print Official Receipt →')}
+
+    ${noteBox(
+      `<strong style="color:${BRAND.navy};">What happens next?</strong><br />
+       Our academic coordinator will contact you with your batch schedule, learning materials and orientation details. For any questions, reply to this email or call our admissions desk.`,
+      'info',
+    )}`;
 
   return sendEmail({
     toEmail: data.email,
     toName: data.studentName,
     subject: `Admission Confirmed & Payment Receipt - Adshalaa EduTech`,
     text: `Dear ${data.studentName}, your registration for ${data.course} has been confirmed. Amount Paid: ₹${formattedAmount}. Payment ID: ${data.paymentId}. View receipt: ${receiptUrl}`,
-    html: htmlContent,
+    html: emailLayout({
+      title: 'Payment Receipt - Adshalaa EduTech',
+      preheader: `Your registration for ${data.course} is confirmed. Amount paid: ₹${formattedAmount}.`,
+      heading: 'Registration Confirmed ✓',
+      subheading: 'Admission confirmation &amp; payment receipt',
+      bodyHtml,
+      footer: 'admissions',
+      maxWidth: 600,
+    }),
   });
 }
 
@@ -324,121 +400,81 @@ export async function sendAdminRegistrationNotification(data: {
 }) {
   const formattedAmount = Number(data.paymentAmount || 0).toLocaleString('en-IN');
   const remainingNum = Number(data.remainingBalance || 0);
+  const when = `${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST`;
 
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>New Registration Alert - Adshalaa EduTech</title>
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 24px 12px; color: #222; }
-        .card { max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid #dcdfe4; border-radius: 12px; overflow: hidden; }
-        .header { background: #161439; color: #ffffff; padding: 22px 24px; }
-        .header h1 { margin: 0; font-size: 20px; font-weight: 700; }
-        .header p { margin: 4px 0 0 0; font-size: 13px; color: #bcc1cd; }
-        .content { padding: 24px; }
-        .table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13.5px; }
-        .table td { padding: 9px 12px; border-bottom: 1px solid #edf0f2; }
-        .table td.lbl { color: #666; width: 35%; font-weight: 500; }
-        .table td.val { color: #111; font-weight: 600; }
-        .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; }
-        .footer { background: #fafbfc; padding: 14px 24px; border-top: 1px solid #eaeef2; font-size: 12px; color: #888; text-align: center; }
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <div class="header">
-          <h1>🔔 New Student Enrollment</h1>
-          <p>Adshalaa EduTech • Admission & Payment Notification</p>
-        </div>
-        <div class="content">
-          <div style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
-            <span class="badge">Payment Confirmed ✓</span>
-            <span style="font-size: 13px; color: #555;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</span>
-          </div>
+  const studentRows: DetailRow[] = [
+    { label: 'Name', value: esc(data.studentName), strong: true },
+    { label: 'Email', value: `<a href="mailto:${esc(data.email)}" style="color:${BRAND.green}; text-decoration:none;">${esc(data.email)}</a>` },
+    { label: 'Phone', value: `<a href="tel:${esc(data.phone)}" style="color:${BRAND.green}; text-decoration:none;">${esc(data.phone)}</a>` },
+    ...(data.city ? [{ label: 'City', value: esc(data.city) }] : []),
+  ];
 
-          <table class="table">
-            <tr>
-              <td class="lbl">Student Name</td>
-              <td class="val">${data.studentName}</td>
-            </tr>
-            <tr>
-              <td class="lbl">Email Address</td>
-              <td class="val"><a href="mailto:${data.email}">${data.email}</a></td>
-            </tr>
-            <tr>
-              <td class="lbl">Phone Number</td>
-              <td class="val"><a href="tel:${data.phone}">${data.phone}</a></td>
-            </tr>
-            ${data.city ? `
-            <tr>
-              <td class="lbl">City</td>
-              <td class="val">${data.city}</td>
-            </tr>
-            ` : ''}
-            <tr>
-              <td class="lbl">Course Enrolled</td>
-              <td class="val" style="color: #1a3f32;">${data.course}</td>
-            </tr>
-            ${data.batch ? `
-            <tr>
-              <td class="lbl">Batch & Mode</td>
-              <td class="val">${data.batch}</td>
-            </tr>
-            ` : ''}
-            <tr>
-              <td class="lbl">Amount Paid Today</td>
-              <td class="val" style="color: #2e7d32; font-size: 15px;">₹${formattedAmount}</td>
-            </tr>
-            <tr>
-              <td class="lbl">Remaining Balance</td>
-              <td class="val">₹${remainingNum.toLocaleString('en-IN')} ${data.emiPlanType ? `(${data.emiPlanType})` : ''}</td>
-            </tr>
-            ${data.emiAmount ? `
-            <tr>
-              <td class="lbl">EMI Installment</td>
-              <td class="val">₹${Number(data.emiAmount).toLocaleString('en-IN')} / month</td>
-            </tr>
-            ` : ''}
-            <tr>
-              <td class="lbl">Razorpay Payment ID</td>
-              <td class="val" style="font-family: monospace;">${data.paymentId}</td>
-            </tr>
-            ${data.orderId ? `
-            <tr>
-              <td class="lbl">Razorpay Order ID</td>
-              <td class="val" style="font-family: monospace;">${data.orderId}</td>
-            </tr>
-            ` : ''}
-            ${data.source ? `
-            <tr>
-              <td class="lbl">Discovery Source</td>
-              <td class="val">${data.source}</td>
-            </tr>
-            ` : ''}
-            ${data.goals ? `
-            <tr>
-              <td class="lbl">Career Goals</td>
-              <td class="val" style="font-weight: 400; font-size: 13px;">${data.goals}</td>
-            </tr>
-            ` : ''}
-          </table>
-        </div>
-        <div class="footer">
-          Adshalaa EduTech Admin Alert • Sent to ${ADMIN_EMAIL}
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
+  const programRows: DetailRow[] = [
+    { label: 'Course', value: esc(data.course), strong: true },
+    ...(data.batch ? [{ label: 'Batch &amp; Mode', value: esc(data.batch) }] : []),
+  ];
+
+  const paymentRows: DetailRow[] = [
+    { label: 'Amount paid today', value: inr(data.paymentAmount), strong: true },
+    { label: 'Remaining balance', value: `${inr(remainingNum)}${data.emiPlanType ? ` (${esc(data.emiPlanType)})` : ''}` },
+    ...(data.emiAmount ? [{ label: 'EMI installment', value: `${inr(data.emiAmount)} / month` }] : []),
+    { label: 'Razorpay payment ID', value: esc(data.paymentId), mono: true },
+    ...(data.orderId ? [{ label: 'Razorpay order ID', value: esc(data.orderId), mono: true }] : []),
+  ];
+
+  const otherRows: DetailRow[] = [
+    ...(data.source ? [{ label: 'Discovery source', value: esc(data.source) }] : []),
+    ...(data.goals ? [{ label: 'Career goals', value: `<span style="font-weight:400;">${esc(data.goals)}</span>` }] : []),
+  ];
+
+  const bodyHtml = `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="background:#ecf8ee; border:1px solid #a9d9b0; border-radius:10px; padding:14px 16px;">
+          <div style="font-size:12px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:#1b5e20;">Payment confirmed ✓</div>
+          <div style="font-size:24px; font-weight:800; color:${BRAND.green}; margin-top:2px;">₹${formattedAmount}</div>
+          <div style="font-size:12.5px; color:${BRAND.muted}; margin-top:2px;">${esc(when)}</div>
+        </td>
+      </tr>
+    </table>
+
+    ${sectionTitle('Student')}
+    ${detailTable(studentRows)}
+
+    ${sectionTitle('Program')}
+    ${detailTable(programRows)}
+
+    ${sectionTitle('Payment')}
+    ${detailTable(paymentRows)}
+
+    ${otherRows.length ? `${sectionTitle('Additional info')}${detailTable(otherRows)}` : ''}
+
+    <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:26px auto 0;">
+      <tr>
+        <td style="background:${BRAND.green}; border-radius:8px;">
+          <a href="tel:${esc(data.phone)}" style="display:inline-block; padding:11px 22px; color:#ffffff; font-size:13.5px; font-weight:700; text-decoration:none;">📞 Call student</a>
+        </td>
+        <td style="width:10px;">&nbsp;</td>
+        <td style="background:#ffffff; border:1.5px solid ${BRAND.green}; border-radius:8px;">
+          <a href="mailto:${esc(data.email)}" style="display:inline-block; padding:10px 22px; color:${BRAND.green}; font-size:13.5px; font-weight:700; text-decoration:none;">✉ Email student</a>
+        </td>
+      </tr>
+    </table>`;
 
   return sendEmail({
     toEmail: ADMIN_EMAIL,
     toName: 'Adshalaa Admin',
     subject: `🔔 New Admission: ${data.studentName} enrolled in ${data.course} (₹${formattedAmount})`,
     text: `New student registration: ${data.studentName} has enrolled in ${data.course}. Amount Paid: ₹${formattedAmount}. Payment ID: ${data.paymentId}. Phone: ${data.phone}, Email: ${data.email}.`,
-    html: htmlContent,
+    html: emailLayout({
+      title: 'New Registration Alert - Adshalaa EduTech',
+      preheader: `${data.studentName} enrolled in ${data.course} – ₹${formattedAmount} received.`,
+      heading: 'New Student Enrollment',
+      subheading: 'Admission &amp; payment notification',
+      bodyHtml,
+      footer: 'admin',
+      maxWidth: 620,
+    }),
   });
 }
 
@@ -457,69 +493,41 @@ export async function sendEmiReminderEmail(data: {
 }) {
   const payUrl = data.paymentLink || 'https://www.adshalaa.com/student-registration';
 
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>EMI Payment Reminder - Adshalaa EduTech</title>
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f3; margin: 0; padding: 24px 12px; color: #222; }
-        .card { max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #dce8e2; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        .header { background: #1a3f32; color: #ffffff; padding: 26px 24px; text-align: center; }
-        .header img { height: 44px; margin-bottom: 6px; }
-        .header h1 { margin: 0; font-size: 20px; font-weight: 700; }
-        .content { padding: 28px 24px; }
-        .due-card { background: #fff8e1; border: 1.5px solid #ffe082; border-radius: 10px; padding: 16px; margin: 20px 0; text-align: center; }
-        .due-amount { font-size: 26px; font-weight: 800; color: #e65100; margin: 4px 0; }
-        .btn-pay { display: inline-block; background: #1a3f32; color: #ffffff !important; padding: 13px 28px; border-radius: 6px; font-size: 15px; font-weight: 700; text-decoration: none; }
-        .footer { background: #fafcfb; padding: 16px 24px; border-top: 1px solid #eef2f0; font-size: 12px; color: #666; text-align: center; }
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <div class="header">
-          <img src="${LOGO_URL}" alt="Adshalaa EduTech" style="height: 48px; max-width: 220px; object-fit: contain; margin-bottom: 8px;" />
-          <h1>Adshalaa EduTech</h1>
-        </div>
-        <div class="content">
-          <h2 style="font-size: 18px; color: #161439; margin-top: 0;">EMI Payment Reminder</h2>
-          <p style="font-size: 14px; color: #555; line-height: 1.5;">
-            Dear <strong>${data.studentName}</strong>,<br /><br />
-            This is a friendly reminder regarding your upcoming course fee installment for <strong>${data.course}</strong>.
-          </p>
+  const bodyHtml = `
+    <p style="margin:0 0 6px; font-size:16px; font-weight:600; color:${BRAND.navy};">Dear ${esc(data.studentName)},</p>
+    <p style="margin:0 0 4px;">
+      This is a friendly reminder about your upcoming course fee installment for <strong>${esc(data.course)}</strong>.
+    </p>
 
-          <div class="due-card">
-            <div style="font-size: 12px; color: #b26a00; font-weight: 600; text-transform: uppercase;">
-              Installment ${data.installmentNumber} of ${data.totalInstallments}
-            </div>
-            <div class="due-amount">₹${data.emiAmount.toLocaleString('en-IN')}</div>
-            <div style="font-size: 13px; color: #444;">Due Date: <strong>${data.dueDate}</strong></div>
-          </div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
+      <tr>
+        <td align="center" style="background:#fff8e1; border:1.5px solid #ffe082; border-radius:12px; padding:20px 12px;">
+          <div style="font-size:11.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#b26a00;">Installment ${data.installmentNumber} of ${data.totalInstallments}</div>
+          <div style="font-size:32px; font-weight:800; color:${BRAND.green}; margin:6px 0 4px;">${inr(data.emiAmount)}</div>
+          <div style="font-size:13.5px; color:${BRAND.text};">Due date: <strong>${esc(data.dueDate)}</strong></div>
+        </td>
+      </tr>
+    </table>
 
-          <div style="text-align: center; margin: 24px 0 16px;">
-            <a href="${payUrl}" class="btn-pay" target="_blank">Pay Installment Online →</a>
-          </div>
+    ${ctaButton(payUrl, 'Pay Installment Online →')}
 
-          <p style="font-size: 12.5px; color: #777; line-height: 1.4; text-align: center; margin: 0;">
-            If you have already paid this installment, please ignore this notice.
-          </p>
-        </div>
-        <div class="footer">
-          <strong>Adshalaa EduTech • Accounts Desk</strong><br />
-          Helpline: +91 8652199991 / +91 7760775875 | Email: info@adshalaa.com<br />
-          www.adshalaa.com
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
+    <p style="margin:18px 0 0; font-size:12.5px; color:${BRAND.muted}; text-align:center;">
+      Already paid this installment? Please ignore this reminder.
+    </p>`;
 
   return sendEmail({
     toEmail: data.studentEmail,
     toName: data.studentName,
     subject: `EMI Payment Reminder (Installment ${data.installmentNumber}) - Adshalaa EduTech`,
     text: `Dear ${data.studentName}, your EMI installment of ₹${data.emiAmount.toLocaleString('en-IN')} for ${data.course} is due on ${data.dueDate}. Pay online: ${payUrl}`,
-    html: htmlContent,
+    html: emailLayout({
+      title: 'EMI Payment Reminder - Adshalaa EduTech',
+      preheader: `Installment ${data.installmentNumber} of ${data.totalInstallments} (${inr(data.emiAmount)}) is due on ${data.dueDate}.`,
+      heading: 'EMI Payment Reminder',
+      subheading: 'Course fee installment due',
+      bodyHtml,
+      footer: 'accounts',
+      maxWidth: 540,
+    }),
   });
 }
