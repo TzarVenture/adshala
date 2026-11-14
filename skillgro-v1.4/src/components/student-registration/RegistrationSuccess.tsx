@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import adshalaaFooterLogo from '@/assets/img/brand/Adshalaa_footer_logo.png';
+import { INSTITUTE } from '@/config/institute';
+import { amountToWords } from '@/utils/amountToWords';
 import './Registration.css';
 
 interface RegistrationData {
@@ -107,6 +109,15 @@ export default function RegistrationSuccess({
           color: #000000 !important;
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
+        }
+        /* Print on plain white paper: strip every background colour/image and shadow */
+        body, body * {
+          background-color: transparent !important;
+          background-image: none !important;
+          box-shadow: none !important;
+        }
+        html, body {
+          background-color: #ffffff !important;
         }
         header, footer, nav, .tg-header__area, #sticky-header, #header-fixed-height,
         .no-print, .receipt-sidebar, .breadcrumb, .embedded-notice, .receipt-card-print,
@@ -219,7 +230,108 @@ export default function RegistrationSuccess({
     );
   }
 
-  // The official admission receipt card (Screen view)
+  // The official payment receipt (shared by the on-screen card and print page 1)
+  const amountPaid = Number(registration.paymentAmount || 0);
+  const amountPaidText = amountPaid.toLocaleString('en-IN');
+
+  const field = (label: string, value: ReactNode, extraClass = '') => (
+    <div className={`rcpt-field ${extraClass}`.trim()}>
+      <span className="rcpt-label">{label}</span>
+      <span className="rcpt-value">{value}</span>
+    </div>
+  );
+
+  const receiptSheet = (
+    <div className="rcpt-sheet">
+      {/* Tilted brand watermark */}
+      <div className="rcpt-watermark" aria-hidden="true">
+        <img src={adshalaaFooterLogo.src} alt="" />
+      </div>
+
+      <div className="rcpt-body">
+        {/* Letterhead: logo left, registration text right (address lives on page 2) */}
+        <div className="receipt-header-responsive rcpt-head">
+          <img src={adshalaaFooterLogo.src} alt="Adshalaa EduTech" className="rcpt-logo" />
+          <div className="receipt-header-text rcpt-head-text">
+            <div className="receipt-header-title rcpt-head-title">
+              <h2>Registration Confirmed</h2>
+              <span className="rcpt-verified">Verified Enrollment</span>
+            </div>
+            <p>Official admission slip issued by {INSTITUTE.name}.</p>
+            <p className="rcpt-contact">{INSTITUTE.phones.join(' / ')} · {INSTITUTE.email}</p>
+          </div>
+        </div>
+
+        {/* Title bar with receipt number and date */}
+        <div className="rcpt-title">
+          <span className="rcpt-title-text">PAYMENT RECEIPT</span>
+          <span className="rcpt-title-meta">
+            Receipt No: <strong className="rcpt-mono">{registration.paymentId}</strong>
+            <span className="rcpt-sep">|</span>
+            Date: <strong>{registration.registeredAt || '—'}</strong>
+          </span>
+        </div>
+
+        {/* Student information */}
+        <div className="rcpt-section">
+          <h3>Student Information</h3>
+          <div className="rcpt-grid">
+            {field('Candidate Name', registration.name || '—')}
+            {field('Email Address', registration.email || '—')}
+            {field('Phone Number', registration.phone || '—')}
+            {registration.city && field('City / Campus', registration.city)}
+          </div>
+        </div>
+
+        {/* Program details */}
+        <div className="rcpt-section">
+          <h3>Program Details</h3>
+          <div className="rcpt-grid">
+            {field('Selected Course', registration.course || '—', 'rcpt-span-all')}
+            {field('Batch Schedule', registration.batchSchedule || registration.batch || '—')}
+            {field('Learning Mode', registration.batchMode || '—')}
+          </div>
+        </div>
+
+        {/* Payment summary */}
+        <div className="rcpt-section">
+          <h3>Payment Summary</h3>
+          <div className="rcpt-grid">
+            {field('Amount Paid', <span className="rcpt-amount">₹{amountPaidText}</span>)}
+            {field('Payment Status', <span className="rcpt-ok">✓ Successful</span>)}
+            {field('Payment Mode', 'Online (Razorpay)')}
+            {field('Transaction ID', <span className="rcpt-mono">{registration.paymentId}</span>, 'rcpt-span-2')}
+            {registration.orderId && field('Gateway Order ID', <span className="rcpt-mono">{registration.orderId}</span>)}
+          </div>
+        </div>
+
+        {/* Amount in words + PAID stamp */}
+        <div className="rcpt-words-row">
+          <div className="rcpt-words">
+            <span className="rcpt-label">Amount in words</span>
+            <strong>{amountToWords(amountPaid)}</strong>
+          </div>
+          <div className="rcpt-stamp" aria-label="Paid">PAID</div>
+        </div>
+
+        {/* Signature */}
+        <div className="rcpt-sign-row">
+          <div className="rcpt-thanks">Received with thanks. Please retain this receipt for future reference and fee reconciliation.</div>
+          <div className="rcpt-sign">
+            <div className="rcpt-sign-line"></div>
+            <strong>Authorised Signatory</strong>
+            <span>For {INSTITUTE.name}</span>
+          </div>
+        </div>
+
+        <div className="rcpt-foot">
+          This is a computer-generated receipt and is valid without a physical signature. · {INSTITUTE.website}
+        </div>
+      </div>
+    </div>
+  );
+
+  // Screen view: receipt sheet + actions
   const receiptCardContent = (
     <div
       className="receipt-card-print verified-receipt-card"
@@ -228,225 +340,36 @@ export default function RegistrationSuccess({
         background: '#ffffff',
         border: '1px solid #dce5e0',
         borderRadius: '16px',
-        padding: '28px 30px',
+        padding: '20px',
         boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
-        overflow: 'hidden',
       }}
     >
-      {/* Background Watermark for Receipt */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '440px',
-          maxWidth: '85%',
-          opacity: 0.045,
-          pointerEvents: 'none',
-          zIndex: 0,
-          textAlign: 'center',
-        }}
-      >
-        <img
-          src={adshalaaFooterLogo.src}
-          alt=""
-          style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-        />
-      </div>
+      {receiptSheet}
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
-      {/* Top Institute Header with Brand Logo */}
-      <div className="receipt-header-responsive" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', marginBottom: '24px', paddingBottom: '20px', borderBottom: '1px solid #e7efe9' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <img
-            src={adshalaaFooterLogo.src}
-            alt="Adshalaa EduTech"
-            style={{ height: '44px', width: 'auto', objectFit: 'contain' }}
-          />
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#161439', margin: 0 }}>
-                Registration Confirmed
-              </h2>
-              <span
-                style={{
-                  fontSize: '11.5px',
-                  fontWeight: 600,
-                  color: '#2e7d32',
-                  background: '#e8f5e9',
-                  padding: '4px 10px',
-                  borderRadius: '14px'
-                }}
-              >
-                Verified Enrollment
-              </span>
-            </div>
-            <p style={{ fontSize: '13.5px', color: '#555', margin: '4px 0 0 0' }}>
-              Official admission slip issued by Adshalaa EduTech.
-            </p>
-          </div>
-        </div>
-
-        <div className="no-print" style={{ fontSize: '13.5px', color: '#555' }}>
-          <div>Payment ID: <span style={{ fontFamily: 'monospace', fontWeight: 600, color: '#161439' }}>{registration.paymentId}</span></div>
-          {registration.registeredAt && <div style={{ marginTop: '2px' }}>Date: <span style={{ fontWeight: 600, color: '#161439' }}>{registration.registeredAt}</span></div>}
-        </div>
-      </div>
-
-      {/* Structured Details Box */}
-      <div
-        style={{
-          background: '#f8faf9',
-          border: '1px solid #e2ece5',
-          borderRadius: '12px',
-          padding: '22px',
-          marginBottom: '22px'
-        }}
-      >
-        {/* Section 1: Course Details */}
-        <div style={{ marginBottom: '20px', paddingBottom: '18px', borderBottom: '1px solid #e2ece5' }}>
-          <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#1a3f32', letterSpacing: '0.4px', textTransform: 'uppercase', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="fas fa-graduation-cap" style={{ fontSize: '15px' }}></i>
-            Program Details
-          </div>
-          <div className="receipt-grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Selected Course</div>
-              <div style={{ fontSize: '15.5px', fontWeight: 600, color: '#161439', marginTop: '4px' }}>
-                {registration.course || '—'}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Batch Schedule</div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#161439', marginTop: '4px' }}>
-                {registration.batchSchedule || registration.batch || '—'}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Learning Mode</div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#161439', marginTop: '4px' }}>
-                {registration.batchMode || '—'}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Section 2: Student Information */}
-        <div style={{ marginBottom: '20px', paddingBottom: '18px', borderBottom: '1px solid #e2ece5' }}>
-          <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#1a3f32', letterSpacing: '0.4px', textTransform: 'uppercase', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="fas fa-user" style={{ fontSize: '14px' }}></i>
-            Student Information
-          </div>
-          <div className="receipt-grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Candidate Name</div>
-              <div style={{ fontSize: '15.5px', fontWeight: 600, color: '#161439', marginTop: '4px' }}>
-                {registration.name || '—'}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Email Address</div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#161439', marginTop: '4px', wordBreak: 'break-word' }}>
-                {registration.email || '—'}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Phone Number</div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#161439', marginTop: '4px' }}>
-                {registration.phone || '—'}
-              </div>
-            </div>
-            {registration.city && (
-              <div>
-                <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>City / Campus</div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#161439', marginTop: '4px' }}>
-                  {registration.city}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Section 3: Payment Summary */}
-        <div>
-          <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#1a3f32', letterSpacing: '0.4px', textTransform: 'uppercase', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="fas fa-receipt" style={{ fontSize: '14px' }}></i>
-            Payment Summary
-          </div>
-          <div className="receipt-grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Amount Paid</div>
-              <div style={{ fontSize: '20px', fontWeight: 700, color: '#1a3f32', marginTop: '2px' }}>
-                ₹{Number(registration.paymentAmount || 0).toLocaleString('en-IN')}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Payment Status</div>
-              <div style={{ fontSize: '14.5px', fontWeight: 600, color: '#2e7d32', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <i className="fas fa-check-circle" style={{ fontSize: '14px' }}></i> Successful
-              </div>
-            </div>
-            {registration.paymentId && (
-              <div>
-                <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Transaction ID</div>
-                <div style={{ fontSize: '13.5px', color: '#161439', fontFamily: 'monospace', fontWeight: 600, marginTop: '4px', wordBreak: 'break-all' }}>
-                  {registration.paymentId}
-                </div>
-              </div>
-            )}
-            {registration.orderId && (
-              <div>
-                <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: 500 }}>Gateway Order ID</div>
-                <div style={{ fontSize: '13.5px', color: '#161439', fontFamily: 'monospace', fontWeight: 600, marginTop: '4px', wordBreak: 'break-all' }}>
-                  {registration.orderId}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Official Footnote */}
-      <div style={{ fontSize: '13px', color: '#444', lineHeight: '1.6', marginBottom: '22px', padding: '12px 16px', background: '#f4f8f6', borderRadius: '10px', border: '1px solid #dbe7df' }}>
+      <div className="no-print" style={{ fontSize: '13px', color: '#444', lineHeight: '1.6', margin: '18px 0', padding: '12px 16px', background: '#f4f8f6', borderRadius: '10px', border: '1px solid #dbe7df' }}>
         <i className="fas fa-shield-alt me-2" style={{ color: '#1a3f32' }}></i>
         This official admission slip is digitally verified by Adshaala Admissions Board. A copy has been dispatched to your email address.
       </div>
 
-      {/* Action Buttons Bar: EXACT SAME BUTTON STYLING AS IN NAVBAR (.btn and .btn.btn-border) */}
       <div className="receipt-actions no-print">
         <button
           type="button"
           onClick={() => window.print()}
           className="btn btn-border"
-          style={{
-            padding: '12px 24px',
-            fontSize: '14px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
+          style={{ padding: '12px 24px', fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
         >
           <i className="fas fa-print"></i>
-          <span>Print Receipt</span>
+          <span>Print / Download Receipt</span>
         </button>
 
         <Link
           href="/"
           className="btn btn-border"
-          style={{
-            padding: '12px 22px',
-            fontSize: '14px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            marginLeft: 'auto',
-          }}
+          style={{ padding: '12px 22px', fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}
         >
           <i className="fas fa-home"></i>
           <span>Home</span>
         </Link>
-      </div>
       </div>
     </div>
   );
@@ -454,169 +377,19 @@ export default function RegistrationSuccess({
   // Dedicated 2-page print layout for PDF / Printing (Controlled heights to completely eliminate empty 2nd page spills)
   const printDocumentPages = (
     <div className="print-only" style={{ display: 'none' }}>
-      {/* ── PRINT PAGE 1: Official Admission Slip ── */}
-      <div className="print-page-1" style={{ position: 'relative', padding: '0 0 10px 0', overflow: 'hidden' }}>
-        {/* Background Watermark */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '420px',
-            maxWidth: '80%',
-            opacity: 0.05,
-            pointerEvents: 'none',
-            zIndex: 0,
-            textAlign: 'center',
-          }}
-        >
-          <img
-            src={adshalaaFooterLogo.src}
-            alt=""
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-          />
-        </div>
-
-        <div style={{ position: 'relative', zIndex: 1 }}>
-        {/* Print Header with Brand Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #1a3f32', paddingBottom: '12px', marginBottom: '14px' }}>
-          <div>
-            <img src={adshalaaFooterLogo.src} alt="Adshalaa EduTech" style={{ height: '42px', objectFit: 'contain' }} />
-            <div style={{ fontSize: '10.5px', color: '#666', marginTop: '3px' }}>
-              ISO 9001:2015 Certified · Government & Industry Accredited
-            </div>
-          </div>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '14px', fontWeight: 700, color: '#1a3f32' }}>ADSHALAA EDUTECH</div>
-            <div style={{ fontSize: '11.5px', color: '#555' }}>Official Student Admission & Payment Slip</div>
-            <div style={{ fontSize: '10.5px', color: '#777', marginTop: '2px' }}>Ref: {registration.paymentId}</div>
-          </div>
-        </div>
-
-        {/* Verification Banner */}
-        <div style={{ background: '#eef6f2', border: '1px solid #1a3f32', borderRadius: '5px', padding: '8px 12px', marginBottom: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <strong style={{ fontSize: '12.5px', color: '#1a3f32' }}>✓ ADMISSION CONFIRMED & VERIFIED</strong>
-          <span style={{ fontSize: '11.5px', color: '#333' }}>Date: {registration.registeredAt || '15 Oct 2026'}</span>
-        </div>
-
-        {/* Print Section 1: Candidate Details */}
-        <div style={{ marginBottom: '14px', border: '1px solid #ddd', borderRadius: '5px', overflow: 'hidden' }}>
-          <div style={{ background: '#f5f5f5', padding: '6px 10px', fontWeight: 700, fontSize: '11.5px', color: '#1a3f32', borderBottom: '1px solid #ddd' }}>
-            1. CANDIDATE PROFILE
-          </div>
-          <table style={{ width: '100%', fontSize: '11.5px', borderCollapse: 'collapse' }}>
-            <tbody>
-              <tr>
-                <td style={{ padding: '6px 10px', width: '25%', color: '#666', borderBottom: '1px solid #eee' }}>Candidate Name:</td>
-                <td style={{ padding: '6px 10px', width: '25%', fontWeight: 600, borderBottom: '1px solid #eee' }}>{registration.name || '—'}</td>
-                <td style={{ padding: '6px 10px', width: '25%', color: '#666', borderBottom: '1px solid #eee' }}>Phone Number:</td>
-                <td style={{ padding: '6px 10px', width: '25%', fontWeight: 600, borderBottom: '1px solid #eee' }}>{registration.phone || '—'}</td>
-              </tr>
-              <tr>
-                <td style={{ padding: '6px 10px', color: '#666' }}>Email Address:</td>
-                <td style={{ padding: '6px 10px', fontWeight: 600 }}>{registration.email || '—'}</td>
-                <td style={{ padding: '6px 10px', color: '#666' }}>City / Campus:</td>
-                <td style={{ padding: '6px 10px', fontWeight: 600 }}>{registration.city || 'Mumbai'}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Print Section 2: Program Details */}
-        <div style={{ marginBottom: '14px', border: '1px solid #ddd', borderRadius: '5px', overflow: 'hidden' }}>
-          <div style={{ background: '#f5f5f5', padding: '6px 10px', fontWeight: 700, fontSize: '11.5px', color: '#1a3f32', borderBottom: '1px solid #ddd' }}>
-            2. PROGRAM & ENROLLMENT DETAILS
-          </div>
-          <table style={{ width: '100%', fontSize: '11.5px', borderCollapse: 'collapse' }}>
-            <tbody>
-              <tr>
-                <td style={{ padding: '6px 10px', width: '25%', color: '#666', borderBottom: '1px solid #eee' }}>Selected Course:</td>
-                <td style={{ padding: '6px 10px', width: '75%', fontWeight: 600, borderBottom: '1px solid #eee' }} colSpan={3}>
-                  {registration.course || '—'}
-                </td>
-              </tr>
-              <tr>
-                <td style={{ padding: '6px 10px', color: '#666' }}>Batch Schedule:</td>
-                <td style={{ padding: '6px 10px', fontWeight: 600 }}>{registration.batchSchedule || registration.batch || '—'}</td>
-                <td style={{ padding: '6px 10px', color: '#666' }}>Learning Mode:</td>
-                <td style={{ padding: '6px 10px', fontWeight: 600 }}>{registration.batchMode || '—'}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Print Section 3: Fee Ledger */}
-        <div style={{ marginBottom: '18px', border: '1px solid #ddd', borderRadius: '5px', overflow: 'hidden' }}>
-          <div style={{ background: '#f5f5f5', padding: '6px 10px', fontWeight: 700, fontSize: '11.5px', color: '#1a3f32', borderBottom: '1px solid #ddd' }}>
-            3. PAYMENT & FINANCIAL LEDGER
-          </div>
-          <table style={{ width: '100%', fontSize: '11.5px', borderCollapse: 'collapse' }}>
-            <tbody>
-              <tr>
-                <td style={{ padding: '6px 10px', width: '25%', color: '#666', borderBottom: '1px solid #eee' }}>Amount Paid:</td>
-                <td style={{ padding: '6px 10px', width: '25%', fontWeight: 700, color: '#1a3f32', fontSize: '13.5px', borderBottom: '1px solid #eee' }}>
-                  ₹{Number(registration.paymentAmount || 0).toLocaleString('en-IN')}
-                </td>
-                <td style={{ padding: '6px 10px', width: '25%', color: '#666', borderBottom: '1px solid #eee' }}>Payment Status:</td>
-                <td style={{ padding: '6px 10px', width: '25%', fontWeight: 600, color: '#2e7d32', borderBottom: '1px solid #eee' }}>
-                  ✓ Successful
-                </td>
-              </tr>
-              <tr>
-                <td style={{ padding: '6px 10px', color: '#666' }}>Transaction ID:</td>
-                <td style={{ padding: '6px 10px', fontFamily: 'monospace', fontWeight: 600 }}>{registration.paymentId}</td>
-                <td style={{ padding: '6px 10px', color: '#666' }}>Gateway Order ID:</td>
-                <td style={{ padding: '6px 10px', fontFamily: 'monospace', fontWeight: 600 }}>{registration.orderId || '—'}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Verification Signatures */}
-        <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', paddingTop: '16px' }}>
-          <div>
-            <div style={{ borderTop: '1px solid #333', width: '200px', paddingTop: '4px', fontSize: '11.5px', fontWeight: 600 }}>
-              Admissions Verification Seal
-            </div>
-            <div style={{ fontSize: '10.5px', color: '#666' }}>Digitally Certified Record</div>
-          </div>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ borderTop: '1px solid #333', width: '200px', paddingTop: '4px', fontSize: '11.5px', fontWeight: 600 }}>
-              Authorized Signatory
-            </div>
-            <div style={{ fontSize: '10.5px', color: '#666' }}>Adshaala Academic Directorate</div>
-          </div>
-        </div>
-
-        <div style={{ marginTop: '30px', textAlign: 'center', fontSize: '10.5px', color: '#888', borderTop: '1px solid #eee', paddingTop: '6px' }}>
-          Page 1 of 2 — Official Student Admission Receipt · www.adshalaa.com · info@adshalaa.com
-        </div>
+      {/* ── PRINT PAGE 1: Payment Receipt ── */}
+      <div className="print-page-1" style={{ position: 'relative', padding: '0 0 10px 0' }}>
+        {receiptSheet}
+        <div style={{ marginTop: '14px', textAlign: 'center', fontSize: '10.5px', color: '#888' }}>
+          Page 1 of 2 — Official Student Payment Receipt · {INSTITUTE.website} · {INSTITUTE.email}
         </div>
       </div>
 
       {/* ── PRINT PAGE 2: Guidelines, Support & Accreditations ── */}
       <div className="print-page-2" style={{ position: 'relative', padding: '10px 0 0 0', overflow: 'hidden' }}>
-        {/* Background Watermark */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '420px',
-            maxWidth: '80%',
-            opacity: 0.05,
-            pointerEvents: 'none',
-            zIndex: 0,
-            textAlign: 'center',
-          }}
-        >
-          <img
-            src={adshalaaFooterLogo.src}
-            alt=""
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-          />
+        {/* Tilted watermark logo */}
+        <div className="rcpt-watermark" aria-hidden="true">
+          <img src={adshalaaFooterLogo.src} alt="" />
         </div>
 
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -650,7 +423,7 @@ export default function RegistrationSuccess({
               </tr>
               <tr>
                 <td style={{ padding: '6px 10px', color: '#666', borderBottom: '1px solid #eee' }}>Campus Center:</td>
-                <td style={{ padding: '6px 10px', fontWeight: 600, borderBottom: '1px solid #eee' }}>Mumbai Campus, Maharashtra, India</td>
+                <td style={{ padding: '6px 10px', fontWeight: 600, borderBottom: '1px solid #eee' }}>{INSTITUTE.address}</td>
               </tr>
               <tr>
                 <td style={{ padding: '6px 10px', color: '#666' }}>Support Hours:</td>
@@ -1015,8 +788,18 @@ export default function RegistrationSuccess({
                   Institute Campus
                 </div>
                 <div style={{ fontSize: '14px', color: '#333', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: '#ffc224' }}></i>
-                  Mumbai Campus, Maharashtra
+                  <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: '#ffc224', marginTop: '4px', alignSelf: 'flex-start' }}></i>
+                  <span style={{ lineHeight: 1.5 }}>
+                    {INSTITUTE.address}
+                    <a
+                      href={INSTITUTE.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'block', marginTop: '4px', fontSize: '13px', fontWeight: 600, color: '#1a3f32', textDecoration: 'underline' }}
+                    >
+                      View on Google Maps →
+                    </a>
+                  </span>
                 </div>
               </div>
 

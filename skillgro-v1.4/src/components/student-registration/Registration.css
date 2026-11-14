@@ -1375,7 +1375,7 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 767.98px) {
+@media screen and (max-width: 767.98px) {
   .verified-receipt-card,
   .receipt-card-print {
     padding: 18px 14px !important;
@@ -1406,6 +1406,12 @@
   }
   .receipt-header-responsive > div {
     width: 100% !important;
+  }
+  .receipt-header-responsive .receipt-header-text {
+    text-align: left !important;
+  }
+  .receipt-header-responsive .receipt-header-title {
+    justify-content: flex-start !important;
   }
   .course-selection-list label {
     padding: 12px 14px !important;
@@ -1439,6 +1445,15 @@
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+  /* Print on plain white paper: strip every background colour/image and shadow */
+  body, body * {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+  html, body {
+    background-color: #ffffff !important;
+  }
   header, footer, nav, .tg-header__area, #sticky-header, #header-fixed-height,
   .no-print, .receipt-sidebar, .breadcrumb, .embedded-notice, .receipt-card-print,
   .registration-brand-info, .step-actions, .progress-bar-container,
@@ -1468,3 +1483,352 @@
 }
 
 
+
+/* ── Payment receipt (institute style) ────────────────────────── */
+.rcpt-sheet {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #1a3f32;
+  padding: 24px 28px 18px;
+  overflow: hidden;
+  color: #161439;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+/* Tilted brand watermark */
+.rcpt-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64%;
+  max-width: 520px;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.rcpt-watermark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.rcpt-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Letterhead */
+.rcpt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #ffc224;
+}
+.rcpt-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+.rcpt-head-text {
+  margin-left: auto;
+  text-align: right;
+}
+.rcpt-head-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rcpt-head-title h2 {
+  font-size: 19px;
+  font-weight: 700;
+  color: #161439;
+  margin: 0;
+}
+.rcpt-verified {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+  padding: 3px 10px;
+  border-radius: 14px;
+}
+.rcpt-head-text p {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: #555;
+}
+.rcpt-head-text p.rcpt-contact {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Title bar */
+.rcpt-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 16px 0 6px;
+  padding: 8px 2px;
+  border-bottom: 1px solid #1a3f32;
+}
+.rcpt-title-text {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #1a3f32;
+}
+.rcpt-title-meta {
+  font-size: 12.5px;
+  color: #555;
+}
+.rcpt-title-meta strong {
+  color: #161439;
+}
+.rcpt-sep {
+  margin: 0 8px;
+  color: #b8c7bf;
+}
+
+/* Labelled sections */
+.rcpt-section {
+  margin-top: 16px;
+}
+.rcpt-section h3 {
+  margin: 0 0 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d8e2dc;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #1a3f32;
+}
+.rcpt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 18px;
+}
+.rcpt-field {
+  min-width: 0;
+}
+.rcpt-span-all {
+  grid-column: 1 / -1;
+}
+.rcpt-span-2 {
+  grid-column: span 2;
+}
+.rcpt-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #6b7280;
+}
+.rcpt-value {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #161439;
+  word-break: break-word;
+}
+.rcpt-mono {
+  font-family: monospace;
+  font-size: 12.5px;
+}
+.rcpt-amount {
+  font-size: 19px;
+  font-weight: 800;
+  color: #1a3f32;
+}
+.rcpt-ok {
+  color: #2e7d32;
+}
+
+/* Amount in words + PAID stamp */
+.rcpt-words-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px dashed #b8c7bf;
+}
+.rcpt-words strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+}
+.rcpt-stamp {
+  flex-shrink: 0;
+  transform: rotate(-10deg);
+  border: 3px solid #2e7d32;
+  color: #2e7d32;
+  border-radius: 8px;
+  padding: 3px 20px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  opacity: 0.85;
+}
+
+/* Signature + footer */
+.rcpt-sign-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 34px;
+}
+.rcpt-thanks {
+  flex: 1;
+  font-size: 12px;
+  color: #555;
+}
+.rcpt-sign {
+  width: 210px;
+  text-align: center;
+  font-size: 12px;
+}
+.rcpt-sign-line {
+  border-top: 1px solid #333;
+  margin-bottom: 4px;
+}
+.rcpt-sign strong,
+.rcpt-sign span {
+  display: block;
+}
+.rcpt-sign span {
+  font-size: 11px;
+  color: #666;
+}
+.rcpt-foot {
+  margin-top: 16px;
+  padding-top: 6px;
+  border-top: 1px dashed #b8c7bf;
+  text-align: center;
+  font-size: 10.5px;
+  color: #777;
+}
+
+@media screen and (max-width: 767.98px) {
+  .rcpt-sheet {
+    padding: 16px 14px 14px;
+  }
+  .rcpt-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .rcpt-span-2 {
+    grid-column: 1 / -1;
+  }
+  .rcpt-title {
+    flex-direction: column;
+  }
+  .rcpt-words-row,
+  .rcpt-sign-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rcpt-sign {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+@media print {
+  .rcpt-watermark {
+    opacity: 0.13;
+  }
+  .rcpt-sheet {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  /* Theme paragraph styles are larger/greyer than the inline sizes; keep page 2 text as designed */
+  .print-page-2 p {
+    font-size: inherit !important;
+    line-height: 1.5 !important;
+    color: #333 !important;
+  }
+}
+
+/* ── Submit / checking loaders ─────────────────────────────────── */
+@keyframes reg-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: -3px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: reg-spin 0.7s linear infinite;
+}
+
+.btn-next:disabled,
+.btn-submit:disabled {
+  cursor: progress;
+}
+
+.submit-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: inherit;
+  backdrop-filter: blur(2px);
+}
+
+.submit-overlay-box {
+  max-width: 340px;
+  text-align: center;
+}
+
+.submit-overlay-box h4 {
+  margin: 16px 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #161439;
+}
+
+.submit-overlay-box p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.submit-spinner {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto;
+  border: 4px solid #e0ebe6;
+  border-top-color: #1a3f32;
+  border-right-color: #ffc224;
+  border-radius: 50%;
+  animation: reg-spin 0.8s linear infinite;
+}
+
+@media print {
+  .submit-overlay {
+    display: none !important;
+  }
+}
