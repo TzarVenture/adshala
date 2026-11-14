@@ -65,10 +65,10 @@ export interface CourseDataType {
   title: string;
   desc: string;
   instructors: string;
-  price: number;
+  price: number;               // default / single fee (used when no mode-specific fee exists)
   originalPrice?: number;      // struck-through price shown in sidebar
-  offlinePrice?: number;       // offline course fee shown in DM sidebar
-  onlinePrice?: number;        // online course fee shown in DM sidebar
+  offlinePrice?: number;       // offline course fee (optional – only when fees differ by mode)
+  onlinePrice?: number;        // online course fee  (optional – only when fees differ by mode)
   skill_level: string;
   overview?: string;           // key used to switch tabs in CourseDetailsArea
   price_type: string;
@@ -156,6 +156,8 @@ const inner_course_data: CourseDataType[] = [
       title: "Advanced SEO Certification",
       instructors: "David Millar",
       price: 20000,
+      offlinePrice: 20000,
+      onlinePrice: 15000,
       originalPrice: 35000,
       skill_level: "Beginner",
       overview: "seo-certification",
@@ -201,6 +203,8 @@ const inner_course_data: CourseDataType[] = [
       title: "Mastery in Social Media Management",
       instructors: "David Millar",
       price: 20000,
+      offlinePrice: 20000,
+      onlinePrice: 15000,
       originalPrice: 35000,
       skill_level: "Beginner",
       overview: "mastery-in-social-media-management",

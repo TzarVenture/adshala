@@ -16,12 +16,7 @@ import course_thumb12 from "@/assets/img/courses/h8_course_thumb06.jpg"
 import course_thumb13 from "@/assets/img/courses/h8_course_thumb07.jpg"
 import course_thumb14 from "@/assets/img/courses/h8_course_thumb08.jpg"
 
-import thumb1 from "@/assets/img/courses/course_card_images/1.jpg"
-import thumb2 from "@/assets/img/courses/course_card_images/2.jpg"
-import thumb3 from "@/assets/img/courses/course_card_images/3.jpg"
-import thumb4 from "@/assets/img/courses/course_card_images/4.jpg"
-import thumb5 from "@/assets/img/courses/course_card_images/5.jpg"
-import thumb6 from "@/assets/img/courses/course_card_images/6.jpg"
+import inner_course_data from "@/data/inner-data/InnerCourseData";
 
 interface DataType {
    id: number;
@@ -43,83 +38,27 @@ interface DataType {
    }[]
 }[];
 
+// Home page course cards are derived from InnerCourseData (the single source of
+// truth for course title, fee, order and links) so nothing is hard-coded twice.
+// The registration form also reads from here, so fee changes flow through.
 const course_data: DataType[] = [
-      {
+   {
       id: 1,
       page: "home_1",
-      course_details: [
-         {
-            id: 114,
-            sku: "marketplace-specialist-program-in-mumbai",
-            thumb: thumb3,
-            tag: "Marketing",
-            review: "(4.8 Reviews)",
-            title: "Marketplace Specialist Program",
-            author: "David Millar",
-            link: "/course-details/111",
-            price: 20000,
-            offlinePrice: 20000,
-            onlinePrice: 15000,
-         },
-         {
-            id: 115,
-            sku: "advanced-seo-certification-in-mumbai",
-            thumb: thumb4,
-            tag: "Marketing",
-            review: "(4.8 Reviews)",
-            title: "Advanced SEO certification",
-            author: "David Millar",
-            link: "/course-details/111",
-            price: 20000,
-         },
-         {
-            id: 113,
-            sku: "mastery-in-social-media-management-in-mumbai",
-            thumb: thumb1,
-            tag: "Marketing",
-            review: "(4.8 Reviews)",
-            title: "Mastery in Social Media Management",
-            author: "David Millar",
-            link: "/course-details/111",
-            price: 20000,
-         },
-         {
-            id: 111,
-            sku: "certification-in-advanced-digital-marketing-and-ai-mumbai",
-            thumb: thumb2,
-            tag: "Marketing",
-            review: "(4.8 Reviews)",
-            title: "Certification in Advanced Digital Marketing & AI",
-            author: "David Millar",
-            link: "/course-details/111",
-            price: 39000,
-            offlinePrice: 39000,
-            onlinePrice: 30000,
-         },
-         {
-            id: 112,
-            sku: "certification-in-advanced-graphic-design-and-ai-mumbai",
-            thumb: thumb6,
-            tag: "Design",
-            review: "(4.8 Reviews)",
-            title: "Certification in Advanced Graphic Design & AI",
-            author: "David Millar",
-            link: "/course-details/111",
-            price: 70800,
-         },
-         {
-            id: 116,
-            sku: "certification-in-web-development-in-mumbai",
-            thumb: thumb5,
-            tag: "Development",
-            review: "(4.8 Reviews)",
-            title: "Certification in Web Development",
-            author: "David Millar",
-            link: "/course-details/111",
-            price: 59000,
-         },
-      ],
-   }
+      course_details: inner_course_data.map((course) => ({
+         id: course.id,
+         sku: course.sku,
+         thumb: course.thumb,
+         tag: course.category,
+         review: "(4.8 Reviews)",
+         title: course.title,
+         author: course.instructors,
+         link: `/course-details/${course.sku}`,
+         price: course.price,
+         offlinePrice: course.offlinePrice,
+         onlinePrice: course.onlinePrice,
+      })),
+   },
 ]
 
 // const course_data: DataType[] = [

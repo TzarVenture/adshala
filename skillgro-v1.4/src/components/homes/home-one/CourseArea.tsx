@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
-import Image from "next/image";
-import Link from "next/link";
+import CourseCard from "@/components/courses/CourseCard";
 import course_data from "@/data/home-data/CourseData";
 
 import bg_img from '@//assets/img/bg/courses_bg.jpg';
@@ -95,37 +94,15 @@ const CourseArea = ({ style }: StyleType) => {
                 <Swiper {...setting} modules={[Autoplay, Navigation]} className="swiper courses-swiper-active">
                   {filtered?.map((item) => (
                     <SwiperSlide key={item.id} className="swiper-slide" style={{ height: "auto", display: "flex" }}>
-                      <div className="courses__item shine__animate-item" style={{ width: "100%", display: "flex", flexDirection: "column", height: "100%" }}>
-                        <div className="courses__item-thumb">
-                          <Link href={`/course-details/${item.sku}`} className="shine__animate-link">
-                            <Image src={item.thumb} alt="img" style={{ objectFit: "contain", width: "100%", height: "auto" }} />
-                          </Link>
-                        </div>
-                        <div className="courses__item-content" style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                          <div>
-                            <ul className="courses__item-meta list-wrap">
-                              <li className="courses__item-tag">
-                                <Link href="/courses">{item.tag}</Link>
-                              </li>
-                            </ul>
-                            <h5 className="title" style={{ minHeight: "44px", marginBottom: "8px", display: "flex", alignItems: "flex-start" }}>
-                              <Link href={`/course-details/${item.sku}`}>{item.title}</Link>
-                            </h5>
-                          </div>
-                          <div className="courses__item-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "auto", paddingTop: "6px" }}>
-                            <div className="button">
-                              <Link href={`/course-details/${item.sku}`}>
-                                <span className="text">Enroll Now</span>
-                                <i className="flaticon-arrow-right"></i>
-                              </Link>
-                            </div>
-                            <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                              <h5 className="price" style={{ margin: 0, lineHeight: "1.1" }}>₹{Number(item.price).toLocaleString("en-IN")}</h5>
-                              <span style={{ fontSize: "10px", color: "#6D6C80", fontWeight: "500", marginTop: "2px", lineHeight: "1" }}>*GST Tax Included</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <CourseCard
+                        sku={String(item.sku)}
+                        title={item.title}
+                        category={item.tag}
+                        thumb={item.thumb}
+                        price={item.price}
+                        offlinePrice={item.offlinePrice}
+                        onlinePrice={item.onlinePrice}
+                      />
                     </SwiperSlide>
                   ))}
                 </Swiper>

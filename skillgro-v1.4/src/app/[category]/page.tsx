@@ -9,7 +9,6 @@
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import "./page.css"
 import HeaderOne from "@/layouts/headers/HeaderOne";
@@ -21,6 +20,7 @@ import ScrollToTopOnMount from "./ScrollToTopOnMount";
 import category_config from "@/data/home-data/CategoryConfig";
 import courses_data from "@/data/inner-data/InnerCourseData";
 import EnquiryHero from "@/components/courses/course-enquiry/EnquiryHero";
+import CourseCard from "@/components/courses/CourseCard";
 
 // ─────────────────────────────────────────────────────────────────────
 // 1. Tell Next.js which slugs to pre-render at build time
@@ -151,54 +151,15 @@ export default async function CategoryPage({ params }: Props) {
             <div className="row gy-3 ">
               {courses.map((course) => (
                 <div key={course.id} className="col-xl-3 col-lg-4 col-md-6 d-flex">
-                  <div className="courses__item shine__animate-item" style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-
-                    {/* Thumbnail */}
-                    <div className="courses__item-thumb">
-                      <Link
-                        href={`/course-details/${course.sku}`}
-                        className="shine__animate-link"
-                      >
-                        <Image
-                          src={course.thumb}
-                          alt={course.title}
-                          style={{ objectFit: "contain", width: "100%", height: "auto" }}
-                        />
-                      </Link>
-                    </div>
-
-                    {/* Content (Matched exactly to CourseArea.tsx UI) */}
-                    <div className="courses__item-content" style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                      <div>
-                        <ul className="courses__item-meta list-wrap">
-                          <li className="courses__item-tag">
-                            <Link href="/courses">{course.category}</Link>
-                          </li>
-                        </ul>
-
-                        <h5 className="title" style={{ minHeight: "44px", marginBottom: "8px", display: "flex", alignItems: "flex-start" }}>
-                          <Link href={`/course-details/${course.sku}`}>
-                            {course.title}
-                          </Link>
-                        </h5>
-                      </div>
-
-                      <div className="courses__item-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "auto", paddingTop: "6px" }}>
-                        <div className="button">
-                          <Link href={`/course-details/${course.sku}`}>
-                            <span className="text">Enroll Now</span>
-                            <i className="flaticon-arrow-right"></i>
-                          </Link>
-                        </div>
-                        <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                          <h5 className="price" style={{ margin: 0, lineHeight: "1.1" }}>
-                            ₹{Number(course.price).toLocaleString("en-IN")}
-                          </h5>
-                          <span style={{ fontSize: "10px", color: "#6D6C80", fontWeight: "500", marginTop: "2px", lineHeight: "1" }}>*GST Tax Included</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <CourseCard
+                    sku={course.sku}
+                    title={course.title}
+                    category={course.category}
+                    thumb={course.thumb}
+                    price={course.price}
+                    offlinePrice={course.offlinePrice}
+                    onlinePrice={course.onlinePrice}
+                  />
                 </div>
               ))}
             </div>
