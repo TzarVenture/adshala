@@ -1,5 +1,7 @@
+import React from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { CONTACT_PHONES } from "@/config/institute"
 
 import icon_1 from "@/assets/img/icons/map_marker.svg"
 import icon_2 from "@/assets/img/icons/envelope.svg"
@@ -24,7 +26,16 @@ const HeaderTopOne = ({ style }: StyleType) => {
                <div className="col-xl-7 col-lg-6">
                   <div className="tg-header__top-right">
                      <div className="tg-header__phone">
-                        <FaPhone />Call us: <Link href="tel:8652199991">+91 8652199991</Link>
+                        <FaPhone />
+                        <span className="tg-header__phone-label">Call us:</span>
+                        <span className="tg-header__phone-list">
+                           {CONTACT_PHONES.map((phone, i) => (
+                              <React.Fragment key={phone.tel}>
+                                 {i > 0 && <span className="tg-header__phone-sep">|</span>}
+                                 <Link href={`tel:${phone.tel}`}>{phone.display}</Link>
+                              </React.Fragment>
+                           ))}
+                        </span>
                      </div>
                      <ul className="tg-header__top-social list-wrap">
                         <li className="d-none d-xxl-inline-block">Follow Us On :</li>

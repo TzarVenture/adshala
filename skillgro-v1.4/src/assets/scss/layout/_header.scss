@@ -74,8 +74,13 @@
         &-right {
             @include flexbox();
             align-items: center;
+            flex-wrap: wrap;
             gap: 10px 27px;
             justify-content: flex-end;
+
+            @media #{$xl} {
+                gap: 10px 18px;
+            }
 
             @media #{$md} {
                 justify-content: center;
@@ -142,6 +147,26 @@
 
         & img {
             opacity: .6;
+        }
+
+        // Several numbers: keep each number on one line and never split "+91" from the digits
+        & .tg-header__phone-label,
+        & .tg-header__phone-list {
+            white-space: nowrap;
+        }
+
+        & .tg-header__phone-list {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        & .tg-header__phone-sep {
+            opacity: .45;
+        }
+
+        svg {
+            flex-shrink: 0;
         }
     }
 

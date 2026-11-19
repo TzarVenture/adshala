@@ -12,3 +12,10 @@ export const INSTITUTE = {
   website: "www.adshalaa.com",
   supportHours: "Monday to Saturday (9:30 AM to 7:00 PM IST)",
 } as const;
+
+// Numbers shown in the website navbar and footer
+export const CONTACT_PHONES = [
+  { display: "+91 7760775875", tel: "+917760775875" },
+  { display: "+91 7304056607", tel: "+917304056607" },
+  { display: "+91 9004250252", tel: "+919004250252" },
+] as const;

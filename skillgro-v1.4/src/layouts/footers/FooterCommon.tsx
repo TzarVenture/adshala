@@ -1,3 +1,4 @@
+import { CONTACT_PHONES } from "@/config/institute"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -16,9 +17,13 @@ const FooterCommon = () => {
                <div className="footer__content" >
                   <p style={{ color: "#dbd7d7" }}>India's leading skill-development institute offering certified programs in Digital Marketing, Graphic Design, and Web Development, with real internships and 100% placement support.</p>
                   <ul className="list-wrap">
-                     <li style={{ color: "#dbd7d7", fontSize: "16px", marginTop: "10px" }}>
-                        <i className="fas fa-phone" style={{ marginRight: "8px", color: "#FFC224" }}></i>
-                        +91 8652199991 | +91 7760775875
+                     <li style={{ color: "#dbd7d7", fontSize: "16px", marginTop: "10px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                        {CONTACT_PHONES.map((phone) => (
+                           <a key={phone.tel} href={`tel:${phone.tel}`} style={{ color: "inherit", display: "inline-flex", alignItems: "center", gap: "10px", width: "fit-content" }}>
+                              <i className="fas fa-phone" style={{ color: "#FFC224", fontSize: "14px", width: "16px", textAlign: "center" }}></i>
+                              <span style={{ whiteSpace: "nowrap" }}>{phone.display}</span>
+                           </a>
+                        ))}
                      </li>
                   </ul>
                </div>
